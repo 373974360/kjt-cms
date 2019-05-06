@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC  "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+ "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class dynamic-insert="true" dynamic-update="true" entity-name="com.cms.siteconfig.siteDomain.CmsSiteDomain" table="CMS_SITE_DOMAIN">
+        <tuplizer class="com.primeton.server.das.tuplizer.SDOEntityTuplizer" entity-mode="sdo"/>
+        <id name="id" type="long">
+            <column length="22" name="ID"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="siteDomain" type="string">
+            <column length="510" name="SITE_DOMAIN"/>
+        </property>
+        <property name="siteId" type="long">
+            <column length="22" name="SITE_ID"/>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns="com.cms.siteconfig.siteDomain" xmlns:sdo="commonj.sdo" xmlns:sdoJava="commonj.sdo/java" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="com.cms.siteconfig.siteDomain">
+    <xs:complexType name="CmsSiteDomain">
+        <xs:sequence>
+            <xs:any minOccurs="0"/>
+            <xs:element minOccurs="0" name="id" nillable="true" type="xs:long"/>
+            <xs:element minOccurs="0" name="siteDomain" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="siteId" nillable="true" type="xs:long"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

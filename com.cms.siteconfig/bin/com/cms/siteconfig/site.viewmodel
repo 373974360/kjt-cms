@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<viewModelSet author="chaoweima" displayName="site" id="com.cms.siteconfig.site">
+    <viewModel author="chaoweima" displayName="CmsSite" entityName="com.cms.siteconfig.site.CmsSite" id="CmsSite">
+        <field dataType="Long" dict="false" id="id" label="id">
+            <view type="write"/>
+            <edit name="" type="text">
+                <attr name="class">nui-textbox</attr>
+                <attr name="required">false</attr>
+                <attr name="enabled">true</attr>
+                <attr name="visible">true</attr>
+            </edit>
+        </field>
+        <field dataType="String" dict="false" id="siteName" label="siteName">
+            <view type="write"/>
+            <edit name="" type="text">
+                <attr name="class">nui-textbox</attr>
+                <attr name="required">false</attr>
+                <attr name="enabled">true</attr>
+                <attr name="visible">true</attr>
+            </edit>
+        </field>
+        <field dataType="String" dict="false" id="remark" label="remark">
+            <view type="write"/>
+            <edit name="" type="text">
+                <attr name="class">nui-textbox</attr>
+                <attr name="required">false</attr>
+                <attr name="enabled">true</attr>
+                <attr name="visible">true</attr>
+            </edit>
+        </field>
+    </viewModel>
+</viewModelSet>

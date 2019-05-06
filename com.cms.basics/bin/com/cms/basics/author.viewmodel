@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<viewModelSet author="chaoweima" displayName="authro" id="com.cms.basics.author">
+    <viewModel author="chaoweima" displayName="CmsAuthor" entityName="com.cms.basics.author.CmsAuthor" id="CmsAuthor">
+        <field dataType="Long" dict="false" id="id" label="id">
+            <view type="write"/>
+            <edit name="" type="text">
+                <attr name="class">nui-textbox</attr>
+                <attr name="required">false</attr>
+                <attr name="enabled">true</attr>
+                <attr name="visible">true</attr>
+            </edit>
+        </field>
+        <field dataType="String" dict="false" id="authorName" label="authorName">
+            <view type="write"/>
+            <edit name="" type="text">
+                <attr name="class">nui-textbox</attr>
+                <attr name="required">false</attr>
+                <attr name="enabled">true</attr>
+                <attr name="visible">true</attr>
+            </edit>
+        </field>
+        <field dataType="String" dict="false" id="authorUrl" label="authorUrl">
+            <view type="write"/>
+            <edit name="" type="text">
+                <attr name="class">nui-textbox</attr>
+                <attr name="required">false</attr>
+                <attr name="enabled">true</attr>
+                <attr name="visible">true</attr>
+            </edit>
+        </field>
+        <field dataType="Long" dict="false" id="siteId" label="siteId">
+            <view type="write"/>
+            <edit name="" type="text">
+                <attr name="class">nui-textbox</attr>
+                <attr name="required">false</attr>
+                <attr name="enabled">true</attr>
+                <attr name="visible">true</attr>
+            </edit>
+        </field>
+    </viewModel>
+</viewModelSet>
