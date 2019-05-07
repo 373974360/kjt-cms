@@ -86,7 +86,7 @@
 				var row = grid.getSelected();
 				if (row) {
 					nui.open({
-						url : "OOperatorUpdate.jsp",
+						url : "<%=request.getContextPath()%>/basics/author/AuthorUpdate.jsp",
 						title : "编辑数据",
 						width : 350,
 						height : 150,
@@ -115,11 +115,11 @@
 					function(action) {
 						if (action == "ok") {
 							var json = nui.encode({
-								ooperators : rows
+								authors : rows
 							});
 							grid.loading("正在删除中,请稍等...");
 							$.ajax({
-								url : "com.primeton.nuisample.ooperatorbiz.deleteOOperators.biz.ext",
+								url : "com.cms.basics.AuthorService.deleteAuthors.biz.ext",
 								type : 'POST',
 								data : json,
 								cache : false,

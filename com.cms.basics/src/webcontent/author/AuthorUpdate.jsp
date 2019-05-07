@@ -34,13 +34,31 @@
 	    <script type="text/javascript">
 	        nui.parse();
 	        var form = new nui.Form("form1");
+	        
+	        function setData(data){
+	        	data = nui.clone(data);
+	        	var json = nui.encode({author:data});
+				$.ajax({
+					url:"com.cms.basics.AuthorService.getAuthor.biz.ext",
+					type:'POST',
+			         data:json,
+			         cache:false,
+			         contentType:'text/json',
+			         success:function(text){
+						obj = nui.decode(text);
+			            form.setData(obj);
+			            form.setChanged(false);
+			         }
+	          	});
+	        }
+	        
 	        function SaveData() {
 	           	form.validate();
 		        if(form.isValid()==false) return;
 		        var data = form.getData(false,true);
 		        var json = nui.encode(data);
 	            $.ajax({
-	                url: "com.cms.basics.AuthorService.addAuthor.biz.ext",
+	                url: "com.cms.basics.AuthorService.updateAuthor.biz.ext",
 	                type: 'POST',
 	                data: json,
 	                cache: false,
