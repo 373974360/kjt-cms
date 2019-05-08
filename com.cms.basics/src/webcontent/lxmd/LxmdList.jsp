@@ -2,23 +2,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
-		<title>来源管理</title>
+		<title>来信目的</title>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		<script src="<%=request.getContextPath()%>/common/nui/nui.js" type="text/javascript"></script>
 	</head>
 	<body style="width: 98%; height: 95%;">
-		<div class="nui-panel" title="来源查询" iconCls="icon-add" style="width: 100%; height: 15%;" showToolbar="false" showFooter="true">
+		<div class="nui-panel" title="来信目的查询" iconCls="icon-add" style="width: 100%; height: 15%;" showToolbar="false" showFooter="true">
 			<div id="queryform" class="nui-form" align="center" style="height: 100%">
 				<!-- 数据实体的名称 -->
-				<input class="nui-hidden" name="criteria/_entity" value="com.cms.basics.source.CmsSource">
+				<input class="nui-hidden" name="criteria/_entity" value="com.cms.basics.lxmd.CmsLxmd">
 				<!-- 排序字段 -->
-				<input class="nui-hidden" name="criteria/_orderby[1]/_property" value="sourceName">
+				<input class="nui-hidden" name="criteria/_orderby[1]/_property" value="mdName">
 				<input class="nui-hidden" name="criteria/_orderby[1]/_sort" value="asc">
 				<table id="table1" class="table" style="height: 100%;float:left;">
 					<tr>
-						<td class="form_label">来源名称:</td>
+						<td class="form_label">来信目的名称:</td>
 						<td colspan="1">
-							<input class="nui-textbox" name="criteria/_expr[2]/sourceName" />
+							<input class="nui-textbox" name="criteria/_expr[2]/mdName" />
 							<input class="nui-hidden" name="criteria/_expr[2]/_op" value="like">
 							<input class="nui-hidden" name="criteria/_expr[2]/_likeRule" value="all">
 						</td>
@@ -32,12 +32,12 @@
 				</table>
 			</div>
 		</div>
-		<div class="nui-panel" title="来源列表" iconCls="icon-add" style="width: 100%; height: 85%;" showToolbar="false" showFooter="false">
+		<div class="nui-panel" title="来信目的列表" iconCls="icon-add" style="width: 100%; height: 85%;" showToolbar="false" showFooter="false">
 			<div class="nui-toolbar" style="border-bottom: 0; padding: 0px;">
 				<table style="width: 100%;">
 					<tr>
 						<td style="width: 100%;">
-							<a class="nui-button" iconCls="icon-add" onclick="add()">增加 </a>
+							<a class="nui-button" iconCls="icon-add" onclick="add()">手工录入 </a>
 							<a id="update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑 </a>
 							<a class="nui-button" iconCls="icon-remove" onclick="remove()">删除</a>
 						</td>
@@ -45,14 +45,14 @@
 				</table>
 			</div>
 			<div class="nui-fit">
-				<div id="datagrid1" dataField="source" class="nui-datagrid" style="width: 100%; height: 100%;"
-					url="com.cms.basics.SourceService.querySource.biz.ext"
+				<div id="datagrid1" dataField="lxmd" class="nui-datagrid" style="width: 100%; height: 100%;"
+					url="com.cms.basics.LxmdService.queryLxmd.biz.ext"
 					pageSize="10" showPageInfo="true" multiSelect="true" onselectionchanged="selectionChanged" allowSortColumn="false">
 					<div property="columns">
 						<div type="checkcolumn" width="10"></div>
-						<div field="id" headerAlign="center" allowSort="true" visible="false">来源ID</div>
-						<div field="sourceName" headerAlign="center" allowSort="true">来源名称</div>
-						<div field="sourceUrl" headerAlign="center" allowSort="true">来源地址</div>
+						<div field="id" headerAlign="center" allowSort="true" visible="false">来信目的ID</div>
+						<div field="mdName" headerAlign="center" allowSort="true">来信目的名称</div>
+						<div field="remark" headerAlign="center" allowSort="true">备注</div>
 					</div>
 				</div>
 			</div>
@@ -67,7 +67,7 @@
 			//新增
 			function add() {
 				nui.open({
-					url : "<%=request.getContextPath()%>/basics/source/SourceAdd.jsp",
+					url : "<%=request.getContextPath()%>/basics/lxmd/LxmdAdd.jsp",
 					title : "新增记录",
 					width : 350,
 					height : 150,
@@ -86,7 +86,7 @@
 				var row = grid.getSelected();
 				if (row) {
 					nui.open({
-						url : "<%=request.getContextPath()%>/basics/source/SourceUpdate.jsp",
+						url : "<%=request.getContextPath()%>/basics/lxmd/LxmdUpdate.jsp",
 						title : "编辑数据",
 						width : 350,
 						height : 150,
@@ -115,11 +115,11 @@
 					function(action) {
 						if (action == "ok") {
 							var json = nui.encode({
-								sources : rows
+								lxmds : rows
 							});
 							grid.loading("正在删除中,请稍等...");
 							$.ajax({
-								url : "com.cms.basics.SourceService.deleteSources.biz.ext",
+								url : "com.cms.basics.LxmdService.deleteLxmds.biz.ext",
 								type : 'POST',
 								data : json,
 								cache : false,
