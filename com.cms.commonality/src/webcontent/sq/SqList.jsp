@@ -58,14 +58,14 @@
 						<div field="phone" headerAlign="center" allowSort="true">联系电话</div>
 						<div field="email" headerAlign="center" allowSort="true">电子邮箱</div>
 						<div field="isOpen" headerAlign="center" allowSort="true" renderer="onOpenRenderer">是否公开</div>
-						<div field="content" headerAlign="center" allowSort="true">来信内容</div>
+						<div field="content" headerAlign="center" allowSort="true" visible="false">来信内容</div>
 						<div field="createTime" headerAlign="center" allowSort="true">提交时间</div>
 						<div field="subOrgId" headerAlign="center" allowSort="true" visible="false">受理部门ID</div>
 						<div field="subOrgName" headerAlign="center" allowSort="true">受理部门</div>
 						<div field="replyOrgId" headerAlign="center" allowSort="true" visible="false">回复部门ID</div>
 						<div field="replyOrgName" headerAlign="center" allowSort="true">回复部门</div>
 						<div field="replyTime" headerAlign="center" allowSort="true">回复时间</div>
-						<div field="replyContent" headerAlign="center" allowSort="true">回复内容</div>
+						<div field="replyContent" headerAlign="center" allowSort="true" visible="false">回复内容</div>
 						<div field="isReply" headerAlign="center" allowSort="true" renderer="onRepRenderer">是否回复</div>
 						<div field="isPublish" headerAlign="center" allowSort="true" renderer="onPubRenderer">是否发布</div>
 						
@@ -96,7 +96,7 @@
 					url : "<%=request.getContextPath()%>/commonality/sq/SqAdd.jsp",
 					title : "新增记录",
 					width : 700,
-					height : 350,
+					height : 260,
 					onload : function() {
 					},
 					ondestroy : function(action) {//弹出页面关闭前
@@ -115,7 +115,7 @@
 						url : "<%=request.getContextPath()%>/commonality/sq/SqUpdate.jsp",
 						title : "编辑数据",
 						width : 700,
-						height : 350,
+						height : 260,
 						onload : function() {
 							var iframe = this.getIFrameEl();
 							var data = row;

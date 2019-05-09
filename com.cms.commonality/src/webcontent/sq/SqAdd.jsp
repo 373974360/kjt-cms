@@ -36,25 +36,15 @@
 		                <td>    
 		                    <input name="sq.email" class="nui-textbox nui-form-input" required="true"/>
 		                </td>
-		                <th class="nui-form-label">来信内容：</th>
-		                <td>    
-		                    <input name="sq.content" class="nui-textarea" required="true"/>
-		                </td>
-		            </tr>
-		            <tr>
-		                <th class="nui-form-label">提交时间：</th>
-		                <td>    
-		                    <input name="sq.createTime" class="nui-datepicker" required="true"/>
-		                </td>
-		                <th class="nui-form-label">受理部门：</th>
+		               	<th class="nui-form-label">受理部门：</th>
 		                <td>    
 		                    <input name="sq.subOrgName" class="nui-textbox nui-form-input" required="true"/>
 		                </td>
 		            </tr>
 		            <tr>
-		                <th class="nui-form-label">回复时间：</th>
+		                <th class="nui-form-label">提交时间：</th>
 		                <td>    
-		                    <input name="sq.replyTime" class="nui-datepicker" format="yyyy-MM-dd H:mm" required="true"/>
+		                    <input name="sq.createTime" class="nui-datepicker" format="yyyy-MM-dd HH:mm:ss" required="true"/>
 		                </td>
 		                <th class="nui-form-label">回复部门：</th>
 		                <td>    
@@ -62,24 +52,24 @@
 		                </td>
 		            </tr>
 		            <tr>
-		                <th class="nui-form-label">回复内容：</th>
+		                <th class="nui-form-label">回复时间：</th>
 		                <td>    
-		                    <input name="sq.replyContent" class="nui-textarea" required="true"/>
-		                </td>
-		                <th class="nui-form-label">是否公开：</th>
-		                <td>    
-		                    <input name="sq.isOpen" class="nui-dictcombobox" dictTypeId="CMS_OPENYESNO" required="true"/>
-		                </td>
-		            </tr>
-		             <tr>
-		                <th class="nui-form-label">是否回复：</th>
-		                <td>    
-		                    <input name="sq.isReply" class="nui-dictcombobox" dictTypeId="CMS_REYESNO" required="true"/>
+		                    <input name="sq.replyTime" class="nui-datepicker" format="yyyy-MM-dd H:mm" required="true"/>
 		                </td>
 		                <th class="nui-form-label">是否发布：</th>
 		                <td>    
 		                    <input name="sq.isPublish" class="nui-dictcombobox" dictTypeId="CMS_PUBYESNO" required="true"/>
 		                </td>
+		            </tr>
+		            <tr>
+		                <th class="nui-form-label">是否公开：</th>
+		                <td>    
+		                    <input name="sq.isOpen" class="nui-dictcombobox" dictTypeId="CMS_OPENYESNO" required="true"/>
+		                </td>		           
+		                <th class="nui-form-label">是否回复：</th>
+		                <td>    
+		                    <input name="sq.isReply" class="nui-dictcombobox" dictTypeId="CMS_REYESNO" required="true"/>
+		                </td>		                
 		            </tr>	          
 		        </table>    
 		    </div>    

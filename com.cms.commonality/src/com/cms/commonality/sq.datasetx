@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:DataSetDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://www.primeton.com/datamodel" name="sq" gridVisibility="false" rulerVisibility="true" snapToGeometry="true" displayName="sq" author="Administrator">
   <nodes xsi:type="model:PEntityNode" id="node0" name="CmsSq" nodeType="table" displayName="CmsSq" author="Administrator" open="true" allUseViewModel="true" instanceClass="" table="CMS_SQ" genStrategy="assigned">
-    <location x="165" y="105"/>
+    <location x="150" y="105"/>
     <size height="354" width="150"/>
     <figSize height="20" width="150"/>
     <columnProperty id="property0" name="id" displayName="id" columnName="ID" nullAble="false" PK="true" columnType="NUMBER" eosDataType="Long" length="22" dasType="long" overWriteDefaultColumnType="false" showType="Long" update="true" insert="true">
