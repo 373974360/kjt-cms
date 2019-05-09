@@ -28,13 +28,13 @@
 		                </td>
 		                <th class="nui-form-label">联系电话：</th>
 		                <td>    
-		                    <input name="sq.phone" class="nui-textbox nui-form-input" required="true"/>
+		                    <input name="sq.phone" class="nui-textbox nui-form-input" vtype="float" required="true"/>
 		                </td>
 		            </tr>
 		            <tr>
 		                <th class="nui-form-label">电子邮箱：</th>
 		                <td>    
-		                    <input name="sq.email" class="nui-textbox nui-form-input" required="true"/>
+		                    <input name="sq.email" class="nui-textbox nui-form-input" vtype="email;rangeLength:5,20;" required="true"/>
 		                </td>
 		               	<th class="nui-form-label">受理部门：</th>
 		                <td>    
@@ -64,11 +64,11 @@
 		            <tr>
 		                <th class="nui-form-label">提交时间：</th>
 		                <td>    
-		                    <input name="sq.createTime" class="nui-datepicker" format="yyyy-MM-dd HH:mm:ss" required="true"/>
+		                    <input name="sq.createTime" class="nui-datepicker" format="yyyy-MM-dd HH:mm:ss" showTime="true" required="true"/>
 		                </td>	
 		                <th class="nui-form-label">回复时间：</th>
 		                <td>    
-		                    <input name="sq.replyTime" class="nui-datepicker" format="yyyy-MM-dd HH:mm:ss" required="true"/>
+		                    <input name="sq.replyTime" class="nui-datepicker" format="yyyy-MM-dd HH:mm:ss" showTime="true"required="true"/>
 		                </td>                
 		            </tr>	          
 		        </table>    
