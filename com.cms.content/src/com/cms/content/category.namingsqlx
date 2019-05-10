@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- author:chaoweima -->
+<sqlMap>
+    <select id="queryCategoryByParentId" parameterClass="commonj.sdo.DataObject" resultClass="commonj.sdo.DataObject">
+	    <![CDATA[
+	    	select id,ch_name as text from cms_info_category where parent_id = '$parentId$' order by cat_sort asc
+	    ]]>
+    </select>
+</sqlMap>
