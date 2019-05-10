@@ -25,21 +25,21 @@
 		            <tr>
 		                <th class="nui-form-label">首页模板：</th>
 		                <td>    
-		                    <input name="category.indexTemplet" class="nui-textbox nui-form-input" required="true"/>
+		                    <input name="category.indexTemplet" class="nui-textbox nui-form-input"/>
 		                </td>
 		                <th class="nui-form-label">列表模板：</th>
 		                <td>    
-		                    <input name="category.listTemplet" class="nui-textbox nui-form-input" required="true"/>
+		                    <input name="category.listTemplet" class="nui-textbox nui-form-input"/>
 		                </td>
 		            </tr>
 		            <tr>
 		                <th class="nui-form-label">跳转地址：</th>
 		                <td>    
-		                    <input name="category.linkUrl" class="nui-textbox nui-form-input" required="true"/>
+		                    <input name="category.linkUrl" class="nui-textbox nui-form-input"/>
 		                </td>
 		                <th class="nui-form-label">栏目排序：</th>
 		                <td>    
-		                    <input name="category.catSort" class="nui-textbox nui-form-input" required="true"/>
+		                    <input name="category.catSort" class="nui-textbox nui-form-input"/>
 		                </td>
 		            </tr>
 		            <tr>

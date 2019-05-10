@@ -19,20 +19,22 @@ import commonj.sdo.DataObject;
  */
 @Bizlet("站点栏目管理")
 public class QueryCategoryTreeNode {
-
-
-	private static int counts = 0;
-	private static int it = 0;
 	/**
 	 * @param data
 	 * @return
 	 * @author chaoweima
 	 */
 	@Bizlet("栏目树结构处理")
-	public static DataObject[] getCategoryTreeByRoot(String dsName) {
+	public static DataObject[] getCategoryTreeNode(int nodeId,String dsName) {
+		int counts = 0;
+		int it = 0;
+		int index = 0;
+		if(nodeId==0){
+			index = 1;
+		}
 		if (dsName == null || dsName.length() == 0)
 			dsName = "default";
-		String sql = "select id,ch_name as chName from cms_info_category where parent_id = 0 order by cat_sort asc";
+		String sql = "select id,ch_name,parent_id from cms_info_category where parent_id = "+nodeId+" order by cat_sort asc";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection(dsName);
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -46,13 +48,41 @@ public class QueryCategoryTreeNode {
 				counts = rs.getRow();
 				rs.beforeFirst();
 			}
-
-			DataObject[] dobj = new DataObject[counts];
+						
+			DataObject[] dobj = new DataObject[counts+index];
+			if(nodeId == 0){
+				DataObject rootDtr = DataObjectUtil.createDataObject("com.cms.content.category.CmsInfoCategory");
+				rootDtr.setBoolean("expanded", true);
+				rootDtr.setString("iconCls", "icon-application-home");
+				rootDtr.setString("id", "root_root");
+				rootDtr.setBoolean("isLeaf", false);
+				rootDtr.setString("realId", "root");
+				rootDtr.setString("text", "站点栏目管理");
+				rootDtr.setString("type", "root");
+				dobj[0] = rootDtr;
+			}
 			while (rs.next()) {
 				DataObject dtr = DataObjectUtil.createDataObject("com.cms.content.category.CmsInfoCategory");
-				dtr.setString("id", rs.getString("id"));
-				dtr.setString("chName",rs.getString("ch_name"));
-				dobj[it] = dtr;
+				dtr.setString("id", "category_"+rs.getString("id"));
+				dtr.setBoolean("expanded", false);
+				dtr.setInt("realId", rs.getInt("id"));
+				dtr.setString("text",rs.getString("ch_name"));
+				if(nodeId==0){
+					dtr.setString("iconCls", "icon-application");
+					dtr.setBoolean("isLeaf", false);
+					dtr.setString("pid","root_root");
+					dtr.setString("type","site");
+				}else{
+					int nodeCount = getTreeNode(rs.getInt("id"),dsName);
+					if(nodeCount > 0){
+						dtr.setBoolean("isLeaf", false);
+					}else{
+						dtr.setBoolean("isLeaf", true);
+					}
+					dtr.setString("pid", "category_"+rs.getString("parent_id"));
+					dtr.setString("type","category");
+				}
+				dobj[it+index] = dtr;
 				it++;
 			}
 
@@ -66,6 +96,32 @@ public class QueryCategoryTreeNode {
 		}
 	}
 	
+	public static int getTreeNode(int parentId,String dsName) {
+		int counts = 0;
+		if (dsName == null || dsName.length() == 0)
+			dsName = "default";
+		String sql = "select id,ch_name,parent_id from cms_info_category where parent_id = "+parentId+"";
+		Connection conn = ConnectionHelper.getCurrentContributionConnection(dsName);
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY);
+			rs = stmt.executeQuery(sql);
+			if (null != rs) {
+				rs.last();
+				counts = rs.getRow();
+				rs.beforeFirst();
+			}
+			return counts;
+		} catch (Throwable e) {
+			throw new RuntimeException(e);
+		} finally {
+			close(rs);
+			close(stmt);
+			close(conn);
+		}
+	}
 	
 	
 	private static void close(Connection conn) {

@@ -29,7 +29,7 @@
 		                </td>
 		                <th class="nui-form-label">首页模板：</th>
 		                <td>    
-		                    <input name="category.indexTemplet" class="nui-textbox nui-form-input" required="true"/>
+		                    <input name="category.indexTemplet" class="nui-textbox nui-form-input"/>
 		                </td>
 		            </tr>
 		            <tr>

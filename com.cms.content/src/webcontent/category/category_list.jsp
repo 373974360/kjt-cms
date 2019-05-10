@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%>
+<%
+	String parentId = request.getParameter("nodeId");
+ %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -12,9 +15,9 @@
 				<!-- 数据实体的名称 -->
 				<input class="nui-hidden" name="criteria/_entity" value="com.cms.content.category.CmsInfoCategory">
 				<!-- 排序字段 -->
-				<input class="nui-hidden" name="criteria/_orderby[1]/_property" value="chName">
+				<input class="nui-hidden" name="criteria/_orderby[1]/_property" value="catSort">
 				<input class="nui-hidden" name="criteria/_orderby[1]/_sort" value="asc">
-				<input class="nui-hidden" name="criteria/_expr[3]/parentId" value="0"/>
+				<input class="nui-hidden" name="criteria/_expr[3]/parentId" value="<%=parentId %>"/>
 				<input class="nui-hidden" name="criteria/_expr[3]/_op" value="=">
 				<table id="table1" class="table" style="height: 100%;float:left;">
 					<tr>
@@ -55,9 +58,9 @@
 						<div field="id" headerAlign="center" allowSort="true" visible="false">栏目ID</div>
 						<div field="chName" headerAlign="center" allowSort="true">中文名称</div>
 						<div field="enName" headerAlign="center" allowSort="true">英文名称</div>
-						<div field="linkUrl" headerAlign="center" allowSort="true">英文名称</div>
-						<div field="catSort" headerAlign="center" allowSort="true">英文名称</div>
-						<div field="remark" headerAlign="center" allowSort="true">英文名称</div>
+						<div field="linkUrl" headerAlign="center" allowSort="true">跳转地址</div>
+						<div field="catSort" headerAlign="center" allowSort="true">排序</div>
+						<div field="remark" headerAlign="center" allowSort="true">备注</div>
 					</div>
 				</div>
 			</div>
@@ -72,7 +75,7 @@
 			//新增
 			function add() {
 				nui.open({
-					url : "<%=request.getContextPath()%>/content/category/category_add.jsp",
+					url : "<%=request.getContextPath()%>/content/category/category_add.jsp?parentId=<%=parentId %>",
 					title : "新增记录",
 					width : 700,
 					height : 290,
@@ -81,6 +84,7 @@
 					ondestroy : function(action) {//弹出页面关闭前
 						if (action == "saveSuccess") {
 							grid.reload();
+		                	parent.refresh();
 						}
 					}
 				});
@@ -104,6 +108,7 @@
 						ondestroy : function(action) {
 							if (action == "saveSuccess") {
 								grid.reload();
+		                		parent.refresh();
 							}
 						}
 					});
@@ -133,6 +138,7 @@
 									var returnJson = nui.decode(text);
 									if (returnJson.exception == null) {
 										grid.reload();
+		                				parent.refresh();
 										nui.alert("删除成功","系统提示",function(action) {
 										});
 									} else {

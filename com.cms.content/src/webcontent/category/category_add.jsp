@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%>
+<%
+	String parentId = request.getParameter("parentId");
+ %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -10,7 +13,7 @@
 		<div class="nui-fit" style="padding-top:5px">
 			<div id="form1" method="post">
 				<input id="category.id" name="category.id" class="nui-hidden" />
-				<input id="category.parentId" name="category.parentId" class="nui-hidden" />
+				<input id="category.parentId" name="category.parentId" class="nui-hidden" value="<%=parentId %>" />
 		        <table style="width:100%;table-layout:fixed;" class="nui-form-table" >
 		            <tr>
 		                <th class="nui-form-label">中文名称：</th>
@@ -25,21 +28,21 @@
 		            <tr>
 		                <th class="nui-form-label">首页模板：</th>
 		                <td>    
-		                    <input name="category.indexTemplet" class="nui-textbox nui-form-input" required="true"/>
+		                    <input name="category.indexTemplet" class="nui-textbox nui-form-input"/>
 		                </td>
 		                <th class="nui-form-label">列表模板：</th>
 		                <td>    
-		                    <input name="category.listTemplet" class="nui-textbox nui-form-input" required="true"/>
+		                    <input name="category.listTemplet" class="nui-textbox nui-form-input"/>
 		                </td>
 		            </tr>
 		            <tr>
 		                <th class="nui-form-label">跳转地址：</th>
 		                <td>    
-		                    <input name="category.linkUrl" class="nui-textbox nui-form-input" required="true"/>
+		                    <input name="category.linkUrl" class="nui-textbox nui-form-input"/>
 		                </td>
 		                <th class="nui-form-label">栏目排序：</th>
 		                <td>    
-		                    <input name="category.catSort" class="nui-textbox nui-form-input" required="true"/>
+		                    <input name="category.catSort" class="nui-textbox nui-form-input"/>
 		                </td>
 		            </tr>
 		            <tr>
