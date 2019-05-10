@@ -68,7 +68,7 @@
 		                </td>	
 		                <th class="nui-form-label">回复时间：</th>
 		                <td>    
-		                    <input name="sq.replyTime" class="nui-datepicker" format="yyyy-MM-dd HH:mm:ss" showTime="true"required="true"/>
+		                    <input name="sq.replyTime" class="nui-datepicker" format="yyyy-MM-dd HH:mm:ss" showTime="true" required="true"/>
 		                </td>                
 		            </tr>	          
 		        </table>    
@@ -82,60 +82,66 @@
 	    <script type="text/javascript">
 	        nui.parse();
 	        var form = new nui.Form("form1");
-	        
-	        function setData(data){
-	        	data = nui.clone(data);
-	        	var json = nui.encode({sq:data});
-				$.ajax({
-					url:"com.cms.commonality.SqService.getSq.biz.ext",
-					type:'POST',
-			         data:json,
-			         cache:false,
-			         contentType:'text/json',
-			         success:function(text){
-						obj = nui.decode(text);
-			            form.setData(obj);
-			            form.setChanged(false);
-			         }
-	          	});
-	        }
-	        
-	        function SaveData() {
-	           	form.validate();
-		        if(form.isValid()==false) return;
-		        var data = form.getData(false,true);
-		        var json = nui.encode(data);
-	            $.ajax({
-	                url: "com.cms.commonality.SqService.updateSq.biz.ext",
-	                type: 'POST',
-	                data: json,
-	                cache: false,
-	                contentType:'text/json',
-	                success: function (text) {
-	                    CloseWindow("saveSuccess");
-	                },
-	                error: function (jqXHR, textStatus, errorThrown) {
-	                    alert(jqXHR.responseText);
-	                    CloseWindow();
-	                }
-	            });
-	        }
-	        
-	        
-			function CloseWindow(action){
-				if(action=="close"){
+	 
+			function setData(data) {
+				data = nui.clone(data);
+				var json = nui.encode({
+					sq : data
+				});
+				$
+						.ajax({
+							url : "com.cms.commonality.SqService.getSq.biz.ext",
+							type : 'POST',
+							data : json,
+							cache : false,
+							contentType : 'text/json',
+							success : function(text) {
+								obj = nui.decode(text);
+								form.setData(obj);
+								form.setChanged(false);
+							}
+						});
+			}
 
-				}else if(window.CloseOwnerWindow)
+			function SaveData() {
+				form.validate();
+				if (form.isValid() == false)
+					return;
+				var data = form.getData(false, true);
+				var json = nui.encode(data);
+				$
+						.ajax({
+							url : "com.cms.commonality.SqService.updateSq.biz.ext",
+							type : 'POST',
+							data : json,
+							cache : false,
+							contentType : 'text/json',
+							success : function(text) {
+								CloseWindow("saveSuccess");
+							},
+							error : function(jqXHR, textStatus,
+									errorThrown) {
+								alert(jqXHR.responseText);
+								CloseWindow();
+							}
+						});
+			}
+
+			function CloseWindow(action) {
+				if (action == "close") {
+				} else if (window.CloseOwnerWindow)
 					return window.CloseOwnerWindow(action);
 				else
-              	return window.close();
-            }
-	        function onOk(e) {
-	            SaveData();
-	        }
-	        function onCancel(e) {
-	            CloseWindow("cancel");
-	        }
-	    </script>
+					return window.close();
+			}
+						
+			function onOk(e) {
+				SaveData();
+			}
+			
+			function onCancel(e) {
+				CloseWindow("cancel");
+			}
+		</script>
 	</body>
 </html>
