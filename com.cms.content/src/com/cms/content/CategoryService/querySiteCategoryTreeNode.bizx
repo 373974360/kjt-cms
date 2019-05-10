@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <process:tBusinessLogic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://com.primeton.emf.core" xmlns:process="http://primeton.com/emf/core/process" name="querySiteCategoryTreeNode" detailDescription="" demonstration="" urls="" gridVisibility="false" rulerVisibility="true" snapToGeometry="true" productVersion="7.0.0.0">
   <nodes xsi:type="process:tStart" description="" id="start0" name="开始" displayName="开始" type="start">
-    <sourceConnections xsi:type="process:tLink" id="link5" name="link5" displayName="连接线" isDefault="true" type="transition">
+    <sourceConnections xsi:type="process:tLink" id="link0" name="link0" displayName="连接线" isDefault="true" type="transition">
       <sourceNode>start0</sourceNode>
       <targetNode>invokePojo0</targetNode>
-      <process:transitionCondition/>
     </sourceConnections>
     <location x="100" y="150"/>
     <size height="28" width="28"/>
     <nodeLabel>start0label</nodeLabel>
   </nodes>
   <nodes xsi:type="process:tEnd" description="" id="end0" name="结束" displayName="结束" type="end">
-    <targetConnections>link18</targetConnections>
+    <targetConnections>link1</targetConnections>
     <location x="400" y="150"/>
     <size height="28" width="28"/>
     <nodeLabel>end0label</nodeLabel>
     <process:returns>
-      <process:return id="0" language="commonj.sdo.DataObject[]" name="data" type="query" valueType="Java">data</process:return>
+      <process:return id="0" language="com.cms.content.category.CmsInfoCategory[]" name="data" type="query" valueType="DataObject">data</process:return>
     </process:returns>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="start0label" name="label" displayName="label" nodeType="label">
@@ -29,68 +28,38 @@
     <figSize height="17" width="25"/>
     <node>end0</node>
   </nodes>
-  <nodes xsi:type="process:tInvoke" description="" id="invokePojo0" name="queryByNamedSql" displayName="queryByNamedSql" type="invoke" index="3" invokeType="invoke_pojo" varArgs="false">
-    <sourceConnections xsi:type="process:tLink" id="link17" name="link17" displayName="连接线" isDefault="true" type="transition">
+  <nodes xsi:type="process:tInvoke" description="" id="invokePojo0" name="getCategoryTreeByRoot" displayName="getCategoryTreeByRoot" type="invoke" index="1" invokeType="invoke_pojo" varArgs="false">
+    <sourceConnections xsi:type="process:tLink" id="link1" name="link1" displayName="连接线" isDefault="true" type="transition">
       <sourceNode>invokePojo0</sourceNode>
-      <targetNode>invokePojo1</targetNode>
-      <process:transitionCondition/>
+      <targetNode>end0</targetNode>
     </sourceConnections>
-    <targetConnections>link5</targetConnections>
-    <location x="250" y="165"/>
+    <targetConnections>link0</targetConnections>
+    <location x="258" y="220"/>
     <size height="28" width="22"/>
     <nodeLabel>invokePojo0label</nodeLabel>
     <process:pojo methodType="instance" synchronization="true" transactionType="join">
-      <process:partner type="literal">com.eos.foundation.database.DatabaseExt.queryByNamedSql</process:partner>
+      <process:partner type="literal">com.cms.content.QueryCategoryTreeNode.getCategoryTreeByRoot</process:partner>
       <process:instance instanceName=""/>
     </process:pojo>
     <process:inputVariables>
-      <process:inputVariable id="0" name="dsName" type="literal" value="java.lang.String" valueType="Java" pattern="value">default</process:inputVariable>
-      <process:inputVariable id="1" name="nameSqlId" type="literal" value="java.lang.String" valueType="Java" pattern="value">com.cms.content.category.queryCategoryByParentId</process:inputVariable>
-      <process:inputVariable id="2" name="parameterObject" type="query" value="java.lang.Object" valueType="Java" pattern="reference">params</process:inputVariable>
+      <process:inputVariable id="0" name="dsName" type="literal" value="java.lang.String" valueType="Java" pattern="reference">default</process:inputVariable>
     </process:inputVariables>
     <process:outputVariables>
-      <process:outputVariable id="0" name="out0" type="query" value="java.lang.Object[]" valueType="Java">data</process:outputVariable>
+      <process:outputVariable id="0" name="out0" type="query" value="commonj.sdo.DataObject[]" valueType="Java">data</process:outputVariable>
     </process:outputVariables>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="invokePojo0label" name="label" nodeType="label">
-    <location x="207" y="201"/>
-    <figSize height="17" width="109"/>
+    <location x="199" y="256"/>
+    <figSize height="17" width="141"/>
     <node>invokePojo0</node>
-  </nodes>
-  <nodes xsi:type="process:tInvoke" description="" id="invokePojo1" name="treeView" displayName="treeView" type="invoke" index="1" invokeType="invoke_pojo" varArgs="false">
-    <sourceConnections xsi:type="process:tLink" id="link18" name="link18" displayName="连接线" isDefault="true" type="transition">
-      <sourceNode>invokePojo1</sourceNode>
-      <targetNode>end0</targetNode>
-    </sourceConnections>
-    <targetConnections>link17</targetConnections>
-    <location x="349" y="229"/>
-    <size height="28" width="22"/>
-    <nodeLabel>invokePojo1label</nodeLabel>
-    <process:pojo methodType="instance" synchronization="true" transactionType="join">
-      <process:partner type="literal">com.cms.content.TreeView.treeView</process:partner>
-      <process:instance instanceName=""/>
-    </process:pojo>
-    <process:inputVariables>
-      <process:inputVariable id="0" name="data" type="query" value="commonj.sdo.DataObject[]" valueType="Java" pattern="reference">data</process:inputVariable>
-    </process:inputVariables>
-    <process:outputVariables>
-      <process:outputVariable id="0" name="out1" type="query" value="commonj.sdo.DataObject[]" valueType="Java">data</process:outputVariable>
-    </process:outputVariables>
-  </nodes>
-  <nodes xsi:type="model:NodeElementLabel" id="invokePojo1label" name="label" nodeType="label">
-    <location x="335" y="265"/>
-    <figSize height="17" width="51"/>
-    <node>invokePojo1</node>
   </nodes>
   <topRuler/>
   <leftRuler/>
   <process:info author="chaoweima" createTime="2019-05-09 15:33:19" date="2019-05-09Z" description="" name="queryCategoryTreeNode" version="7.0.0.0"/>
   <process:variables/>
-  <process:inputs varArgs="false">
-    <process:input anyType="commonj.sdo.DataObject" description="" isArray="false" name="params"/>
-  </process:inputs>
+  <process:inputs varArgs="false"/>
   <process:outputs>
-    <process:output anyType="commonj.sdo.DataObject" description="" isArray="true" name="data"/>
+    <process:output description="" isArray="true" modelType="com.cms.content.category.CmsInfoCategory" name="data"/>
   </process:outputs>
   <process:extAttribute1>public</process:extAttribute1>
   <process:transactionType>true</process:transactionType>
