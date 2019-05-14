@@ -16,8 +16,7 @@
 		            <tr>
 		                <th class="nui-form-label">来信标题：</th>
 		                <td colspan="2">    
-		                	<input name="sq" class="nui-combobox" style="width:150px;" textField="title" valueField="id"
-								url="com.cms.commonality.SqService.querySqAll.biz.ext" dataField="data"  showNullItem="true" required="true" />           
+		                    <input name="sq.title" class="nui-textbox nui-form-input" required="true"/> 
 		                </td>
 		                <th class="nui-form-label">来信人姓名：</th>
 		                <td colspan="2">    

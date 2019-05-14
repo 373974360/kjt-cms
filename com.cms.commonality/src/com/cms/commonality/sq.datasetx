@@ -452,7 +452,7 @@
         </fieldEdit>
       </viewField>
     </columnProperty>
-    <columnProperty id="property8" name="content" displayName="来信内容" columnName="CONTENT" nullAble="true" PK="false" columnType="CLOB" eosDataType="String" length="1" lazy="true" dasType="com.primeton.das.entity.impl.lob.type.ClobStringType" overWriteDefaultColumnType="false" showType="ClobString" update="true" insert="true">
+    <columnProperty id="property8" name="content" displayName="来信内容" columnName="CONTENT" nullAble="true" PK="false" columnType="CLOB" eosDataType="String" length="1" dasType="string" overWriteDefaultColumnType="false" showType="String" update="true" insert="true">
       <comment>来信内容</comment>
       <viewField dict="false" dictTypeId="" displayName="content" entityField="content" id="content" label="来信内容" name="content" userDefined="true">
         <fieldView showAllAttr="false">
@@ -844,7 +844,7 @@
         </fieldEdit>
       </viewField>
     </columnProperty>
-    <columnProperty id="property15" name="replyContent" displayName="回复内容" columnName="REPLY_CONTENT" nullAble="true" PK="false" columnType="CLOB" eosDataType="String" length="1" lazy="true" dasType="com.primeton.das.entity.impl.lob.type.ClobStringType" overWriteDefaultColumnType="false" showType="ClobString" update="true" insert="true">
+    <columnProperty id="property15" name="replyContent" displayName="回复内容" columnName="REPLY_CONTENT" nullAble="true" PK="false" columnType="CLOB" eosDataType="String" length="1" dasType="string" overWriteDefaultColumnType="false" showType="String" update="true" insert="true">
       <comment>回复内容</comment>
       <viewField dict="false" dictTypeId="" displayName="replyContent" entityField="replyContent" id="replyContent" label="回复内容" name="replyContent" userDefined="true">
         <fieldView showAllAttr="false">

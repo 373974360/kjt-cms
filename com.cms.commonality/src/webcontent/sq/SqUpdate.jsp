@@ -76,13 +76,15 @@
 		            <tr>
 		                <th class="nui-form-label">来信内容：</th>
 		                <td colspan="6">    
-		                   <textarea id="content1" name="sq.content" style="height:300px;width:98%;"></textarea>
+		                	<input name="sq.content" class="nui-hidden" />
+		                   <textarea id="content1" style="height:300px;width:98%;"></textarea>
 		                </td>		                			                            
 		            </tr>
 		            <tr>
 			            <th class="nui-form-label">回复内容：</th>
-		                <td colspan="6">    
-		                   <textarea id="content2" name="sq.replyContent" style="height:300px;width:98%;"></textarea>
+		                <td colspan="6"> 
+		                   <input name="sq.replyContent" class="nui-hidden" />
+		                   <textarea id="content2" style="height:300px;width:98%;"></textarea>
 		                </td> 
 		            </tr>		          
 		        </table>    
@@ -100,17 +102,6 @@
 			var ue = UE.getEditor('content1');
 	        var ue2 = UE.getEditor('content2');
 	        
-	        function getContent() {
-		        var arr = ue.getContent();
-		        var arr2 = ue2.getContent();
-		        alert(arr);
-		    };
-		    function setContent() {
-		        ue.setContent('sq.content');
-		        ue2.setContent('sq.replyContent');
-
-		    };
-	 
 			function setData(data) {
 				data = nui.clone(data);
 				var json = nui.encode({
@@ -124,6 +115,12 @@
 						contentType : 'text/json',
 						success : function(text) {
 							obj = nui.decode(text);
+							if(obj.sq.content!=null){
+								ue.setContent(obj.sq.content);
+							}
+							if(obj.sq.replyContent!=null){
+								ue2.setContent(obj.sq.replyContent);
+							}
 							form.setData(obj);
 							form.setChanged(false);
 						}
@@ -135,6 +132,8 @@
 				if (form.isValid() == false)
 					return;
 				var data = form.getData(false, true);
+				data.sq.content = ue.getContent();
+				data.sq.replyContent = ue2.getContent();
 				var json = nui.encode(data);
 				$.ajax({
 						url : "com.cms.commonality.SqService.updateSq.biz.ext",
