@@ -5,6 +5,8 @@
 		<link id="css_skin" rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/coframe/tools/skins/skin1/css/style.css"/>
 		<link id="css_icon" rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/coframe/tools/icons/icon.css"/>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/common/nui/nui.js"></script>
+		<script src="<%=request.getContextPath()%>/content/ueditor/ueditor.config.js" type="text/javascript"></script>
+    	<script src="<%=request.getContextPath()%>/content/ueditor/ueditor.all.min.js" type="text/javascript"></script>
 	</head>
 	<body>
 		<div class="nui-fit" style="padding-top:5px">
@@ -13,63 +15,76 @@
 		        <table style="width:100%; table-layout:fixed;" class="nui-form-table" >
 		            <tr>
 		                <th class="nui-form-label">来信标题：</th>
-		                <td>    
-		                    <input name="sq.title" class="nui-textbox nui-form-input" required="true"/>
+		                <td colspan="2">    
+		                	<input name="sq" class="nui-combobox" style="width:150px;" textField="title" valueField="id"
+								url="com.cms.commonality.SqService.querySqAll.biz.ext" dataField="data"  showNullItem="true" required="true" />           
 		                </td>
 		                <th class="nui-form-label">来信人姓名：</th>
-		                <td>    
+		                <td colspan="2">    
 		                    <input name="sq.username" class="nui-textbox nui-form-input" required="true"/>
 		                </td>
 		            </tr>
 		            <tr>
 		                <th class="nui-form-label">联系地址：</th>
-		                <td>    
+		                <td colspan="2">    
 		                    <input name="sq.address" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空"/>
 		                </td>
 		                <th class="nui-form-label">联系电话：</th>
-		                <td>    
+		                <td colspan="2">    
 		                    <input name="sq.phone" class="nui-textbox nui-form-input" vtype="float" required="true"/>
 		                </td>
 		            </tr>
 		            <tr>
 		                <th class="nui-form-label">电子邮箱：</th>
-		                <td>    
+		                <td colspan="2">    
 		                    <input name="sq.email" class="nui-textbox nui-form-input" vtype="email;rangeLength:5,20;"  required="true"/>
 		                </td>
 		               	<th class="nui-form-label">受理部门：</th>
-		                <td>    
+		                <td colspan="2">    
 		                    <input name="sq.subOrgName" class="nui-textbox nui-form-input" required="true"/>
 		                </td>
 		            </tr>
 		            <tr>
 		                <th class="nui-form-label">是否回复：</th>
-		                <td>    
+		                <td colspan="2">    
 		                    <input name="sq.isReply" class="nui-dictcombobox" dictTypeId="CMS_REYESNO" required="true"/>
 		                </td>
 		                <th class="nui-form-label">回复部门：</th>
-		                <td>    
+		                <td colspan="2">    
 		                    <input name="sq.replyOrgName" class="nui-textbox nui-form-input" required="true"/>
 		                </td>
 		            </tr>
 		            <tr>
 		                <th class="nui-form-label">是否公开：</th>
-		                <td>    
+		                <td colspan="2">    
 		                    <input name="sq.isOpen" class="nui-dictcombobox" dictTypeId="CMS_OPENYESNO" required="true"/>
 		                </td>
 		                <th class="nui-form-label">是否发布：</th>
-		                <td>    
+		                <td colspan="2">    
 		                    <input name="sq.isPublish" class="nui-dictcombobox" dictTypeId="CMS_PUBYESNO" required="true"/>
 		                </td>
 		            </tr>
 		            <tr>
 		                <th class="nui-form-label">提交时间：</th>
-		                <td>    
+		                <td colspan="2">    
 		                    <input name="sq.createTime" class="nui-datepicker" format="yyyy-MM-dd HH:mm:ss" showTime="true" required="true"/>
 		                </td>	
 		                <th class="nui-form-label">回复时间：</th>
-		                <td>    
+		                <td colspan="2">    
 		                    <input name="sq.replyTime" class="nui-datepicker" format="yyyy-MM-dd HH:mm:ss" showTime="true"required="true"/>
 		                </td>                
+		            </tr>
+		            <tr>
+		                <th class="nui-form-label">来信内容：</th>
+		                <td colspan="6">    
+		                   <textarea id="content1" value="sq.content" style="height:300px;width:98%;"></textarea>
+		                </td>		                			                            
+		            </tr>
+		            <tr>
+			            <th class="nui-form-label">回复内容：</th>
+		                <td colspan="6">    
+		                   <textarea id="content2" value="sq.replyContent" style="height:300px;width:98%;"></textarea>
+		                </td> 
 		            </tr>	          
 		        </table>    
 		    </div>    
@@ -82,6 +97,17 @@
 	    <script type="text/javascript">
 	        nui.parse();
 	        var form = new nui.Form("form1");
+	        
+	        var ue = UE.getEditor('content1');
+	        var ue2 = UE.getEditor('content2');
+	        function getContent() {
+		        var arr = ue.getContent();
+		        alert(arr);
+		    };
+		    function setContent() {
+		        ue.setContent('MiniUI - 专业WebUI控件库');
+		    };
+	        
 	        function SaveData() {
 	           	form.validate();
 		        if(form.isValid()==false) return;

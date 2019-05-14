@@ -94,8 +94,8 @@
 				nui.open({
 					url : "<%=request.getContextPath()%>/commonality/sq/SqAdd.jsp",
 					title : "新增记录",
-					width : 700,
-					height : 280,
+					width : '80%',
+					height : '100%',
 					onload : function() {
 					},
 					ondestroy : function(action) {//弹出页面关闭前
@@ -113,8 +113,8 @@
 					nui.open({
 						url : "<%=request.getContextPath()%>/commonality/sq/SqUpdate.jsp",
 						title : "编辑数据",
-						width : 700,
-						height : 280,
+						width : '80%',
+						height : '100%',
 						onload : function() {
 							var iframe = this.getIFrameEl();
 							var data = row;
