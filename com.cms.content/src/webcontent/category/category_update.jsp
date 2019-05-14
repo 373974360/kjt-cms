@@ -4,7 +4,11 @@
 	<head>
 		<link id="css_skin" rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/coframe/tools/skins/skin1/css/style.css"/>
 		<link id="css_icon" rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/coframe/tools/icons/icon.css"/>
-		<script type="text/javascript" src="<%=request.getContextPath()%>/common/nui/nui.js"></script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/common/nui/nui.js">
+		</script><style type="text/css">
+			#selectModel table{width:100%;}
+			.mini-checkboxlist-td{width:20px;}
+		</style>
 	</head>
 	<body>
 		<div class="nui-fit" style="padding-top:5px">
@@ -43,6 +47,15 @@
 		                </td>
 		            </tr>
 		            <tr>
+		                <th class="nui-form-label">关联模型：</th>
+		                <td colspan=3>    
+		                    <div id="selectModel" class="nui-checkboxlist" name="categoryModels.modelId" repeatItems="3" repeatLayout="table" style="width:100%;"
+							    textField="modelName" valueField="modelEnName" onload="onLoad"
+							    url="com.cms.siteconfig.ModelService.queryModelAll.biz.ext" dataField="data"  >
+							</div>
+		                </td>
+		            </tr>
+		            <tr>
 		                <th class="nui-form-label">备注：</th>
 		                <td colspan="3">    
 		                    <input name="category.remark" class="nui-textbox nui-form-input"/>
@@ -71,7 +84,19 @@
 			         contentType:'text/json',
 			         success:function(text){
 						obj = nui.decode(text);
-			            form.setData(obj);
+						var json = nui.encode(obj);
+						json = json.substring(0,json.indexOf("categoryModels")-2);
+						var models = obj.categoryModels;
+						if(models.length>0){
+							var json_1 = ',"categoryModels":{"modelId":"';
+							for(var i=0;i<models.length;i++){
+								json_1 += models[i].modelId+","; 
+							}
+							json_1 = json_1.substring(0,json_1.length-1)+'"}';
+							json = json+json_1;
+						}
+						json = json + "}";
+			            form.setData(JSON.parse(json));
 			            form.setChanged(false);
 			         }
 	          	});
@@ -82,7 +107,18 @@
 		        if(form.isValid()==false) return;
 		        var data = form.getData(false,true);
 		        var json = nui.encode(data);
-		        console.log(json);
+		        json = json.substring(0,json.indexOf("categoryModels")-2);
+		        var modelId = data.categoryModels.modelId;
+		        if(modelId!=undefined && modelId.length>0){
+		        	var json_1 = ',"categoryModels":[';
+			        var modelArray = modelId.split(",");
+			        for(var i=0;i<modelArray.length;i++){
+			        	json_1 = json_1 + '{"modelId":'+'"'+modelArray[i]+'"},';
+			        }
+			        json_1 = json_1.substring(0, json_1.length-1)+"]";
+			        json = json+json_1;
+		        }
+        		json = json + "}";
 	            $.ajax({
 	                url: "com.cms.content.CategoryService.updateCategory.biz.ext",
 	                type: 'POST',

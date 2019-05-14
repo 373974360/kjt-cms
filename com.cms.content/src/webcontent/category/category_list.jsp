@@ -98,7 +98,7 @@
 						url : "<%=request.getContextPath()%>/content/category/category_update.jsp",
 						title : "编辑数据",
 						width : 700,
-						height : 290,
+						height : 350,
 						onload : function() {
 							var iframe = this.getIFrameEl();
 							var data = row;

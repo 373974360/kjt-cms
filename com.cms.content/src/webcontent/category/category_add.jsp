@@ -80,6 +80,18 @@
 		        if(form.isValid()==false) return;
 		        var data = form.getData(false,true);
 		        var json = nui.encode(data);
+		        json = json.substring(0,json.indexOf("categoryModels")-2);
+		        var modelId = data.categoryModels.modelId;
+		        if(modelId!=undefined && modelId.length>0){
+		        	var json_1 = ',"categoryModels":[';
+			        var modelArray = modelId.split(",");
+			        for(var i=0;i<modelArray.length;i++){
+			        	json_1 = json_1 + '{"modelId":'+'"'+modelArray[i]+'"},';
+			        }
+			        json_1 = json_1.substring(0, json_1.length-1)+"]";
+			        json = json+json_1;
+		        }
+        		json = json + "}";
 	            $.ajax({
 	                url: "com.cms.content.CategoryService.addCategory.biz.ext",
 	                type: 'POST',

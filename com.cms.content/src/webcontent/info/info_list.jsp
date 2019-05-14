@@ -38,14 +38,14 @@
 						%>
 							<a class="nui-menubutton" menu="#popupMenu" >新增...</a>
 						    <ul id="popupMenu" class="nui-menu" style="display:none;">
-				                <li iconCls="icon-article" onclick="add('article')">文章</li>
-				                <li iconCls="icon-video" onclick="add('video')">视频</li>
-				                <li iconCls="icon-pic" onclick="add('pic')">组图</li>
-				                <li iconCls="icon-link" onclick="add('link')">连接</li>
-				                <li iconCls="icon-leader" onclick="add('leader')">领导</li>
-				                <li iconCls="icon-doc" onclick="add('doc')">发文</li>
-				                <li iconCls="icon-expert" onclick="add('expert')">专家</li>
-				                <li iconCls="icon-download" onclick="add('download')">下载</li>
+				                <li id="article" iconCls="icon-article" onclick="add('article')" style="display:none;">文章</li>
+				                <li id="video" iconCls="icon-video" onclick="add('video')" style="display:none;">视频</li>
+				                <li id="pic" iconCls="icon-pic" onclick="add('pic')" style="display:none;">组图</li>
+				                <li id="link" iconCls="icon-link" onclick="add('link')" style="display:none;">连接</li>
+				                <li id="leader" iconCls="icon-leader" onclick="add('leader')" style="display:none;">领导</li>
+				                <li id="doc" iconCls="icon-doc" onclick="add('doc')" style="display:none;">发文</li>
+				                <li id="expert" iconCls="icon-expert" onclick="add('expert')" style="display:none;">专家</li>
+				                <li id="download" iconCls="icon-download" onclick="add('download')" style="display:none;">下载</li>
 						    </ul>
 						<%
 							}
@@ -65,9 +65,9 @@
 					<div field="id" headerAlign="center" allowSort="true" visible="false">内容ID</div>
 					<div field="infoTitle" width="300" headerAlign="left" allowSort="true">标题</div>
 					<div field="action" width="100" headerAlign="center" allowSort="true">管理操作</div>
-					<div field="inputUser" width="80" headerAlign="center" allowSort="true">录入人</div>
+					<div field="editor" width="80" headerAlign="center" allowSort="true">编辑</div>
 					<div field="inputDtime" width="100" headerAlign="center" allowSort="true">录入时间</div>
-					<div field="releasedTime" width="100" headerAlign="center" allowSort="true">发布时间</div>
+					<div field="releasedDtime" width="100" headerAlign="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm:ss">发布时间</div>
 				</div>
 			</div>
 		</div>
@@ -77,10 +77,29 @@
 	
 			var formData = new nui.Form("#queryform").getData(false, false);
 			grid.load(formData);
+			setAddBtn();
+			function setAddBtn(){
+	        	var json = nui.encode({catId:<%=catId %>});
+				$.ajax({
+					url:"com.cms.content.CategoryService.queryInfoCategoryModel.biz.ext",
+					type:'POST',
+			         data:json,
+			         cache:false,
+			         contentType:'text/json',
+			         success:function(text){
+			         	console.log(text.data.length);
+						if(text.data.length>0){
+							for(var i=0;i<text.data.length;i++){
+								$("#"+text.data[i].modelId).css("display","block");
+							}
+						}
+			         }
+	          	});
+	        }
 			
 			//新增
 			function add(model) {
-				var url = "<%=request.getContextPath()%>/content/info/info_"+model+"_add.jsp?catId=<%=catId %>";
+				var url = "<%=request.getContextPath()%>/content/info/info_"+model+"_add.jsp?catId=<%=catId %>&modelId="+model;
 				nui.open({
 					url : url,
 					title : "新增记录",
@@ -91,7 +110,7 @@
 					ondestroy : function(action) {//弹出页面关闭前
 						if (action == "saveSuccess") {
 							grid.reload();
-		                	parent.refresh();
+		                	refresh();
 						}
 					}
 				});

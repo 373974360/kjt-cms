@@ -38,7 +38,7 @@
         </process:simpleCondition>
       </process:transitionCondition>
     </sourceConnections>
-    <targetConnections>link1</targetConnections>
+    <targetConnections>link10</targetConnections>
     <location x="105" y="270"/>
     <size height="24" width="24"/>
     <nodeLabel>loopstart0label</nodeLabel>
@@ -117,7 +117,7 @@
     <node>invokePojo2</node>
   </nodes>
   <nodes xsi:type="process:tInvoke" description="" id="invokePojo0" name="insertEntity" displayName="insertEntity" type="invoke" index="2" invokeType="invoke_pojo" varArgs="false">
-    <sourceConnections xsi:type="process:tLink" id="link1" name="link1" displayName="连接线" isDefault="true" type="transition">
+    <sourceConnections xsi:type="process:tLink" id="link10" name="link10" displayName="连接线" isDefault="true" type="transition">
       <sourceNode>invokePojo0</sourceNode>
       <targetNode>loopstart0</targetNode>
     </sourceConnections>
