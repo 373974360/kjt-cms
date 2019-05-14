@@ -62,6 +62,16 @@
 		                </td>
 		            </tr>
 		            <tr>
+		                <th class="nui-form-label">来信内容：</th>
+		                <td>    
+		                    <textarea  name="sq.content" style="width: 100%;height:285px;"></textarea>
+		                </td>	
+		                <th class="nui-form-label">回复内容：</th>
+		                 <td>    
+		                    <textarea  name="sq.replyContent" style="width: 100%;height:285px;"></textarea>
+		                </td>              
+		            </tr>
+		            <tr>
 		                <th class="nui-form-label">提交时间：</th>
 		                <td>    
 		                    <input name="sq.createTime" class="nui-datepicker" format="yyyy-MM-dd HH:mm:ss" showTime="true" required="true"/>
@@ -82,6 +92,7 @@
 	    <script type="text/javascript">
 	        nui.parse();
 	        var form = new nui.Form("form1");
+
 	 
 			function setData(data) {
 				data = nui.clone(data);
