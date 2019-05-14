@@ -18,7 +18,7 @@ import commonj.sdo.DataObject;
  *
  */
 @Bizlet("站点栏目管理")
-public class QueryCategoryTreeNode {
+public class QueryCategoryAllTreeNode {
 	/**
 	 * @param data
 	 * @return
@@ -96,11 +96,17 @@ public class QueryCategoryTreeNode {
 		}
 	}
 	
+	/**
+	 * @param data
+	 * @return
+	 * @author chaoweima
+	 */
+	@Bizlet("栏目树结构处理")
 	public static int getTreeNode(int parentId,String dsName) {
 		int counts = 0;
 		if (dsName == null || dsName.length() == 0)
 			dsName = "default";
-		String sql = "select id,ch_name,parent_id from cms_info_category where parent_id = "+parentId+"";
+		String sql = "select id from cms_info_category where parent_id = "+parentId+"";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection(dsName);
 		Statement stmt = null;
 		ResultSet rs = null;

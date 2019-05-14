@@ -82,6 +82,7 @@
 		        if(form.isValid()==false) return;
 		        var data = form.getData(false,true);
 		        var json = nui.encode(data);
+		        console.log(json);
 	            $.ajax({
 	                url: "com.cms.content.CategoryService.updateCategory.biz.ext",
 	                type: 'POST',

@@ -44,7 +44,7 @@
 						<td style="width: 100%;">
 							<a class="nui-button" iconCls="icon-add" onclick="add()">增加 </a>
 							<a id="update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑 </a>
-							<a class="nui-button" iconCls="icon-remove" onclick="remove()">删除</a>
+							<a id="remove" class="nui-button" iconCls="icon-remove" onclick="remove()">删除</a>
 						</td>
 					</tr>
 				</table>
@@ -78,7 +78,7 @@
 					url : "<%=request.getContextPath()%>/content/category/category_add.jsp?parentId=<%=parentId %>",
 					title : "新增记录",
 					width : 700,
-					height : 290,
+					height : 350,
 					onload : function() {
 					},
 					ondestroy : function(action) {//弹出页面关闭前
@@ -121,8 +121,13 @@
 			function remove() {
 				var rows = grid.getSelecteds();
 				if (rows.length > 0) {
-					nui.confirm("确定删除选中记录？","系统提示",
-					function(action) {
+					var bool = isExist(rows[0].id);
+					if(bool>0){
+						nui.alert("请先删除子栏目","系统提示",function(action) {
+						});
+						return;
+					}
+					nui.confirm("确定删除选中记录？","系统提示",function(action) {
 						if (action == "ok") {
 							var json = nui.encode({
 								categorys : rows
@@ -154,6 +159,22 @@
 				}
 			}
 	
+			//判断是否有子栏目
+		    function isExist(value){
+		    	var bool;
+		    	$.ajax({
+			        url:"com.cms.content.CategoryService.isExist.biz.ext",
+			        type:'POST',
+			        data:'parentId='+value,
+			        cache:false,
+			        async:false,
+			        dataType:'json',
+			        success:function(text){
+			       		bool = text.data>0;
+			        }
+		      });
+		      return bool;
+		    }
 			//重新刷新页面
 			function refresh() {
 				var form = new nui.Form("#queryform");
@@ -185,8 +206,10 @@
 				var rows = grid.getSelecteds();
 				if (rows.length > 1) {
 					nui.get("update").disable();
+					nui.get("remove").disable();
 				} else {
 					nui.get("update").enable();
+					nui.get("remove").enable();
 				}
 			}
 		</script>

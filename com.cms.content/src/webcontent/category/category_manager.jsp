@@ -24,7 +24,7 @@
 <div id="layout1" class="nui-layout" style="width:100%;height:100%;">
 	<div id="region1" region="west" title="站点栏目管理" showHeader="true" class="sub-sidebar" 
 	width="240" allowResize="false">
-			<ul id="tree1" class="nui-tree" url="com.cms.content.CategoryService.queryCategoryTreeNode.biz.ext" 
+			<ul id="tree1" class="nui-tree" url="com.cms.content.CategoryService.queryCategoryAllTreeNode.biz.ext" 
 			style="width:98%;height:98%;padding:5px;" textField="text" idField="id" resultAsTree="false" 
 			parentField="pid" onnodeclick="onNodeClick" allowDrag="true" allowDrop="true" showTreeLines="true"
 			contextMenu="#applicaitonTreeMenu" onbeforeload="onBeforeTreeLoad" ongivefeedback="onGiveFeedback" ondrop="onDrop" style="background:#fafafa;">
@@ -76,29 +76,6 @@
 		tabs.setTabs(applicationtabs);
 	}
 	
-	function onDrop(e){
-		var tree = e.sender;
-		var node = e.dragNode;              //被拖拽的节点
-		var targetNode = e.dropNode;  //目标投放节点
-		var dragAction = e.dragAction 
-		
-		var json = nui.encode({nodeId:node.realId,nodeType:node.type,targetNodeId:targetNode.realId,targetNodeType:targetNode.type});
-		$.ajax({
-            url: "org.gocom.components.coframe.framework.FuncGroupManager.updateFuncGroupRelation.biz.ext",
-            type: 'POST',
-            data: json,
-            cache: false,
-            contentType:'text/json',
-            success: function (text) {
-            	tree.loadNode(targetNode);
-            },
-            error: function () {
-            }
-        });
-		
-		
-	}
-	
 	function onGiveFeedback(e) {
 		var tree = e.sender;
 		var node = e.targetNode;              //被拖拽的节点
@@ -140,9 +117,9 @@
 		var tree = e.sender;
 		var node = e.dragNode;              //被拖拽的节点
 		var targetNode = e.dropNode;  //目标投放节点
-		var dragAction = e.dragAction;
 		
-		var json = nui.encode({id:node.realId,parentId:targetNode.realId});
+		var json = nui.encode({"category":{"id":node.realId,"parentId":targetNode.realId}});
+		console.log(json);
 		$.ajax({
             url: "com.cms.content.CategoryService.updateCategory.biz.ext",
             type: 'POST',
@@ -200,7 +177,6 @@
 			}
 		});
 	}
-	
 	//应用功能树右键菜单
 	function onBeforeOpen(e) {
 	    var obj = e.sender;
@@ -230,7 +206,6 @@
 	    if(node.type=="category"){
 	    	var array = [{id: "addcategory", text: "新增子栏目", iconCls:"icon-add", onclick:"addCategory"},
 						{id: "editcategory", text: "修改栏目", iconCls:"icon-edit", onclick:"editCategory"},
-						{id: "removeapplication", text: "删除栏目", iconCls:"icon-remove", onclick:"removeApplication"},
 						{id: "refresh", text: "刷新", iconCls:"icon-reload", onclick:"refresh"}];
 			e.htmlEvent.preventDefault();
 			obj.loadList(array);			

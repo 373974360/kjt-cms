@@ -8,6 +8,10 @@
 		<link id="css_skin" rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/coframe/tools/skins/skin1/css/style.css"/>
 		<link id="css_icon" rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/coframe/tools/icons/icon.css"/>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/common/nui/nui.js"></script>
+		<style type="text/css">
+			#selectModel table{width:100%;}
+			.mini-checkboxlist-td{width:20px;}
+		</style>
 	</head>
 	<body>
 		<div class="nui-fit" style="padding-top:5px">
@@ -43,6 +47,15 @@
 		                <th class="nui-form-label">栏目排序：</th>
 		                <td>    
 		                    <input name="category.catSort" class="nui-textbox nui-form-input"/>
+		                </td>
+		            </tr>
+		            <tr>
+		                <th class="nui-form-label">关联模型：</th>
+		                <td colspan=3>    
+		                    <div id="selectModel" class="nui-checkboxlist" name="categoryModels.modelId" repeatItems="3" repeatLayout="table" style="width:100%;"
+							    textField="modelName" valueField="modelEnName" onload="onLoad"
+							    url="com.cms.siteconfig.ModelService.queryModelAll.biz.ext" dataField="data"  >
+							</div>
 		                </td>
 		            </tr>
 		            <tr>
