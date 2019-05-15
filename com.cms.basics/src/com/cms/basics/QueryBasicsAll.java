@@ -93,7 +93,7 @@ public class QueryBasicsAll {
 			}	
 			DataObject[] dobj = new DataObject[counts];
 			while (rs.next()) {
-				DataObject dtr = DataObjectUtil.createDataObject("com.cms.basics.infoType.CmsInfoType");
+				DataObject dtr = DataObjectUtil.createDataObject("com.cms.basics.lxmd.CmsLxmd");
 				dtr.setString("id", rs.getString("id"));
 				dtr.setString("mdName", rs.getString("md_Name"));
 				dobj[it] = dtr;

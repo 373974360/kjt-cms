@@ -14,7 +14,7 @@
 		            <tr>
 		                <th class="nui-form-label">来信目的名称：</th>
 		                <td> 
-		                	<input name="lxmd" class="nui-combobox" style="width:150px;" textField="mdName" valueField="id"
+		                	<input name="lxmd" class="nui-combobox nui-form-input" style="width:150px;" textField="mdName" valueField="id"
 								url="com.cms.basics.LxmdService.queryLxmdName.biz.ext" dataField="data"  showNullItem="true" required="true" />		                    
 		                </td>
 		            </tr>
