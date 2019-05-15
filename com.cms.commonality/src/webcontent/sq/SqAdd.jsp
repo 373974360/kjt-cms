@@ -76,15 +76,17 @@
 		            <tr>
 		                <th class="nui-form-label">来信内容：</th>
 		                <td colspan="6">    
-		                   <textarea id="content1" value="sq.content" style="height:300px;width:98%;"></textarea>
+		                	<input name="sq.content" class="nui-hidden" />
+		                   <textarea id="content1" style="height:300px;width:98%;"></textarea>
 		                </td>		                			                            
 		            </tr>
 		            <tr>
 			            <th class="nui-form-label">回复内容：</th>
-		                <td colspan="6">    
-		                   <textarea id="content2" value="sq.replyContent" style="height:300px;width:98%;"></textarea>
+		                <td colspan="6"> 
+		                   <input name="sq.replyContent" class="nui-hidden" />
+		                   <textarea id="content2" style="height:300px;width:98%;"></textarea>
 		                </td> 
-		            </tr>	          
+		            </tr>	         
 		        </table>    
 		    </div>    
 		</div>
@@ -99,18 +101,13 @@
 	        
 	        var ue = UE.getEditor('content1');
 	        var ue2 = UE.getEditor('content2');
-	        function getContent() {
-		        var arr = ue.getContent();
-		        alert(arr);
-		    };
-		    function setContent() {
-		        ue.setContent('MiniUI - 专业WebUI控件库');
-		    };
-	        
+	      
 	        function SaveData() {
 	           	form.validate();
 		        if(form.isValid()==false) return;
 		        var data = form.getData(false,true);
+		        data.sq.content = ue.getContent();
+		        data.sq.replyContent = ue2.getContent();
 		        var json = nui.encode(data);
 	            $.ajax({
 	                url: "com.cms.commonality.SqService.addSq.biz.ext",
