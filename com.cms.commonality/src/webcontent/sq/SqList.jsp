@@ -47,7 +47,7 @@
 			<div class="nui-fit">
 				<div id="datagrid1" dataField="sq" class="nui-datagrid" style="width: 100%; height: 100%;"
 					url="com.cms.commonality.SqService.querySq.biz.ext"
-					pageSize="10" showPageInfo="true" multiSelect="true" onselectionchanged="selectionChanged" allowSortColumn="false">
+					pageSize="10" showPageInfo="true" multiSelect="true" onselectionchanged="selectionChanged" onrowclick="rowclick" allowSortColumn="false">
 					<div property="columns">
 						<div type="checkcolumn" width="25"></div>
 						<div field="id" headerAlign="center" allowSort="true" visible="false">ID</div>
@@ -60,14 +60,14 @@
 						<div field="content" headerAlign="center" allowSort="true" visible="false">来信内容</div>
 						<div field="createTime" headerAlign="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm:ss">提交时间</div>
 						<div field="subOrgId" headerAlign="center" allowSort="true" visible="false">受理部门ID</div>
-						<div field="subOrgName" headerAlign="center" allowSort="true">受理部门</div>
+						<div field="subOrgName" headerAlign="center" allowSort="true" renderer="onOrg">受理部门</div>
 						<div field="replyOrgId" headerAlign="center" allowSort="true" visible="false">回复部门ID</div>
-						<div field="replyOrgName" headerAlign="center" allowSort="true">回复部门</div>
+						<div field="replyOrgName" headerAlign="center" allowSort="true" renderer="onOrg">回复部门</div>
 						<div field="replyTime" headerAlign="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm:ss">回复时间</div>
 						<div field="replyContent" headerAlign="center" allowSort="true" visible="false">回复内容</div>
-						<div field="isReply" headerAlign="center" allowSort="true" renderer="onRepRenderer">是否回复</div>
-						<div field="isPublish" headerAlign="center" allowSort="true" renderer="onPubRenderer">是否发布</div>
-						<div field="isOpen" headerAlign="center" allowSort="true" renderer="onOpenRenderer">是否公开</div>
+						<div field="isReply" headerAlign="center" allowSort="true" renderer="onYesOrNoRenderer">是否回复</div>
+						<div field="isPublish" headerAlign="center" allowSort="true" renderer="onYesOrNoRenderer">是否发布</div>
+						<div field="isOpen" headerAlign="center" allowSort="true" renderer="onYesOrNoRenderer">是否公开</div>
 					</div>
 				</div>
 			</div>
@@ -78,15 +78,13 @@
 	
 			var formData = new nui.Form("#queryform").getData(false, false);
 			grid.load(formData);
-			
-			function onOpenRenderer(e){
-				return nui.getDictText('CMS_OPENYESNO',e.value);
+			//判断是否字典
+			function onYesOrNoRenderer(e){
+				return nui.getDictText('CMS_YESORNO',e.value);
 			}
-			function onRepRenderer(e){
-				return nui.getDictText('CMS_REYESNO',e.value);
-			}
-			function onPubRenderer(e){
-				return nui.getDictText('CMS_PUBYESNO',e.value);
+			//部门名称字典
+			function onOrg(e) {
+				return nui.getDictText('ORG_ORGANIZATION',e.value);
 			}
 	
 			//新增
@@ -202,6 +200,27 @@
 				} else {
 					nui.get("update").enable();
 				}
+			}
+			//行单击时发生
+			function rowclick() {
+				var row = grid.getSelected();
+					nui.open({
+						url : "<%=request.getContextPath()%>/commonality/sq/SqDetail.jsp",
+						title : "数据详情",
+						width : '80%',
+						height : '100%',
+						onload : function() {
+							var iframe = this.getIFrameEl();
+							var data = row;
+							//直接从页面获取，不用去后台获取
+							iframe.contentWindow.setData(data);
+						},
+						ondestroy : function(action) {
+							if (action == "saveSuccess") {
+								grid.reload();
+							}
+						}
+					});				
 			}
 		</script>
 	</body>
