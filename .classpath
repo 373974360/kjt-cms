@@ -9,5 +9,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry excluding="**/**.SpringXml|**/**.bizlet|**/**.bizx|**/**.componentType|**/**.compositex|**/**.datasetx|**/**.eosComponentType|**/**.flowx|**/**.namingsqlx|**/**.wsdl|**/**.xsd|**/.copyarea.db|**/**.desc" kind="src" output="com.cms.basics/bin" path="com.cms.basics/src"/>
 	<classpathentry kind="con" path="com.primeton.studio.workbench.classPath"/>
+	<classpathentry kind="lib" path="eos-web/WEB-INF/lib/ueditor-1.1.2.jar"/>
+	<classpathentry kind="lib" path="eos-web/WEB-INF/lib/json.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

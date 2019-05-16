@@ -4,11 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%>
 <%
 	String catId = request.getParameter("catId");
-	String modelId = request.getParameter("modelId");
 	UserObject userObject = (UserObject)request.getSession().getAttribute("userObject");
-	
-	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	String curTime = df.format(new Date());
  %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -26,12 +22,11 @@
 		<div class="nui-fit" style="padding-top:5px">
 			<div id="form1" method="post">
 				<input id="info.id" name="info.id" class="nui-hidden" />
-				<input id="info.catId" name="info.catId" class="nui-hidden" value="<%=catId %>" />
-				<input id="info.modelId" name="info.modelId" class="nui-hidden" value="<%=modelId %>" />
 				<input id="info.inputUser" name="info.inputUser" class="nui-hidden" value="<%=userObject.getUserId() %>" />
 				<input id="info.orgId" name="info.orgId" class="nui-hidden" value="<%=userObject.getUserOrgId() %>" />
 				<input id="info.orgName" name="info.orgName" class="nui-hidden" value="<%=userObject.getUserOrgName() %>" />
             	<input name="content.infoContent" class="nui-hidden"/>
+            	<input name="content.id" class="nui-hidden"/>
 		        <table style="width:100%;table-layout:fixed;float:left;" class="nui-form-table" >
 		            <tr>
 		                <th class="nui-form-label" style="width:120px;">所属栏目：</th>
@@ -93,7 +88,7 @@
 		                </td>
 		                <th class="nui-form-label">发布时间：</th>
 		                <td>    
-		                    <input name="info.releasedDtime" class="nui-datepicker nui-form-input" format="yyyy-MM-dd HH:mm:ss" dateFormat="yyyy-MM-dd HH:mm:ss" value="<%=curTime %>" showTime="true"/>
+		                    <input name="info.releasedDtime" class="nui-datepicker nui-form-input" format="yyyy-MM-dd HH:mm:ss" dateFormat="yyyy-MM-dd HH:mm:ss" showTime="true"/>
 		                </td>
 		            </tr>
 		            <tr>
@@ -203,6 +198,42 @@
 	          	});
 	        }
 	        
+	        function setData(data){
+	        	data = nui.clone(data);
+	        	var json = nui.encode({info:data});
+				$.ajax({
+					url:"com.cms.content.ContentService.getInfoContent.biz.ext",
+					type:'POST',
+			         data:json,
+			         cache:false,
+			         contentType:'text/json',
+			         success:function(text){
+						obj = nui.decode(text);
+						if(obj.content.length>0 && obj.content[0].infoContent!=null){
+							ue.setContent(obj.content[0].infoContent);
+							obj.content = obj.content[0];
+						}
+			            form.setData(obj);
+						if(obj.infoCats.length>0){
+							var ids = "";
+							var texts = "";
+							for(var i=0;i<obj.infoCats.length;i++){
+								if(i>0){
+									ids += ","+obj.infoCats[i].REALID;
+									texts += ","+obj.infoCats[i].TEXT;
+								}else{
+									ids += obj.infoCats[i].REALID;
+									texts += obj.infoCats[i].TEXT;
+								}
+							}
+							tree.setValue(ids);
+            				tree.setText(texts);
+						}
+			            form.setChanged(false);
+			         }
+	          	});
+	        }
+	        
 	        function SaveData() {
 	           	form.validate();
 		        if(form.isValid()==false) return;
@@ -223,7 +254,7 @@
 		        }
         		json = json + "}";
 	            $.ajax({
-	                url: "com.cms.content.ContentService.addInfo.biz.ext",
+	                url: "com.cms.content.ContentService.updateInfo.biz.ext",
 	                type: 'POST',
 	                data: json,
 	                cache: false,

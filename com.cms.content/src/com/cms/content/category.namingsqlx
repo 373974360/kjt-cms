@@ -1,9 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- author:chaoweima -->
 <sqlMap>
-    <select id="queryCategoryByParentId" parameterClass="commonj.sdo.DataObject" resultClass="commonj.sdo.DataObject">
-	    <![CDATA[
-	    	select id,ch_name as text from cms_info_category where parent_id = '$parentId$' order by cat_sort asc
-	    ]]>
+    <select id="queryInfoList" parameterClass="commonj.sdo.DataObject" resultClass="com.cms.content.category.CmsInfo">
+    	select 
+    		id,
+    		info_title as infoTitle,
+    		editor,
+    		input_dtime as inputDtime,
+    		released_dtime as releasedDtime,
+    		is_top as isTop,
+    		is_tuijian as isTuijian,
+    		model_id as modelId,
+    		cat_id as catId
+    	from 
+    		cms_info
+    	where 1=1
+    	<dynamic>
+    		<isNotNull prepend="and" property="infoStatus">
+    			info_status = $infoStatus$
+    		</isNotNull>
+    		<isNotNull prepend="and" property="infoType">
+    			info_type = $infoType$
+    		</isNotNull>
+    		<isNotNull prepend="and" property="searchKey">
+    			info_title like '%$searchKey$%'
+    		</isNotNull>
+    		<isNotNull prepend="and" property="catId">
+    			cat_id in ($catId$)
+    		</isNotNull>
+    		<isNotNull prepend="or" property="infoId">
+    			(id in ($infoId$)
+		    		<isNotNull prepend="and" property="searchKey">
+		    			info_title like '%$searchKey$%'
+		    		</isNotNull>
+		    		<isNotNull prepend="and" property="infoStatus">
+		    			info_status = $infoStatus$
+		    		</isNotNull>
+		    		<isNotNull prepend="and" property="infoType">
+		    			info_type = $infoType$
+		    		</isNotNull>
+    			)
+    		</isNotNull>
+    	</dynamic>
+    	order by is_top asc,released_dtime desc
+    </select>
+    
+    <delete id="deleteInfoContentById" parameterClass="commonj.sdo.DataObject">
+    	delete from cms_info_content where info_id = $id$
+    </delete>
+    <delete id="deleteInfoCatById" parameterClass="commonj.sdo.DataObject">
+    	delete from cms_info_cat where info_id = $id$
+    </delete>
+    
+    
+    <select id="queryInfoCatList" parameterClass="commonj.sdo.DataObject" resultClass="com.cms.content.category.CmsInfoCat">
+    	select i.cat_id as realId,c.ch_name as text from cms_info_cat i,cms_info_category c where i.cat_id=c.id and info_id=$id$
+    </select>
+    <select id="queryInfoContent" parameterClass="commonj.sdo.DataObject" resultClass="com.cms.content.category.CmsInfoContent">
+    	select id,info_id as infoId,pic_content as picContent,video_path as videoPath,info_content as infoContent from cms_info_content where info_id=$id$
     </select>
 </sqlMap>

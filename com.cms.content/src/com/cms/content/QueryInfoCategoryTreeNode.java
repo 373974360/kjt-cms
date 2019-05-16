@@ -31,7 +31,7 @@ public class QueryInfoCategoryTreeNode {
 		int it = 0;
 		if (dsName == null || dsName.length() == 0)
 			dsName = "default";
-		String sql = "select id,ch_name,parent_id from cms_info_category where parent_id = "+nodeId+" order by cat_sort asc";
+		String sql = "select id,ch_name,parent_id from cms_info_category where parent_id = "+nodeId+" and (link_url is null or link_url='') order by cat_sort asc";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection(dsName);
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -91,7 +91,7 @@ public class QueryInfoCategoryTreeNode {
 		int counts = 0;
 		if (dsName == null || dsName.length() == 0)
 			dsName = "default";
-		String sql = "select id from cms_info_category where parent_id = "+parentId+"";
+		String sql = "select id from cms_info_category where parent_id = "+parentId+" and (link_url is null or link_url='')";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection(dsName);
 		Statement stmt = null;
 		ResultSet rs = null;

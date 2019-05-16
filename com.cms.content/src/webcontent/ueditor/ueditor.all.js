@@ -11193,7 +11193,7 @@ UE.commands['insertimage'] = {
 
             me.execCommand('insertHtml', html.join(''));
         }
-
+        
         me.fireEvent('afterinsertimage', opt)
     }
 };

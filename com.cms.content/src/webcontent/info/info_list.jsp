@@ -16,25 +16,18 @@
 	</head>
 	<body style="width: 98%; height: 95%;">
 		<div id="queryform" class="nui-form" align="center">
-			<!-- 数据实体的名称 -->
-			<input class="nui-hidden" name="criteria/_entity" value="com.cms.content.category.CmsInfo">
 			<!-- 查询字段 -->
-			<input class="nui-hidden" name="criteria/_expr[0]/catId" value="<%=catId %>"/>
-			<input class="nui-hidden" name="criteria/_expr[0]/_op" value="=">
-			<input class="nui-hidden" name="criteria/_expr[1]/infoStatus" value="<%=infoStatus %>"/>
-			<input class="nui-hidden" name="criteria/_expr[1]/_op" value="=">
-			<input class="nui-hidden" name="criteria/_expr[2]/title" value="<%=searchKey %>"/>
-			<input class="nui-hidden" name="criteria/_expr[2]/_op" value="like">
-			<input class="nui-hidden" name="criteria/_expr[2]/_likeRule" value="all">
-			<input class="nui-hidden" name="criteria/_expr[3]/infoType" value="<%=infoType %>"/>
-			<input class="nui-hidden" name="criteria/_expr[3]/_op" value="=">
+			<input class="nui-hidden" name="params/catId" value="<%=catId %>"/>
+			<input class="nui-hidden" name="params/infoStatus" value="<%=infoStatus %>"/>
+			<input class="nui-hidden" name="params/infoType" value="<%=infoType %>"/>
+			<input class="nui-hidden" name="params/searchKey" value="<%=searchKey %>"/>
 		</div>
 		<div class="nui-toolbar" style="border-bottom: 0; padding: 0px;">
 			<table style="width: 100%;">
 				<tr>
 					<td style="width: 100%;">
 						<%
-							if(isAdd){
+							if(isAdd && infoStatus.equals("3")){
 						%>
 							<a class="nui-menubutton" menu="#popupMenu" >新增...</a>
 						    <ul id="popupMenu" class="nui-menu" style="display:none;">
@@ -50,33 +43,83 @@
 						<%
 							}
 						%>
-						<a id="update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑 </a>
-						<a id="remove" class="nui-button" iconCls="icon-remove" onclick="remove()">删除</a>
+						
+						<%
+							if(infoStatus.equals("3")){
+						%>
+							<a id="revoke" class="nui-button" iconCls="icon-redo" onclick="setInfoStatus(4,'撤稿')">撤稿 </a>
+							<a id="update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑 </a>
+							<a id="remove" class="nui-button" iconCls="icon-remove" onclick="setInfoStatus(5,'删除')">删除</a>
+						<%
+							}
+						%>
+						
+						<%
+							if(infoStatus.equals("2")){
+						%>
+							<a id="publish" class="nui-button" iconCls="icon-goto" onclick="setInfoStatus(3,'发布')">发布</a>
+							<a id="update" class="nui-button" iconCls="icon-edit">编辑 </a>
+							<a id="remove" class="nui-button" iconCls="icon-remove" onclick="setInfoStatus(5,'删除')">删除</a>
+						<%
+							}
+						%>
+						
+						<%
+							if(infoStatus.equals("4")||infoStatus.equals("1")){
+						%>
+							<a id="submits" class="nui-button" iconCls="icon-upload" onclick="setInfoStatus(2,'送审')">送审 </a>
+							<a id="update" class="nui-button" iconCls="icon-edit">编辑 </a>
+							<a id="remove" class="nui-button" iconCls="icon-remove" onclick="setInfoStatus(5,'删除')">删除</a>
+						<%
+							}
+						%>
+						
+						<%
+							if(infoStatus.equals("5")){
+						%>
+							<a id="reduction" class="nui-button" iconCls="icon-ok" onclick="setInfoStatus(1,'还原')">还原</a>
+							<a id="clear" class="nui-button" iconCls="icon-remove">清空</a>
+							<a id="del" class="nui-button" iconCls="icon-remove" onclick="del()">彻底删除</a>
+						<%
+							}
+						%>
 					</td>
 				</tr>
 			</table>
 		</div>
 		<div class="nui-fit">
 			<div id="datagrid1" dataField="info" class="nui-datagrid" style="width: 100%; height: 100%;"
-				url="com.cms.content.ContentService.queryInfoList.biz.ext"
+				url="com.cms.content.ContentService.queryInfoListSql.biz.ext"
 				pageSize="10" showPageInfo="true" multiSelect="true" onselectionchanged="selectionChanged" allowSortColumn="false">
 				<div property="columns">
 					<div type="checkcolumn" width="20"></div>
 					<div field="id" headerAlign="center" allowSort="true" visible="false">内容ID</div>
 					<div field="infoTitle" width="300" headerAlign="left" allowSort="true">标题</div>
-					<div field="action" width="100" headerAlign="center" allowSort="true">管理操作</div>
-					<div field="editor" width="80" headerAlign="center" allowSort="true">编辑</div>
-					<div field="inputDtime" width="100" headerAlign="center" allowSort="true">录入时间</div>
-					<div field="releasedDtime" width="100" headerAlign="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm:ss">发布时间</div>
+					<div field="isTop" width="40" headerAlign="center" align="center" allowSort="true">置顶</div>
+					<div field="editor" width="70" headerAlign="center" align="center" allowSort="true">编辑</div>
+					<div field="inputDtime" width="80" headerAlign="center" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm">录入时间</div>
+					<div field="releasedDtime" width="80" headerAlign="center" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm">发布时间</div>
 				</div>
 			</div>
 		</div>
 		<script type="text/javascript">
 			nui.parse();
 			var grid = nui.get("datagrid1");
-	
-			var formData = new nui.Form("#queryform").getData(false, false);
-			grid.load(formData);
+         	var formData = new nui.Form("#queryform").getData(false, false);
+         	grid.load(formData);
+         	
+         	grid.on("drawcell", function (e) {
+			    var field = e.field,
+			        value = e.value;
+			    if (field == "isTop") {
+			        if (value == 1){
+			        	e.cellHtml = "是";
+			        }else{
+			        	e.cellHtml = "否";
+			        }
+			    }
+			});
+         	
 			setAddBtn();
 			function setAddBtn(){
 	        	var json = nui.encode({catId:<%=catId %>});
@@ -87,7 +130,6 @@
 			         cache:false,
 			         contentType:'text/json',
 			         success:function(text){
-			         	console.log(text.data.length);
 						if(text.data.length>0){
 							for(var i=0;i<text.data.length;i++){
 								$("#"+text.data[i].modelId).css("display","block");
@@ -116,6 +158,119 @@
 				});
 			}
 			
+			//编辑
+			function edit() {
+				var row = grid.getSelected();
+				if (row) {
+					nui.open({
+						url : "<%=request.getContextPath()%>/content/info/info_"+row.modelId+"_edit.jsp?catId="+row.catId,
+						title : "编辑数据",
+						width : '80%',
+						height : '100%',
+						onload : function() {
+							var iframe = this.getIFrameEl();
+							var data = row;
+							//直接从页面获取，不用去后台获取
+							iframe.contentWindow.setData(data);
+						},
+						ondestroy : function(action) {
+							if (action == "saveSuccess") {
+								grid.reload();
+							}
+						}
+					});
+				} else {
+					nui.alert("请选中一条记录", "提示");
+				}
+			}
+			
+			//修改信息状态
+			function setInfoStatus(infoStatus,msg) {
+				var rows = grid.getSelecteds();
+				if (rows.length > 0) {
+					var json = '{"infos":[';
+					for(var i=0;i<rows.length;i++){
+						if(i>0){
+							json+=',{"id":"'+rows[i].id+'","infoStatus":"'+infoStatus+'"}';
+						}else{
+							json+='{"id":"'+rows[i].id+'","infoStatus":"'+infoStatus+'"}';
+						}
+					}
+					json += "]}";
+					nui.confirm("确定"+msg+"选中记录？","系统提示",function(action) {
+						if (action == "ok") {
+							grid.loading("正在删除中,请稍等...");
+							$.ajax({
+								url : "com.cms.content.ContentService.setInfoStatus.biz.ext",
+								type : 'POST',
+								data : json,
+								cache : false,
+								contentType : 'text/json',
+								success : function(text) {
+									var returnJson = nui.decode(text);
+									if (returnJson.exception == null) {
+										grid.reload();
+										nui.alert(msg+"成功","系统提示",function(action) {
+										});
+									} else {
+										grid.unmask();
+										nui.alert(msg+"成功","系统提示");
+									}
+								}
+							});
+						}
+					});
+				} else {
+					nui.alert("请选中一条记录！");
+				}
+			}
+			
+			
+			//删除
+			function del() {
+				var rows = grid.getSelecteds();
+				if (rows.length > 0) {
+					nui.confirm("确定彻底删除选中记录？","系统提示",
+					function(action) {
+						if (action == "ok") {
+							var json = nui.encode({
+								infos : rows
+							});
+							grid.loading("正在删除中,请稍等...");
+							$.ajax({
+								url : "com.cms.content.ContentService.deleteInfos.biz.ext",
+								type : 'POST',
+								data : json,
+								cache : false,
+								contentType : 'text/json',
+								success : function(text) {
+									var returnJson = nui.decode(text);
+									if (returnJson.exception == null) {
+										grid.reload();
+										nui.alert("删除成功","系统提示",function(action) {
+										});
+									} else {
+										grid.unmask();
+										nui.alert("删除失败","系统提示");
+									}
+								}
+							});
+						}
+					});
+				} else {
+					nui.alert("请选中一条记录！");
+				}
+			}
+	
+			//当选择列时
+			function selectionChanged() {
+				var rows = grid.getSelecteds();
+				if (rows.length > 1) {
+					nui.get("update").disable();
+				} else {
+					nui.get("update").enable();
+				}
+			}
 			//重新刷新页面
 			function refresh() {
 				var form = new nui.Form("#queryform");

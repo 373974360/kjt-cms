@@ -22,7 +22,7 @@
 </head>
 <body>  
 <div id="layout1" class="nui-layout" style="width:100%;height:100%;">
-	<div id="region1" region="west" title="站点栏目管理" showHeader="true" class="sub-sidebar" 
+	<div id="region1" region="west" title="站点栏目" showHeader="true" class="sub-sidebar" 
 	width="200" allowResize="false">
 		<ul id="tree1" class="nui-tree" url="com.cms.content.ContentService.queryInfoCategoryTreeNode.biz.ext" 
 		style="width:98%;height:98%;padding:5px;" textField="text" idField="id" resultAsTree="false" 

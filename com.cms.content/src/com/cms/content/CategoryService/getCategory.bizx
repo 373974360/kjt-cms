@@ -15,8 +15,8 @@
     <size height="28" width="28"/>
     <nodeLabel>end0label</nodeLabel>
     <process:returns>
-      <process:return id="0" name="category" type="query">category</process:return>
-      <process:return id="1" name="categoryModels" type="query">categoryModels</process:return>
+      <process:return id="0" language="com.cms.content.category.CmsInfoCategory" name="category" type="query" valueType="DataObject">category</process:return>
+      <process:return id="1" language="commonj.sdo.DataObject[]" name="categoryModels" type="query" valueType="Java">categoryModels</process:return>
     </process:returns>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="start0label" name="label" displayName="label" nodeType="label">
@@ -47,7 +47,7 @@
       <process:inputVariable id="1" name="dataObject" type="query" value="commonj.sdo.DataObject" valueType="Java" pattern="reference">category</process:inputVariable>
     </process:inputVariables>
     <process:outputVariables>
-      <process:outputVariable id="0" name="out0" type="query" value="int" valueType="Java"></process:outputVariable>
+      <process:outputVariable id="0" name="out0" type="query" value="int" valueType="Java"/>
     </process:outputVariables>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="invokePojo0label" name="label" nodeType="label">
