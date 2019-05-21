@@ -117,7 +117,7 @@
 		                <td colspan="5">    
 			                <div name="info.infoStatus" class="nui-radiobuttonlist"
 							    textField="text" dataField="infoStatus" valueField="id" value="3"
-							    url="<%=request.getContextPath()%>/content/info/infoStatus.txt" >
+							    url="<%=request.getContextPath()%>/content/info/infoStatus.txt">
 							</div>
 		                </td>
 		            </tr>

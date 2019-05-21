@@ -56,18 +56,16 @@
 		</div>
     	<!--Tabs-->
 		<div class="nui-panel" title="内容列表" iconCls="icon-add" style="width: 100%; height: 85%;" showToolbar="false" showFooter="false">
-	       <div id="infotabs" class="nui-tabs  bg-toolbar" activeIndex="0" style="width:100%;height:100%;border:0;">
+	       <div id="infotabs" class="nui-tabs bg-toolbar" activeIndex="0" style="width:100%;height:100%;border:0;">
 			    <div name="info_list_tab_3" title="已发布" visible="true"></div>
 			    <div name="info_list_tab_2" title="审核中" visible="true"></div>
 			    <div name="info_list_tab_4" title="已撤稿" visible="true"></div>
 			    <div name="info_list_tab_1" title="草稿" visible="true"></div>
-			    <div name="info_list_tab_5" title="已删除" visible="true"></div>
+			    <div name="info_list_tab_5" title="回收站" visible="true"></div>
 			</div>
 		</div>
 	</div>
 </div>
-
-
 <script type="text/javascript">
     nui.parse();
     var tree = nui.get("tree1");

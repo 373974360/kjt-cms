@@ -36,7 +36,7 @@
 				                <li id="pic" iconCls="icon-pic" onclick="add('pic')" style="display:none;">组图</li>
 				                <li id="link" iconCls="icon-link" onclick="add('link')" style="display:none;">连接</li>
 				                <li id="leader" iconCls="icon-leader" onclick="add('leader')" style="display:none;">领导</li>
-				                <li id="doc" iconCls="icon-doc" onclick="add('doc')" style="display:none;">发文</li>
+				                <li id="doc" iconCls="icon-doc" onclick="add('doc')" style="display:none;">文件</li>
 				                <li id="expert" iconCls="icon-expert" onclick="add('expert')" style="display:none;">专家</li>
 				                <li id="download" iconCls="icon-download" onclick="add('download')" style="display:none;">下载</li>
 						    </ul>
@@ -58,7 +58,7 @@
 							if(infoStatus.equals("2")){
 						%>
 							<a id="publish" class="nui-button" iconCls="icon-goto" onclick="setInfoStatus(3,'发布')">发布</a>
-							<a id="update" class="nui-button" iconCls="icon-edit">编辑 </a>
+							<a id="update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑 </a>
 							<a id="remove" class="nui-button" iconCls="icon-remove" onclick="setInfoStatus(5,'删除')">删除</a>
 						<%
 							}
@@ -68,7 +68,7 @@
 							if(infoStatus.equals("4")||infoStatus.equals("1")){
 						%>
 							<a id="submits" class="nui-button" iconCls="icon-upload" onclick="setInfoStatus(2,'送审')">送审 </a>
-							<a id="update" class="nui-button" iconCls="icon-edit">编辑 </a>
+							<a id="update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑 </a>
 							<a id="remove" class="nui-button" iconCls="icon-remove" onclick="setInfoStatus(5,'删除')">删除</a>
 						<%
 							}
@@ -78,7 +78,6 @@
 							if(infoStatus.equals("5")){
 						%>
 							<a id="reduction" class="nui-button" iconCls="icon-ok" onclick="setInfoStatus(1,'还原')">还原</a>
-							<a id="clear" class="nui-button" iconCls="icon-remove">清空</a>
 							<a id="del" class="nui-button" iconCls="icon-remove" onclick="del()">彻底删除</a>
 						<%
 							}
@@ -90,11 +89,11 @@
 		<div class="nui-fit">
 			<div id="datagrid1" dataField="info" class="nui-datagrid" style="width: 100%; height: 100%;"
 				url="com.cms.content.ContentService.queryInfoListSql.biz.ext"
-				pageSize="10" showPageInfo="true" multiSelect="true" onselectionchanged="selectionChanged" allowSortColumn="false">
+				pageSize="20" showPageInfo="true" multiSelect="true" onselectionchanged="selectionChanged" allowSortColumn="false">
 				<div property="columns">
 					<div type="checkcolumn" width="20"></div>
 					<div field="id" headerAlign="center" allowSort="true" visible="false">内容ID</div>
-					<div field="infoTitle" width="300" headerAlign="left" allowSort="true">标题</div>
+					<div field="title" width="300" headerAlign="left" allowSort="true">标题</div>
 					<div field="isTop" width="40" headerAlign="center" align="center" allowSort="true">置顶</div>
 					<div field="editor" width="70" headerAlign="center" align="center" allowSort="true">编辑</div>
 					<div field="inputDtime" width="80" headerAlign="center" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm">录入时间</div>
@@ -110,13 +109,17 @@
          	
          	grid.on("drawcell", function (e) {
 			    var field = e.field,
-			        value = e.value;
+			        value = e.value,
+			        row = e.row;
 			    if (field == "isTop") {
 			        if (value == 1){
 			        	e.cellHtml = "是";
 			        }else{
 			        	e.cellHtml = "否";
 			        }
+			    }
+			    if (field == "title") {
+		      		e.cellHtml = "<a class='icon-"+row.modelId+"' style='padding-left:20px;cursor:pointer;'>"+row.infoTitle+"</a>";
 			    }
 			});
          	

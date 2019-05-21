@@ -25,7 +25,6 @@
 				<input id="info.inputUser" name="info.inputUser" class="nui-hidden" value="<%=userObject.getUserId() %>" />
 				<input id="info.orgId" name="info.orgId" class="nui-hidden" value="<%=userObject.getUserOrgId() %>" />
 				<input id="info.orgName" name="info.orgName" class="nui-hidden" value="<%=userObject.getUserOrgName() %>" />
-            	<input name="content.infoContent" class="nui-hidden"/>
             	<input name="content.id" class="nui-hidden"/>
 		        <table style="width:100%;table-layout:fixed;float:left;" class="nui-form-table" >
 		            <tr>
@@ -143,9 +142,9 @@
 		                </td>
 		            </tr>
 		            <tr>
-		                <th class="nui-form-label">正文内容：</th>
-		                <td colspan="6">
-		                   	<textarea id="content" style="height:300px;width:98%;"></textarea>
+		                <th class="nui-form-label">链接地址：</th>
+		                <td colspan="5">    
+		                   <input name="info.contentUrl" class="nui-textbox nui-form-input" required="true"/>
 		                </td>
 		            </tr>
 		        </table>    
@@ -164,7 +163,6 @@
 				e.params.nodeId = e.node.realId;
 		    }
 	        var form = new nui.Form("form1");
-	        var ue = UE.getEditor('content');
 	        var upload_ue = UE.getEditor('upload_ue');
 			upload_ue.ready(function () {
 				//设置编辑器不可用
@@ -202,19 +200,13 @@
 	        	data = nui.clone(data);
 	        	var json = nui.encode({info:data});
 				$.ajax({
-					url:"com.cms.content.ContentService.getInfoContent.biz.ext",
+					url:"com.cms.content.ContentService.getInfoLink.biz.ext",
 					type:'POST',
 			         data:json,
 			         cache:false,
 			         contentType:'text/json',
 			         success:function(text){
 						obj = nui.decode(text);
-						if(obj.content.length>0){
-							if(obj.content[0].infoContent!=null){
-								ue.setContent(obj.content[0].infoContent);
-							}
-							obj.content = obj.content[0];
-						}
 			            form.setData(obj);
 						if(obj.infoCats.length>0){
 							var ids = "";
@@ -241,7 +233,6 @@
 		        if(form.isValid()==false) return;
 		        var data = form.getData(false,true);
 		        data.info.thumbUrl = $("input[name='info.thumbUrl']").val();
-		        data.content.infoContent = ue.getContent();
 		        var json = nui.encode(data);
 		        json = json.substring(0,json.indexOf("infoCat")-2);
 		        var catId = data.infoCat.catId;
@@ -256,7 +247,7 @@
 		        }
         		json = json + "}";
 	            $.ajax({
-	                url: "com.cms.content.ContentService.updateInfo.biz.ext",
+	                url: "com.cms.content.ContentService.updateLink.biz.ext",
 	                type: 'POST',
 	                data: json,
 	                cache: false,

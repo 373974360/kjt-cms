@@ -108,6 +108,14 @@
 		                </td>
 		            </tr>
 		            <tr>
+		                <th class="nui-form-label">文号：</th>
+		                <td colspan="3">    
+		                   <input name="info.gkNo" class="nui-textbox nui-form-input" required="true"/>
+		                </td>
+		                <td></td>
+		                <td></td>
+		            </tr>
+		            <tr>
 		                <th class="nui-form-label">发布状态：</th>
 		                <td colspan="5">    
 			                <div name="info.infoStatus" class="nui-radiobuttonlist"

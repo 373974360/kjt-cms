@@ -304,6 +304,7 @@
             $('.info', '#queueList').html('<span style="color:red;">' + '还有2个未上传文件'.replace(/[\d]/, count) + '</span>');
             return false;
         } else {
+        	editor.fireEvent('afterUpvideo', videoObjs);
             editor.execCommand('insertvideo', videoObjs, 'upload');
         }
     }

@@ -4,7 +4,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%>
 <%
 	String catId = request.getParameter("catId");
+	String modelId = request.getParameter("modelId");
 	UserObject userObject = (UserObject)request.getSession().getAttribute("userObject");
+	
+	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	String curTime = df.format(new Date());
  %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -22,11 +26,14 @@
 		<div class="nui-fit" style="padding-top:5px">
 			<div id="form1" method="post">
 				<input id="info.id" name="info.id" class="nui-hidden" />
+				<input id="info.catId" name="info.catId" class="nui-hidden" value="<%=catId %>" />
+				<input id="info.modelId" name="info.modelId" class="nui-hidden" value="<%=modelId %>" />
 				<input id="info.inputUser" name="info.inputUser" class="nui-hidden" value="<%=userObject.getUserId() %>" />
 				<input id="info.orgId" name="info.orgId" class="nui-hidden" value="<%=userObject.getUserOrgId() %>" />
 				<input id="info.orgName" name="info.orgName" class="nui-hidden" value="<%=userObject.getUserOrgName() %>" />
             	<input name="content.infoContent" class="nui-hidden"/>
-            	<input name="content.id" class="nui-hidden"/>
+            	<input name="content.picContent" class="nui-hidden"/>
+           		<script type="text/plain" id="upload_ue"></script>
 		        <table style="width:100%;table-layout:fixed;float:left;" class="nui-form-table" >
 		            <tr>
 		                <th class="nui-form-label" style="width:120px;">所属栏目：</th>
@@ -88,7 +95,7 @@
 		                </td>
 		                <th class="nui-form-label">发布时间：</th>
 		                <td>    
-		                    <input name="info.releasedDtime" class="nui-datepicker nui-form-input" format="yyyy-MM-dd HH:mm:ss" dateFormat="yyyy-MM-dd HH:mm:ss" showTime="true"/>
+		                    <input name="info.releasedDtime" class="nui-datepicker nui-form-input" format="yyyy-MM-dd HH:mm:ss" dateFormat="yyyy-MM-dd HH:mm:ss" value="<%=curTime %>" showTime="true"/>
 		                </td>
 		            </tr>
 		            <tr>
@@ -99,12 +106,8 @@
 		            </tr>
 		            <tr>
 		                <th class="nui-form-label">标题图片：</th>
-		                <td colspan="4">    
-		                   <script type="text/plain" id="upload_ue"></script>
+		                <td colspan="5">    
 		                   <input name="info.thumbUrl" class="nui-textbox nui-form-input"/>
-		                </td>
-		                <td>
-		                   <a id="update" class="nui-button" iconCls="icon-upload" onclick="upImage();">上传图片 </a>
 		                </td>
 		            </tr>
 		            <tr>
@@ -112,7 +115,7 @@
 		                <td colspan="5">    
 			                <div name="info.infoStatus" class="nui-radiobuttonlist"
 							    textField="text" dataField="infoStatus" valueField="id" value="3"
-							    url="<%=request.getContextPath()%>/content/info/infoStatus.txt" >
+							    url="<%=request.getContextPath()%>/content/info/infoStatus.txt">
 							</div>
 		                </td>
 		            </tr>
@@ -143,7 +146,14 @@
 		                </td>
 		            </tr>
 		            <tr>
-		                <th class="nui-form-label">正文内容：</th>
+		                <th class="nui-form-label">组图内容：</th>
+		                <td colspan="5" id="picArray"></td>
+		                <td valign="top">
+		                   <a id="update" class="nui-button" iconCls="icon-upload" onclick="upImage();">上传组图 </a>
+		                </td>
+		            </tr>
+		            <tr>
+		                <th class="nui-form-label">文字内容：</th>
 		                <td colspan="6">
 		                   	<textarea id="content" style="height:300px;width:98%;"></textarea>
 		                </td>
@@ -173,9 +183,21 @@
 				upload_ue.hide();
 				//侦听图片上传
 				upload_ue.addListener('beforeInsertImage', function (t, arg) {
-					$("input[name='info.thumbUrl']").val(arg[0].src);
+					var _html = "<table>";
+					if(arg.length>0){
+						for(var i=0;i<arg.length;i++){
+							_html+="<tr id='picArray_"+i+"'><td><img src='"+arg[i].src+"' width='200' height='120'/><input type='hidden' name='picUrl' value='"+arg[i].src+"'/></td>";
+							_html+="<td valign='top'><div>标题：<input type='text' name='picTitle' class='nui-textbox nui-form-input' value='"+arg[i].alt+"'/></div><div>描述：<textarea name='picRemark' style='height:60px;width:100%;font-size:14px;'></textarea></div></td>";
+							_html+="<td><a class='icon-remove' onclick='removePic("+i+")' style='padding-left:20px;cursor:pointer'>移除</a><br/><a class='icon-add' onclick=setThumbUrl('"+arg[i].src+"') style='padding-left:20px;cursor:pointer'>设为标题图</a></td></tr>";
+						}
+					}
+					_html+="</table>";
+					$("#picArray").html(_html);
 				});
 			});
+			function removePic(index){
+				$("#picArray_"+index).remove();
+			}
 			//弹出图片上传的对话框
 			function upImage() {
 				var myImage = upload_ue.getDialog("insertimage");
@@ -198,50 +220,13 @@
 	          	});
 	        }
 	        
-	        function setData(data){
-	        	data = nui.clone(data);
-	        	var json = nui.encode({info:data});
-				$.ajax({
-					url:"com.cms.content.ContentService.getInfoContent.biz.ext",
-					type:'POST',
-			         data:json,
-			         cache:false,
-			         contentType:'text/json',
-			         success:function(text){
-						obj = nui.decode(text);
-						if(obj.content.length>0){
-							if(obj.content[0].infoContent!=null){
-								ue.setContent(obj.content[0].infoContent);
-							}
-							obj.content = obj.content[0];
-						}
-			            form.setData(obj);
-						if(obj.infoCats.length>0){
-							var ids = "";
-							var texts = "";
-							for(var i=0;i<obj.infoCats.length;i++){
-								if(i>0){
-									ids += ","+obj.infoCats[i].REALID;
-									texts += ","+obj.infoCats[i].TEXT;
-								}else{
-									ids += obj.infoCats[i].REALID;
-									texts += obj.infoCats[i].TEXT;
-								}
-							}
-							tree.setValue(ids);
-            				tree.setText(texts);
-						}
-			            form.setChanged(false);
-			         }
-	          	});
-	        }
-	        
 	        function SaveData() {
-	           	form.validate();
+		        form.validate();
 		        if(form.isValid()==false) return;
 		        var data = form.getData(false,true);
 		        data.info.thumbUrl = $("input[name='info.thumbUrl']").val();
 		        data.content.infoContent = ue.getContent();
+		        data.content.picContent = getPicContent();
 		        var json = nui.encode(data);
 		        json = json.substring(0,json.indexOf("infoCat")-2);
 		        var catId = data.infoCat.catId;
@@ -256,7 +241,7 @@
 		        }
         		json = json + "}";
 	            $.ajax({
-	                url: "com.cms.content.ContentService.updateInfo.biz.ext",
+	                url: "com.cms.content.ContentService.addInfo.biz.ext",
 	                type: 'POST',
 	                data: json,
 	                cache: false,
@@ -269,6 +254,36 @@
 	                    CloseWindow();
 	                }
 	            });
+	        }
+	        
+	        function getPicContent(){
+		        var picTitles = [];
+		        $("input[name='picTitle']").each(function(){
+	            	picTitles.push($(this).val());
+		        });
+		        var picUrls = [];
+		        $("input[name='picUrl']").each(function(){
+	            	picUrls.push($(this).val());
+		        });
+		        var picRemarks = [];
+		        $("textarea[name='picRemark']").each(function(){
+	            	picRemarks.push($(this).val());
+		        });
+		        var picArray = '{"picArray": [';
+		        if(picTitles.length>0){
+		        	for(var i=0;i<picTitles.length;i++){
+		        		if(i>0){
+		        			picArray+=",";
+		        		}
+		        		picArray+='{"src":"'+picUrls[i]+'","title":"'+picTitles[i]+'","remark":"'+picRemarks[i]+'"}';
+		        	}
+		        }
+		        picArray+="]}";
+		        return picArray;
+	        }
+	        function setThumbUrl(picUrl){
+	        	console.log(picUrl);
+	        	$("input[name='info.thumbUrl']").val(picUrl);
 	        }
 			function CloseWindow(action){
 				if(action=="close"){

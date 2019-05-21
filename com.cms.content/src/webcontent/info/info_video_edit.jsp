@@ -143,7 +143,16 @@
 		                </td>
 		            </tr>
 		            <tr>
-		                <th class="nui-form-label">正文内容：</th>
+		                <th class="nui-form-label">视频地址：</th>
+		                <td colspan="4">
+		                   <input name="content.videoPath" class="nui-textbox nui-form-input"/>
+		                </td>
+		                <td>
+		                   <a id="update" class="nui-button" iconCls="icon-upload" onclick="upVideo();">上传视频 </a>
+		                </td>
+		            </tr>
+		            <tr>
+		                <th class="nui-form-label">文字内容：</th>
 		                <td colspan="6">
 		                   	<textarea id="content" style="height:300px;width:98%;"></textarea>
 		                </td>
@@ -175,11 +184,20 @@
 				upload_ue.addListener('beforeInsertImage', function (t, arg) {
 					$("input[name='info.thumbUrl']").val(arg[0].src);
 				});
+				//侦听视频上传，取上传视频列表中第一个上传的视频的路径
+		        upload_ue.addListener('afterUpvideo', function (t, arg) {
+		        	$("input[name='content.videoPath']").val(arg[0].url);
+		        });
 			});
 			//弹出图片上传的对话框
 			function upImage() {
 				var myImage = upload_ue.getDialog("insertimage");
 				myImage.open();
+			}
+			//弹出图片上传的对话框
+			function upVideo() {
+				var myVideo = upload_ue.getDialog("insertvideo");
+				myVideo.open();
 			}
 	        
 	        setCatgory();
@@ -242,6 +260,7 @@
 		        var data = form.getData(false,true);
 		        data.info.thumbUrl = $("input[name='info.thumbUrl']").val();
 		        data.content.infoContent = ue.getContent();
+		        data.content.videoPath = $("input[name='content.videoPath']").val();
 		        var json = nui.encode(data);
 		        json = json.substring(0,json.indexOf("infoCat")-2);
 		        var catId = data.infoCat.catId;

@@ -4,7 +4,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%>
 <%
 	String catId = request.getParameter("catId");
+	String modelId = request.getParameter("modelId");
 	UserObject userObject = (UserObject)request.getSession().getAttribute("userObject");
+	
+	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	String curTime = df.format(new Date());
  %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -22,11 +26,11 @@
 		<div class="nui-fit" style="padding-top:5px">
 			<div id="form1" method="post">
 				<input id="info.id" name="info.id" class="nui-hidden" />
+				<input id="info.catId" name="info.catId" class="nui-hidden" value="<%=catId %>" />
+				<input id="info.modelId" name="info.modelId" class="nui-hidden" value="<%=modelId %>" />
 				<input id="info.inputUser" name="info.inputUser" class="nui-hidden" value="<%=userObject.getUserId() %>" />
 				<input id="info.orgId" name="info.orgId" class="nui-hidden" value="<%=userObject.getUserOrgId() %>" />
 				<input id="info.orgName" name="info.orgName" class="nui-hidden" value="<%=userObject.getUserOrgName() %>" />
-            	<input name="content.infoContent" class="nui-hidden"/>
-            	<input name="content.id" class="nui-hidden"/>
 		        <table style="width:100%;table-layout:fixed;float:left;" class="nui-form-table" >
 		            <tr>
 		                <th class="nui-form-label" style="width:120px;">所属栏目：</th>
@@ -88,7 +92,7 @@
 		                </td>
 		                <th class="nui-form-label">发布时间：</th>
 		                <td>    
-		                    <input name="info.releasedDtime" class="nui-datepicker nui-form-input" format="yyyy-MM-dd HH:mm:ss" dateFormat="yyyy-MM-dd HH:mm:ss" showTime="true"/>
+		                    <input name="info.releasedDtime" class="nui-datepicker nui-form-input" format="yyyy-MM-dd HH:mm:ss" dateFormat="yyyy-MM-dd HH:mm:ss" value="<%=curTime %>" showTime="true"/>
 		                </td>
 		            </tr>
 		            <tr>
@@ -112,7 +116,7 @@
 		                <td colspan="5">    
 			                <div name="info.infoStatus" class="nui-radiobuttonlist"
 							    textField="text" dataField="infoStatus" valueField="id" value="3"
-							    url="<%=request.getContextPath()%>/content/info/infoStatus.txt" >
+							    url="<%=request.getContextPath()%>/content/info/infoStatus.txt">
 							</div>
 		                </td>
 		            </tr>
@@ -143,9 +147,12 @@
 		                </td>
 		            </tr>
 		            <tr>
-		                <th class="nui-form-label">正文内容：</th>
-		                <td colspan="6">
-		                   	<textarea id="content" style="height:300px;width:98%;"></textarea>
+		                <th class="nui-form-label">附件：</th>
+		                <td colspan="4">    
+		                   <input name="info.contentUrl" class="nui-textbox nui-form-input"/>
+		                </td>
+		                <td>
+		                   <a id="update" class="nui-button" iconCls="icon-upload" onclick="upFiles();">上传附件 </a>
 		                </td>
 		            </tr>
 		        </table>    
@@ -164,7 +171,6 @@
 				e.params.nodeId = e.node.realId;
 		    }
 	        var form = new nui.Form("form1");
-	        var ue = UE.getEditor('content');
 	        var upload_ue = UE.getEditor('upload_ue');
 			upload_ue.ready(function () {
 				//设置编辑器不可用
@@ -175,12 +181,21 @@
 				upload_ue.addListener('beforeInsertImage', function (t, arg) {
 					$("input[name='info.thumbUrl']").val(arg[0].src);
 				});
+		        //侦听文件上传，取上传文件列表中第一个上传的文件的路径
+		        upload_ue.addListener('afterUpfile', function (t, arg) {
+					$("input[name='info.contentUrl']").val(arg[0].url);
+		        });
 			});
 			//弹出图片上传的对话框
 			function upImage() {
 				var myImage = upload_ue.getDialog("insertimage");
 				myImage.open();
 			}
+		    //弹出文件上传的对话框
+		    function upFiles() {
+		        var myFiles = upload_ue.getDialog("attachment");
+		        myFiles.open();
+		    }
 	        
 	        setCatgory();
 	        function setCatgory(){
@@ -198,50 +213,12 @@
 	          	});
 	        }
 	        
-	        function setData(data){
-	        	data = nui.clone(data);
-	        	var json = nui.encode({info:data});
-				$.ajax({
-					url:"com.cms.content.ContentService.getInfoContent.biz.ext",
-					type:'POST',
-			         data:json,
-			         cache:false,
-			         contentType:'text/json',
-			         success:function(text){
-						obj = nui.decode(text);
-						if(obj.content.length>0){
-							if(obj.content[0].infoContent!=null){
-								ue.setContent(obj.content[0].infoContent);
-							}
-							obj.content = obj.content[0];
-						}
-			            form.setData(obj);
-						if(obj.infoCats.length>0){
-							var ids = "";
-							var texts = "";
-							for(var i=0;i<obj.infoCats.length;i++){
-								if(i>0){
-									ids += ","+obj.infoCats[i].REALID;
-									texts += ","+obj.infoCats[i].TEXT;
-								}else{
-									ids += obj.infoCats[i].REALID;
-									texts += obj.infoCats[i].TEXT;
-								}
-							}
-							tree.setValue(ids);
-            				tree.setText(texts);
-						}
-			            form.setChanged(false);
-			         }
-	          	});
-	        }
-	        
 	        function SaveData() {
 	           	form.validate();
 		        if(form.isValid()==false) return;
 		        var data = form.getData(false,true);
 		        data.info.thumbUrl = $("input[name='info.thumbUrl']").val();
-		        data.content.infoContent = ue.getContent();
+		        data.info.contentUrl = $("input[name='info.contentUrl']").val();
 		        var json = nui.encode(data);
 		        json = json.substring(0,json.indexOf("infoCat")-2);
 		        var catId = data.infoCat.catId;
@@ -256,7 +233,7 @@
 		        }
         		json = json + "}";
 	            $.ajax({
-	                url: "com.cms.content.ContentService.updateInfo.biz.ext",
+	                url: "com.cms.content.ContentService.addLink.biz.ext",
 	                type: 'POST',
 	                data: json,
 	                cache: false,
