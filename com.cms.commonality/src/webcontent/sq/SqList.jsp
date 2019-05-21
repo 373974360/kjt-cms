@@ -205,15 +205,17 @@
 			function rowclick() {
 				var row = grid.getSelected();
 					nui.open({
-						url : "<%=request.getContextPath()%>/commonality/sq/SqDetail.jsp",
-						title : "数据详情",
+						url : "<%=request.getContextPath()%>/commonality/sq/SqDetail.jsp?sqId="+row.id,
+						title : "来信详情",
 						width : '80%',
 						height : '100%',
 						onload : function() {
 							var iframe = this.getIFrameEl();
 							var data = row;
 							//直接从页面获取，不用去后台获取
-							iframe.contentWindow.setData(data);
+							//iframe.contentWindow.setData(data);
+							//iframe.contentWindow.setData2(data);
+							iframe.contentWindow.setDataParams(data);
 						},
 						ondestroy : function(action) {
 							if (action == "saveSuccess") {

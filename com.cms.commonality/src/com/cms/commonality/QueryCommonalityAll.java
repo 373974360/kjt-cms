@@ -27,7 +27,7 @@ import commonj.sdo.DataObject;
  * 
  */
 
-public class queryOrgAll {
+public class QueryCommonalityAll {
 	/**
 	 * 
 	 * @param dsName
@@ -71,6 +71,41 @@ public class queryOrgAll {
 		}
 	}
 	
+	@Bizlet(params = { @BizletParam(index = 0, type = CONSTANT) })
+	public static DataObject querySqProcess(String sqId,String dsName) {
+		DataObject dtr = null;
+		if (dsName == null || dsName.length() == 0)
+			dsName = "default";
+		String sql = "select SUB_ORG_NAME,TO_ORG_NAME,RE_TYPE,RE_TIME from CMS_SQ_PROCESS WHERE SQ_ID = " + sqId;
+		Connection conn = ConnectionHelper.getCurrentContributionConnection(dsName);
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+			rs = stmt.executeQuery(sql);
+			
+			if (null != rs) {
+				rs.last();
+				
+				rs.beforeFirst();
+			}	
+		
+			while (rs.next()) {
+				dtr = DataObjectUtil.createDataObject("com.cms.commonality.sqPro.CmsSqPro");				
+				dtr.setString("subOrgName", rs.getString("SUB_ORG_NAME"));
+				dtr.setString("reType", rs.getString("RE_TYPE"));
+				dtr.setString("toOrgName", rs.getString("TO_ORG_NAME"));
+				dtr.setString("reTime", rs.getString("RE_TIME"));		
+			}
+			return dtr;
+		} catch (Throwable e) {
+			throw new RuntimeException(e);
+		} finally {
+			close(rs);
+			close(stmt);
+			close(conn);
+		}
+	}
 
 	private static void close(Connection conn) {
 		if (conn == null)

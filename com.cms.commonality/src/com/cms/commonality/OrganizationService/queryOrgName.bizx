@@ -38,7 +38,7 @@
     <size height="28" width="22"/>
     <nodeLabel>invokePojo0label</nodeLabel>
     <process:pojo methodType="instance" synchronization="true" transactionType="join">
-      <process:partner type="literal">com.cms.commonality.queryOrgAll.queryOrgName</process:partner>
+      <process:partner type="literal">com.cms.commonality.QueryCommonalityAll.queryOrgName</process:partner>
       <process:instance instanceName=""/>
     </process:pojo>
     <process:inputVariables>
