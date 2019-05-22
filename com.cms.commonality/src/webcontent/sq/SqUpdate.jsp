@@ -1,6 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<%@page import="com.eos.foundation.eoscommon.ResourcesMessageUtil"%>
+<%
+	// 机构条件查询
+	String orgConditionQuery = ResourcesMessageUtil.getI18nResourceMessage("orgConditionQuery"); 
+	// 机构代码
+	String orgCode = ResourcesMessageUtil.getI18nResourceMessage("orgCode"); 
+	// 机构名称
+	String orgName = ResourcesMessageUtil.getI18nResourceMessage("orgName"); 
+	// 机构类型
+	String orgType = ResourcesMessageUtil.getI18nResourceMessage("orgType"); 
+ 	// 机构等级
+	String orgLevel = ResourcesMessageUtil.getI18nResourceMessage("orgLevel"); 
+ 	// 机构层级
+	String orgDegree = ResourcesMessageUtil.getI18nResourceMessage("orgDegree"); 
+ 	// 机构状态
+	String orgStatus = ResourcesMessageUtil.getI18nResourceMessage("orgStatus"); 
+%>
+<style>
+	#table1 .tit{
+		height: 10px;
+	    line-height: 10px;
+	}
+	#table1 td{
+		height: 10px;
+	    line-height: 10px;
+	}
+</style>
 	<head>
 		<link id="css_skin" rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/coframe/tools/skins/skin1/css/style.css"/>
 		<link id="css_icon" rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/coframe/tools/icons/icon.css"/>
@@ -41,14 +68,14 @@
 		            </tr>
 		            <tr>
 		            	<th class="nui-form-label">受理部门：</th>
-		                <td colspan="2">
-		                	<input name="sq.subOrgName" class="nui-combobox nui-form-input" style="width:150px;" textField="orgName" valueField="orgCode"
-								url="com.cms.commonality.OrganizationService.queryOrgName.biz.ext" dataField="data"  showNullItem="true" />	    		                 
+		                <td colspan="2">	                
+							<input name="sq.subOrgName" textName="orgname" class="nui-buttonedit nui-form-input" 
+							onbuttonclick="selectOrg" style="width:80%" allowinput="false"/>	  		                 
 		                </td>
 		            	<th class="nui-form-label">回复部门：</th>
-		                <td colspan="2"> 
-		                	<input name="sq.replyOrgName" class="nui-combobox nui-form-input" style="width:150px;" textField="orgName" valueField="orgCode"
-								url="com.cms.commonality.OrganizationService.queryOrgName.biz.ext" dataField="data"  showNullItem="true" />   		                    
+		               <td colspan="2">
+							<input name="sq.replyOrgName" textName="orgname" class="nui-buttonedit nui-form-input" 
+							onbuttonclick="selectOrg" style="width:80%" allowinput="false"/>				    		                 							
 		                </td>
 		            </tr>
 		            <tr>
@@ -176,6 +203,29 @@
 			function onCancel(e) {
 				CloseWindow("cancel");
 			}
+			
+			//选择机构
+		    function selectOrg(e) {
+		        var btnEdit = this;
+		        nui.open({
+		            url:  "<%=request.getContextPath() %>/coframe/org/employee/select_org_tree.jsp",
+		            showMaxButton: false,
+		            title: "选择机构",
+		            width: 350,
+		            height: 350,
+		            ondestroy: function(action){
+		                if (action == "ok") {
+		                    var iframe = this.getIFrameEl();
+		                    var data = iframe.contentWindow.GetData();
+		                    data = nui.clone(data);
+		                    if (data) {
+		                        btnEdit.setValue(data.orgname);
+		                        btnEdit.setText(data.orgname);
+		                    }
+		                }
+		            }
+		        });            
+		    }
 		</script>
 	</body>
 </html>

@@ -49,7 +49,7 @@
 					url="com.cms.commonality.SqService.querySq.biz.ext"
 					pageSize="10" showPageInfo="true" multiSelect="true" onselectionchanged="selectionChanged" onrowclick="rowclick" allowSortColumn="false">
 					<div property="columns">
-						<div type="checkcolumn" width="25"></div>
+						<div type="checkcolumn" width="40"></div>
 						<div field="id" headerAlign="center" allowSort="true" visible="false">ID</div>
 						<div field="mdId" headerAlign="center" allowSort="true" visible="false">来信目的主键</div>
 						<div field="title" headerAlign="center" allowSort="true">来信标题</div>
@@ -60,9 +60,9 @@
 						<div field="content" headerAlign="center" allowSort="true" visible="false">来信内容</div>
 						<div field="createTime" headerAlign="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm:ss">提交时间</div>
 						<div field="subOrgId" headerAlign="center" allowSort="true" visible="false">受理部门ID</div>
-						<div field="subOrgName" headerAlign="center" allowSort="true" renderer="onOrg">受理部门</div>
+						<div field="subOrgName" headerAlign="center" allowSort="true" >受理部门</div>
 						<div field="replyOrgId" headerAlign="center" allowSort="true" visible="false">回复部门ID</div>
-						<div field="replyOrgName" headerAlign="center" allowSort="true" renderer="onOrg">回复部门</div>
+						<div field="replyOrgName" headerAlign="center" allowSort="true" >回复部门</div>
 						<div field="replyTime" headerAlign="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm:ss">回复时间</div>
 						<div field="replyContent" headerAlign="center" allowSort="true" visible="false">回复内容</div>
 						<div field="isReply" headerAlign="center" allowSort="true" renderer="onYesOrNoRenderer">是否回复</div>
@@ -78,14 +78,10 @@
 	
 			var formData = new nui.Form("#queryform").getData(false, false);
 			grid.load(formData);
-			//判断是否字典
+			//判断是否
 			function onYesOrNoRenderer(e){
 				return nui.getDictText('CMS_YESORNO',e.value);
-			}
-			//部门名称字典
-			function onOrg(e) {
-				return nui.getDictText('ORG_ORGANIZATION',e.value);
-			}
+			}			
 	
 			//新增
 			function add() {
