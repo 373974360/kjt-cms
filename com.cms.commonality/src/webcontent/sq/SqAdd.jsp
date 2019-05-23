@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <%@page import="com.eos.foundation.eoscommon.ResourcesMessageUtil"%>
@@ -17,6 +19,9 @@
 	String orgDegree = ResourcesMessageUtil.getI18nResourceMessage("orgDegree"); 
  	// 机构状态
 	String orgStatus = ResourcesMessageUtil.getI18nResourceMessage("orgStatus"); 
+	
+	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	String curTime = df.format(new Date());
 %>
 <style>
 	#table1 .tit{
@@ -102,11 +107,11 @@
 		            <tr>
 		                <th class="nui-form-label">提交时间：</th>
 		                <td colspan="2">    
-		                    <input name="sq.createTime" class="nui-datepicker nui-form-input" format="yyyy-MM-dd HH:mm:ss" showTime="true"/>
+		                    <input name="sq.createTime" class="nui-datepicker nui-form-input" format="yyyy-MM-dd HH:mm:ss" value="<%=curTime %>" showTime="true"/>
 		                </td>	
 		                <th class="nui-form-label">回复时间：</th>
 		                <td colspan="2">    
-		                    <input name="sq.replyTime" class="nui-datepicker nui-form-input" format="yyyy-MM-dd HH:mm:ss" showTime="true"/>
+		                    <input name="sq.replyTime" class="nui-datepicker nui-form-input" format="yyyy-MM-dd HH:mm:ss" value="<%=curTime %>" showTime="true"/>
 		                </td>                
 		            </tr>
 		            <tr>

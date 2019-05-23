@@ -22,9 +22,8 @@
 	String orgStatus = ResourcesMessageUtil.getI18nResourceMessage("orgStatus"); 
 %>
 <style>
-	#table1 .tit{
-		height: 10px;
-	    line-height: 10px;
+	#form1 input{
+		border-style: 0;
 	}
 	#table1 td{
 		height: 10px;
@@ -32,79 +31,79 @@
 	}
 </style>
 	<head>
+	<%@include file="/coframe/tools/skins/common.jsp" %>
 		<link id="css_skin" rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/coframe/tools/skins/skin1/css/style.css"/>
 		<link id="css_icon" rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/coframe/tools/icons/icon.css"/>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/common/nui/nui.js"></script>
 		<script src="<%=request.getContextPath()%>/content/ueditor/ueditor.config.js" type="text/javascript"></script>
-    	<script src="<%=request.getContextPath()%>/content/ueditor/ueditor.all.min.js" type="text/javascript"></script>
-		
+    	<script src="<%=request.getContextPath()%>/content/ueditor/ueditor.all.min.js" type="text/javascript"></script>		
 	</head>
 	<body>
 		<div class="nui-fit" style="padding-top:5px">
 			<div id="form1" method="post">
-				<div id="panel1" class="nui-panel" title="来信人信息" iconCls="icon-add" style="width:100%;height:120px;" 
-    					showToolbar="true" showCollapseButton="true" showFooter="true" allowResize="true" collapseOnTitleClick="true">
+				<div id="panel1" class="nui-panel" title="来信人信息" iconCls="icon-add" style="width:100%;height:110px;" borderStyle="border:0"
+    			showToolbar="true" showCollapseButton="true" showFooter="true" allowResize="true" collapseOnTitleClick="true">
     				<input id="sq.id" name="sq.id" class="nui-hidden"/>
     				 <input name="sq.replyContent" class="nui-hidden" />
-					<table style="width:100%; table-layout:fixed;" class="nui-form-table">
+					<table id="table1" style="width:100%; table-layout:fixed;" class="nui-form-table">
 						<tr>			                
 			                <th class="nui-form-label">来信人姓名：</th>
 			                <td colspan="1">    
-			                    <input name="sq.username" class="nui-textbox nui-form-input" readonly="readonly"/>
+			                    <input name="sq.username" class="nui-textbox nui-form-input " readonly="readonly" borderStyle="border:0" />
 			                </td>
-			                <th class="nui-form-label">联系电话：</th>
-			                <td colspan="1">    
-			                    <input name="sq.phone" class="nui-textbox nui-form-input" vtype="float" readonly="readonly"/>
-			                </td>
-			            </tr>
-			            <tr>
 			                <th class="nui-form-label">联系地址：</th>
 			                <td colspan="1">    
-			                    <input name="sq.address" class="nui-textbox nui-form-input" readonly="readonly"/>
+			                    <input name="sq.address" class="nui-textbox nui-form-input" readonly="readonly" borderStyle="border:0"/>
+			                </td>			                
+			            </tr>
+			            <tr>
+			                <th class="nui-form-label">联系电话：</th>
+			                <td colspan="1">    
+			                    <input name="sq.phone" class="nui-textbox nui-form-input" vtype="float" readonly="readonly" borderStyle="border:0"/>
 			                </td>
 			                <th class="nui-form-label">电子邮箱：</th>
 			                <td colspan="1">    
-			                    <input name="sq.email" class="nui-textbox nui-form-input" vtype="email;rangeLength:5,20;" readonly="readonly"/>
+			                    <input name="sq.email" class="nui-textbox nui-form-input" vtype="email;rangeLength:5,20;" readonly="readonly" borderStyle="border:0"/>
 			                </td>		                
 			            </tr>		           
 					</table>
     			</div>
     			<div id="panel2" class="nui-panel" title="信件信息" iconCls="icon-add" style="width:100%;height:350;" 
     					showToolbar="true" showCollapseButton="true" showFooter="true" allowResize="true" collapseOnTitleClick="true">  				
-					<table style="width:100%; table-layout:fixed;" class="nui-form-table">
+					<table id="table2" style="width:100%; table-layout:fixed;" class="nui-form-table">
 						<tr>
 			                <th class="nui-form-label">来信标题：</th>
 			                <td colspan="1">    
-			                    <input style="border: none;" name="sq.title" class="nui-textbox nui-form-input" readonly="readonly"/> 
+			                    <input name="sq.title" class="nui-textbox nui-form-input" readonly="readonly"  borderStyle="border:0"/> 
 			                </td>
 			                <th class="nui-form-label">来信目的：</th>
 			                <td colspan="1"> 
-			                	<input name="sq.mdId" class="nui-combobox nui-form-input" style="width:150px;" textField="mdName" valueField="id"
-								url="com.cms.basics.LxmdService.queryLxmdName.biz.ext" dataField="data" showNullItem="true" readonly="readonly"/>		                    
+			                	<input name="sq.mdId" class="nui-combobox nui-form-input" style="width:150px;" textField="mdName" valueField="id" borderStyle="border:none"
+								url="com.cms.basics.LxmdService.queryLxmdName.biz.ext" dataField="data" showNullItem="true" showButton="false" readonly="readonly"/>		                    
 			                </td>
 			                <th class="nui-form-label">是否公开：</th>
 			                <td >    
-			                    <input name="sq.isOpen" class="nui-dictcombobox" style="width:50px;" dictTypeId="CMS_YESORNO" readonly="readonly"/>
+			                    <input name="sq.isOpen" class="nui-dictcombobox" style="width:50px;" dictTypeId="CMS_YESORNO" readonly="readonly" showButton="false" borderStyle="border:0"/>
 			                </td>		               
 		            	</tr>
 			            <tr>			            	
 			                <th class="nui-form-label">是否回复：</th>
 			                <td >    
-			                    <input name="sq.isReply" class="nui-dictcombobox "  style="width:50px;"dictTypeId="CMS_YESORNO" readonly="readonly"/>
+			                    <input name="sq.isReply" class="nui-dictcombobox "  style="width:50px;"dictTypeId="CMS_YESORNO" readonly="readonly" showButton="false" borderStyle="border:0"/>
 			                </td>		              		                
 			                <th class="nui-form-label">是否发布：</th>
 			                <td >    
-			                    <input name="sq.isPublish" class="nui-dictcombobox " style="width:50px;" dictTypeId="CMS_YESORNO" readonly="readonly"/>
+			                    <input name="sq.isPublish" class="nui-dictcombobox " style="width:50px;" dictTypeId="CMS_YESORNO" readonly="readonly" showButton="false" borderStyle="border:0"/>
 			                </td>
 		            	</tr>
 		            	<tr>
 			                <th class="nui-form-label">提交时间：</th>
 			                <td colspan="1">    
-			                    <input name="sq.createTime" class="nui-datepicker nui-form-input" style="width:200px;" format="yyyy-MM-dd HH:mm:ss" showTime="true" readonly="readonly"/>
+			                    <input name="sq.createTime" class="nui-datepicker nui-form-input" style="width:200px;" format="yyyy-MM-dd HH:mm:ss" showTime="true" showButton="false" readonly="readonly" borderStyle="border:0"/>
 			                </td>	
 			                <th class="nui-form-label">回复时间：</th>
 			                <td colspan="1">    
-			                    <input name="sq.replyTime" class="nui-datepicker nui-form-input" style="width:200px;" format="yyyy-MM-dd HH:mm:ss" showTime="true" readonly="readonly"/>
+			                    <input name="sq.replyTime" class="nui-datepicker nui-form-input" style="width:200px;" format="yyyy-MM-dd HH:mm:ss" showTime="true" showButton="false" readonly="readonly" borderStyle="border:0"/>
 			                </td>                
 			            </tr>
 			            <tr>
@@ -126,17 +125,17 @@
 					<input class="nui-hidden" name="criteria/_expr[1]/_op" value="=">
 				</div>		
     			<div class="nui-fit">
-					<div id="datagrid1" dataField="sqProcess" class="nui-datagrid" style="width: 100%; height: 100%;"
+					<div id="datagrid1" dataField="sqProcess" class="nui-datagrid" style="width: 100%; height: 100%;" 
 						url="com.cms.commonality.SqProcess.querySqProcess.biz.ext"
 						pageSize="10" showPageInfo="true" multiSelect="true" allowSortColumn="false">
 						<div property="columns">
-							<div type="indexcolumn" width="15px"></div>								
-							<div field="id" headerAlign="center" allowSort="true" visible="false">ID</div>
-							<div field="sqId" headerAlign="center" allowSort="true" visible="false">群众来信id</div>
-							<div field="subOrgName" headerAlign="center" allowSort="true" renderer="onOrg">处理单位</div>
-							<div field="toOrgName" headerAlign="center" allowSort="true" renderer="onOrg">转办单位</div>
-							<div field="reType" headerAlign="center" allowSort="true" renderer="onReOrTo">处理类型</div>																									
-							<div field="reTime" headerAlign="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm:ss">处理时间</div>								
+							<div type="indexcolumn" width="20px">处理步骤</div>								
+							<div field="id" headerAlign="center" align="center" allowSort="true" visible="false">ID</div>
+							<div field="sqId" headerAlign="center" align="center" allowSort="true" visible="false">群众来信id</div>
+							<div field="subOrgName" headerAlign="center" align="center" allowSort="true" renderer="onOrg">处理单位</div>
+							<div field="toOrgName" headerAlign="center" align="center" allowSort="true" renderer="onOrg">转办单位</div>
+							<div field="reType" headerAlign="center" align="center"allowSort="true" renderer="onReOrTo">处理类型</div>																									
+							<div field="reTime" headerAlign="center" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm:ss">处理时间</div>								
 						</div>
 					</div>
 				</div>
@@ -146,9 +145,9 @@
 		        <span style="display:inline-block;width:25px;"></span>
 		        <a class="nui-button" style="width:80px;" onclick="onReply()">回复信件</a>		        
 			</div>
-		    <div id="form3" method="post">
+		    <div id="form3" class="nui-form" method="post">
 		    	<div id="panel4" style="display:none;width: 100%; height: 100%" class="nui-panel" title="转办信件" iconCls="icon-add"  
-	    					showToolbar="false" showFooter="false">
+	    			showCloseButton="true" showToolbar="false" showFooter="false">
     				<input id="sqPro.id" name="sqPro.id" class="nui-hidden"/>
     				<input id="sqPro.sqId" name="sqPro.sqId" class="nui-hidden"/>
     				<input id="sqPro.reType" name="sqPro.reType" class="nui-hidden" value = 1 />
@@ -176,8 +175,8 @@
 			            </tr>
 			            <tr>
 			                <th class="nui-form-label">回复时间：</th>
-			                <td colspan="1">    
-			                    <input name="sqPro.reTime" class="nui-datepicker " format="yyyy-MM-dd HH:mm:ss" showTime="true"/>
+			                <td>    
+			                    <input name="sqPro.reTime" class="nui-datepicker nui-input" style="width:15%;" format="yyyy-MM-dd HH:mm:ss" showTime="true"/>
 			                </td>		                
 			            </tr>		           
 					</table>
@@ -188,24 +187,24 @@
 					</div>
     			</div>	    		
     		</div> 
-	    	<div id="form4" method="post">
+	    	<div id="form4" class="nui-form" method="post">
 		    	<div id="panel5" style="display:none;width: 100%; height: 100%" class="nui-panel" title="回复信件" iconCls="icon-add"  
-	    					showToolbar="false" showFooter="false">
+	    			showCloseButton="true" showToolbar="false" showFooter="false">
     				<input id="sqPro.id" name="sqPro.id" class="nui-hidden"/>
     				<input id="sqPro.reType" name="sqPro.reType" class="nui-hidden" value = 2 />
 					<table style="width:100%; table-layout:fixed;" class="nui-form-table">
 						<tr>			                
 			                <th class="nui-form-label">处理单位：</th>			               
 			                <td class="tit">
-								<input name="sqPro.subOrgName" textName="orgname"  class="nui-buttonedit " 
+								<input name="sqPro.subOrgName" textName="orgname" class="nui-buttonedit " 
 								onbuttonclick="selectOrg" allowinput="false"/>	  		                 
 		                	</td>			                
 			            </tr>
 						<tr>			                
 			                <th class="nui-form-label">回复单位：</th>
 			                <td class="tit">
-								<input name="sqPro.toOrgName" textName="orgname"  class="nui-buttonedit " 
-								onbuttonclick="selectOrg" allowinput="false"/>	  		                 
+								<input name="sqPro.toOrgName" textName="orgname" class="nui-buttonedit " 
+								onbuttonclick="selectOrg" allowinput="false" onshowButton="false"/>	  		                 
 		                	</td>			                
 			            </tr>
 			            <tr>
@@ -218,7 +217,7 @@
 			            <tr>
 			                <th class="nui-form-label">回复时间：</th>
 			                <td colspan="1">    
-			                    <input id="reTime" name="sqPro.reTime" class="nui-datepicker " format="yyyy-MM-dd HH:mm:ss" showTime="true"/>
+			                    <input id="reTime" name="sqPro.reTime" class="nui-datepicker" style="width:15%;" format="yyyy-MM-dd HH:mm:ss" showTime="true"/>
 			                </td>		                
 			            </tr>		           
 					</table>
@@ -266,12 +265,12 @@
 					});				
 			}	
 	    	
-	    	var ue;	    	
+	    	var ue1 = UE.getEditor('remark2');
+	    	var ue2 = UE.getEditor('remark1');	    	
 	    	//回复信件
 	    	function onReply(){
 	    		$("#panel4").hide();
-	    		$("#panel5").show();
-	    		ue = UE.getEditor('remark2');
+	    		$("#panel5").show();	    	
 	    	}
 	    	
 			//转办信件
@@ -281,7 +280,7 @@
 	    		ue = UE.getEditor('remark1');	    		
 	    	}
 	    	
-	    	//保存转办记录并刷新记录列表
+	    	//保存'转办记录'并刷新记录列表
 	    	function SaveData() {
 	           	form3.validate();
 		        if(form.isValid()==false) return;
@@ -309,7 +308,7 @@
 			function onOk(e) {
 	            SaveData();
 	        }
-	    	//保存回复记录并更新sq表回复内容
+	    	//保存'回复记录'并更新sq表回复内容
 	    	function SaveReData() {
 	           	form4.validate();
 		        if(form.isValid()==false) return;
@@ -377,17 +376,20 @@
 			}
 			
 			function onCancel(){
-				$("#panel4").hide();
-				$("#panel5").hide();
+				//表单清空
+				form3.clear();
+				form4.clear();
+				ue1.execCommand('cleardoc');
+				ue2.execCommand('cleardoc');
+				$("#panel4").hide();				
+				$("#panel5").hide();				
 			}
 			
 			//处理类型字典
 	    	function onReOrTo(e){
 	    		return nui.getDictText('CMS_REORTO',e.value);
 	    	}
-	    	
-
-			
+	    				
 			//重新刷新页面
 			function refresh() {
 				var form = new nui.Form("#queryform");
