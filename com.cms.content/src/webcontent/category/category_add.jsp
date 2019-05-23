@@ -32,11 +32,11 @@
 		            <tr>
 		                <th class="nui-form-label">首页模板：</th>
 		                <td>    
-		                    <input name="category.indexTemplet" class="nui-textbox nui-form-input"/>
+		                    <input name="category.indexTemplet" style="width:100%" class="nui-combobox" textField="templetName" valueField="id" url="com.cms.siteconfig.TempletService.queryTempletAll.biz.ext" dataField="data" showNullItem="true" />
 		                </td>
 		                <th class="nui-form-label">列表模板：</th>
 		                <td>    
-		                    <input name="category.listTemplet" class="nui-textbox nui-form-input"/>
+		                	<input name="category.listTemplet" style="width:100%" class="nui-combobox" textField="templetName" valueField="id" url="com.cms.siteconfig.TempletService.queryTempletAll.biz.ext" dataField="data" showNullItem="true" />
 		                </td>
 		            </tr>
 		            <tr>

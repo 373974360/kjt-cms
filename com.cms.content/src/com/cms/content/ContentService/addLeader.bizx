@@ -33,7 +33,7 @@
       <targetNode>invokePojo2</targetNode>
     </sourceConnections>
     <targetConnections>link3</targetConnections>
-    <location x="324" y="75"/>
+    <location x="519" y="84"/>
     <size height="28" width="22"/>
     <nodeLabel>invokePojo0label</nodeLabel>
     <process:pojo methodType="instance" synchronization="true" transactionType="join">
@@ -47,7 +47,7 @@
     <process:outputVariables/>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="invokePojo0label" name="label" nodeType="label">
-    <location x="307" y="111"/>
+    <location x="502" y="120"/>
     <figSize height="17" width="56"/>
     <node>invokePojo0</node>
   </nodes>
@@ -80,7 +80,7 @@
       <targetNode>assign0</targetNode>
     </sourceConnections>
     <targetConnections>link1</targetConnections>
-    <location x="324" y="195"/>
+    <location x="519" y="204"/>
     <size height="28" width="22"/>
     <nodeLabel>invokePojo2label</nodeLabel>
     <process:pojo methodType="instance" synchronization="true" transactionType="join">
@@ -93,7 +93,7 @@
     <process:outputVariables/>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="invokePojo2label" name="label" nodeType="label">
-    <location x="293" y="231"/>
+    <location x="488" y="240"/>
     <figSize height="17" width="85"/>
     <node>invokePojo2</node>
   </nodes>
@@ -103,7 +103,7 @@
       <targetNode>loopstart0</targetNode>
     </sourceConnections>
     <targetConnections>link11</targetConnections>
-    <location x="407" y="288"/>
+    <location x="602" y="297"/>
     <size height="28" width="22"/>
     <nodeLabel>invokePojo3label</nodeLabel>
     <process:pojo methodType="instance" synchronization="true" transactionType="join">
@@ -117,7 +117,7 @@
     <process:outputVariables/>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="invokePojo3label" name="label" nodeType="label">
-    <location x="370" y="324"/>
+    <location x="565" y="333"/>
     <figSize height="17" width="96"/>
     <node>invokePojo3</node>
   </nodes>
@@ -127,7 +127,7 @@
       <targetNode>invokePojo3</targetNode>
     </sourceConnections>
     <targetConnections>link8</targetConnections>
-    <location x="319" y="288"/>
+    <location x="514" y="297"/>
     <size height="28" width="28"/>
     <nodeLabel>assign0label</nodeLabel>
     <process:copy>
@@ -136,7 +136,7 @@
     </process:copy>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="assign0label" name="label" nodeType="label">
-    <location x="302" y="324"/>
+    <location x="497" y="333"/>
     <figSize height="17" width="62"/>
     <node>assign0</node>
   </nodes>
@@ -251,8 +251,8 @@
       <sourceNode>assign2</sourceNode>
       <targetNode>invokePojo0</targetNode>
     </sourceConnections>
-    <targetConnections>link13</targetConnections>
-    <location x="233" y="75"/>
+    <targetConnections>link14</targetConnections>
+    <location x="428" y="84"/>
     <size height="28" width="28"/>
     <nodeLabel>assign2label</nodeLabel>
     <process:copy>
@@ -263,9 +263,21 @@
       <process:from type="query" pattern="reference">releasedDtime</process:from>
       <process:to type="query">info/releasedDtime</process:to>
     </process:copy>
+    <process:copy>
+      <process:from type="query" pattern="reference">gkIndex/index</process:from>
+      <process:to type="query">info/gkIndex</process:to>
+    </process:copy>
+    <process:copy>
+      <process:from type="query" pattern="reference">gkIndex/num</process:from>
+      <process:to type="query">info/gkNum</process:to>
+    </process:copy>
+    <process:copy>
+      <process:from type="query" pattern="reference">gkIndex/year</process:from>
+      <process:to type="query">info/gkYear</process:to>
+    </process:copy>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="assign2label" name="label" nodeType="label">
-    <location x="211" y="111"/>
+    <location x="406" y="120"/>
     <figSize height="17" width="73"/>
     <node>assign2</node>
   </nodes>
@@ -295,7 +307,7 @@
   <nodes xsi:type="process:tInvoke" description="" id="invokePojo7" name="dateFormat" displayName="dateFormat" type="invoke" index="1" invokeType="invoke_pojo" varArgs="false">
     <sourceConnections xsi:type="process:tLink" id="link13" name="link13" displayName="连接线" isDefault="true" type="transition">
       <sourceNode>invokePojo7</sourceNode>
-      <targetNode>assign2</targetNode>
+      <targetNode>invokePojo8</targetNode>
     </sourceConnections>
     <targetConnections>link5</targetConnections>
     <location x="204" y="280"/>
@@ -316,6 +328,29 @@
     <location x="181" y="316"/>
     <figSize height="17" width="68"/>
     <node>invokePojo7</node>
+  </nodes>
+  <nodes xsi:type="process:tInvoke" description="" id="invokePojo8" name="getGkIndex" displayName="getGkIndex" collapsed="false" type="invoke" index="0" invokeType="invoke_pojo" varArgs="false">
+    <sourceConnections xsi:type="process:tLink" id="link14" name="link14" displayName="连接线" isDefault="true" type="transition">
+      <sourceNode>invokePojo8</sourceNode>
+      <targetNode>assign2</targetNode>
+    </sourceConnections>
+    <targetConnections>link13</targetConnections>
+    <location x="336" y="235"/>
+    <size height="28" width="22"/>
+    <nodeLabel>invokePojo8label</nodeLabel>
+    <process:pojo methodType="instance" synchronization="true" transactionType="join">
+      <process:partner type="literal">com.cms.content.GkIndexUtils.getGkIndex</process:partner>
+      <process:instance instanceName=""/>
+    </process:pojo>
+    <process:inputVariables/>
+    <process:outputVariables>
+      <process:outputVariable id="0" name="out0" type="query" value="com.cms.content.GkIndexVo" valueType="Java">gkIndex</process:outputVariable>
+    </process:outputVariables>
+  </nodes>
+  <nodes xsi:type="model:NodeElementLabel" id="invokePojo8label" name="label" nodeType="label">
+    <location x="313" y="271"/>
+    <figSize height="17" width="68"/>
+    <node>invokePojo8</node>
   </nodes>
   <topRuler/>
   <leftRuler/>

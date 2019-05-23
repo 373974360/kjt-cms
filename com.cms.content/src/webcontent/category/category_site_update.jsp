@@ -24,12 +24,14 @@
 		            </tr>
 		            <tr>
 		                <th class="nui-form-label">站点域名：</th>
-		                <td>    
+		                <td colspan="3">    
 		                    <input name="category.siteDomin" class="nui-textbox nui-form-input" required="true"/>
 		                </td>
+		            </tr>
+		            <tr>
 		                <th class="nui-form-label">首页模板：</th>
-		                <td>    
-		                    <input name="category.indexTemplet" class="nui-textbox nui-form-input"/>
+		                <td colspan="3">    
+		                	<input name="category.indexTemplet" class="nui-combobox" style="width:100%" textField="templetName" valueField="id" url="com.cms.siteconfig.TempletService.queryTempletAll.biz.ext" dataField="data" showNullItem="true" />
 		                </td>
 		            </tr>
 		            <tr>

@@ -36,6 +36,7 @@ public class VelocityContextAbstract {
 	public VelocityContextAbstract(HttpServletRequest request){
 		inputParam(request);
 	}
+	public VelocityContextAbstract(){}
 	
 	public void inputParam(HttpServletRequest request){  
 		vcontext.put("v_session", request.getSession());
@@ -66,6 +67,8 @@ public class VelocityContextAbstract {
 		try {
 			try{
 				map.put("InfoUtilData", Class.forName("com.cms.siteview.data.InfoDataUtil"));
+				map.put("CategoryUtil", Class.forName("com.cms.siteview.data.CategoryUtil"));
+				map.put("FormatUtil", Class.forName("com.cms.siteview.velocity.FormatUtil"));
 			}catch(ClassNotFoundException e){
 				e.printStackTrace();
 			}

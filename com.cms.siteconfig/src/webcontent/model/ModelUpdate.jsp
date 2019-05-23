@@ -10,11 +10,11 @@
 		<div class="nui-fit" style="padding-top:5px">
 			<div id="form1" method="post">
 				<input id="model.id" name="model.id" class="nui-hidden" />
-		        <table style="width:100%;table-layout:fixed;" class="nui-form-table" >
+		        <table style="width:100%;table-layout:fixed;float:left;" class="nui-form-table" >
 		            <tr>
 		                <th class="nui-form-label">详情模板：</th>
 		                <td>    
-		                    <input name="model.infoTemplet" class="nui-textbox nui-form-input" required="true"/>
+		               		<input name="model.infoTemplet" class="nui-combobox" style="width:100%" textField="templetName" valueField="id" url="com.cms.siteconfig.TempletService.queryTempletAll.biz.ext" dataField="data" showNullItem="true" />
 		                </td>
 		            </tr>	 
 		        </table>    

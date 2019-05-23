@@ -50,6 +50,7 @@
 							<a id="revoke" class="nui-button" iconCls="icon-redo" onclick="setInfoStatus(4,'撤稿')">撤稿 </a>
 							<a id="update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑 </a>
 							<a id="remove" class="nui-button" iconCls="icon-remove" onclick="setInfoStatus(5,'删除')">删除</a>
+							<a id="publishHtml" class="nui-button" iconCls="icon-ok" onclick="publishHtml()">发布静态页</a>
 						<%
 							}
 						%>
@@ -82,6 +83,7 @@
 						<%
 							}
 						%>
+						<a id="reload" class="nui-button" iconCls="icon-reload" onclick="refresh()">刷新</a>
 					</td>
 				</tr>
 			</table>
@@ -93,6 +95,8 @@
 				<div property="columns">
 					<div type="checkcolumn" width="20"></div>
 					<div field="id" headerAlign="center" allowSort="true" visible="false">内容ID</div>
+					<div field="infoStatus" headerAlign="center" allowSort="true" visible="false">infoStatus</div>
+					<div field="modelId" headerAlign="center" allowSort="true" visible="false">modelId</div>
 					<div field="title" width="300" headerAlign="left" allowSort="true">标题</div>
 					<div field="isTop" width="40" headerAlign="center" align="center" allowSort="true">置顶</div>
 					<div field="editor" width="70" headerAlign="center" align="center" allowSort="true">编辑</div>
@@ -272,6 +276,40 @@
 					nui.get("update").disable();
 				} else {
 					nui.get("update").enable();
+				}
+			}
+			function publishHtml(){
+				var rows = grid.getSelecteds();
+				if (rows.length > 0) {
+					nui.confirm("确定生成选中记录？","系统提示",
+					function(action) {
+						if (action == "ok") {
+							var json = nui.encode({
+								infos : rows
+							});
+							grid.loading("正在生成,请稍等...");
+							$.ajax({
+								url : "com.cms.content.ContentService.createContentHtml.biz.ext",
+								type : 'POST',
+								data : json,
+								cache : false,
+								contentType : 'text/json',
+								success : function(text) {
+									var returnJson = nui.decode(text);
+									if (returnJson.exception == null) {
+										grid.reload();
+										nui.alert("生成成功","系统提示",function(action) {
+										});
+									} else {
+										grid.unmask();
+										nui.alert("生成失败","系统提示");
+									}
+								}
+							});
+						}
+					});
+				} else {
+					nui.alert("请选中一条记录！");
 				}
 			}
 			//重新刷新页面

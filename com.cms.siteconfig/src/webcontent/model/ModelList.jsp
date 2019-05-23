@@ -89,9 +89,9 @@
 				if (row) {
 					nui.open({
 						url : "<%=request.getContextPath()%>/siteconfig/model/ModelUpdate.jsp",
-						title : "编辑数据",
-						width : 350,
-						height : 150,
+						title : "配置模板",
+						width : "80%",
+						height : "80%",
 						onload : function() {
 							var iframe = this.getIFrameEl();
 							var data = row;

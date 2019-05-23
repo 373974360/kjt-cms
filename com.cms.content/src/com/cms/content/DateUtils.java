@@ -17,6 +17,7 @@ import com.eos.system.annotation.Bizlet;
 public class DateUtils {
 	
 	private static SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private static SimpleDateFormat yearDf = new SimpleDateFormat("yyyy");
 
 	/**
 	 * @param date
@@ -32,6 +33,10 @@ public class DateUtils {
 	@Bizlet("日期格式化")
 	public static String getCurrTime() {
 		return df.format(new Date());
+	}
+	@Bizlet("日期格式化")
+	public static String getYear() {
+		return yearDf.format(new Date());
 	}
 
 }

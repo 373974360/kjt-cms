@@ -5,7 +5,11 @@ package com.cms.siteview.velocity;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.cms.siteview.data.CategoryUtil;
+import com.cms.siteview.data.InfoDataUtil;
 import com.eos.system.annotation.Bizlet;
+
+import commonj.sdo.DataObject;
 
 /**
  * @author chaoweima
@@ -17,13 +21,25 @@ public class VelocityInfoContextImp extends VelocityContextAbstract {
 	public VelocityInfoContextImp(HttpServletRequest request){
 		super(request);
 	}
-	
-
+	public VelocityInfoContextImp(String infoId,String templet_id){
+		DataObject infoData = InfoDataUtil.getInfoData(infoId);
+		vcontext.put("cat_id", infoData.getString("catId"));
+		vcontext.put("infoData", infoData);
+		template_id = templet_id;			
+	}
 	public void setTemplateID(String templateId){
 		template_id = templateId;
 	}
-	//详情页
-	public void setTemplateID(String infoId,String tempType){
-		template_id = "22";//根据信息ID 查询 该信息归属栏目的详情模板
+	public void setTemplateID(String catId,String tempType){
+		if(tempType.equals("info")){
+			DataObject infoData = InfoDataUtil.getInfoData(catId);
+			DataObject modelData = InfoDataUtil.getModelById(infoData.getString("modelId"));
+			vcontext.put("cat_id", infoData.getString("catId"));
+			vcontext.put("infoData", infoData);
+			template_id = modelData.getString("infoTemplet");
+		}else{
+			DataObject catObj = CategoryUtil.getCategoryById(catId);
+			template_id = catObj.getString(tempType);
+		}
 	}
 }

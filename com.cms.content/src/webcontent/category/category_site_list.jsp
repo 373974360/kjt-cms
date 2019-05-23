@@ -30,7 +30,7 @@
 				pageSize="10" showPageInfo="true" multiSelect="true" onselectionchanged="selectionChanged" allowSortColumn="false">
 				<div property="columns">
 					<div type="checkcolumn" width="20"></div>
-					<div field="id" headerAlign="center" allowSort="true" visible="false">站点ID</div>
+					<div field="id" headerAlign="center" align="center" allowSort="true" width="20">ID</div>
 					<div field="chName" headerAlign="center" allowSort="true">站点名称</div>
 					<div field="enName" headerAlign="center" allowSort="true">英文名称</div>
 					<div field="siteDomin" headerAlign="center" allowSort="true">站点域名</div>
@@ -51,7 +51,7 @@
 					url : "<%=request.getContextPath()%>/content/category/category_site_add.jsp",
 					title : "新增记录",
 					width : 700,
-					height : 180,
+					height : "100%",
 					onload : function() {
 					},
 					ondestroy : function(action) {//弹出页面关闭前
@@ -70,7 +70,7 @@
 						url : "<%=request.getContextPath()%>/content/category/category_site_update.jsp",
 						title : "编辑数据",
 						width : 700,
-						height : 180,
+						height : "100%",
 						onload : function() {
 							var iframe = this.getIFrameEl();
 							var data = row;

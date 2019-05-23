@@ -55,7 +55,7 @@
 					pageSize="10" showPageInfo="true" multiSelect="true" onselectionchanged="selectionChanged" allowSortColumn="false">
 					<div property="columns">
 						<div type="checkcolumn" width="20"></div>
-						<div field="id" headerAlign="center" allowSort="true" visible="false">栏目ID</div>
+						<div field="id" headerAlign="center" align="center" allowSort="true" width="20">ID</div>
 						<div field="chName" headerAlign="center" allowSort="true">中文名称</div>
 						<div field="enName" headerAlign="center" allowSort="true">英文名称</div>
 						<div field="linkUrl" headerAlign="center" allowSort="true">跳转地址</div>
@@ -78,7 +78,7 @@
 					url : "<%=request.getContextPath()%>/content/category/category_add.jsp?parentId=<%=parentId %>",
 					title : "新增记录",
 					width : 700,
-					height : 350,
+					height : "100%",
 					onload : function() {
 					},
 					ondestroy : function(action) {//弹出页面关闭前
@@ -98,7 +98,7 @@
 						url : "<%=request.getContextPath()%>/content/category/category_update.jsp",
 						title : "编辑数据",
 						width : 700,
-						height : 350,
+						height : "100%",
 						onload : function() {
 							var iframe = this.getIFrameEl();
 							var data = row;

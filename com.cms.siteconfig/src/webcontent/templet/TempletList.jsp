@@ -50,7 +50,7 @@
 					pageSize="10" showPageInfo="true" multiSelect="true" onselectionchanged="selectionChanged" allowSortColumn="false">
 					<div property="columns">
 						<div type="checkcolumn" width="10"></div>
-						<div field="id" headerAlign="center" allowSort="true" visible="false">模板ID</div>
+						<div field="id" headerAlign="center" align="center" allowSort="true" width="10">ID</div>
 						<div field="templetName" headerAlign="center" allowSort="true">模板名称</div>
 						<div field="createTime" headerAlign="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm">创建时间</div>
 					</div>
