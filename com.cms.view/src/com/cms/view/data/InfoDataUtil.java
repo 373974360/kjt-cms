@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.cms.siteview.data;
+package com.cms.view.data;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -12,8 +12,8 @@ import java.util.Map;
 import java.util.Set;
 
 import com.cms.content.QueryInfoListUtils;
-import com.cms.siteview.velocity.FormatUtil;
-import com.cms.siteview.velocity.TurnPageBean;
+import com.cms.view.velocity.FormatUtil;
+import com.cms.view.velocity.TurnPageBean;
 import com.eos.common.connection.ConnectionHelper;
 import com.eos.foundation.common.utils.StringUtil;
 import com.eos.foundation.data.DataObjectUtil;

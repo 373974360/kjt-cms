@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.cms.siteview.data;
+package com.cms.view.data;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

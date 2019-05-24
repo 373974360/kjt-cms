@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.cms.siteview.velocity;
+package com.cms.view.velocity;
 
 import org.apache.velocity.app.VelocityEngine;
 

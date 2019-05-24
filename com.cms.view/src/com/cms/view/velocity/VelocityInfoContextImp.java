@@ -1,12 +1,12 @@
 /**
  * 
  */
-package com.cms.siteview.velocity;
+package com.cms.view.velocity;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.cms.siteview.data.CategoryUtil;
-import com.cms.siteview.data.InfoDataUtil;
+import com.cms.view.data.CategoryUtil;
+import com.cms.view.data.InfoDataUtil;
 import com.eos.system.annotation.Bizlet;
 
 import commonj.sdo.DataObject;

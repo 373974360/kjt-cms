@@ -4,9 +4,16 @@
 package com.cms.content.html;
 
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 import com.cms.siteconfig.TempletUtils;
-import com.cms.siteview.data.InfoDataUtil;
-import com.cms.siteview.velocity.VelocityInfoContextImp;
+import com.cms.view.data.CategoryUtil;
+import com.cms.view.data.InfoDataUtil;
+import com.cms.view.velocity.VelocityInfoContextImp;
+import com.eos.common.connection.ConnectionHelper;
+import com.eos.foundation.common.utils.StringUtil;
 import com.eos.system.annotation.Bizlet;
 
 import commonj.sdo.DataObject;
@@ -50,11 +57,10 @@ public class CreateContentHTML {
                 	DataObject modelData = InfoDataUtil.getModelById(obj.getString("modelId"));
                     String template_id = modelData.getString("infoTemplet");
                     String content_url = obj.getString("contentUrl");
-                    if ((content_url == "") || (content_url == null) || (content_url == "null") || ("".equals(content_url))) {
-                        //content_url = CategoryUtil.getFoldePathByCategoryID(ib.getCat_id(), ib.getApp_id(), ib.getSite_id());
+                    if (StringUtil.isBlank(content_url)) {
+                        content_url = getFoldePathByCategoryID(obj.getString("catId"))+"/";
                         content_url = content_url + obj.getString("id") + ".html";
-                        //Map<K, V> m = new HashMap();
-                        //m.put("sql", "update cs_info set content_url ='" + content_url + "' where info_id=" + ib.getInfo_id());
+                        updateContentUrl(content_url, obj.getString("id"));
                     }
                     VelocityInfoContextImp vici = new VelocityInfoContextImp(obj.getString("id"),template_id);
                     String content = vici.parseTemplate();
@@ -69,4 +75,40 @@ public class CreateContentHTML {
         }
         return true;
     }
+	
+	public static void updateContentUrl(String contentUrl,String id) {
+		String sql = "update cms_info set content_url = '"+contentUrl+"' where id = "+id;
+		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
+		PreparedStatement pstmt;
+		try {
+	        pstmt = (PreparedStatement) conn.prepareStatement(sql);
+	        pstmt.executeUpdate();
+	        pstmt.close();
+	        conn.close();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
+	public static String getFoldePathByCategoryID(String catId){
+		DataObject currObj = CategoryUtil.getCategoryById(catId);
+		String catIds = catId;
+		for(int i=0;i<10;i++){
+			currObj = CategoryUtil.getCategoryById(currObj.getString("parentId"));
+			if(currObj==null||currObj.getString("id")==null){
+				break;
+			}
+			catIds += ","+currObj.getString("id");
+		}
+		String[] catArray = catIds.split(",");
+		String[] reverseArray = new String[catArray.length];
+		for (int i = 0; i < catArray.length; i++) {
+			reverseArray[i] = catArray[catArray.length - i - 1];
+        }
+		String path = "";
+		for(int i=0;i<reverseArray.length;i++){
+			path+="/"+CategoryUtil.getCategoryById(reverseArray[i]).getString("enName");
+		}
+		return path;
+	}
 }

@@ -5,5 +5,5 @@ Bundle-Vendor: chaoweima
 Bundle-Version: 1.0.0
 Bundle-Name: com.cms.siteview
 Bundle-Description: 
-Bundle-SymbolicName: com.cms.siteview
+Bundle-SymbolicName: com.cms.view
 
