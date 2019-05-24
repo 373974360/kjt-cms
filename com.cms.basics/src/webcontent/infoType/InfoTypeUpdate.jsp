@@ -14,7 +14,7 @@
 		            <tr>
 		                <th class="nui-form-label">分类名称：</th>
 		                <td>    
-		                    <input name="infoType.typeName" class="nui-textbox nui-form-input" required="true"/>
+		                    <input name="infoType.typeName" class="nui-textbox nui-form-input" required="true"  requiredErrorText="不能为空"/>
 		                </td>
 		            </tr>
 		            <tr class="odd">

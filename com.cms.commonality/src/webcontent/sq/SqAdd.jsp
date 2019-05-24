@@ -47,61 +47,61 @@
 		        <table id="table1" style="width:100%; table-layout:fixed;" class="nui-form-table">
 		            <tr>
 		                <th class="nui-form-label">来信标题：</th>
-		                <td colspan="2">    
-		                    <input name="sq.title" class="nui-textbox nui-form-input" required="true"/> 
-		                </td>
-		                <th class="nui-form-label">来信人姓名：</th>
-		                <td colspan="2">    
-		                    <input name="sq.username" class="nui-textbox nui-form-input" required="true"/>
-		                </td>
+		                <td colspan="5">    
+		                    <input name="sq.title" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空"/> 
+		                </td>		                
 		            </tr>
 		            <tr>
-		                <th class="nui-form-label">联系地址：</th>
+		                <th class="nui-form-label">来信人姓名：</th>
 		                <td colspan="2">    
-		                    <input name="sq.address" class="nui-textbox nui-form-input" required="true"/>
+		                    <input name="sq.username" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空"/>
 		                </td>
 		                <th class="nui-form-label">联系电话：</th>
 		                <td colspan="2">    
-		                    <input name="sq.phone" class="nui-textbox nui-form-input" vtype="float" required="true"/>
+		                    <input name="sq.phone" class="nui-textbox nui-form-input" vtype="float" floatErrorText="请输入电话号码" required="true" requiredErrorText="不能为空"/>
 		                </td>
 		            </tr>
 		            <tr>
+		            	<th class="nui-form-label">联系地址：</th>
+		                <td colspan="2">    
+		                    <input name="sq.address" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空"/>
+		                </td>
 		                <th class="nui-form-label">电子邮箱：</th>
 		                <td colspan="2">    
-		                    <input name="sq.email" class="nui-textbox nui-form-input" vtype="email;rangeLength:5,20;" required="true"/>
+		                    <input name="sq.email" class="nui-textbox nui-form-input" vtype="email;rangeLength:5,20;" emailErrorText="请输入邮箱格式" required="true"  requiredErrorText="不能为空"/>
 		                </td>		               
 		            </tr>
 		            <tr>
 		            	<th class="nui-form-label">受理部门：</th>
 		                <td colspan="2" class="tit">
 							<input name="sq.subOrgName" textName="orgname"  class="nui-buttonedit nui-form-input" 
-							onbuttonclick="selectOrg" style="width:80%" allowinput="false"/>	  		                 
+							onbuttonclick="selectOrg" style="width:80%" allowinput="false" emptyText="请选择"/>	  		                 
 		                </td>
 		            	<th class="nui-form-label">回复部门：</th>
 		                <td colspan="2" class="tit">
 							<input name="sq.replyOrgName" textName="orgname" class="nui-buttonedit nui-form-input" 
-							onbuttonclick="selectOrg" style="width:80%" allowinput="false"/>				    		                 							
+							onbuttonclick="selectOrg" style="width:80%" allowinput="false" emptyText="请选择"/>				    		                 							
 		                </td>
 		            </tr>
 		            <tr>
 		            	<th class="nui-form-label">来信目的：</th>
 		                <td colspan="2"> 
 		                	<input name="sq.mdId" class="nui-combobox nui-form-input" style="width:150px;" textField="mdName" valueField="id"
-								url="com.cms.basics.LxmdService.queryLxmdName.biz.ext" dataField="data"  showNullItem="true"/>		                    
+								url="com.cms.basics.LxmdService.queryLxmdName.biz.ext" dataField="data"  showNullItem="true" emptyText="请选择"/>		                    
 		                </td>
 		                <th class="nui-form-label">是否回复：</th>
 		                <td colspan="2">    
-		                    <input name="sq.isReply" class="nui-dictcombobox nui-form-input" dictTypeId="CMS_YESORNO"/>
+		                    <input name="sq.isReply" class="nui-dictcombobox nui-form-input" emptyText="请选择" dictTypeId="CMS_YESORNO"/>
 		                </td>		              
 		            </tr>
 		            <tr>
 		                <th class="nui-form-label">是否公开：</th>
 		                <td colspan="2">    
-		                    <input name="sq.isOpen" class="nui-dictcombobox nui-form-input" dictTypeId="CMS_YESORNO"/>
+		                    <input name="sq.isOpen" class="nui-dictcombobox nui-form-input" emptyText="请选择" dictTypeId="CMS_YESORNO"/>
 		                </td>
 		                <th class="nui-form-label">是否发布：</th>
 		                <td colspan="2">    
-		                    <input name="sq.isPublish" class="nui-dictcombobox nui-form-input" dictTypeId="CMS_YESORNO"/>
+		                    <input name="sq.isPublish" class="nui-dictcombobox nui-form-input" emptyText="请选择" dictTypeId="CMS_YESORNO"/>
 		                </td>
 		            </tr>
 		            <tr>

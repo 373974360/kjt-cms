@@ -198,7 +198,7 @@
 					nui.get("update").enable();
 				}
 			}
-			//行单击详情时发生
+			//单击详情按钮时发生
 			function detailsRow() {
 				var row = grid.getSelected();
 					nui.open({
@@ -220,8 +220,7 @@
 							}
 						}
 					});				
-			}
-			
+			}			
 			function onActionRenderer(e) {	            
 	            var record = e.record;
 	            var uid = record._uid;

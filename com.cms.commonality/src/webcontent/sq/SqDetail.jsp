@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%>
 <%
 	String sqId = request.getParameter("sqId");
+	Integer reType1 = 1;//处理类型-转办
+	Integer reType2 = 2;//回复
  %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -21,15 +23,7 @@
  	// 机构状态
 	String orgStatus = ResourcesMessageUtil.getI18nResourceMessage("orgStatus"); 
 %>
-<style>
-	#form1 input{
-		border-style: 0;
-	}
-	#table1 td{
-		height: 10px;
-	    line-height: 10px;
-	}
-</style>
+
 	<head>
 	<%@include file="/coframe/tools/skins/common.jsp" %>
 		<link id="css_skin" rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/coframe/tools/skins/skin1/css/style.css"/>
@@ -41,15 +35,15 @@
 	<body>
 		<div class="nui-fit" style="padding-top:5px">
 			<div id="form1" method="post">
-				<div id="panel1" class="nui-panel" title="来信人信息" iconCls="icon-add" style="width:100%;height:110px;" borderStyle="border:0"
+				<div id="panel1" class="nui-panel" title="来信人信息" iconCls="icon-add" style="width:100%;height:110px;" 
     			showToolbar="true" showCollapseButton="true" showFooter="true" allowResize="true" collapseOnTitleClick="true">
     				<input id="sq.id" name="sq.id" class="nui-hidden"/>
-    				 <input name="sq.replyContent" class="nui-hidden" />
-					<table id="table1" style="width:100%; table-layout:fixed;" class="nui-form-table">
+    				<input name="sq.replyContent" class="nui-hidden"/>
+					<table id="table1" style="width:70%; table-layout:fixed;" border="0">
 						<tr>			                
 			                <th class="nui-form-label">来信人姓名：</th>
-			                <td>    
-			                    <input name="sq.username" class="nui-textbox" readonly="readonly" borderStyle="border:0" />
+			                <td >    
+			                    <input name="sq.username" class="nui-textbox nui-form-input" readonly="readonly" borderStyle="border:0" />
 			                </td>
 			                <th class="nui-form-label">联系地址：</th>
 			                <td>    
@@ -59,18 +53,18 @@
 			            <tr>
 			                <th class="nui-form-label">联系电话：</th>
 			                <td >    
-			                    <input name="sq.phone" class="nui-textbox" vtype="float" readonly="readonly" borderStyle="border:0"/>
+			                    <input name="sq.phone" class="nui-textbox nui-form-input" vtype="float" readonly="readonly" borderStyle="border:0"/>
 			                </td>
 			                <th class="nui-form-label">电子邮箱：</th>
 			                <td >    
-			                    <input name="sq.email" class="nui-textbox" vtype="email;rangeLength:5,20;" readonly="readonly" borderStyle="border:0"/>
+			                    <input name="sq.email" class="nui-textbox nui-form-input" vtype="email;rangeLength:5,20;" readonly="readonly" borderStyle="border:0"/>
 			                </td>		                
 			            </tr>		           
 					</table>
     			</div>
     			<div id="panel2" class="nui-panel" title="信件信息" iconCls="icon-add" style="width:100%;height:350;" 
     					showToolbar="true" showCollapseButton="true" showFooter="true" allowResize="true" collapseOnTitleClick="true">  				
-					<table id="table2" style="width:100%; table-layout:fixed;" class="nui-form-table">
+					<table id="table2" style="width:90%; table-layout:fixed;" border="0">
 						<tr>
 			                <th class="nui-form-label">来信标题：</th>
 			                <td colspan="1">    
@@ -78,37 +72,37 @@
 			                </td>
 			                <th class="nui-form-label">来信目的：</th>
 			                <td colspan="1"> 
-			                	<input name="sq.mdId" class="nui-combobox nui-form-input" style="width:150px;" textField="mdName" valueField="id" borderStyle="border:none"
+			                	<input name="sq.mdId" class="nui-combobox nui-form-input" textField="mdName" valueField="id" borderStyle="border:none"
 								url="com.cms.basics.LxmdService.queryLxmdName.biz.ext" dataField="data" showNullItem="true" showButton="false" readonly="readonly"/>		                    
 			                </td>
 			                <th class="nui-form-label">是否公开：</th>
 			                <td >    
-			                    <input name="sq.isOpen" class="nui-dictcombobox" style="width:50px;" dictTypeId="CMS_YESORNO" readonly="readonly" showButton="false" borderStyle="border:0"/>
+			                    <input name="sq.isOpen" class="nui-dictcombobox" dictTypeId="CMS_YESORNO" readonly="readonly" showButton="false" borderStyle="border:0"/>
 			                </td>		               
 		            	</tr>
 			            <tr>			            	
 			                <th class="nui-form-label">是否回复：</th>
 			                <td >    
-			                    <input name="sq.isReply" class="nui-dictcombobox "  style="width:50px;"dictTypeId="CMS_YESORNO" readonly="readonly" showButton="false" borderStyle="border:0"/>
+			                    <input name="sq.isReply" class="nui-dictcombobox " dictTypeId="CMS_YESORNO" readonly="readonly" showButton="false" borderStyle="border:0"/>
 			                </td>		              		                
 			                <th class="nui-form-label">是否发布：</th>
 			                <td >    
-			                    <input name="sq.isPublish" class="nui-dictcombobox " style="width:50px;" dictTypeId="CMS_YESORNO" readonly="readonly" showButton="false" borderStyle="border:0"/>
+			                    <input name="sq.isPublish" class="nui-dictcombobox " dictTypeId="CMS_YESORNO" readonly="readonly" showButton="false" borderStyle="border:0"/>
 			                </td>
 		            	</tr>
 		            	<tr>
 			                <th class="nui-form-label">提交时间：</th>
 			                <td colspan="1">    
-			                    <input name="sq.createTime" class="nui-datepicker nui-form-input" style="width:200px;" format="yyyy-MM-dd HH:mm:ss" showTime="true" showButton="false" readonly="readonly" borderStyle="border:0"/>
+			                    <input name="sq.createTime" class="nui-datepicker nui-form-input" format="yyyy-MM-dd HH:mm:ss" showTime="true" showButton="false" readonly="readonly" borderStyle="border:0"/>
 			                </td>	
 			                <th class="nui-form-label">回复时间：</th>
 			                <td colspan="1">    
-			                    <input name="sq.replyTime" class="nui-datepicker nui-form-input" style="width:200px;" format="yyyy-MM-dd HH:mm:ss" showTime="true" showButton="false" readonly="readonly" borderStyle="border:0"/>
+			                    <input name="sq.replyTime" class="nui-datepicker nui-form-input" format="yyyy-MM-dd HH:mm:ss" showTime="true" showButton="false" readonly="readonly" borderStyle="border:0"/>
 			                </td>                
 			            </tr>
 			            <tr>
 			                <th class="nui-form-label">来信内容：</th>
-			                <td colspan="6">    
+			                <td colspan="5">    
 			                <span id="content"></span>
 		                	</td>		                			                            
 		            	</tr> 		            	        
@@ -133,7 +127,7 @@
 							<div field="id" headerAlign="center" align="center" allowSort="true" visible="false">ID</div>
 							<div field="sqId" headerAlign="center" align="center" allowSort="true" visible="false">群众来信id</div>
 							<div field="subOrgName" headerAlign="center" align="center" allowSort="true" renderer="onOrg">处理单位</div>
-							<div field="toOrgName" headerAlign="center" align="center" allowSort="true" renderer="onOrg">转办单位</div>
+							<div field="toOrgName" headerAlign="center" align="center" allowSort="true" renderer="onOrg">转办/回复单位</div>
 							<div field="reType" headerAlign="center" align="center"allowSort="true" renderer="onReOrTo">处理类型</div>																									
 							<div field="reTime" headerAlign="center" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm:ss">处理时间</div>								
 						</div>
@@ -145,25 +139,25 @@
 		        <span style="display:inline-block;width:25px;"></span>
 		        <a class="nui-button" style="width:80px;" onclick="onReply()">回复信件</a>		        
 			</div>
-		    <div id="form3" class="nui-form" method="post">
-		    	<div id="panel4" style="display:none;width: 100%; height: 100%" class="nui-panel" title="转办信件" iconCls="icon-add"  
+			<div id="panel4" style="display:none;width: 100%; height: 100%" class="nui-panel" title="转办信件" iconCls="icon-add"  
 	    			showCloseButton="true" showToolbar="false" showFooter="false">
+		    	<div id="form3" class="nui-form" method="post">		    	
     				<input id="sqPro.id" name="sqPro.id" class="nui-hidden"/>
     				<input id="sqPro.sqId" name="sqPro.sqId" class="nui-hidden"/>
-    				<input id="sqPro.reType" name="sqPro.reType" class="nui-hidden" value = 1 />
+    				<input id="sqPro.reType" name="sqPro.reType" class="nui-hidden"/>
 					<table style="width:100%; table-layout:fixed;" class="nui-form-table">
 						<tr>			                
 			                <th class="nui-form-label">处理单位：</th>
 			                <td >
 								<input name="sqPro.subOrgName" textName="orgname"  class="nui-buttonedit " 
-								onbuttonclick="selectOrg" allowinput="false"/>	  		                 
+								onbuttonclick="selectOrg" allowinput="false" style="width:15%;" emptyText="请选择"/>	  		                 
 		                	</td>			                
 			            </tr>
 						<tr>			                
 			                <th class="nui-form-label">转办单位：</th>
 			                <td >
 								<input name="sqPro.toOrgName" textName="orgname"  class="nui-buttonedit " 
-								onbuttonclick="selectOrg" allowinput="false"/>	  		                 
+								onbuttonclick="selectOrg" allowinput="false" style="width:15%;" emptyText="请选择"/>	  		                 
 		                	</td>			                		                
 			            </tr>
 			            <tr>
@@ -176,7 +170,8 @@
 			            <tr>
 			                <th class="nui-form-label">回复时间：</th>
 			                <td>    
-			                    <input name="sqPro.reTime" class="nui-datepicker nui-input" style="width:15%;" format="yyyy-MM-dd HH:mm:ss" showTime="true"/>
+			                    <input name="sqPro.reTime" class="nui-datepicker nui-input" style="width:15%;" 
+			                    format="yyyy-MM-dd HH:mm:ss" showTime="true" allowinput="false" emptyText="请选择"/>
 			                </td>		                
 			            </tr>		           
 					</table>
@@ -187,24 +182,24 @@
 					</div>
     			</div>	    		
     		</div> 
-	    	<div id="form4" class="nui-form" method="post">
-		    	<div id="panel5" style="display:none;width: 100%; height: 100%" class="nui-panel" title="回复信件" iconCls="icon-add"  
+    		<div id="panel5" style="display:none;width: 100%; height: 100%" class="nui-panel" title="回复信件" iconCls="icon-add"  
 	    			showCloseButton="true" showToolbar="false" showFooter="false">
+	    		<div id="form4" class="nui-form" method="post">		    	
     				<input id="sqPro.id" name="sqPro.id" class="nui-hidden"/>
-    				<input id="sqPro.reType" name="sqPro.reType" class="nui-hidden" value = 2 />
+    				<input id="sqPro.reType" name="sqPro.reType" class="nui-hidden"/>
 					<table style="width:100%; table-layout:fixed;" class="nui-form-table">
 						<tr>			                
 			                <th class="nui-form-label">处理单位：</th>			               
 			                <td class="tit">
 								<input name="sqPro.subOrgName" textName="orgname" class="nui-buttonedit " 
-								onbuttonclick="selectOrg" allowinput="false"/>	  		                 
+								onbuttonclick="selectOrg" allowinput="false" style="width:15%;" emptyText="请选择"/>	  		                 
 		                	</td>			                
 			            </tr>
 						<tr>			                
 			                <th class="nui-form-label">回复单位：</th>
 			                <td class="tit">
 								<input name="sqPro.toOrgName" textName="orgname" class="nui-buttonedit " 
-								onbuttonclick="selectOrg" allowinput="false" onshowButton="false"/>	  		                 
+								onbuttonclick="selectOrg" allowinput="false" style="width:15%;" emptyText="请选择"/>	  		                 
 		                	</td>			                
 			            </tr>
 			            <tr>
@@ -217,7 +212,8 @@
 			            <tr>
 			                <th class="nui-form-label">回复时间：</th>
 			                <td colspan="1">    
-			                    <input id="reTime" name="sqPro.reTime" class="nui-datepicker" style="width:15%;" format="yyyy-MM-dd HH:mm:ss" showTime="true"/>
+			                    <input id="reTime" name="sqPro.reTime" class="nui-datepicker" style="width:15%;" 
+			                    format="yyyy-MM-dd HH:mm:ss" showTime="true"  allowinput="false" emptyText="请选择"/>
 			                </td>		                
 			            </tr>		           
 					</table>
@@ -265,8 +261,9 @@
 					});				
 			}	
 	    	
-	    	var ue1 = UE.getEditor('remark2');
-	    	var ue2 = UE.getEditor('remark1');	    	
+	    	
+	    	var ue1 = UE.getEditor('remark1');	
+	    	var ue2 = UE.getEditor('remark2');	    	    	
 	    	//回复信件
 	    	function onReply(){
 	    		$("#panel4").hide();
@@ -276,8 +273,7 @@
 			//转办信件
 	    	function onTo(){
 	    		$("#panel5").hide();
-	    		$("#panel4").show();
-	    		ue = UE.getEditor('remark1');	    		
+	    		$("#panel4").show();    		 		
 	    	}
 	    	
 	    	//保存'转办记录'并刷新记录列表
@@ -285,7 +281,8 @@
 	           	form3.validate();
 		        if(form.isValid()==false) return;
 		        var data = form3.getData(false,true);
-		        data.sqPro.remark = ue.getContent();
+		        data.sqPro.reType = <%=reType1 %>;
+		        data.sqPro.remark = ue1.getContent();
 		        data.sqPro.sqId = <%=sqId %>;		        
 		        var json = nui.encode(data);
 	            $.ajax({
@@ -313,7 +310,8 @@
 	           	form4.validate();
 		        if(form.isValid()==false) return;
 		        var data = form4.getData(false,true);
-		        data.sqPro.remark = ue.getContent();
+		        data.sqPro.remark = ue2.getContent();
+		        data.sqPro.reType = <%=reType2 %>;
 		        data.sqPro.sqId = <%=sqId %>;		        
 		        var json = nui.encode(data);
 	            $.ajax({
@@ -339,7 +337,7 @@
 					return;
 				var data = form.getData(false, true);
 				data.sq.id = <%=sqId %>;
-				data.sq.replyContent = ue.getContent();
+				data.sq.replyContent = ue2.getContent();
 				//data.sq.replyTime = $("#reTime").val();				
 				var json = nui.encode(data);
 				$.ajax({

@@ -14,7 +14,7 @@
 		            <tr>
 		                <th class="nui-form-label">来源名称：</th>
 		                <td>    
-		                    <input name="source.sourceName" class="nui-textbox nui-form-input" required="true"/>
+		                    <input name="source.sourceName" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空"/>
 		                </td>
 		            </tr>
 		            <tr class="odd">

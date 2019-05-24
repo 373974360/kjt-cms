@@ -14,7 +14,7 @@
 		            <tr>
 		                <th class="nui-form-label">来信目的名称：</th>
 		                <td> 
-		                	<input name="lxmd.mdName" class="nui-textbox nui-form-input" required="true"/>                    
+		                	<input name="lxmd.mdName" class="nui-textbox nui-form-input" required="true"  requiredErrorText="不能为空"/>                    
 		                </td>
 		            </tr>
 		            <tr class="odd">
