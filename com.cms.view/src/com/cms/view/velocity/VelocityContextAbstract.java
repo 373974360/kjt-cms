@@ -66,9 +66,9 @@ public class VelocityContextAbstract {
 		//从配置文件中得来
 		try {
 			try{
-				map.put("InfoUtilData", Class.forName("com.cms.siteview.data.InfoDataUtil"));
-				map.put("CategoryUtil", Class.forName("com.cms.siteview.data.CategoryUtil"));
-				map.put("FormatUtil", Class.forName("com.cms.siteview.velocity.FormatUtil"));
+				map.put("InfoUtilData", Class.forName("com.cms.view.data.InfoDataUtil"));
+				map.put("CategoryUtil", Class.forName("com.cms.view.data.CategoryUtil"));
+				map.put("FormatUtil", Class.forName("com.cms.view.velocity.FormatUtil"));
 			}catch(ClassNotFoundException e){
 				e.printStackTrace();
 			}

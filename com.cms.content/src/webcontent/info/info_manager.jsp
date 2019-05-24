@@ -1,6 +1,10 @@
+<%@page import="com.eos.data.datacontext.UserObject"%>
 <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@include file="/coframe/tools/skins/common.jsp" %>
+<%
+	UserObject userObject = (UserObject)request.getSession().getAttribute("userObject");
+ %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!-- 
   - Author(s): fangwl (mailto:fangwl@primeton.com)
@@ -27,7 +31,7 @@
 		<ul id="tree1" class="nui-tree" url="com.cms.content.ContentService.queryInfoCategoryTreeNode.biz.ext" 
 		style="width:98%;height:98%;padding:5px;" textField="text" idField="id" resultAsTree="false" 
 		parentField="pid" onnodeclick="onNodeClick" showTreeLines="true"
-		 onbeforeload="onBeforeTreeLoad" style="background:#fafafa;">
+		 onbeforeload="onBeforeTreeLoad" ajaxData="setRoleId" style="background:#fafafa;">
     	</ul>
     </div>
     <div title="center" region="center" style="border:0;padding-left:5px;">
@@ -69,6 +73,11 @@
 <script type="text/javascript">
     nui.parse();
     var tree = nui.get("tree1");
+    
+    function setRoleId(){
+		return {"userId":"<%=userObject.getUserId() %>","nodeId":0};
+	}
+    
     function onBeforeTreeLoad(e) {
 		e.params.nodeType = e.node.type;
 		e.params.nodeId = e.node.realId;

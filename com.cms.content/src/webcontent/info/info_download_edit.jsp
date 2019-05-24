@@ -26,6 +26,8 @@
 				<input id="info.orgId" name="info.orgId" class="nui-hidden" value="<%=userObject.getUserOrgId() %>" />
 				<input id="info.orgName" name="info.orgName" class="nui-hidden" value="<%=userObject.getUserOrgName() %>" />
             	<input name="content.id" class="nui-hidden"/>
+            	<input name="info.modelId" class="nui-hidden"/>
+            	<input name="info.catId" class="nui-hidden"/>
 		        <table style="width:100%;table-layout:fixed;float:left;" class="nui-form-table" >
 		            <tr>
 		                <th class="nui-form-label" style="width:120px;">所属栏目：</th>
@@ -40,7 +42,7 @@
 		                <th class="nui-form-label" style="width:70px;">同时发布：</th>
 		                <td style="width:150px;">    
 		                    <input name="infoCat.catId" id="select1" class="nui-treeselect" style="width:150px;" url="com.cms.content.ContentService.queryInfoCategoryTreeNode.biz.ext"
-							    textField="text" dataField="data" valueField="realId" parentField="pid" onbeforeload="onBeforeTreeLoad" multiSelect="true"/>
+							    textField="text" ajaxData="setRoleId" dataField="data" valueField="realId" parentField="pid" onbeforeload="onBeforeTreeLoad" multiSelect="true"/>
 		                </td>
 		                <td></td>
 		            </tr>       
@@ -161,6 +163,10 @@
 	    <script type="text/javascript">
 	        nui.parse();
 		    var tree = nui.get("select1");
+		    
+		    function setRoleId(){
+				return {"userId":"<%=userObject.getUserId() %>","nodeId":0};
+			}
 		    function onBeforeTreeLoad(e) {
 				e.params.nodeType = e.node.type;
 				e.params.nodeId = e.node.realId;

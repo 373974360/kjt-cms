@@ -23,15 +23,42 @@ import commonj.sdo.DataObject;
 @Bizlet("获取信息列表")
 public class QueryInfoListUtils {
 
+	@Bizlet("返回用户读取数据的权限")
+	public static String getInfoUserData(String userId){
+		String result = "0";
+		String sql = "select * from cms_user_data where user_id="+userId;
+		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			rs = stmt.executeQuery(sql);
+			if (null != rs) {
+				rs.last();
+				rs.beforeFirst();
+			}
+			while (rs.next()) {
+				result = rs.getString("info_data");
+			}
+			return result;
+		} catch (Throwable e) {
+			throw new RuntimeException(e);
+		} finally {
+			close(rs);
+			close(stmt);
+			close(conn);
+		}
+	}
+	
 	
 	@Bizlet("返回栏目子节点")
-	public static String getInfoCatIds(String catId,String result){
+	public static String getInfoCatIds(String catId,String result,String userId){
 		String id = "";
-		DataObject[] dtr = getInfoCategory(catId);
+		DataObject[] dtr = getInfoCategory(catId,userId);
 		for(DataObject d:dtr){
 			id = d.getString("id");
 			result += ","+id;
-			String s = getInfoCatIds(id,result);
+			String s = getInfoCatIds(id,result,userId);
 			result = s;
 		}
 		return result;
@@ -78,10 +105,10 @@ public class QueryInfoListUtils {
 		}
 	}
 	
-	public static DataObject[] getInfoCategory(String catId) {
+	public static DataObject[] getInfoCategory(String catId,String userId) {
 		int counts = 0;
 		int it = 0;
-		String sql = "select id,ch_name,parent_id from cms_info_category where parent_id = "+catId+" order by cat_sort asc";
+		String sql = "select c.id,c.ch_name,c.parent_id from cms_info_category c left join cms_user_category u on c.id=u.cat_id where c.parent_id = "+catId+" and u.user_id="+userId+" order by c.cat_sort asc";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		Statement stmt = null;
 		ResultSet rs = null;

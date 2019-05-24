@@ -29,6 +29,9 @@
     		<isNotNull prepend="and" property="catId">
     			cat_id in ($catId$)
     		</isNotNull>
+    		<isNotNull prepend="and" property="catId">
+    			cat_id in ($catId$)
+    		</isNotNull>
     		<isNotNull prepend="or" property="infoId">
     			(id in ($infoId$)
 		    		<isNotNull prepend="and" property="searchKey">
@@ -65,5 +68,14 @@
     </select>
     <select id="queryInfoLeader" parameterClass="commonj.sdo.DataObject" resultClass="com.cms.content.category.CmsInfoLeader">
     	select id,info_id as infoId,ldzw,grjl,zrfg,kycg from cms_info_leader where info_id=$id$
+    </select>
+    <delete id="deleteUserCategory" parameterClass="commonj.sdo.DataObject">
+    	delete from cms_user_category where user_id = $userId$
+    </delete>
+    <delete id="deleteUserData" parameterClass="commonj.sdo.DataObject">
+    	delete from cms_user_data where user_id = $userId$
+    </delete>
+    <select id="queryUserData" parameterClass="commonj.sdo.DataObject" resultClass="com.cms.content.category.CmsUserData">
+    	select id,user_id as userId,sq_data as sqData,info_data as infoData from cms_user_data where user_id=$userId$
     </select>
 </sqlMap>

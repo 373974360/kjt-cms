@@ -11,7 +11,7 @@
     <nodeLabel>start0label</nodeLabel>
   </nodes>
   <nodes xsi:type="process:tEnd" description="" id="end0" name="结束" displayName="结束" type="end">
-    <targetConnections>link4</targetConnections>
+    <targetConnections>link15</targetConnections>
     <location x="976" y="423"/>
     <size height="28" width="28"/>
     <nodeLabel>end0label</nodeLabel>
@@ -159,7 +159,7 @@
   <nodes xsi:type="process:tLoopEnd" description="" id="loopend0" name="循环结束" displayName="循环结束" grouped="true" type="loopend" matchedName="loopstart0">
     <sourceConnections xsi:type="process:tLink" id="link4" name="link4" displayName="连接线" isDefault="true" type="transition">
       <sourceNode>loopend0</sourceNode>
-      <targetNode>end0</targetNode>
+      <targetNode>invokePojo9</targetNode>
     </sourceConnections>
     <targetConnections>link9</targetConnections>
     <location x="837" y="425"/>
@@ -351,6 +351,31 @@
     <location x="313" y="271"/>
     <figSize height="17" width="68"/>
     <node>invokePojo8</node>
+  </nodes>
+  <nodes xsi:type="process:tInvoke" description="" id="invokePojo9" name="createContentHTML" displayName="createContentHTML" type="invoke" index="1" invokeType="invoke_pojo" varArgs="false">
+    <sourceConnections xsi:type="process:tLink" id="link15" name="link15" displayName="连接线" isDefault="true" type="transition">
+      <sourceNode>invokePojo9</sourceNode>
+      <targetNode>end0</targetNode>
+    </sourceConnections>
+    <targetConnections>link4</targetConnections>
+    <location x="916" y="434"/>
+    <size height="28" width="22"/>
+    <nodeLabel>invokePojo9label</nodeLabel>
+    <process:pojo methodType="instance" synchronization="true" transactionType="join">
+      <process:partner type="literal">com.cms.content.html.CreateContentHTML.createContentHTML</process:partner>
+      <process:instance instanceName=""/>
+    </process:pojo>
+    <process:inputVariables>
+      <process:inputVariable id="0" name="obj" type="query" value="commonj.sdo.DataObject" valueType="Java" pattern="reference">info</process:inputVariable>
+    </process:inputVariables>
+    <process:outputVariables>
+      <process:outputVariable id="0" name="out0" type="query" value="boolean" valueType="Java">b</process:outputVariable>
+    </process:outputVariables>
+  </nodes>
+  <nodes xsi:type="model:NodeElementLabel" id="invokePojo9label" name="label" nodeType="label">
+    <location x="869" y="470"/>
+    <figSize height="17" width="116"/>
+    <node>invokePojo9</node>
   </nodes>
   <topRuler/>
   <leftRuler/>

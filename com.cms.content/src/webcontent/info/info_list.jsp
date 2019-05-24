@@ -1,3 +1,4 @@
+<%@page import="com.eos.data.datacontext.UserObject"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%>
 <%
 	String catId = request.getParameter("nodeId");
@@ -5,6 +6,7 @@
 	String infoStatus = request.getParameter("infoStatus");
 	String infoType = request.getParameter("infoType");
 	boolean isAdd = Boolean.parseBoolean(request.getParameter("isAdd"));
+	UserObject userObject = (UserObject)request.getSession().getAttribute("userObject");
  %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -21,6 +23,9 @@
 			<input class="nui-hidden" name="params/infoStatus" value="<%=infoStatus %>"/>
 			<input class="nui-hidden" name="params/infoType" value="<%=infoType %>"/>
 			<input class="nui-hidden" name="params/searchKey" value="<%=searchKey %>"/>
+			<input class="nui-hidden" name="params/userId" value="<%=userObject.getUserId() %>"/>
+			<input class="nui-hidden" name="params/orgId" value="<%=userObject.getUserOrgId() %>"/>
+			<input class="nui-hidden" name="params/redAuth" value="0"/>
 		</div>
 		<div class="nui-toolbar" style="border-bottom: 0; padding: 0px;">
 			<table style="width: 100%;">
