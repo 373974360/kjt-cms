@@ -1,9 +1,9 @@
-<%@page import="com.cms.siteview.velocity.VelocityInfoContextImp"%>
+<%@page import="com.cms.view.velocity.VelocityInfoContextImp"%>
 <%@page pageEncoding="UTF-8"%>
 <%
 	String catId = request.getParameter("cat_id");
 	VelocityInfoContextImp vc = new VelocityInfoContextImp(request);
-	vc.setTemplateID(catId,"listTemplet");
+	vc.setTemplateID(catId,"indexTemplet");
 	String content = vc.parseTemplate();
 	if(content != null && !"".equals(content) && content.length() > 0){
 		out.println(content);

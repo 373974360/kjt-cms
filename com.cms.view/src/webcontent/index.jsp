@@ -1,7 +1,7 @@
 <%@page import="java.net.URL"%>
-<%@page import="com.cms.siteview.data.CategoryUtil"%>
+<%@page import="com.cms.view.data.CategoryUtil"%>
 <%@page import="commonj.sdo.DataObject"%>
-<%@page import="com.cms.siteview.velocity.VelocityInfoContextImp"%>
+<%@page import="com.cms.view.velocity.VelocityInfoContextImp"%>
 <%@page pageEncoding="UTF-8"%>
 <%
 	URL url = new URL(request.getRequestURL().toString());

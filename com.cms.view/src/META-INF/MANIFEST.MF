@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Require-Bundle: com.primeton.eos.richweb,com.eos.foundation
-eos-webCtxPath: siteview
+eos-webCtxPath: view
 Bundle-Vendor: chaoweima
 Bundle-Version: 1.0.0
-Bundle-Name: com.cms.siteview
+Bundle-Name: com.cms.view
 Bundle-Description: 
 Bundle-SymbolicName: com.cms.view
 

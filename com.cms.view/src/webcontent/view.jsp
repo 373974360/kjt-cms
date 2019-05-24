@@ -1,4 +1,4 @@
-<%@page import="com.cms.siteview.velocity.VelocityInfoContextImp"%>
+<%@page import="com.cms.view.velocity.VelocityInfoContextImp"%>
 <%@page pageEncoding="UTF-8"%>
 <%
 	String infoId = request.getParameter("info_id");
