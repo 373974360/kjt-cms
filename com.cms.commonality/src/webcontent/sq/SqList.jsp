@@ -68,7 +68,7 @@
 						<div field="isReply" width="50" align="center" headerAlign="center" allowSort="true" renderer="onYesOrNoRenderer">是否回复</div>
 						<div field="isPublish" width="50" align="center" headerAlign="center" allowSort="true" renderer="onYesOrNoRenderer">是否发布</div>
 						<div field="isOpen" width="50" align="center" headerAlign="center" allowSort="true" renderer="onYesOrNoRenderer">是否公开</div>
-						<div name="action" width="40" headerAlign="center" align="center" renderer="onActionRenderer" cellStyle="padding:0;">#</div>
+						<div name="action" width="50" headerAlign="center" align="center" renderer="onActionRenderer" cellStyle="padding:0;">来信内容</div>
 					</div>
 				</div>
 			</div>
@@ -226,7 +226,7 @@
 	            var record = e.record;
 	            var uid = record._uid;
 
-	            var s = '<a class="Edit_Button" href="javascript:detailsRow(\'' + uid + '\')">详情</a>';
+	            var s = '<a class="Edit_Button" href="javascript:detailsRow(\'' + uid + '\')">详情/处理</a>';
 	                       
 	            return s;
 	        }

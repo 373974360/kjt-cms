@@ -188,7 +188,7 @@
 		        nui.open({
 		            url:  "<%=request.getContextPath() %>/coframe/org/employee/select_org_tree.jsp",
 		            showMaxButton: false,
-		            title: "选择机构",
+		            title: "选择部门",
 		            width: 350,
 		            height: 350,
 		            ondestroy: function(action){

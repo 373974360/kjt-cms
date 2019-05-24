@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<viewModelSet author="chaoweima" displayName="templet" id="com.cms.siteview.templet">
+    <viewModel author="chaoweima" displayName="CmsTemplet" entityName="com.cms.siteview.templet.CmsTemplet" id="CmsTemplet">
+        <field dataType="Long" dict="false" id="id" label="id">
+            <view type="write"/>
+            <edit name="" type="text"/>
+        </field>
+        <field dataType="String" dict="false" id="templetName" label="templetName">
+            <view type="write"/>
+            <edit name="" type="text"/>
+        </field>
+        <field dataType="String" dict="false" id="templetContent" label="templetContent">
+            <view type="write"/>
+            <edit name="" type="text"/>
+        </field>
+        <field dataType="String" dict="false" id="createTime" label="createTime">
+            <view type="write"/>
+            <edit name="" type="text"/>
+        </field>
+    </viewModel>
+</viewModelSet>

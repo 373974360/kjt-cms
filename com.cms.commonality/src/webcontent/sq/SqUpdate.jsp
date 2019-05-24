@@ -68,13 +68,13 @@
 		            </tr>
 		            <tr>
 		            	<th class="nui-form-label">受理部门：</th>
-		                <td colspan="2">	                
-							<input name="sq.subOrgName" textName="orgname" class="nui-buttonedit nui-form-input" 
-							onbuttonclick="selectOrg" style="width:80%" allowinput="false"/>	  		                 
+		                <td colspan="2">                
+							<input name="sq.subOrgName" textName="sq.subOrgName" class="nui-buttonedit nui-form-input" 
+							onbuttonclick="selectOrg" style="width:80%" allowinput="true"/>	  		                 
 		                </td>
 		            	<th class="nui-form-label">回复部门：</th>
 		               <td colspan="2">
-							<input name="sq.replyOrgName" textName="orgname" class="nui-buttonedit nui-form-input" 
+							<input name="sq.replyOrgName" textName="sq.replyOrgName" class="nui-buttonedit nui-form-input" 
 							onbuttonclick="selectOrg" style="width:80%" allowinput="false"/>				    		                 							
 		                </td>
 		            </tr>
@@ -210,7 +210,7 @@
 		        nui.open({
 		            url:  "<%=request.getContextPath() %>/coframe/org/employee/select_org_tree.jsp",
 		            showMaxButton: false,
-		            title: "选择机构",
+		            title: "选择部门",
 		            width: 350,
 		            height: 350,
 		            ondestroy: function(action){

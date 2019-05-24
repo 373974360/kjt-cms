@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC  "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+ "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class dynamic-insert="true" dynamic-update="true" entity-name="com.cms.siteview.templet.CmsTemplet" table="CMS_TEMPLET">
+        <tuplizer class="com.primeton.server.das.tuplizer.SDOEntityTuplizer" entity-mode="sdo"/>
+        <id name="id" type="long">
+            <column length="22" name="ID"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="templetName" type="string">
+            <column length="510" name="TEMPLET_NAME"/>
+        </property>
+        <property lazy="true" name="templetContent" type="com.primeton.das.entity.impl.lob.type.ClobStringType">
+            <column length="1" name="TEMPLET_CONTENT"/>
+        </property>
+        <property name="createTime" type="string">
+            <column length="40" name="CREATE_TIME"/>
+        </property>
+    </class>
+</hibernate-mapping>

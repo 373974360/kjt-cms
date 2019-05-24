@@ -48,22 +48,22 @@
 					<table id="table1" style="width:100%; table-layout:fixed;" class="nui-form-table">
 						<tr>			                
 			                <th class="nui-form-label">来信人姓名：</th>
-			                <td colspan="1">    
-			                    <input name="sq.username" class="nui-textbox nui-form-input " readonly="readonly" borderStyle="border:0" />
+			                <td>    
+			                    <input name="sq.username" class="nui-textbox" readonly="readonly" borderStyle="border:0" />
 			                </td>
 			                <th class="nui-form-label">联系地址：</th>
-			                <td colspan="1">    
+			                <td>    
 			                    <input name="sq.address" class="nui-textbox nui-form-input" readonly="readonly" borderStyle="border:0"/>
 			                </td>			                
 			            </tr>
 			            <tr>
 			                <th class="nui-form-label">联系电话：</th>
-			                <td colspan="1">    
-			                    <input name="sq.phone" class="nui-textbox nui-form-input" vtype="float" readonly="readonly" borderStyle="border:0"/>
+			                <td >    
+			                    <input name="sq.phone" class="nui-textbox" vtype="float" readonly="readonly" borderStyle="border:0"/>
 			                </td>
 			                <th class="nui-form-label">电子邮箱：</th>
-			                <td colspan="1">    
-			                    <input name="sq.email" class="nui-textbox nui-form-input" vtype="email;rangeLength:5,20;" readonly="readonly" borderStyle="border:0"/>
+			                <td >    
+			                    <input name="sq.email" class="nui-textbox" vtype="email;rangeLength:5,20;" readonly="readonly" borderStyle="border:0"/>
 			                </td>		                
 			            </tr>		           
 					</table>
@@ -181,7 +181,7 @@
 			            </tr>		           
 					</table>
 					<div class="nui-toolbar" style="text-align:center;padding-top:5px;padding-bottom:5px;" borderStyle="border:0;">
-						 <a class="nui-button" style="width:60px;" iconCls="icon-save" onclick="onOk()">保存</a>
+						 <a class="nui-button" style="width:60px;" iconCls="icon-ok" onclick="onOk()">确定</a>
 						 <span style="display:inline-block;width:25px;"></span>
 						 <a class="nui-button" style="width:60px;" iconCls="icon-cancel" onclick="onCancel()">取消</a>
 					</div>
@@ -222,7 +222,7 @@
 			            </tr>		           
 					</table>
 					<div class="nui-toolbar" style="text-align:center;padding-top:5px;padding-bottom:5px;" borderStyle="border:0;">
-						 <a class="nui-button" style="width:60px;" iconCls="icon-save" onclick="onOkRe()">保存</a>
+						 <a class="nui-button" style="width:60px;" iconCls="icon-ok" onclick="onOkRe()">确定</a>
 						 <span style="display:inline-block;width:25px;"></span>
 						 <a class="nui-button" style="width:60px;" iconCls="icon-cancel" onclick="onCancel()">取消</a>
 					</div>
@@ -404,7 +404,7 @@
 		        nui.open({
 		            url:  "<%=request.getContextPath() %>/coframe/org/employee/select_org_tree.jsp",
 		            showMaxButton: false,
-		            title: "选择机构",
+		            title: "选择部门",
 		            width: 350,
 		            height: 350,
 		            ondestroy: function(action){

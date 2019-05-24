@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns="com.cms.siteview.templet" xmlns:sdo="commonj.sdo" xmlns:sdoJava="commonj.sdo/java" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="com.cms.siteview.templet">
+    <xs:complexType name="CmsTemplet">
+        <xs:sequence>
+            <xs:any minOccurs="0"/>
+            <xs:element minOccurs="0" name="id" nillable="true" type="xs:long"/>
+            <xs:element minOccurs="0" name="templetName" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="templetContent" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="createTime" nillable="true" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
