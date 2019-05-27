@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- author:chaoweima -->
 <sqlMap>
-    <select id="queryInfoList" parameterClass="commonj.sdo.DataObject" resultClass="com.cms.content.category.CmsInfo">
+        <select id="queryInfoList" parameterClass="commonj.sdo.DataObject" resultClass="com.cms.content.category.CmsInfo">
     	select 
     		id,
     		info_title as infoTitle,
@@ -12,7 +12,8 @@
     		is_tuijian as isTuijian,
     		model_id as modelId,
     		cat_id as catId,
-    		info_status as infoStatus
+    		info_status as infoStatus,
+    		content_url as contentUrl
     	from 
     		cms_info
     	where 1=1
@@ -29,9 +30,17 @@
     		<isNotNull prepend="and" property="catId">
     			cat_id in ($catId$)
     		</isNotNull>
-    		<isNotNull prepend="and" property="catId">
-    			cat_id in ($catId$)
+    		<isNotNull property="infoData">
+    			<isEqual prepend="and" property="infoData" compareValue="1">
+			 		input_user = $userId$
+			   	</isEqual>
+    			<isEqual prepend="and" property="infoData" compareValue="2">
+			 		org_id = $orgId$
+			   	</isEqual>
     		</isNotNull>
+    		<isNull prepend="and" property="infoData">
+    			org_id = 0
+    		</isNull>
     		<isNotNull prepend="or" property="infoId">
     			(id in ($infoId$)
 		    		<isNotNull prepend="and" property="searchKey">
@@ -43,6 +52,17 @@
 		    		<isNotNull prepend="and" property="infoType">
 		    			info_type = $infoType$
 		    		</isNotNull>
+		    		<isNotNull property="infoData">
+		    			<isEqual prepend="and" property="infoData" compareValue="1">
+					 		input_user = $userId$
+					   	</isEqual>
+		    			<isEqual prepend="and" property="infoData" compareValue="2">
+					 		org_id = $orgId$
+					   	</isEqual>
+		    		</isNotNull>
+		    		<isNull prepend="and" property="infoData">
+		    			org_id = 0
+		    		</isNull>
     			)
     		</isNotNull>
     	</dynamic>

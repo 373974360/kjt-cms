@@ -25,7 +25,7 @@ public class QueryInfoListUtils {
 
 	@Bizlet("返回用户读取数据的权限")
 	public static String getInfoUserData(String userId){
-		String result = "0";
+		String infoData = "0";
 		String sql = "select * from cms_user_data where user_id="+userId;
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		Statement stmt = null;
@@ -33,14 +33,10 @@ public class QueryInfoListUtils {
 		try {
 			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = stmt.executeQuery(sql);
-			if (null != rs) {
-				rs.last();
-				rs.beforeFirst();
-			}
 			while (rs.next()) {
-				result = rs.getString("info_data");
+				infoData = rs.getString("info_data");
 			}
-			return result;
+			return infoData;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		} finally {

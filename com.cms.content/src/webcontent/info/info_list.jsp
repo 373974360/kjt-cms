@@ -25,7 +25,6 @@
 			<input class="nui-hidden" name="params/searchKey" value="<%=searchKey %>"/>
 			<input class="nui-hidden" name="params/userId" value="<%=userObject.getUserId() %>"/>
 			<input class="nui-hidden" name="params/orgId" value="<%=userObject.getUserOrgId() %>"/>
-			<input class="nui-hidden" name="params/redAuth" value="0"/>
 		</div>
 		<div class="nui-toolbar" style="border-bottom: 0; padding: 0px;">
 			<table style="width: 100%;">
@@ -100,8 +99,6 @@
 				<div property="columns">
 					<div type="checkcolumn" width="20"></div>
 					<div field="id" headerAlign="center" allowSort="true" visible="false">内容ID</div>
-					<div field="infoStatus" headerAlign="center" allowSort="true" visible="false">infoStatus</div>
-					<div field="modelId" headerAlign="center" allowSort="true" visible="false">modelId</div>
 					<div field="title" width="300" headerAlign="left" allowSort="true">标题</div>
 					<div field="isTop" width="40" headerAlign="center" align="center" allowSort="true">置顶</div>
 					<div field="editor" width="70" headerAlign="center" align="center" allowSort="true">编辑</div>
@@ -200,18 +197,15 @@
 			function setInfoStatus(infoStatus,msg) {
 				var rows = grid.getSelecteds();
 				if (rows.length > 0) {
-					var json = '{"infos":[';
 					for(var i=0;i<rows.length;i++){
-						if(i>0){
-							json+=',{"id":"'+rows[i].id+'","infoStatus":"'+infoStatus+'"}';
-						}else{
-							json+='{"id":"'+rows[i].id+'","infoStatus":"'+infoStatus+'"}';
-						}
+						rows[i].infoStatus = infoStatus;
 					}
-					json += "]}";
+					var json = nui.encode({
+						infos : rows
+					});
 					nui.confirm("确定"+msg+"选中记录？","系统提示",function(action) {
 						if (action == "ok") {
-							grid.loading("正在删除中,请稍等...");
+							grid.loading("正在"+msg+"中,请稍等...");
 							$.ajax({
 								url : "com.cms.content.ContentService.setInfoStatus.biz.ext",
 								type : 'POST',
