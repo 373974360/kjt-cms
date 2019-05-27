@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import com.cms.content.QueryInfoListUtils;
 import com.cms.view.velocity.FormatUtil;
 import com.cms.view.velocity.TurnPageBean;
 import com.eos.common.connection.ConnectionHelper;
@@ -379,7 +378,7 @@ public class InfoDataUtil {
                 cat_id = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
             }
             if (!"".equals(cat_id) && !"0".equals(cat_id) && !cat_id.startsWith("$cat_id")) {
-            	con_map.put("cat_id", QueryInfoListUtils.getInfoCatIds(cat_id, cat_id));
+            	con_map.put("cat_id", getInfoCatIds(cat_id, cat_id));
             }
         }
         con_map.put("page_size", page_size + "");
@@ -429,6 +428,49 @@ public class InfoDataUtil {
 		return sql;
 	}
 	
+	public static String getInfoCatIds(String catId,String result){
+		String id = "";
+		DataObject[] dtr = getInfoCategory(catId);
+		for(DataObject d:dtr){
+			id = d.getString("id");
+			result += ","+id;
+			String s = getInfoCatIds(id,result);
+			result = s;
+		}
+		return result;
+	}
+	public static DataObject[] getInfoCategory(String catId) {
+		int counts = 0;
+		int it = 0;
+		String sql = "select c.id,c.ch_name,c.parent_id from cms_info_category c where c.parent_id = "+catId+" order by c.cat_sort asc";
+		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			rs = stmt.executeQuery(sql);
+			it = 0;
+			if (null != rs) {
+				rs.last();
+				counts = rs.getRow();
+				rs.beforeFirst();
+			}
+			DataObject[] dobj = new DataObject[counts];
+			while (rs.next()) {
+				DataObject dtr = DataObjectUtil.createDataObject("com.cms.content.category.CmsInfoCategory");
+				dtr.setString("id", rs.getString("id"));
+				dobj[it] = dtr;
+				it++;
+			}
+			return dobj;
+		} catch (Throwable e) {
+			throw new RuntimeException(e);
+		} finally {
+			close(rs);
+			close(stmt);
+			close(conn);
+		}
+	}
 	private static void close(Connection conn) {
 		if (conn == null)
 			return;

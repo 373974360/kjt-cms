@@ -33,7 +33,7 @@
 						<%
 							if(isAdd && infoStatus.equals("3")){
 						%>
-							<a class="nui-menubutton" menu="#popupMenu" >新增...</a>
+							<a id="add" class="nui-menubutton" menu="#popupMenu" >新增...</a>
 						    <ul id="popupMenu" class="nui-menu" style="display:none;">
 				                <li id="article" iconCls="icon-article" onclick="add('article')" style="display:none;">文章</li>
 				                <li id="video" iconCls="icon-video" onclick="add('video')" style="display:none;">视频</li>
@@ -128,6 +128,36 @@
 		      		e.cellHtml = "<a class='icon-"+row.modelId+"' style='padding-left:20px;cursor:pointer;'>"+row.infoTitle+"</a>";
 			    }
 			});
+         	
+         	setAuthBtn();
+         	function setAuthBtn(){
+         		var btn = ["add","revoke","update","remove","publish","submits","reduction","del"];
+         		var json = nui.encode({params:{userId:<%=userObject.getUserId() %>}});
+				$.ajax({
+					url:"com.cms.content.ContentService.queryBtnAuth.biz.ext",
+					type:'POST',
+			         data:json,
+			         cache:false,
+			         contentType:'text/json',
+			         success:function(text){
+						for(var i=0;i<btn.length;i++){
+							if(text.data.length>0){
+								var b = false;
+								for(var j=0;j<text.data.length;j++){
+									if(btn[i] == text.data[j].RESID.replace("info_","")){
+										b = true;
+									}
+								}
+								if(!b){
+									$("#"+btn[i]).remove();
+								}
+							}else{
+								$("#"+btn[i]).remove();
+							}
+						}
+			         }
+	          	});
+         	}
          	
 			setAddBtn();
 			function setAddBtn(){

@@ -98,4 +98,26 @@
     <select id="queryUserData" parameterClass="commonj.sdo.DataObject" resultClass="com.cms.content.category.CmsUserData">
     	select id,user_id as userId,sq_data as sqData,info_data as infoData from cms_user_data where user_id=$userId$
     </select>
+    
+    <select id="queryBtnAuth" parameterClass="commonj.sdo.DataObject" resultClass="commonj.sdo.DataObject">
+    	SELECT
+			t.res_id as resId
+		FROM
+			(
+		SELECT DISTINCT
+			u.operator_id,
+			r.res_id 
+		FROM
+			cap_user u,
+			cap_partyauth p,
+			cap_resauth r 
+		WHERE
+			u.operator_id = p.party_id 
+			AND p.role_id = r.party_id 
+			AND r.res_type = 'function' 
+			AND u.operator_id = $userId$ 
+			) t left join app_function f ON t.res_id = f.funccode 
+		WHERE
+			f.funcgroupid = 1021
+    </select>
 </sqlMap>
