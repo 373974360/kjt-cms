@@ -48,7 +48,9 @@
     			showToolbar="true" showCollapseButton="true" showFooter="true" allowResize="true" collapseOnTitleClick="true">
     				<input id="sq.id" name="sq.id" class="nui-hidden"/>
     				<input name="sq.replyContent" class="nui-hidden"/>
+    				<input name="sq.replyOrgId" class="nui-hidden"/>
     				<input name="sq.replyOrgName" class="nui-hidden"/>
+    				<input name="sq.subOrgId" class="nui-hidden"/>
     				<input name="sq.subOrgName" class="nui-hidden"/>    				
 					<table id="table1" style="width:70%; table-layout:fixed;" border="0">
 						<tr>			                
@@ -363,7 +365,9 @@
 				var data = form.getData(false, true);
 				data.sq.id = "<%=sqId %>";
 				data.sq.replyContent = ue2.getContent();
+				data.sq.replyOrgId = "<%=userObject.getUserOrgId() %>";
 				data.sq.replyOrgName = "<%=userObject.getUserOrgName() %>";
+				data.sq.subOrgId = "<%=userObject.getUserOrgId() %>";
 				data.sq.subOrgName = "<%=userObject.getUserOrgName() %>";
 				data.sq.replyTime = data2.sqPro.reTime;	
 				data.sq.isReply = "<%=isReply %>";	
