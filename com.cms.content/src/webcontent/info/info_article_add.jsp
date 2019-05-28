@@ -9,6 +9,7 @@
 	
 	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	String curTime = df.format(new Date());
+	Long workItemID = (Long)request.getAttribute("workItemID");
  %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -228,7 +229,7 @@
 		        }
         		json = json + "}";
 	            $.ajax({
-	                url: "com.cms.content.ContentService.addInfo.biz.ext",
+	                url: "com.cms.content.InfoWorkFlowService.addInfo.biz.ext",
 	                type: 'POST',
 	                data: json,
 	                cache: false,

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:DataSetDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://www.primeton.com/datamodel" name="category" gridVisibility="false" rulerVisibility="true" snapToGeometry="true" displayName="category" author="chaoweima">
   <nodes xsi:type="model:PEntityNode" id="node0" name="CmsInfoCategory" nodeType="table" displayName="CmsInfoCategory" author="chaoweima" open="true" table="CMS_INFO_CATEGORY" genStrategy="assigned">
-    <location x="405" y="30"/>
+    <location x="510" y="30"/>
     <size height="264" width="150"/>
     <figSize height="20" width="150"/>
     <columnProperty id="property13" name="id" displayName="id" columnName="ID" nullAble="false" PK="true" columnType="NUMBER" eosDataType="Long" length="22" dasType="long" overWriteDefaultColumnType="false" showType="Long" update="true" insert="true">
@@ -370,7 +370,7 @@
     </columnProperty>
   </nodes>
   <nodes xsi:type="model:PEntityNode" id="node2" name="CmsInfoContent" nodeType="table" displayName="CmsInfoContent" author="chaoweima" open="true" table="CMS_INFO_CONTENT" genStrategy="assigned">
-    <location x="225" y="30"/>
+    <location x="330" y="30"/>
     <size height="120" width="150"/>
     <figSize height="20" width="150"/>
     <columnProperty id="property28" name="id" displayName="id" columnName="ID" nullAble="false" PK="true" columnType="NUMBER" eosDataType="Long" length="22" dasType="long" overWriteDefaultColumnType="false" showType="Long" update="true" insert="true">
@@ -515,7 +515,7 @@
     </columnProperty>
   </nodes>
   <nodes xsi:type="model:PEntityNode" id="node3" name="CmsInfoCategoryModel" nodeType="table" displayName="CmsInfoCategoryModel" author="chaoweima" open="true" table="CMS_INFO_CATEGORY_MODEL" genStrategy="assigned">
-    <location x="225" y="206"/>
+    <location x="510" y="450"/>
     <size height="84" width="150"/>
     <figSize height="20" width="150"/>
     <columnProperty id="property47" name="id" displayName="id" columnName="ID" nullAble="false" PK="true" columnType="NUMBER" eosDataType="Long" length="22" dasType="long" overWriteDefaultColumnType="false" showType="Long" update="true" insert="true">
@@ -604,7 +604,7 @@
     </columnProperty>
   </nodes>
   <nodes xsi:type="model:PEntityNode" id="node1" name="CmsInfo" nodeType="table" displayName="CmsInfo" author="chaoweima" open="true" instanceClass="" table="CMS_INFO" genStrategy="assigned">
-    <location x="678" y="205"/>
+    <location x="690" y="30"/>
     <size height="552" width="150"/>
     <figSize height="20" width="150"/>
     <columnProperty id="property12" name="id" displayName="id" columnName="ID" nullAble="false" PK="true" columnType="NUMBER" eosDataType="String" length="22" dasType="string" overWriteDefaultColumnType="false" showType="String" update="true" insert="true">
@@ -2233,7 +2233,7 @@
     </columnProperty>
   </nodes>
   <nodes xsi:type="model:PEntityNode" id="node4" name="CmsInfoCat" nodeType="table" displayName="CmsInfoCat" author="chaoweima" open="true" table="CMS_INFO_CAT" genStrategy="assigned">
-    <location x="30" y="105"/>
+    <location x="330" y="285"/>
     <size height="84" width="150"/>
     <figSize height="20" width="150"/>
     <columnProperty id="property50" name="id" displayName="id" columnName="ID" nullAble="false" PK="true" columnType="NUMBER" eosDataType="Long" length="22" dasType="long" overWriteDefaultColumnType="false" showType="Long" update="true" insert="true">
@@ -2322,7 +2322,7 @@
     </columnProperty>
   </nodes>
   <nodes xsi:type="model:PEntityNode" id="node5" name="CmsInfoLeader" nodeType="table" displayName="CmsInfoLeader" author="chaoweima" open="true" table="CMS_INFO_LEADER" genStrategy="assigned">
-    <location x="290" y="294"/>
+    <location x="510" y="300"/>
     <size height="138" width="150"/>
     <figSize height="20" width="150"/>
     <columnProperty id="property53" name="id" displayName="id" columnName="ID" nullAble="false" PK="true" columnType="NUMBER" eosDataType="Long" length="22" dasType="long" overWriteDefaultColumnType="false" showType="Long" update="true" insert="true">
@@ -2495,7 +2495,7 @@
     </columnProperty>
   </nodes>
   <nodes xsi:type="model:PEntityNode" id="node6" name="CmsUserCategory" nodeType="table" displayName="CmsUserCategory" author="chaoweima" open="true" table="CMS_USER_CATEGORY" genStrategy="assigned">
-    <location x="30" y="255"/>
+    <location x="330" y="378"/>
     <size height="84" width="150"/>
     <figSize height="20" width="150"/>
     <columnProperty id="property59" name="id" displayName="id" columnName="ID" nullAble="false" PK="true" columnType="NUMBER" eosDataType="Long" length="22" dasType="long" overWriteDefaultColumnType="false" showType="Long" update="true" insert="true">
@@ -2584,8 +2584,8 @@
     </columnProperty>
   </nodes>
   <nodes xsi:type="model:PEntityNode" id="node7" name="CmsUserData" nodeType="table" displayName="CmsUserData" author="chaoweima" open="true" table="CMS_USER_DATA" genStrategy="assigned">
-    <location x="76" y="360"/>
-    <size height="106" width="150"/>
+    <location x="330" y="480"/>
+    <size height="102" width="150"/>
     <figSize height="20" width="150"/>
     <columnProperty id="property62" name="id" displayName="id" columnName="ID" nullAble="false" PK="true" columnType="NUMBER" eosDataType="Long" length="22" dasType="long" overWriteDefaultColumnType="false" showType="Long" update="true" insert="true">
       <comment xsi:nil="true"/>
@@ -2674,6 +2674,123 @@
     <columnProperty id="property65" name="infoData" displayName="infoData" columnName="INFO_DATA" nullAble="true" columnType="NUMBER" eosDataType="Long" length="22" dasType="long" overWriteDefaultColumnType="false" showType="Long" update="true" insert="true">
       <comment xsi:nil="true"/>
       <viewField dict="false" displayName="infoData" id="infoData" label="infoData" name="infoData" userDefined="true">
+        <fieldView>
+          <type name="write"/>
+          <attr name="formatPattern"/>
+          <attr name="srcFormatPattern"/>
+          <attr name="maxLength"/>
+          <attr attrValue="" defaultValue="" name="filter"/>
+          <attr attrValue="" defaultValue="" name="maxLengthString"/>
+          <attr name="value"/>
+        </fieldView>
+        <fieldEdit>
+          <type name="text"/>
+          <attr attrValue="" defaultValue="" name="value"/>
+          <attr attrValue="" defaultValue="" name="extAttr"/>
+          <attr attrValue="" defaultValue="" name="tabindex"/>
+          <attr attrValue="" defaultValue="" name="readonly"/>
+          <attr attrValue="" defaultValue="" name="disabled"/>
+          <attr attrValue="" defaultValue="" name="size"/>
+          <attr attrValue="" defaultValue="" name="maxlength"/>
+          <attr attrValue="" defaultValue="" name="title"/>
+          <attr attrValue="" defaultValue="" name="style"/>
+          <attr attrValue="" defaultValue="" name="styleClass"/>
+          <attr attrValue="" defaultValue="" name="validateAttr"/>
+        </fieldEdit>
+      </viewField>
+    </columnProperty>
+  </nodes>
+  <nodes xsi:type="model:PEntityNode" id="node8" name="CmsWorkflow" nodeType="table" displayName="CmsWorkflow" author="chaoweima" open="true" table="CMS_WORKFLOW" genStrategy="assigned">
+    <location x="330" y="165"/>
+    <size height="106" width="150"/>
+    <figSize height="20" width="150"/>
+    <columnProperty id="property66" name="id" displayName="id" columnName="ID" nullAble="false" PK="true" columnType="NUMBER" eosDataType="Long" length="22" dasType="long" overWriteDefaultColumnType="false" showType="Long" update="true" insert="true">
+      <comment xsi:nil="true"/>
+      <viewField dict="false" displayName="id" id="id" label="id" name="id" userDefined="true">
+        <fieldView>
+          <type name="write"/>
+          <attr name="formatPattern"/>
+          <attr name="srcFormatPattern"/>
+          <attr name="maxLength"/>
+          <attr attrValue="" defaultValue="" name="filter"/>
+          <attr attrValue="" defaultValue="" name="maxLengthString"/>
+          <attr name="value"/>
+        </fieldView>
+        <fieldEdit>
+          <type name="text"/>
+          <attr attrValue="" defaultValue="" name="value"/>
+          <attr attrValue="" defaultValue="" name="extAttr"/>
+          <attr attrValue="" defaultValue="" name="tabindex"/>
+          <attr attrValue="" defaultValue="" name="readonly"/>
+          <attr attrValue="" defaultValue="" name="disabled"/>
+          <attr attrValue="" defaultValue="" name="size"/>
+          <attr attrValue="" defaultValue="" name="maxlength"/>
+          <attr attrValue="" defaultValue="" name="title"/>
+          <attr attrValue="" defaultValue="" name="style"/>
+          <attr attrValue="" defaultValue="" name="styleClass"/>
+          <attr attrValue="" defaultValue="" name="validateAttr"/>
+        </fieldEdit>
+      </viewField>
+    </columnProperty>
+    <columnProperty id="property67" name="busId" displayName="busId" columnName="BUS_ID" nullAble="true" columnType="NUMBER" eosDataType="Long" length="22" dasType="long" overWriteDefaultColumnType="false" showType="Long" update="true" insert="true">
+      <comment xsi:nil="true"/>
+      <viewField dict="false" displayName="busId" id="busId" label="busId" name="busId" userDefined="true">
+        <fieldView>
+          <type name="write"/>
+          <attr name="formatPattern"/>
+          <attr name="srcFormatPattern"/>
+          <attr name="maxLength"/>
+          <attr attrValue="" defaultValue="" name="filter"/>
+          <attr attrValue="" defaultValue="" name="maxLengthString"/>
+          <attr name="value"/>
+        </fieldView>
+        <fieldEdit>
+          <type name="text"/>
+          <attr attrValue="" defaultValue="" name="value"/>
+          <attr attrValue="" defaultValue="" name="extAttr"/>
+          <attr attrValue="" defaultValue="" name="tabindex"/>
+          <attr attrValue="" defaultValue="" name="readonly"/>
+          <attr attrValue="" defaultValue="" name="disabled"/>
+          <attr attrValue="" defaultValue="" name="size"/>
+          <attr attrValue="" defaultValue="" name="maxlength"/>
+          <attr attrValue="" defaultValue="" name="title"/>
+          <attr attrValue="" defaultValue="" name="style"/>
+          <attr attrValue="" defaultValue="" name="styleClass"/>
+          <attr attrValue="" defaultValue="" name="validateAttr"/>
+        </fieldEdit>
+      </viewField>
+    </columnProperty>
+    <columnProperty id="property68" name="workId" displayName="workId" columnName="WORK_ID" nullAble="true" columnType="NUMBER" eosDataType="Long" length="22" dasType="long" overWriteDefaultColumnType="false" showType="Long" update="true" insert="true">
+      <comment xsi:nil="true"/>
+      <viewField dict="false" displayName="workId" id="workId" label="workId" name="workId" userDefined="true">
+        <fieldView>
+          <type name="write"/>
+          <attr name="formatPattern"/>
+          <attr name="srcFormatPattern"/>
+          <attr name="maxLength"/>
+          <attr attrValue="" defaultValue="" name="filter"/>
+          <attr attrValue="" defaultValue="" name="maxLengthString"/>
+          <attr name="value"/>
+        </fieldView>
+        <fieldEdit>
+          <type name="text"/>
+          <attr attrValue="" defaultValue="" name="value"/>
+          <attr attrValue="" defaultValue="" name="extAttr"/>
+          <attr attrValue="" defaultValue="" name="tabindex"/>
+          <attr attrValue="" defaultValue="" name="readonly"/>
+          <attr attrValue="" defaultValue="" name="disabled"/>
+          <attr attrValue="" defaultValue="" name="size"/>
+          <attr attrValue="" defaultValue="" name="maxlength"/>
+          <attr attrValue="" defaultValue="" name="title"/>
+          <attr attrValue="" defaultValue="" name="style"/>
+          <attr attrValue="" defaultValue="" name="styleClass"/>
+          <attr attrValue="" defaultValue="" name="validateAttr"/>
+        </fieldEdit>
+      </viewField>
+    </columnProperty>
+    <columnProperty id="property69" name="busType" displayName="busType" columnName="BUS_TYPE" nullAble="true" columnType="NVARCHAR2" eosDataType="String" length="40" dasType="string" overWriteDefaultColumnType="false" showType="String" update="true" insert="true">
+      <comment xsi:nil="true"/>
+      <viewField dict="false" displayName="busType" id="busType" label="busType" name="busType" userDefined="true">
         <fieldView>
           <type name="write"/>
           <attr name="formatPattern"/>

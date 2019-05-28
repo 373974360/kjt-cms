@@ -180,7 +180,7 @@
 			
 			//新增
 			function add(model) {
-				var url = "<%=request.getContextPath()%>/content/info/info_"+model+"_add.jsp?catId=<%=catId %>&modelId="+model;
+				var url = "<%=request.getContextPath()%>/content/info/info_add.jsp?catId=<%=catId %>&modelId="+model;
 				nui.open({
 					url : url,
 					title : "新增记录",
