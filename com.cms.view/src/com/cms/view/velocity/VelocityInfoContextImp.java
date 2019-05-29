@@ -33,10 +33,31 @@ public class VelocityInfoContextImp extends VelocityContextAbstract {
 	public void setTemplateID(String catId,String tempType){
 		if(tempType.equals("info")){
 			DataObject infoData = InfoDataUtil.getInfoData(catId);
-			DataObject modelData = InfoDataUtil.getModelById(infoData.getString("modelId"));
-			vcontext.put("cat_id", infoData.getString("catId"));
-			vcontext.put("infoData", infoData);
-			template_id = modelData.getString("infoTemplet");
+			if(infoData!=null){
+				DataObject modelData = InfoDataUtil.getModelById(infoData.getString("modelId"));
+				vcontext.put("cat_id", infoData.getString("catId"));
+				vcontext.put("infoData", infoData);
+				template_id = modelData.getString("infoTemplet");
+			}else{
+				template_id = "";
+			}
+		}else{
+			DataObject catObj = CategoryUtil.getCategoryById(catId);
+			template_id = catObj.getString(tempType);
+		}
+	}
+
+	public void setTemplateID(String catId,String tempType,String infoStatus){
+		if(tempType.equals("info")){
+			DataObject infoData = InfoDataUtil.getInfoData(catId,infoStatus);
+			if(infoData!=null){
+				DataObject modelData = InfoDataUtil.getModelById(infoData.getString("modelId"));
+				vcontext.put("cat_id", infoData.getString("catId"));
+				vcontext.put("infoData", infoData);
+				template_id = modelData.getString("infoTemplet");
+			}else{
+				template_id = "";
+			}
 		}else{
 			DataObject catObj = CategoryUtil.getCategoryById(catId);
 			template_id = catObj.getString(tempType);

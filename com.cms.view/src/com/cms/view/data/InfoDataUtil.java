@@ -28,6 +28,68 @@ import commonj.sdo.DataObject;
 @Bizlet("网站前台获取信息相关类")
 public class InfoDataUtil {
 
+	public static DataObject getInfoData(String infoId,String infoStatus){
+		String sql = "select * from cms_info i,cms_info_category c where i.cat_id=c.id and i.id="+infoId+"";
+		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			rs = stmt.executeQuery(sql);
+			DataObject[] dobj = new DataObject[1];
+			while (rs.next()) {
+				DataObject dtr = DataObjectUtil.createDataObject("com.cms.content.category.CmsInfo");
+				dtr.setString("id", rs.getString("id"));
+				dtr.setString("catId", rs.getString("cat_id"));
+				dtr.setString("infoTitle", rs.getString("info_title"));
+				dtr.setString("topTitle", rs.getString("top_title"));
+				dtr.setString("subTitle", rs.getString("sub_title"));
+				dtr.setString("modelId", rs.getString("model_id"));
+				dtr.setString("infoType", rs.getString("info_type"));
+				dtr.setString("thumbUrl", rs.getString("thumb_url"));
+				dtr.setString("description", rs.getString("description"));
+				dtr.setString("author", rs.getString("author"));
+				dtr.setString("editor", rs.getString("editor"));
+				dtr.setString("source", rs.getString("source"));
+				dtr.setString("keywords", rs.getString("keywords"));
+				dtr.setString("contentUrl", rs.getString("content_url"));
+				dtr.setString("infoStatus", rs.getString("info_status"));
+				dtr.setString("weight", rs.getString("weight"));
+				dtr.setString("hits", rs.getString("hits"));
+				dtr.setString("isTop", rs.getString("is_top"));
+				dtr.setString("isTuijian", rs.getString("is_tuijian"));
+				dtr.setString("releasedDtime", rs.getString("released_dtime"));
+				dtr.setString("orgName", rs.getString("org_name"));
+				dtr.setString("gkNo", rs.getString("gk_no"));
+				dtr.setString("gkIndex", rs.getString("gk_index"));
+				dtr.setString("chName", rs.getString("ch_name"));
+				if(!rs.getString("model_id").equals("link") && !rs.getString("model_id").equals("download")){
+					DataObject obj;
+					if(rs.getString("model_id").equals("expert") || rs.getString("model_id").equals("leader")){
+						obj = getInfoLeader(rs.getString("id"));
+						dtr.setString("ldzw", obj.getString("ldzw"));
+						dtr.setString("grjl", obj.getString("grjl"));
+						dtr.setString("zrfg", obj.getString("zrfg"));
+						dtr.setString("kycg", obj.getString("kycg"));
+					}else{
+						obj = getInfoContent(rs.getString("id"));
+						dtr.setString("picContent", obj.getString("picContent"));
+						dtr.setString("videoPath", obj.getString("videoPath"));
+						dtr.setString("infoContent", obj.getString("infoContent"));
+					}
+				}
+				dobj[0] = dtr;
+			}
+			return dobj[0];
+		} catch (Throwable e) {
+			throw new RuntimeException(e);
+		} finally {
+			close(rs);
+			close(stmt);
+			close(conn);
+		}
+	}
+	
 	public static DataObject getInfoData(String infoId){
 		String sql = "select * from cms_info i,cms_info_category c where i.cat_id=c.id and i.id="+infoId+" and i.info_status=3";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");

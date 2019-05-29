@@ -2,9 +2,9 @@
 <com.primeton.studio.component.core.EosComponentTypeInfo>
   <description>
     <version>6.0</version>
-    <displayName>InfoWorkFlowService</displayName>
+    <displayName>WorkFlowService</displayName>
     <author>chaoweima</author>
-    <createdTime>2019-05-28 10:58:09</createdTime>
+    <createdTime>2019-05-28 17:46:41</createdTime>
     <description></description>
     <detailDescription></detailDescription>
     <demo></demo>

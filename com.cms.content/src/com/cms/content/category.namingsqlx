@@ -18,8 +18,13 @@
     		cms_info
     	where 1=1
     	<dynamic>
-    		<isNotNull prepend="and" property="infoStatus">
-    			info_status = $infoStatus$
+    		<isNotNull property="infoStatus">
+    			<isEqual prepend="and" property="infoStatus" compareValue="2">
+    				info_status = $infoStatus$ and input_user = $userId$
+    			</isEqual>
+    			<isNotEqual prepend="and" property="infoStatus" compareValue="2">
+    				info_status = $infoStatus$
+    			</isNotEqual>
     		</isNotNull>
     		<isNotNull prepend="and" property="infoType">
     			info_type = $infoType$
@@ -46,8 +51,13 @@
 		    		<isNotNull prepend="and" property="searchKey">
 		    			info_title like '%$searchKey$%'
 		    		</isNotNull>
-		    		<isNotNull prepend="and" property="infoStatus">
-		    			info_status = $infoStatus$
+		    		<isNotNull property="infoStatus">
+		    			<isEqual prepend="and" property="infoStatus" compareValue="2">
+		    				info_status = $infoStatus$ and input_user = $userId$
+		    			</isEqual>
+		    			<isNotEqual prepend="and" property="infoStatus" compareValue="2">
+		    				info_status = $infoStatus$
+		    			</isNotEqual>
 		    		</isNotNull>
 		    		<isNotNull prepend="and" property="infoType">
 		    			info_type = $infoType$
@@ -119,5 +129,47 @@
 			) t left join app_function f ON t.res_id = f.funccode 
 		WHERE
 			f.funcgroupid = 1021
+    </select>
+    <select id="myAgencyInfoList" parameterClass="commonj.sdo.DataObject" resultClass="com.cms.content.category.CmsInfo">
+    	<![CDATA[SELECT
+			i.id,i.info_title as infoTitle,i.input_dtime as inputDtime,i.model_id as modelId,i.editor as editor,i.released_dtime as releasedDtime,i.cat_id as catId,i.is_top as isTop
+		FROM
+			(SELECT
+				* 
+			FROM
+				(
+				SELECT
+					work_id,
+					step_sort 
+				FROM
+					cms_workflow_step 
+				WHERE
+				step_role IN ( SELECT role_id FROM cap_partyauth WHERE party_id = $userId$ )) t,
+				(
+				SELECT
+					l.bus_id,
+					l.wf_id,
+					max( l.wf_step_id ) AS wf_step_id,
+					w.step_num 
+				FROM
+					cms_workflow w,
+					cms_workflow_logs l 
+				WHERE
+					w.id = l.wf_id 
+					AND w.work_type = 1 
+				GROUP BY
+					l.bus_id,
+					l.wf_id,
+					w.step_num 
+				) t1 
+			WHERE
+				t.work_id = t1.wf_id 
+				AND t1.wf_step_id = t.step_sort - 1 
+				AND t1.wf_step_id < t1.step_num 
+			) t2,
+			cms_info i 
+		WHERE
+			t2.bus_id = i.id 
+			AND i.info_status =2]]>
     </select>
 </sqlMap>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- author:chaoweima -->
+<sqlMap>
+    <select id="queryWorkFlowList" parameterClass="commonj.sdo.DataObject" resultClass="com.cms.workflow.workflow.CmsWorkflow">
+    	select id,work_name as workName,work_remark as workRemark,step_num as stepNum,work_type as workType from cms_workflow where 1=1
+    	<isNotNull prepend="and" property="workName">
+			work_name like '%$workName$%'
+		</isNotNull>
+    	 order by id asc
+    </select>
+    
+    <select id="queryStepsList" parameterClass="commonj.sdo.DataObject" resultClass="com.cms.workflow.workflow.CmsWorkflowStep">
+    	select id,step_name as stepName,step_role as stepRole,step_sort as stepSort from cms_workflow_step where work_id=$id$
+    	 order by step_sort asc
+    </select>
+    <delete id="deleteStepsByWorkId" parameterClass="commonj.sdo.DataObject">
+    	delete from cms_workflow_step where work_id = $id$
+    </delete>
+</sqlMap>
