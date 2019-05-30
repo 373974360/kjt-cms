@@ -20,13 +20,13 @@
     </process:returns>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="start0label" name="label" displayName="label" nodeType="label">
-    <location x="32" y="178"/>
-    <figSize height="17" width="25"/>
+    <location x="29" y="178"/>
+    <figSize height="20" width="31"/>
     <node>start0</node>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="end0label" name="label" displayName="label" nodeType="label">
-    <location x="818" y="291"/>
-    <figSize height="17" width="25"/>
+    <location x="815" y="291"/>
+    <figSize height="20" width="31"/>
     <node>end0</node>
   </nodes>
   <nodes xsi:type="process:tInvoke" description="" id="invokePojo0" name="queryEntitiesByCriteriaEntityWithPage" displayName="Query with page according to namedsql." type="invoke" index="0" invokeType="invoke_pojo" varArgs="false">
@@ -54,8 +54,8 @@
     </process:outputVariables>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="invokePojo0label" name="label" nodeType="label">
-    <location x="522" y="291"/>
-    <figSize height="17" width="217"/>
+    <location x="492" y="291"/>
+    <figSize height="20" width="277"/>
     <node>invokePojo0</node>
   </nodes>
   <nodes xsi:type="process:tAssign" description="" id="assign0" name="赋值" displayName="赋值" type="assign">
@@ -102,8 +102,8 @@
     </process:copy>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="assign0label" name="label" nodeType="label">
-    <location x="619" y="178"/>
-    <figSize height="17" width="25"/>
+    <location x="616" y="178"/>
+    <figSize height="20" width="31"/>
     <node>assign0</node>
   </nodes>
   <nodes xsi:type="process:tInvoke" description="" id="invokePojo2" name="获取同时发布至该栏目的信息ID" displayName="getInfoCats" type="invoke" index="1" invokeType="invoke_pojo" varArgs="false">
@@ -127,8 +127,8 @@
     </process:outputVariables>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="invokePojo2label" name="label" nodeType="label">
-    <location x="286" y="178"/>
-    <figSize height="17" width="170"/>
+    <location x="266" y="178"/>
+    <figSize height="20" width="211"/>
     <node>invokePojo2</node>
   </nodes>
   <nodes xsi:type="process:tInvoke" description="" id="invokePojo1" name="获取选中栏目的所有子孙栏目ID" displayName="getInfoCatIds" type="invoke" index="3" invokeType="invoke_pojo" varArgs="false">
@@ -138,7 +138,7 @@
       <process:transitionCondition/>
     </sourceConnections>
     <targetConnections>link5</targetConnections>
-    <location x="167" y="142"/>
+    <location x="168" y="105"/>
     <size height="28" width="22"/>
     <nodeLabel>invokePojo1label</nodeLabel>
     <process:pojo methodType="instance" synchronization="true" transactionType="join">
@@ -155,8 +155,8 @@
     </process:outputVariables>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="invokePojo1label" name="label" nodeType="label">
-    <location x="93" y="178"/>
-    <figSize height="17" width="170"/>
+    <location x="74" y="141"/>
+    <figSize height="20" width="211"/>
     <node>invokePojo1</node>
   </nodes>
   <nodes xsi:type="process:tInvoke" description="" id="invokePojo3" name="获取当前用户数据读取权限" displayName="getInfoUserData" type="invoke" index="1" invokeType="invoke_pojo" varArgs="false">
@@ -165,7 +165,7 @@
       <targetNode>assign0</targetNode>
     </sourceConnections>
     <targetConnections>link8</targetConnections>
-    <location x="503" y="142"/>
+    <location x="510" y="90"/>
     <size height="28" width="22"/>
     <nodeLabel>invokePojo3label</nodeLabel>
     <process:pojo methodType="instance" synchronization="true" transactionType="join">
@@ -180,8 +180,8 @@
     </process:outputVariables>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="invokePojo3label" name="label" nodeType="label">
-    <location x="442" y="178"/>
-    <figSize height="17" width="145"/>
+    <location x="431" y="126"/>
+    <figSize height="20" width="181"/>
     <node>invokePojo3</node>
   </nodes>
   <topRuler/>
