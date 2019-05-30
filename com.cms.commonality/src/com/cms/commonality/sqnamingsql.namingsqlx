@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- author:Administrator -->
+<sqlMap>
+		<select id="querySqList" parameterClass="commonj.sdo.DataObject" resultClass="com.cms.commonality.sq.CmsSq">
+	    	SELECT
+				id,
+				title,
+				IS_OPEN AS isOpen,
+				IS_REPLY AS isReply,
+				IS_PUBLISH AS isPublish,
+				SUB_ORG_NAME AS subOrgName,
+				REPLY_ORG_NAME AS replyOrgName,
+				CREATE_TIME AS createTime,
+				REPLY_TIME AS replyTime 
+			FROM
+				CMS_SQ 
+			WHERE
+				1 = 1 			    	
+	    	<dynamic>
+	    		<isNotNull prepend="and" property="isReply">
+	    			IS_REPLY = $isReply$
+	    		</isNotNull>
+	    		<isNotNull prepend="and" property="isOpen">
+	    			IS_OPEN = $isOpen$
+	    		</isNotNull>
+	    		<isNotNull prepend="and" property="isPublish">
+	    			IS_PUBLISH = $isPublish$
+	    		</isNotNull>
+	    		<isNotNull prepend="and" property="title">
+	    			title like '%$title$%'
+	    		</isNotNull>   		
+	    		<isNotNull>
+	    			<isEqual prepend="and" property="sqData" compareValue="1">
+				 		SUB_ORG_ID = $userOrgId$
+				   	</isEqual>
+	    		</isNotNull>
+	    	</dynamic>	    	
+	    	ORDER BY REPLY_TIME DESC
+	    </select>
+</sqlMap>

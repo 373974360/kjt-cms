@@ -1,4 +1,9 @@
+<%@page import="com.eos.data.datacontext.UserObject"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%>
+<%
+	UserObject userObject = (UserObject)request.getSession().getAttribute("userObject");
+
+ %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -9,19 +14,27 @@
 	<body style="width: 98%; height: 95%;">
 		<div class="nui-panel" title="来信查询" iconCls="icon-add" style="width: 100%; height: 15%;" showToolbar="false" showFooter="true">
 			<div id="queryform" class="nui-form" align="center" style="height: 100%">
-				<!-- 数据实体的名称 -->
-				<input class="nui-hidden" name="criteria/_entity" value="com.cms.commonality.sq.CmsSq">
 				<!-- 排序字段 -->
-				<input class="nui-hidden" name="criteria/_orderby[1]/_property" value="username">
-				<input class="nui-hidden" name="criteria/_orderby[1]/_sort" value="asc">
+				<input name="params/userOrgId" class="nui-hidden" value="<%=userObject.getUserOrgId() %>"> 
+				<input name="params/userId" class="nui-hidden" value="<%=userObject.getUserId() %>"> 
 				<table id="table1" class="table" style="height: 100%;float:left;">
 					<tr>
-						<td class="form_label">来信人姓名:</td>
+						<td class="form_label">来信标题:</td>
 						<td colspan="1">
-							<input class="nui-textbox" name="criteria/_expr[2]/username" />
-							<input class="nui-hidden" name="criteria/_expr[2]/_op" value="like">
-							<input class="nui-hidden" name="criteria/_expr[2]/_likeRule" value="all">
+							<input name="params/title" class="nui-textbox" />							
 						</td>
+						<td class="nui-form-label">回复：</td>
+		                <td colspan="1">    
+		                    <input name="params/isReply" width="40" class="nui-dictcombobox" dictTypeId="CMS_YESORNO" showNullItem="true"/>
+		                </td>
+						<td class="nui-form-label">公开：</td>
+		                <td colspan="1">    
+		                    <input name="params/isOpen" width="40" class="nui-dictcombobox" dictTypeId="CMS_YESORNO" showNullItem="true"/>
+		                </td>
+		                <td class="nui-form-label">发布：</td>
+		                <td colspan="1">    
+		                    <input name="params/isPublish" width="40" class="nui-dictcombobox" dictTypeId="CMS_YESORNO" showNullItem="true"/>
+		                </td>
 						<td>
 							<div property="footer" align="center">
 								<a class="nui-button" onclick="search()">查询 </a>
@@ -46,7 +59,7 @@
 			</div>
 			<div class="nui-fit">
 				<div id="datagrid1" dataField="sq" class="nui-datagrid" style="width: 100%; height: 100%;"
-					url="com.cms.commonality.SqService.querySq.biz.ext"
+					url="com.cms.commonality.SqService.querySqByNamedSQL.biz.ext"
 					pageSize="10" showPageInfo="true" multiSelect="true" onselectionchanged="selectionChanged" allowSortColumn="false">
 					<div property="columns">
 						<div type="checkcolumn" align="center" width="20"></div>

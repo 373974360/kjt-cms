@@ -30,6 +30,34 @@ import commonj.sdo.DataObject;
 public class QueryCommonalityAll {
 	/**
 	 * 
+	 * @param userId
+	 * @return
+	 */
+	@Bizlet("返回用户读取数据的权限")
+	public static String getSqUserData(String userId){
+		String sqData = "0";
+		String sql = "select * from cms_user_data where user_id="+userId;
+		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				sqData = rs.getString("sq_data");
+			}
+			return sqData;
+		} catch (Throwable e) {
+			throw new RuntimeException(e);
+		} finally {
+			close(rs);
+			close(stmt);
+			close(conn);
+		}
+	}
+	
+	/**
+	 * 
 	 * @param dsName
 	 * @return
 	 * @author MAXIAOQIANG

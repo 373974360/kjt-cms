@@ -150,9 +150,11 @@
 				</div>
     		</div>		    		   
 		    <div property="footer" style="text-align:center;padding-top:5px;padding-bottom:5px;" borderStyle="border:0;">		        
-		        <a class="nui-button" style="width:80px;" onclick="onTo()">转办信件</a>
-		        <span style="display:inline-block;width:25px;"></span>
-		        <a class="nui-button" style="width:80px;" onclick="onReply()">回复信件</a>		        
+		        <a class="nui-button" style="width:80px;" onclick="onTo()">信件转办</a>
+		        <span style="display:inline-block;width:20px;"></span>
+		        <a class="nui-button" style="width:80px;" onclick="onReply()">信件回复</a>
+		        <span style="display:inline-block;width:20px;"></span>
+		        <a class="nui-button" style="width:80px;" onclick="onPrint()">信件打印</a>		        
 			</div>
 			<div id="panel4" style="display:none;width: 100%; height: 100%" class="nui-panel" title="转办信件" iconCls="icon-add"  
 	    			showCloseButton="true" showToolbar="false" showFooter="false">
