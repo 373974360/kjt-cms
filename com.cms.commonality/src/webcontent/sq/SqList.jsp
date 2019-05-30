@@ -50,7 +50,7 @@
 				<table style="width: 100%;">
 					<tr>
 						<td style="width: 100%;">
-							<a class="nui-button" iconCls="icon-add" onclick="add()">手工录入 </a>
+							<a class="nui-button" iconCls="icon-add" onclick="add()">录入 </a>
 							<a id="update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑 </a>
 							<a class="nui-button" iconCls="icon-remove" onclick="remove()">删除</a>
 						</td>
