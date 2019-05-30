@@ -197,8 +197,8 @@
 			         contentType:'text/json',
 			         success:function(text){
 						obj = nui.decode(text);
-						$("span[name=categoryName]").html(obj.category.chName);
-						var json_auth = nui.encode({params:{userId:<%=userObject.getUserId() %>}});
+						$("span[name=categoryName]").html(obj.category.chName)
+						var json_auth = nui.encode({params:{userId:<%=userObject.getUserId() %>,funId:1021}});
 						$.ajax({
 							url:"com.cms.content.ContentService.queryBtnAuth.biz.ext",
 							type:'POST',

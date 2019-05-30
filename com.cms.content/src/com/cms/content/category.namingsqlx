@@ -128,48 +128,57 @@
 			AND u.operator_id = $userId$ 
 			) t left join app_function f ON t.res_id = f.funccode 
 		WHERE
-			f.funcgroupid = 1021
+			f.funcgroupid = $funId$
     </select>
     <select id="myAgencyInfoList" parameterClass="commonj.sdo.DataObject" resultClass="com.cms.content.category.CmsInfo">
-    	<![CDATA[SELECT
-			i.id,i.info_title as infoTitle,i.input_dtime as inputDtime,i.model_id as modelId,i.editor as editor,i.released_dtime as releasedDtime,i.cat_id as catId,i.is_top as isTop
-		FROM
-			(SELECT
-				* 
+		<isEqual property="infoStatus" compareValue="6">
+	 		SELECT
+				info.id,
+				info.info_title AS infoTitle,
+				info.input_dtime AS inputDtime,
+				info.model_id AS modelId,
+				info.editor AS editor,
+				info.released_dtime AS releasedDtime,
+				info.cat_id AS catId,
+				info.is_top AS isTop 
 			FROM
+				cms_info info where info.info_status = 6 and info.input_user=$userId$ order by info.released_dtime desc
+	   	</isEqual>
+	   	<isNotEqual property="infoStatus" compareValue="6">
+	    	SELECT
+				info.id,
+				info.info_title AS infoTitle,
+				info.input_dtime AS inputDtime,
+				info.model_id AS modelId,
+				info.editor AS editor,
+				info.released_dtime AS releasedDtime,
+				info.cat_id AS catId,
+				info.is_top AS isTop ,
+				t1.id as itemId,
+				t1.work_id as workId,
+				t1.step_sort as stepSort
+			FROM
+				cms_info info,
 				(
-				SELECT
-					work_id,
-					step_sort 
-				FROM
-					cms_workflow_step 
-				WHERE
-				step_role IN ( SELECT role_id FROM cap_partyauth WHERE party_id = $userId$ )) t,
+			SELECT
+				i.bus_id ,i.id,t.work_id,t.step_sort
+			FROM
+				cms_workflow_item i,
 				(
-				SELECT
-					l.bus_id,
-					l.wf_id,
-					max( l.wf_step_id ) AS wf_step_id,
-					w.step_num 
-				FROM
-					cms_workflow w,
-					cms_workflow_logs l 
-				WHERE
-					w.id = l.wf_id 
-					AND w.work_type = 1 
-				GROUP BY
-					l.bus_id,
-					l.wf_id,
-					w.step_num 
+			SELECT
+				work_id,
+				step_sort 
+			FROM
+				cms_workflow_step 
+			WHERE
+				step_role IN ( SELECT role_id FROM cap_partyauth WHERE party_id = $userId$ )) t 
+			WHERE
+				i.wf_id = t.work_id 
+				AND i.step_id = t.step_sort 
+				AND i.is_handle = 1 
 				) t1 
 			WHERE
-				t.work_id = t1.wf_id 
-				AND t1.wf_step_id = t.step_sort - 1 
-				AND t1.wf_step_id < t1.step_num 
-			) t2,
-			cms_info i 
-		WHERE
-			t2.bus_id = i.id 
-			AND i.info_status =2]]>
+				info.id = t1.bus_id order by info.released_dtime desc
+		</isNotEqual>
     </select>
 </sqlMap>

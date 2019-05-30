@@ -31,7 +31,7 @@
 				<tr>
 					<td style="width: 100%;">
 						<%
-							if(isAdd && infoStatus.equals("3")){
+							if(isAdd && infoStatus.equals("2")){
 						%>
 							<a id="add" class="nui-menubutton" menu="#popupMenu" >新增...</a>
 						    <ul id="popupMenu" class="nui-menu" style="display:none;">
@@ -44,25 +44,16 @@
 				                <li id="expert" iconCls="icon-expert" onclick="add('expert')" style="display:none;">专家</li>
 				                <li id="download" iconCls="icon-download" onclick="add('download')" style="display:none;">下载</li>
 						    </ul>
-						<%
-							}
-						%>
-						
-						<%
-							if(infoStatus.equals("3")){
-						%>
-							<a id="revoke" class="nui-button" iconCls="icon-redo" onclick="setInfoStatus(4,'撤稿')">撤稿 </a>
 							<a id="publish_update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑 </a>
 							<a id="remove" class="nui-button" iconCls="icon-remove" onclick="setInfoStatus(5,'删除')">删除</a>
-							<a id="publishHtml" class="nui-button" iconCls="icon-ok" onclick="publishHtml()">发布静态页</a>
 						<%
 							}
 						%>
 						
 						<%
-							if(infoStatus.equals("2")){
+							if(infoStatus.equals("6")){
 						%>
-							<a id="publish" class="nui-button" iconCls="icon-goto" onclick="setInfoStatus(3,'发布')">发布</a>
+							<a id="submits" class="nui-button" iconCls="icon-upload" onclick="setInfoStatus(2,'送审')">送审 </a>
 							<a id="update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑 </a>
 							<a id="remove" class="nui-button" iconCls="icon-remove" onclick="setInfoStatus(5,'删除')">删除</a>
 						<%
@@ -70,9 +61,8 @@
 						%>
 						
 						<%
-							if(infoStatus.equals("4")||infoStatus.equals("1")){
+							if(infoStatus.equals("1")){
 						%>
-							<a id="publish" class="nui-button" iconCls="icon-goto" onclick="setInfoStatus(3,'发布')">发布</a>
 							<a id="update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑 </a>
 							<a id="remove" class="nui-button" iconCls="icon-remove" onclick="setInfoStatus(5,'删除')">删除</a>
 						<%
@@ -131,8 +121,8 @@
          	
          	setAuthBtn();
          	function setAuthBtn(){
-         		var btn = ["add","revoke","update","remove","publish","reduction","del"];
-         		var json = nui.encode({params:{userId:<%=userObject.getUserId() %>,funId:1021}});
+         		var btn = ["remove","examine","del","add","update","submits","reduction"];
+         		var json = nui.encode({params:{userId:<%=userObject.getUserId() %>,funId:1081}});
 				$.ajax({
 					url:"com.cms.content.ContentService.queryBtnAuth.biz.ext",
 					type:'POST',
@@ -144,7 +134,7 @@
 							if(text.data.length>0){
 								var b = false;
 								for(var j=0;j<text.data.length;j++){
-									if(btn[i] == text.data[j].RESID.replace("info_","")){
+									if(btn[i] == text.data[j].RESID.replace("work_","")){
 										b = true;
 									}
 								}

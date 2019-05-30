@@ -1,7 +1,6 @@
 <%@page import="com.eos.data.datacontext.UserObject"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%>
 <%
-	String searchKey = request.getParameter("searchKey");
 	UserObject userObject = (UserObject)request.getSession().getAttribute("userObject");
  %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -20,7 +19,7 @@
 			<table style="width: 100%;">
 				<tr>
 					<td style="width: 100%;">
-						<a id="examine" class="nui-button" iconCls="icon-filter" onclick="setInfoStatus(4,'撤稿')">审核</a>
+						<a id="examine" class="nui-button" iconCls="icon-filter" onclick="examine()">审核</a>
 						<a id="update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑 </a>
 						<a id="remove" class="nui-button" iconCls="icon-remove" onclick="setInfoStatus(5,'删除')">删除</a>
 					</td>
@@ -45,7 +44,8 @@
 		<script type="text/javascript">
 			nui.parse();
 			var grid = nui.get("datagrid1");
-         	grid.load();
+         	var formData = new nui.Form("#queryform").getData(false, false);
+         	grid.load(formData);
          	
          	grid.on("drawcell", function (e) {
 			    var field = e.field,
@@ -65,7 +65,7 @@
 			setAuthBtn();
          	function setAuthBtn(){
          		var btn = ["examine","update","remove"];
-         		var json = nui.encode({params:{userId:<%=userObject.getUserId() %>}});
+         		var json = nui.encode({params:{userId:<%=userObject.getUserId() %>,funId:1081}});
 				$.ajax({
 					url:"com.cms.content.ContentService.queryBtnAuth.biz.ext",
 					type:'POST',
@@ -77,7 +77,7 @@
 							if(text.data.length>0){
 								var b = false;
 								for(var j=0;j<text.data.length;j++){
-									if(btn[i] == text.data[j].RESID.replace("info_","")){
+									if(btn[i] == text.data[j].RESID.replace("work_","")){
 										b = true;
 									}
 								}
@@ -142,6 +142,27 @@
 							var data = row;
 							//直接从页面获取，不用去后台获取
 							iframe.contentWindow.setData(data);
+						},
+						ondestroy : function(action) {
+							if (action == "saveSuccess") {
+								grid.reload();
+							}
+						}
+					});
+				} else {
+					nui.alert("请选中一条记录", "提示");
+				}
+			}
+			
+			function examine(){
+				var row = grid.getSelected();
+				if (row) {
+					nui.open({
+						url : "<%=request.getContextPath()%>/wellcom/wellcome/examine.jsp?itemId="+row.ITEMID+"&infoId="+row.id+"&wfId="+row.WORKID+"&stepSort="+row.STEPSORT,
+						title : "信息审核",
+						width : 500,
+						height : 500,
+						onload : function() {
 						},
 						ondestroy : function(action) {
 							if (action == "saveSuccess") {

@@ -89,10 +89,6 @@
       <process:from type="query" pattern="reference">pageSize</process:from>
       <process:to type="query">page/length</process:to>
     </process:copy>
-    <process:copy>
-      <process:from type="query" pattern="reference">m:userObject/userId</process:from>
-      <process:to type="query">params/userId</process:to>
-    </process:copy>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="assign0label" name="label" nodeType="label">
     <location x="619" y="178"/>
