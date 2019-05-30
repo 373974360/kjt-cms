@@ -50,6 +50,12 @@
 		                </td>
 		            </tr>
 		            <tr>
+		                <th class="nui-form-label">流程绑定：</th>
+		                <td colspan="3">    
+		                	<input name="category.workflowId" class="nui-combobox" style="width:100%" textField="workName" valueField="id" url="com.cms.workflow.WorkFlowService.queryWorkFlowAll.biz.ext" dataField="data" showNullItem="true"/>
+		                </td>
+		            </tr>
+		            <tr>
 		                <th class="nui-form-label">关联模型：</th>
 		                <td colspan=3>    
 		                    <div id="selectModel" class="nui-checkboxlist" name="categoryModels.modelId" repeatItems="3" repeatLayout="table" style="width:100%;"

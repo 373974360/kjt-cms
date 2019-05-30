@@ -106,30 +106,37 @@
     <figSize height="20" width="31"/>
     <node>assign0</node>
   </nodes>
-  <nodes xsi:type="process:tInvoke" description="" id="invokePojo2" name="获取同时发布至该栏目的信息ID" displayName="getInfoCats" type="invoke" index="1" invokeType="invoke_pojo" varArgs="false">
-    <sourceConnections xsi:type="process:tLink" id="link8" name="link8" displayName="连接线" isDefault="true" type="transition">
-      <sourceNode>invokePojo2</sourceNode>
-      <targetNode>invokePojo3</targetNode>
+  <nodes xsi:type="process:tInvoke" description="" id="invokePojo3" name="获取当前用户数据读取权限" displayName="getInfoUserData" type="invoke" index="1" invokeType="invoke_pojo" varArgs="false">
+    <sourceConnections xsi:type="process:tLink" id="link9" name="link9" displayName="连接线" isDefault="true" type="transition">
+      <sourceNode>invokePojo3</sourceNode>
+      <targetNode>assign0</targetNode>
     </sourceConnections>
-    <targetConnections>link6</targetConnections>
-    <location x="360" y="142"/>
+    <targetConnections>link8</targetConnections>
+    <location x="503" y="142"/>
     <size height="28" width="22"/>
-    <nodeLabel>invokePojo2label</nodeLabel>
+    <nodeLabel>invokePojo3label</nodeLabel>
     <process:pojo methodType="instance" synchronization="true" transactionType="join">
-      <process:partner type="literal">com.cms.content.QueryInfoListUtils.getInfoCats</process:partner>
+      <process:partner type="literal">com.cms.content.QueryInfoListUtils.getInfoUserData</process:partner>
       <process:instance instanceName=""/>
     </process:pojo>
     <process:inputVariables>
-      <process:inputVariable id="0" name="catId" type="query" value="java.lang.String" valueType="Java" pattern="reference">catIds</process:inputVariable>
+      <process:inputVariable id="0" name="userId" type="query" value="java.lang.String" valueType="Java" pattern="reference">params/userId</process:inputVariable>
     </process:inputVariables>
     <process:outputVariables>
-      <process:outputVariable id="0" name="out0" type="query" value="java.lang.String" valueType="Java">infoIds</process:outputVariable>
+      <process:outputVariable id="0" name="out1" type="query" value="java.lang.String" valueType="Java">infoData</process:outputVariable>
     </process:outputVariables>
   </nodes>
+<<<<<<< HEAD
   <nodes xsi:type="model:NodeElementLabel" id="invokePojo2label" name="label" nodeType="label">
     <location x="266" y="178"/>
     <figSize height="20" width="211"/>
     <node>invokePojo2</node>
+=======
+  <nodes xsi:type="model:NodeElementLabel" id="invokePojo3label" name="label" nodeType="label">
+    <location x="442" y="178"/>
+    <figSize height="17" width="145"/>
+    <node>invokePojo3</node>
+>>>>>>> ef6b2642b7255445ec2a04f0aac640d760ed7577
   </nodes>
   <nodes xsi:type="process:tInvoke" description="" id="invokePojo1" name="获取选中栏目的所有子孙栏目ID" displayName="getInfoCatIds" type="invoke" index="3" invokeType="invoke_pojo" varArgs="false">
     <sourceConnections xsi:type="process:tLink" id="link6" name="link6" displayName="连接线" isDefault="true" type="transition">
@@ -159,30 +166,42 @@
     <figSize height="20" width="211"/>
     <node>invokePojo1</node>
   </nodes>
-  <nodes xsi:type="process:tInvoke" description="" id="invokePojo3" name="获取当前用户数据读取权限" displayName="getInfoUserData" type="invoke" index="1" invokeType="invoke_pojo" varArgs="false">
-    <sourceConnections xsi:type="process:tLink" id="link9" name="link9" displayName="连接线" isDefault="true" type="transition">
-      <sourceNode>invokePojo3</sourceNode>
-      <targetNode>assign0</targetNode>
+  <nodes xsi:type="process:tInvoke" description="" id="invokePojo2" name="获取同时发布至该栏目的信息ID" displayName="getInfoCats" type="invoke" index="1" invokeType="invoke_pojo" varArgs="false">
+    <sourceConnections xsi:type="process:tLink" id="link8" name="link8" displayName="连接线" isDefault="true" type="transition">
+      <sourceNode>invokePojo2</sourceNode>
+      <targetNode>invokePojo3</targetNode>
     </sourceConnections>
+<<<<<<< HEAD
     <targetConnections>link8</targetConnections>
     <location x="510" y="90"/>
+=======
+    <targetConnections>link6</targetConnections>
+    <location x="360" y="142"/>
+>>>>>>> ef6b2642b7255445ec2a04f0aac640d760ed7577
     <size height="28" width="22"/>
-    <nodeLabel>invokePojo3label</nodeLabel>
+    <nodeLabel>invokePojo2label</nodeLabel>
     <process:pojo methodType="instance" synchronization="true" transactionType="join">
-      <process:partner type="literal">com.cms.content.QueryInfoListUtils.getInfoUserData</process:partner>
+      <process:partner type="literal">com.cms.content.QueryInfoListUtils.getInfoCats</process:partner>
       <process:instance instanceName=""/>
     </process:pojo>
     <process:inputVariables>
-      <process:inputVariable id="0" name="userId" type="query" value="java.lang.String" valueType="Java" pattern="reference">params/userId</process:inputVariable>
+      <process:inputVariable id="0" name="catId" type="query" value="java.lang.String" valueType="Java" pattern="reference">catIds</process:inputVariable>
     </process:inputVariables>
     <process:outputVariables>
-      <process:outputVariable id="0" name="out1" type="query" value="java.lang.String" valueType="Java">infoData</process:outputVariable>
+      <process:outputVariable id="0" name="out0" type="query" value="java.lang.String" valueType="Java">infoIds</process:outputVariable>
     </process:outputVariables>
   </nodes>
+<<<<<<< HEAD
   <nodes xsi:type="model:NodeElementLabel" id="invokePojo3label" name="label" nodeType="label">
     <location x="431" y="126"/>
     <figSize height="20" width="181"/>
     <node>invokePojo3</node>
+=======
+  <nodes xsi:type="model:NodeElementLabel" id="invokePojo2label" name="label" nodeType="label">
+    <location x="286" y="178"/>
+    <figSize height="17" width="170"/>
+    <node>invokePojo2</node>
+>>>>>>> ef6b2642b7255445ec2a04f0aac640d760ed7577
   </nodes>
   <topRuler/>
   <leftRuler/>

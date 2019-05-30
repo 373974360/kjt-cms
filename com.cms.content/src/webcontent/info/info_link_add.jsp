@@ -31,6 +31,7 @@
 				<input id="info.inputUser" name="info.inputUser" class="nui-hidden" value="<%=userObject.getUserId() %>" />
 				<input id="info.orgId" name="info.orgId" class="nui-hidden" value="<%=userObject.getUserOrgId() %>" />
 				<input id="info.orgName" name="info.orgName" class="nui-hidden" value="<%=userObject.getUserOrgName() %>" />
+		        <input id="info.infoStatus" name="info.infoStatus" class="nui-hidden"/>
 		        <table style="width:100%;table-layout:fixed;float:left;" class="nui-form-table" >
 		            <tr>
 		                <th class="nui-form-label" style="width:120px;">所属栏目：</th>
@@ -114,10 +115,9 @@
 		            <tr>
 		                <th class="nui-form-label">发布状态：</th>
 		                <td colspan="5">    
-			                <div name="info.infoStatus" class="nui-radiobuttonlist"
-							    textField="text" dataField="infoStatus" valueField="id" value="3"
-							    url="<%=request.getContextPath()%>/content/info/infoStatus.txt">
-							</div>
+		                	<input type="radio" name="infoStatus" id="draft" value="1"/> 草稿
+		                	<input type="radio" name="infoStatus" id="pending" value="2"/> 待审
+		                	<input type="radio" name="infoStatus" id="publish" value="3"/> 发布
 		                </td>
 		            </tr>
 		            <tr>
@@ -201,6 +201,37 @@
 			         success:function(text){
 						obj = nui.decode(text);
 						$("span[name=categoryName]").html(obj.category.chName);
+						var json_auth = nui.encode({params:{userId:<%=userObject.getUserId() %>}});
+						$.ajax({
+							url:"com.cms.content.ContentService.queryBtnAuth.biz.ext",
+							type:'POST',
+					         data:json_auth,
+					         cache:false,
+					         contentType:'text/json',
+					         success:function(text){
+					         	var b = false;
+								if(text.data.length>0){
+									for(var j=0;j<text.data.length;j++){
+										if(text.data[j].RESID=="info_publish"){
+											b = true;
+										}
+									}
+								}
+								if(obj.category.workflowId==null){
+									$("#pending").attr("disabled",true);
+								}else{
+									$("#pending").attr("checked",true);
+								}
+								if(!b){
+									$("#publish").attr("disabled",true);
+								}else{
+									$("#publish").attr("checked",true);
+								}
+								if(!b && obj.category.workflowId==null){
+									$("#draft").attr("checked",true);
+								}
+					         }
+			          	});
 			         }
 	          	});
 	        }

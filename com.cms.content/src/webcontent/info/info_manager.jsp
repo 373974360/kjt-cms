@@ -63,6 +63,7 @@
 	       <div id="infotabs" class="nui-tabs bg-toolbar" activeIndex="0" style="width:100%;height:100%;border:0;">
 			    <div name="info_list_tab_3" title="已发布" visible="true"></div>
 			    <div name="info_list_tab_2" title="审核中" visible="true"></div>
+			    <div name="info_list_tab_6" title="已驳回" visible="true"></div>
 			    <div name="info_list_tab_4" title="已撤稿" visible="true"></div>
 			    <div name="info_list_tab_1" title="草稿" visible="true"></div>
 			    <div name="info_list_tab_5" title="回收站" visible="true"></div>
@@ -87,8 +88,9 @@
 	var info_list_3  = { title: '已发布', path: '<%=request.getContextPath() %>/content/info/info_list.jsp?infoStatus=3' };
 	var info_list_4  = { title: '已撤稿', path: '<%=request.getContextPath() %>/content/info/info_list.jsp?infoStatus=4' };
 	var info_list_5  = { title: '已删除', path: '<%=request.getContextPath() %>/content/info/info_list.jsp?infoStatus=5' };
+	var info_list_6  = { title: '已驳回', path: '<%=request.getContextPath() %>/content/info/info_list.jsp?infoStatus=6' };
 	var applicationtabs_map = {};
-	applicationtabs_map["category"] = [info_list_3,info_list_2,info_list_4,info_list_1,info_list_5];
+	applicationtabs_map["category"] = [info_list_3,info_list_2,info_list_6,info_list_4,info_list_1,info_list_5];
 	
 	function setUrlParam(url,params){
 		if(!url){

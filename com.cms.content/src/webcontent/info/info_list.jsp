@@ -52,7 +52,7 @@
 							if(infoStatus.equals("3")){
 						%>
 							<a id="revoke" class="nui-button" iconCls="icon-redo" onclick="setInfoStatus(4,'撤稿')">撤稿 </a>
-							<a id="update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑 </a>
+							<a id="publish_update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑 </a>
 							<a id="remove" class="nui-button" iconCls="icon-remove" onclick="setInfoStatus(5,'删除')">删除</a>
 							<a id="publishHtml" class="nui-button" iconCls="icon-ok" onclick="publishHtml()">发布静态页</a>
 						<%
@@ -125,13 +125,13 @@
 			        }
 			    }
 			    if (field == "title") {
-		      		e.cellHtml = "<a class='icon-"+row.modelId+"' style='padding-left:20px;cursor:pointer;'>"+row.infoTitle+"</a>";
+		      		e.cellHtml = "<a class='icon-"+row.modelId+"' style='padding-left:20px;cursor:pointer;' href='<%=request.getContextPath()%>/content/info/view.jsp?info_id="+row.id+"' target='_blank'>"+row.infoTitle+"</a>";
 			    }
 			});
          	
          	setAuthBtn();
          	function setAuthBtn(){
-         		var btn = ["add","revoke","update","remove","publish","submits","reduction","del"];
+         		var btn = ["add","revoke","update","remove","publish","submits","reduction","del","publish_update"];
          		var json = nui.encode({params:{userId:<%=userObject.getUserId() %>}});
 				$.ajax({
 					url:"com.cms.content.ContentService.queryBtnAuth.biz.ext",
@@ -180,7 +180,7 @@
 			
 			//新增
 			function add(model) {
-				var url = "<%=request.getContextPath()%>/content/info/info_add.jsp?catId=<%=catId %>&modelId="+model;
+				var url = "<%=request.getContextPath()%>/content/info/info_"+model+"_add.jsp?catId=<%=catId %>&modelId="+model;
 				nui.open({
 					url : url,
 					title : "新增记录",
@@ -303,8 +303,10 @@
 				var rows = grid.getSelecteds();
 				if (rows.length > 1) {
 					nui.get("update").disable();
+					nui.get("publish_update").disable();
 				} else {
 					nui.get("update").enable();
+					nui.get("publish_update").disable();
 				}
 			}
 			function publishHtml(){
