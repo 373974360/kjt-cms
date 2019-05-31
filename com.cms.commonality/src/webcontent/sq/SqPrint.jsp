@@ -120,6 +120,7 @@
 	        window.print();
 	        document.getElementById('nobtn1').style.display='block';//恢复打印前的页面
 	        document.getElementById('nobtn2').style.display='block';//恢复打印前的页面
+	        onCancel();
 	        return false;
 
 		}
