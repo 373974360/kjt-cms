@@ -250,7 +250,7 @@
 										});
 									} else {
 										grid.unmask();
-										nui.alert(msg+"成功","系统提示");
+										nui.alert(msg+"失败","系统提示");
 									}
 								}
 							});

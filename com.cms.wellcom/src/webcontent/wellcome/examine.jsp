@@ -1,10 +1,7 @@
 <%@page import="com.eos.data.datacontext.UserObject"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%>
 <%
-	String itemId = request.getParameter("itemId");
-	String infoId = request.getParameter("infoId");
 	String wfId = request.getParameter("wfId");
-	String stepSort = request.getParameter("stepSort");
 	UserObject userObject = (UserObject)request.getSession().getAttribute("userObject");
 	
  %>
@@ -18,11 +15,11 @@
 	<body>
 		<div class="nui-fit" style="padding-top:5px">
 			<div id="form1" method="post">
-				<input id="params.itemId" name="params.itemId" class="nui-hidden" value="<%=itemId %>"/>
-				<input id="params.busId" name="params.busId" class="nui-hidden" value="<%=infoId %>"/>
-				<input id="params.wfId" name="params.wfId" class="nui-hidden" value="<%=wfId %>"/>
-				<input id="params.stepSort" name="params.stepSort" class="nui-hidden" value="<%=stepSort %>"/>
-				<input id="params.wfOptType" name="params.stepSort" class="nui-hidden" value="<%=stepSort %>"/>
+				<input id="params.itemId" name="params.itemId" class="nui-hidden"/>
+				<input id="params.busId" name="params.busId" class="nui-hidden"/>
+				<input id="params.wfId" name="params.wfId" class="nui-hidden"/>
+				<input id="params.stepSort" name="params.stepSort" class="nui-hidden"/>
+				<input id="params.wfOptType" name="params.stepSort" class="nui-hidden"/>
 		        <table style="width:100%;table-layout:fixed;" class="nui-form-table" >
 		            <tr>
 		                <th class="nui-form-label">是否通过：</th>
@@ -50,6 +47,10 @@
 	<script type="text/javascript">
 			nui.parse();
 	        var form = new nui.Form("form1");
+	        var _rows = {};
+	        function setInfos(rows){
+	        	_rows = rows;
+	        }
 	        setData();
 	        function setData(){
 	        	var json = nui.encode({params:{userId:<%=userObject.getUserId() %>,wfId:<%=wfId %>}});
@@ -76,22 +77,28 @@
 	           	form.validate();
 		        if(form.isValid()==false) return;
 		        var data = form.getData(false,true);
-		        data.params.wfOptType = $("input[name='wfOptType']:checked").val();
-		        var json = nui.encode(data);
-	            $.ajax({
-	                url: "com.cms.content.WellComeService.examine.biz.ext",
-	                type: 'POST',
-	                data: json,
-	                cache: false,
-	                contentType:'text/json',
-	                success: function (text) {
-	                    CloseWindow("saveSuccess");
-	                },
-	                error: function (jqXHR, textStatus, errorThrown) {
-	                    alert(jqXHR.responseText);
-	                    CloseWindow();
-	                }
-	            });
+		        for(var i=0;i<_rows.length;i++){
+		        	data.params.busId = _rows[i].id;
+		        	data.params.itemId = _rows[i].ITEMID;
+		        	data.params.wfId = _rows[i].WORKID;
+		        	data.params.stepSort = _rows[i].STEPSORT;
+		        	data.params.wfOptType = $("input[name='wfOptType']:checked").val();
+			        var json = nui.encode(data);
+		            $.ajax({
+		                url: "com.cms.content.WellComeService.examine.biz.ext",
+		                type: 'POST',
+		                data: json,
+		                cache: false,
+		                contentType:'text/json',
+		                success: function (text) {
+		                },
+		                error: function (jqXHR, textStatus, errorThrown) {
+		                    alert(jqXHR.responseText);
+		                    CloseWindow();
+		                }
+		            });
+		        }
+		        CloseWindow("saveSuccess");
 	        }
 	        
 	        

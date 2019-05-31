@@ -125,9 +125,9 @@
 		            <tr>
 		                <th class="nui-form-label">发布状态：</th>
 		                <td colspan="5">    
-		                	<input type="radio" name="infoStatus" id="draft" value="1"/> 草稿
-		                	<input type="radio" name="infoStatus" id="pending" value="2"/> 待审
-		                	<input type="radio" name="infoStatus" id="publish" value="3"/> 发布
+		                	<span id="draft"><input type="radio" name="infoStatus" value="1"/> 草稿</span>
+		                	<span id="pending"><input type="radio" name="infoStatus" value="2"/> 待审</span>
+		                	<span id="publish"><input type="radio" name="infoStatus" value="3"/> 发布</span>
 		                </td>
 		            </tr>
 		            <tr>
@@ -230,18 +230,19 @@
 									}
 								}
 								if(obj.category.workflowId==null){
-									$("#pending").attr("disabled",true);
+									$("#pending").remove();
 								}else{
-									$("#pending").attr("checked",true);
+									$("#pending input[name='infoStatus']").attr("checked",true);
 									$("input[name='wflogs.wfId']").val(obj.category.workflowId);
 								}
 								if(!b){
-									$("#publish").attr("disabled",true);
+									$("#publish").remove();
 								}else{
-									$("#publish").attr("checked",true);
+									$("#pending").remove();
+									$("#publish input[name='infoStatus']").attr("checked",true);
 								}
 								if(!b && obj.category.workflowId==null){
-									$("#draft").attr("checked",true);
+									$("#draft input[name='infoStatus']").attr("checked",true);
 								}
 					         }
 			          	});

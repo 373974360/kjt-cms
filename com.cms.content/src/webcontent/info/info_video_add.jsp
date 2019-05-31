@@ -33,6 +33,14 @@
 				<input id="info.orgName" name="info.orgName" class="nui-hidden" value="<%=userObject.getUserOrgName() %>" />
             	<input name="content.infoContent" class="nui-hidden"/>
 		        <input id="info.infoStatus" name="info.infoStatus" class="nui-hidden"/>
+            	<input name="wflogs.busId" class="nui-hidden"/>
+            	<input name="wflogs.busUrl" class="nui-hidden"/>
+            	<input name="wflogs.wfOptUser" class="nui-hidden" value="<%=userObject.getUserName() %>"/>
+            	<input name="wflogs.wfStepId" class="nui-hidden" value="1"/>
+            	<input name="wflogs.wfOptTime" class="nui-hidden"/>
+            	<input name="wflogs.wfId" class="nui-hidden"/>
+            	<input name="wflogs.wfOptType" class="nui-hidden" value="1"/>
+            	<input name="wflogs.wfOptDesc" class="nui-hidden" value="信息报送"/>
 		        <table style="width:100%;table-layout:fixed;float:left;" class="nui-form-table" >
 		            <tr>
 		                <th class="nui-form-label" style="width:120px;">所属栏目：</th>
@@ -116,9 +124,9 @@
 		            <tr>
 		                <th class="nui-form-label">发布状态：</th>
 		                <td colspan="5">    
-		                	<input type="radio" name="infoStatus" id="draft" value="1"/> 草稿
-		                	<input type="radio" name="infoStatus" id="pending" value="2"/> 待审
-		                	<input type="radio" name="infoStatus" id="publish" value="3"/> 发布
+		                	<span id="draft"><input type="radio" name="infoStatus" value="1"/> 草稿</span>
+		                	<span id="pending"><input type="radio" name="infoStatus" value="2"/> 待审</span>
+		                	<span id="publish"><input type="radio" name="infoStatus" value="3"/> 发布</span>
 		                </td>
 		            </tr>
 		            <tr>
@@ -238,17 +246,19 @@
 									}
 								}
 								if(obj.category.workflowId==null){
-									$("#pending").attr("disabled",true);
+									$("#pending").remove();
 								}else{
-									$("#pending").attr("checked",true);
+									$("#pending input[name='infoStatus']").attr("checked",true);
+									$("input[name='wflogs.wfId']").val(obj.category.workflowId);
 								}
 								if(!b){
-									$("#publish").attr("disabled",true);
+									$("#publish").remove();
 								}else{
-									$("#publish").attr("checked",true);
+									$("#pending").remove();
+									$("#publish input[name='infoStatus']").attr("checked",true);
 								}
 								if(!b && obj.category.workflowId==null){
-									$("#draft").attr("checked",true);
+									$("#draft input[name='infoStatus']").attr("checked",true);
 								}
 					         }
 			          	});
@@ -263,6 +273,8 @@
 		        data.info.thumbUrl = $("input[name='info.thumbUrl']").val();
 		        data.content.infoContent = ue.getContent();
 		        data.content.videoPath = $("input[name='content.videoPath']").val();
+		        data.info.infoStatus = $("input[name='infoStatus']:checked").val();
+		        data.wflogs.wfId = $("input[name='wflogs.wfId']").val();
 		        var json = nui.encode(data);
 		        json = json.substring(0,json.indexOf("infoCat")-2);
 		        var catId = data.infoCat.catId;

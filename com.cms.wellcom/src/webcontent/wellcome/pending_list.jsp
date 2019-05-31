@@ -118,7 +118,7 @@
 										});
 									} else {
 										grid.unmask();
-										nui.alert(msg+"成功","系统提示");
+										nui.alert(msg+"失败","系统提示");
 									}
 								}
 							});
@@ -155,14 +155,18 @@
 			}
 			
 			function examine(){
-				var row = grid.getSelected();
-				if (row) {
+				var rows = grid.getSelecteds();
+				if (rows.length > 0) {
 					nui.open({
-						url : "<%=request.getContextPath()%>/wellcom/wellcome/examine.jsp?itemId="+row.ITEMID+"&infoId="+row.id+"&wfId="+row.WORKID+"&stepSort="+row.STEPSORT,
+						url : "<%=request.getContextPath()%>/wellcom/wellcome/examine.jsp?wfId="+rows[0].WORKID,
 						title : "信息审核",
 						width : 500,
 						height : 500,
 						onload : function() {
+							var iframe = this.getIFrameEl();
+							var data = rows;
+							//直接从页面获取，不用去后台获取
+							iframe.contentWindow.setInfos(data);
 						},
 						ondestroy : function(action) {
 							if (action == "saveSuccess") {
@@ -174,6 +178,7 @@
 					nui.alert("请选中一条记录", "提示");
 				}
 			}
+			
 			//当选择列时
 			function selectionChanged() {
 				var rows = grid.getSelecteds();

@@ -44,8 +44,6 @@
 				                <li id="expert" iconCls="icon-expert" onclick="add('expert')" style="display:none;">专家</li>
 				                <li id="download" iconCls="icon-download" onclick="add('download')" style="display:none;">下载</li>
 						    </ul>
-							<a id="publish_update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑 </a>
-							<a id="remove" class="nui-button" iconCls="icon-remove" onclick="setInfoStatus(5,'删除')">删除</a>
 						<%
 							}
 						%>
@@ -53,7 +51,7 @@
 						<%
 							if(infoStatus.equals("6")){
 						%>
-							<a id="submits" class="nui-button" iconCls="icon-upload" onclick="setInfoStatus(2,'送审')">送审 </a>
+							<a id="submits" class="nui-button" iconCls="icon-upload" onclick="toExamine()">送审 </a>
 							<a id="update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑 </a>
 							<a id="remove" class="nui-button" iconCls="icon-remove" onclick="setInfoStatus(5,'删除')">删除</a>
 						<%
@@ -240,7 +238,7 @@
 										});
 									} else {
 										grid.unmask();
-										nui.alert(msg+"成功","系统提示");
+										nui.alert(msg+"失败","系统提示");
 									}
 								}
 							});
@@ -251,7 +249,27 @@
 				}
 			}
 			
-			
+				
+			function toExamine(){
+				var rows = grid.getSelecteds();
+				if (rows.length > 0) {
+					for(var i=0;i<rows.length;i++){
+						var json = nui.encode({
+							info : rows[i]
+						});
+						$.ajax({
+							url : "com.cms.content.WellComeService.toExamine.biz.ext",
+							type : 'POST',
+							data : json,
+							cache : false,
+							contentType : 'text/json'
+						});
+					}
+					grid.reload();
+				} else {
+					nui.alert("请选中一条记录！");
+				}
+			}
 			//删除
 			function del() {
 				var rows = grid.getSelecteds();
@@ -287,50 +305,14 @@
 					nui.alert("请选中一条记录！");
 				}
 			}
-	
+		
 			//当选择列时
 			function selectionChanged() {
 				var rows = grid.getSelecteds();
 				if (rows.length > 1) {
 					nui.get("update").disable();
-					nui.get("publish_update").disable();
 				} else {
 					nui.get("update").enable();
-					nui.get("publish_update").disable();
-				}
-			}
-			function publishHtml(){
-				var rows = grid.getSelecteds();
-				if (rows.length > 0) {
-					nui.confirm("确定生成选中记录？","系统提示",
-					function(action) {
-						if (action == "ok") {
-							var json = nui.encode({
-								infos : rows
-							});
-							grid.loading("正在生成,请稍等...");
-							$.ajax({
-								url : "com.cms.content.ContentService.createContentHtml.biz.ext",
-								type : 'POST',
-								data : json,
-								cache : false,
-								contentType : 'text/json',
-								success : function(text) {
-									var returnJson = nui.decode(text);
-									if (returnJson.exception == null) {
-										grid.reload();
-										nui.alert("生成成功","系统提示",function(action) {
-										});
-									} else {
-										grid.unmask();
-										nui.alert("生成失败","系统提示");
-									}
-								}
-							});
-						}
-					});
-				} else {
-					nui.alert("请选中一条记录！");
 				}
 			}
 			//重新刷新页面

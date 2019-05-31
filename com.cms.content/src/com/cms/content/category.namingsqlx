@@ -131,20 +131,6 @@
 			f.funcgroupid = $funId$
     </select>
     <select id="myAgencyInfoList" parameterClass="commonj.sdo.DataObject" resultClass="com.cms.content.category.CmsInfo">
-		<isEqual property="infoStatus" compareValue="6">
-	 		SELECT
-				info.id,
-				info.info_title AS infoTitle,
-				info.input_dtime AS inputDtime,
-				info.model_id AS modelId,
-				info.editor AS editor,
-				info.released_dtime AS releasedDtime,
-				info.cat_id AS catId,
-				info.is_top AS isTop 
-			FROM
-				cms_info info where info.info_status = 6 and info.input_user=$userId$ order by info.released_dtime desc
-	   	</isEqual>
-	   	<isNotEqual property="infoStatus" compareValue="6">
 	    	SELECT
 				info.id,
 				info.info_title AS infoTitle,
@@ -178,7 +164,6 @@
 				AND i.is_handle = 1 
 				) t1 
 			WHERE
-				info.id = t1.bus_id order by info.released_dtime desc
-		</isNotEqual>
+				info.id = t1.bus_id and info.info_status=2 order by info.released_dtime desc
     </select>
 </sqlMap>

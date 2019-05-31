@@ -109,14 +109,6 @@
 		                </td>
 		            </tr>
 		            <tr>
-		                <th class="nui-form-label">发布状态：</th>
-		                <td colspan="5">    
-		                	<input type="radio" name="infoStatus" id="draft" value="1"/> 草稿
-		                	<input type="radio" name="infoStatus" id="pending" value="2"/> 待审
-		                	<input type="radio" name="infoStatus" id="publish" value="3"/> 发布
-		                </td>
-		            </tr>
-		            <tr>
 		                <th class="nui-form-label">权重：</th>
 		                <td>    
 		                	<input name="info.weight" value="60" class="nui-spinner"  minValue="0" maxValue="99"/>
@@ -217,37 +209,6 @@
 			         success:function(text){
 						obj = nui.decode(text);
 						$("span[name=categoryName]").html(obj.category.chName);
-						var json_auth = nui.encode({params:{userId:<%=userObject.getUserId() %>,funId:1021}});
-						$.ajax({
-							url:"com.cms.content.ContentService.queryBtnAuth.biz.ext",
-							type:'POST',
-					         data:json_auth,
-					         cache:false,
-					         contentType:'text/json',
-					         success:function(text){
-					         	var b = false;
-								if(text.data.length>0){
-									for(var j=0;j<text.data.length;j++){
-										if(text.data[j].RESID=="info_publish"){
-											b = true;
-										}
-									}
-								}
-								if(obj.category.workflowId==null){
-									$("#pending").attr("disabled",true);
-								}else{
-									$("#pending").attr("checked",true);
-								}
-								if(!b){
-									$("#publish").attr("disabled",true);
-								}else{
-									$("#publish").attr("checked",true);
-								}
-								if(!b && obj.category.workflowId==null){
-									$("#draft").attr("checked",true);
-								}
-					         }
-			          	});
 			         }
 	          	});
 	        }
