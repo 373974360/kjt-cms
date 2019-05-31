@@ -485,6 +485,22 @@
 	            return s;
 	        }
 	        
+	        //单击打印信件按钮时发生
+	        function onPrint(){
+	        	var data = form.getData(false,true);
+	        	nui.open({
+						url : "<%=request.getContextPath()%>/commonality/sq/SqPrint.jsp",
+						title : "打印",
+						width : '80%',
+						height : '100%',
+						onload : function() {
+							var iframe = this.getIFrameEl();						
+							//直接从页面获取，不用去后台获取
+							iframe.contentWindow.setData(data);							
+						}
+					});			
+	        }
+	        
 		</script>
 	</body>
 </html>
