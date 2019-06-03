@@ -166,4 +166,18 @@
 			WHERE
 				info.id = t1.bus_id and info.info_status=2 order by info.released_dtime desc
     </select>
+    
+    <select id="queryWfInfoLogs" parameterClass="commonj.sdo.DataObject" resultClass="com.cms.content.category.CmsWorkflowLogs">
+    	SELECT
+			wf_opt_user AS wfOptUser,
+			wf_opt_time AS wfOptTime,
+			wf_opt_type AS wfOptType,
+			wf_opt_desc AS wfOptDesc 
+		FROM
+			CMS_WORKFLOW_LOGS 
+		WHERE
+			bus_id = $infoId$ 
+		ORDER BY
+			wf_opt_time ASC
+    </select>
 </sqlMap>

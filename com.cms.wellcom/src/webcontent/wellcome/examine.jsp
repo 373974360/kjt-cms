@@ -20,6 +20,8 @@
 				<input id="params.wfId" name="params.wfId" class="nui-hidden"/>
 				<input id="params.stepSort" name="params.stepSort" class="nui-hidden"/>
 				<input id="params.wfOptType" name="params.stepSort" class="nui-hidden"/>
+				<input id="params.modelId" name="params.modelId" class="nui-hidden"/>
+				<input id="params.catId" name="params.catId" class="nui-hidden"/>
 		        <table style="width:100%;table-layout:fixed;" class="nui-form-table" >
 		            <tr>
 		                <th class="nui-form-label">是否通过：</th>
@@ -82,6 +84,8 @@
 		        	data.params.itemId = _rows[i].ITEMID;
 		        	data.params.wfId = _rows[i].WORKID;
 		        	data.params.stepSort = _rows[i].STEPSORT;
+		        	data.params.modelId = _rows[i].modelId;
+		        	data.params.catId = _rows[i].catId;
 		        	data.params.wfOptType = $("input[name='wfOptType']:checked").val();
 			        var json = nui.encode(data);
 		            $.ajax({
@@ -89,9 +93,8 @@
 		                type: 'POST',
 		                data: json,
 		                cache: false,
+		                async:false,
 		                contentType:'text/json',
-		                success: function (text) {
-		                },
 		                error: function (jqXHR, textStatus, errorThrown) {
 		                    alert(jqXHR.responseText);
 		                    CloseWindow();

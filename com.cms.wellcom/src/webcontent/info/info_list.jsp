@@ -61,6 +61,7 @@
 						<%
 							if(infoStatus.equals("1")){
 						%>
+							<a id="submits" class="nui-button" iconCls="icon-upload" onclick="toExamine()">送审 </a>
 							<a id="update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑 </a>
 							<a id="remove" class="nui-button" iconCls="icon-remove" onclick="setInfoStatus(5,'删除')">删除</a>
 						<%
@@ -262,6 +263,7 @@
 							type : 'POST',
 							data : json,
 							cache : false,
+	                		async:false,
 							contentType : 'text/json'
 						});
 					}

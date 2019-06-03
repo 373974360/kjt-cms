@@ -81,10 +81,10 @@
 		e.params.nodeType = e.node.type;
 		e.params.nodeId = e.node.realId;
     }
-	var info_list_1  = { title: '草稿箱', path: '<%=request.getContextPath() %>/content/info/info_list.jsp?infoStatus=1' };
-	var info_list_3  = { title: '已发布', path: '<%=request.getContextPath() %>/content/info/info_list.jsp?infoStatus=3' };
-	var info_list_4  = { title: '已撤稿', path: '<%=request.getContextPath() %>/content/info/info_list.jsp?infoStatus=4' };
-	var info_list_5  = { title: '已删除', path: '<%=request.getContextPath() %>/content/info/info_list.jsp?infoStatus=5' };
+	var info_list_1  = { title: '草稿箱', path: '<%=request.getContextPath() %>/content/info/info_list.jsp?infoStatus=1' ,refreshOnClick:true};
+	var info_list_3  = { title: '已发布', path: '<%=request.getContextPath() %>/content/info/info_list.jsp?infoStatus=3' ,refreshOnClick:true};
+	var info_list_4  = { title: '已撤稿', path: '<%=request.getContextPath() %>/content/info/info_list.jsp?infoStatus=4' ,refreshOnClick:true};
+	var info_list_5  = { title: '已删除', path: '<%=request.getContextPath() %>/content/info/info_list.jsp?infoStatus=5' ,refreshOnClick:true};
 	var applicationtabs_map = {};
 	applicationtabs_map["category"] = [info_list_3,info_list_4,info_list_1,info_list_5];
 	

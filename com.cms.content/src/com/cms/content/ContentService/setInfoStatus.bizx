@@ -10,8 +10,8 @@
     <nodeLabel>start0label</nodeLabel>
   </nodes>
   <nodes xsi:type="process:tEnd" id="end0" name="结束" displayName="结束" type="end">
-    <targetConnections>link4</targetConnections>
-    <location x="525" y="135"/>
+    <targetConnections>link5</targetConnections>
+    <location x="676" y="143"/>
     <size height="28" width="28"/>
     <nodeLabel>end0label</nodeLabel>
     <process:returns/>
@@ -22,7 +22,7 @@
     <node>start0</node>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="end0label" name="label" displayName="label" nodeType="label">
-    <location x="527" y="171"/>
+    <location x="678" y="179"/>
     <figSize height="17" width="25"/>
     <node>end0</node>
   </nodes>
@@ -32,20 +32,56 @@
       <targetNode>invokePojo0</targetNode>
     </sourceConnections>
     <targetConnections>link0</targetConnections>
-    <location x="207" y="175"/>
+    <location x="207" y="245"/>
     <size height="24" width="24"/>
     <nodeLabel>loopstart0label</nodeLabel>
     <process:iterate iterable="infos" iterableElement="temp"/>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="loopstart0label" name="label" nodeType="label">
-    <location x="207" y="207"/>
+    <location x="207" y="277"/>
     <figSize height="17" width="25"/>
     <node>loopstart0</node>
   </nodes>
   <nodes xsi:type="process:tLoopEnd" id="loopend0" name="循环结束" displayName="循环结束" grouped="true" type="loopend" matchedName="loopstart0">
-    <sourceConnections xsi:type="process:tLink" description="" id="link1" name="link1" displayName="连接线" isDefault="true" type="transition">
+    <sourceConnections xsi:type="process:tLink" id="link5" name="link5" displayName="连接线" isDefault="true" type="transition">
       <sourceNode>loopend0</sourceNode>
+      <targetNode>end0</targetNode>
+    </sourceConnections>
+    <targetConnections>link6</targetConnections>
+    <targetConnections>link7</targetConnections>
+    <targetConnections>link12</targetConnections>
+    <location x="501" y="245"/>
+    <size height="24" width="24"/>
+    <nodeLabel>loopend0label</nodeLabel>
+  </nodes>
+  <nodes xsi:type="model:NodeElementLabel" id="loopend0label" name="label" nodeType="label">
+    <location x="489" y="277"/>
+    <figSize height="17" width="49"/>
+    <node>loopend0</node>
+  </nodes>
+  <nodes xsi:type="model:GroupNode" id="group0" name="group" grouped="true" gstart="loopstart0" gend="loopend0">
+    <location x="207" y="170"/>
+    <size height="191" width="319"/>
+    <chidren>loopend0</chidren>
+    <chidren>loopstart0</chidren>
+    <chidren>invokePojo0</chidren>
+    <chidren>invokePojo1</chidren>
+    <chidren>invokePojo2</chidren>
+  </nodes>
+  <nodes xsi:type="process:tInvoke" description="" id="invokePojo0" name="updateEntity" displayName="" grouped="true" type="invoke" index="0" invokeType="invoke_pojo" varArgs="false">
+    <sourceConnections xsi:type="process:tLink" description="" id="link3" name="发布" displayName="连接线" isDefault="false" type="transition">
+      <sourceNode>invokePojo0</sourceNode>
       <targetNode>invokePojo1</targetNode>
+      <process:transitionCondition>
+        <process:simpleCondition operator="EQ">
+          <process:leftOperand type="query">temp/infoStatus</process:leftOperand>
+          <process:rightOperand type="literal">3</process:rightOperand>
+        </process:simpleCondition>
+      </process:transitionCondition>
+    </sourceConnections>
+    <sourceConnections xsi:type="process:tLink" description="" id="link7" name="link7" displayName="连接线" isDefault="true" type="transition">
+      <sourceNode>invokePojo0</sourceNode>
+      <targetNode>loopend0</targetNode>
       <process:transitionCondition>
         <process:simpleCondition operator="EQ">
           <process:leftOperand type="query"></process:leftOperand>
@@ -53,27 +89,25 @@
         </process:simpleCondition>
       </process:transitionCondition>
     </sourceConnections>
-    <targetConnections>link3</targetConnections>
-    <location x="351" y="175"/>
-    <size height="24" width="24"/>
-    <nodeLabel>loopend0label</nodeLabel>
-  </nodes>
-  <nodes xsi:type="model:NodeElementLabel" id="loopend0label" name="label" nodeType="label">
-    <location x="339" y="207"/>
-    <figSize height="17" width="49"/>
-    <node>loopend0</node>
-  </nodes>
-  <nodes xsi:type="model:GroupNode" id="group0" name="group" grouped="true" gstart="loopstart0" gend="loopend0">
-    <location x="207" y="170"/>
-    <size height="51" width="169"/>
-    <chidren>loopend0</chidren>
-    <chidren>loopstart0</chidren>
-    <chidren>invokePojo0</chidren>
-  </nodes>
-  <nodes xsi:type="process:tInvoke" description="" id="invokePojo0" name="updateEntity" displayName="" grouped="true" type="invoke" index="0" invokeType="invoke_pojo" varArgs="false">
-    <sourceConnections xsi:type="process:tLink" id="link3" name="link3" displayName="连接线" isDefault="true" type="transition">
+    <sourceConnections xsi:type="process:tLink" description="" id="link11" name="撤稿" displayName="连接线" type="transition">
       <sourceNode>invokePojo0</sourceNode>
-      <targetNode>loopend0</targetNode>
+      <targetNode>invokePojo2</targetNode>
+      <process:transitionCondition>
+        <process:simpleCondition operator="EQ">
+          <process:leftOperand type="query">temp/infoStatus</process:leftOperand>
+          <process:rightOperand type="literal">4</process:rightOperand>
+        </process:simpleCondition>
+      </process:transitionCondition>
+    </sourceConnections>
+    <sourceConnections xsi:type="process:tLink" description="" id="link13" name="删除" displayName="连接线" type="transition">
+      <sourceNode>invokePojo0</sourceNode>
+      <targetNode>invokePojo2</targetNode>
+      <process:transitionCondition>
+        <process:simpleCondition operator="EQ">
+          <process:leftOperand type="query">temp/infoStatus</process:leftOperand>
+          <process:rightOperand type="literal">5</process:rightOperand>
+        </process:simpleCondition>
+      </process:transitionCondition>
     </sourceConnections>
     <targetConnections>link2</targetConnections>
     <location x="287" y="181"/>
@@ -94,13 +128,13 @@
     <figSize height="17" width="73"/>
     <node>invokePojo0</node>
   </nodes>
-  <nodes xsi:type="process:tInvoke" description="" id="invokePojo1" name="createContentHTML" displayName="createContentHTML" type="invoke" index="1" invokeType="invoke_pojo" varArgs="false">
-    <sourceConnections xsi:type="process:tLink" id="link4" name="link4" displayName="连接线" isDefault="true" type="transition">
+  <nodes xsi:type="process:tInvoke" description="" id="invokePojo1" name="createContentHTML" displayName="createContentHTML" grouped="true" type="invoke" index="1" invokeType="invoke_pojo" varArgs="false">
+    <sourceConnections xsi:type="process:tLink" id="link6" name="link6" displayName="连接线" isDefault="true" type="transition">
       <sourceNode>invokePojo1</sourceNode>
-      <targetNode>end0</targetNode>
+      <targetNode>loopend0</targetNode>
     </sourceConnections>
-    <targetConnections>link1</targetConnections>
-    <location x="448" y="212"/>
+    <targetConnections>link3</targetConnections>
+    <location x="397" y="181"/>
     <size height="28" width="22"/>
     <nodeLabel>invokePojo1label</nodeLabel>
     <process:pojo methodType="instance" synchronization="true" transactionType="join">
@@ -108,16 +142,42 @@
       <process:instance instanceName=""/>
     </process:pojo>
     <process:inputVariables>
-      <process:inputVariable id="0" name="objArray" type="query" value="commonj.sdo.DataObject[]" valueType="Java" pattern="reference">infos</process:inputVariable>
+      <process:inputVariable id="0" name="obj" type="query" value="commonj.sdo.DataObject" valueType="Java" pattern="reference">temp</process:inputVariable>
     </process:inputVariables>
     <process:outputVariables>
-      <process:outputVariable id="0" name="out0" type="query" value="boolean" valueType="Java">data</process:outputVariable>
+      <process:outputVariable id="0" name="out1" type="query" value="boolean" valueType="Java">b</process:outputVariable>
     </process:outputVariables>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="invokePojo1label" name="label" nodeType="label">
-    <location x="401" y="248"/>
+    <location x="350" y="217"/>
     <figSize height="17" width="116"/>
     <node>invokePojo1</node>
+  </nodes>
+  <nodes xsi:type="process:tInvoke" description="" id="invokePojo2" name="deleteContentHTML" displayName="deleteContentHTML" grouped="true" type="invoke" index="1" invokeType="invoke_pojo" varArgs="false">
+    <sourceConnections xsi:type="process:tLink" id="link12" name="link12" displayName="连接线" isDefault="true" type="transition">
+      <sourceNode>invokePojo2</sourceNode>
+      <targetNode>loopend0</targetNode>
+    </sourceConnections>
+    <targetConnections>link11</targetConnections>
+    <targetConnections>link13</targetConnections>
+    <location x="388" y="256"/>
+    <size height="28" width="22"/>
+    <nodeLabel>invokePojo2label</nodeLabel>
+    <process:pojo methodType="instance" synchronization="true" transactionType="join">
+      <process:partner type="literal">com.cms.content.html.CreateContentHTML.deleteContentHTML</process:partner>
+      <process:instance instanceName=""/>
+    </process:pojo>
+    <process:inputVariables>
+      <process:inputVariable id="0" name="obj" type="query" value="commonj.sdo.DataObject" valueType="Java" pattern="reference">temp</process:inputVariable>
+    </process:inputVariables>
+    <process:outputVariables>
+      <process:outputVariable id="0" name="out0" type="query" value="boolean" valueType="Java">b</process:outputVariable>
+    </process:outputVariables>
+  </nodes>
+  <nodes xsi:type="model:NodeElementLabel" id="invokePojo2label" name="label" nodeType="label">
+    <location x="341" y="292"/>
+    <figSize height="17" width="116"/>
+    <node>invokePojo2</node>
   </nodes>
   <topRuler/>
   <leftRuler/>

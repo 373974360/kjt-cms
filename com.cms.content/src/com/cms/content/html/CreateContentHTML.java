@@ -4,6 +4,7 @@
 package com.cms.content.html;
 
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -69,6 +70,25 @@ public class CreateContentHTML {
                     TempletUtils.writeStringToFile(savePath, content, false, "utf-8");
                 }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+	
+	@Bizlet("删除静态内容页")
+    public static boolean deleteContentHTML(DataObject obj) {
+        try {
+        	if(obj!=null){
+        		String contentUrl = obj.getString("contentUrl");
+                String savePath = TempletUtils.class.getClassLoader().getResource("/").getPath();
+                savePath = savePath.substring(0,savePath.indexOf("WEB-INF"))+contentUrl;
+                File f = new File(savePath);
+                if (f.exists())
+                    f.delete();
+        	}
+        	
         } catch (Exception e) {
             e.printStackTrace();
             return false;

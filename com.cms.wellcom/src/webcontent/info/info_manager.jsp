@@ -82,11 +82,11 @@
 		e.params.nodeType = e.node.type;
 		e.params.nodeId = e.node.realId;
     }
-	var info_list_1  = { title: '草稿箱', path: '<%=request.getContextPath() %>/wellcom/info/info_list.jsp?infoStatus=1' };
-	var info_list_2  = { title: '已报送', path: '<%=request.getContextPath() %>/wellcom/info/info_list.jsp?infoStatus=2' };
-	var info_list_3  = { title: '已采纳', path: '<%=request.getContextPath() %>/wellcom/info/info_list.jsp?infoStatus=3' };
-	var info_list_5  = { title: '回收站', path: '<%=request.getContextPath() %>/wellcom/info/info_list.jsp?infoStatus=5' };
-	var info_list_6  = { title: '已驳回', path: '<%=request.getContextPath() %>/wellcom/info/info_list.jsp?infoStatus=6' };
+	var info_list_1  = { title: '草稿箱', path: '<%=request.getContextPath() %>/wellcom/info/info_list.jsp?infoStatus=1' ,refreshOnClick:true};
+	var info_list_2  = { title: '已报送', path: '<%=request.getContextPath() %>/wellcom/info/info_list.jsp?infoStatus=2' ,refreshOnClick:true};
+	var info_list_3  = { title: '已采纳', path: '<%=request.getContextPath() %>/wellcom/info/info_list.jsp?infoStatus=3' ,refreshOnClick:true};
+	var info_list_5  = { title: '回收站', path: '<%=request.getContextPath() %>/wellcom/info/info_list.jsp?infoStatus=5' ,refreshOnClick:true};
+	var info_list_6  = { title: '已驳回', path: '<%=request.getContextPath() %>/wellcom/info/info_list.jsp?infoStatus=6' ,refreshOnClick:true};
 	var applicationtabs_map = {};
 	applicationtabs_map["category"] = [info_list_2,info_list_3,info_list_6,info_list_1,info_list_5];
 	
