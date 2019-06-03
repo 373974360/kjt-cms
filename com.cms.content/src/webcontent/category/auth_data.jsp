@@ -7,6 +7,9 @@
   - Description:
 -->
 <%@page import="com.eos.foundation.eoscommon.ResourcesMessageUtil"%>
+<%
+	String userId = request.getParameter("userId");
+ %>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 	<%@include file="/coframe/tools/skins/common.jsp" %>
@@ -30,7 +33,7 @@
  	<div class="nui-fit" style="padding:0px 10px 10px 10px;">
 		<div id="form1" method="post">
 			<input id="userdata.id" name="userdata.id" class="nui-hidden" />
-			<input id="userdata.userId" name="userdata.userId" class="nui-hidden" value="<%=request.getParameter("userId") %>" />
+			<input id="userdata.userId" name="userdata.userId" class="nui-hidden" value="<%=userId %>" />
 	        <table style="width:100%;table-layout:fixed;" class="nui-form-table" >
 	            <tr>
 	                <th class="nui-form-label">新闻读取权限：</th>
@@ -64,7 +67,7 @@
 	
 	setData();
 	function setData(){
-		var json = nui.encode({params:{"userId":"<%=request.getParameter("userId") %>"}});
+		var json = nui.encode({params:{"userId":"<%=userId %>"}});
 		$.ajax({
 			url:"com.cms.content.CategoryService.getAuthUserData.biz.ext",
 			type:'POST',
@@ -83,8 +86,8 @@
        	form.validate();
         if(form.isValid()==false) return;
         var data = form.getData(false,true);
+        data.userdata.userId = <%=userId %>
         var json = nui.encode(data);
-        
         $.ajax({
             url: "com.cms.content.CategoryService.setAuthUserData.biz.ext",
             type: 'POST',
