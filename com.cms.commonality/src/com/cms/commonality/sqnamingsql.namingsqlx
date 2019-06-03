@@ -31,7 +31,7 @@
 	    		</isNotNull>   		
 	    		<isNotNull>
 	    			<isEqual prepend="and" property="sqData" compareValue="1">
-				 		SUB_ORG_ID = $userOrgId$
+				 		SUB_ORG_ID = $userOrgId$ and REPLY_ORG_ID = $userOrgId$
 				   	</isEqual>
 	    		</isNotNull>
 	    	</dynamic>	    	

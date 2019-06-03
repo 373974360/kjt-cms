@@ -25,69 +25,72 @@
 			<input id="sq.id" name="sq.id" class="nui-hidden" />
 			<input name="sq.content" class="nui-hidden"/>
 			<input name="sq.replyContent" class="nui-hidden"/>
-			<!--startprint-->
-	        <table id="table1" border="1" style="width:98%; table-layout:fixed;" align="center" class="nui-form-table">
-        	 	<tr>
-             		<th colspan="6" align="center" style="font-size: 23">信件内容</th>	                			                            
-        		</tr> 
-            	<tr>
-            		<th >来信人姓名</th>
-	                <td colspan="5"> 
-	                    <input id="username" name="sq.username" class="nui-textbox" readonly="readonly" borderStyle="border:0" />
-	                </td>
-            	</tr>
-            	<tr>
-            		<th >来信标题</th>
-	                <td colspan="5">    
-	                    <input id="title" name="sq.title" class="nui-textbox nui-form-input" readonly="readonly" borderStyle="border:0"/> 
-	                </td>            	
-            	</tr>
-            	<tr>
-            		<th >提交时间</th>
-	                <td colspan="5">    
-	                    <input id="createTime" name="sq.createTime" class="nui-datepicker nui-form-input" format="yyyy-MM-dd HH:mm:ss" 
-	                     showButton="false" readonly="readonly" borderStyle="border:0"/>
-	                </td>
-            	</tr>
-            	<tr>
-            		<th >来信内容</th>
-	                <td colspan="5">    
-	                	<span id="toContent"></span>
-                	</td>
-            	</tr>           	
-	        </table>
-	        <table id="table2" border="1" style="width:98%; table-layout:fixed;" align="center" class="nui-form-table">        	
-            	<tr>
-            		<th colspan="6" style="float:center;font-size: 23">回复内容</th>	               
-            	</tr>
-            	<tr>
-            		<th >回复部门</th>
-	            	<td colspan="5">
-	            		<input id="replyOrgName" name="sq.replyOrgName" class="nui-textbox" readonly="readonly" borderStyle="border:0"/>
-	            	</td>            		
-            	</tr> 
-            	<tr>
-            		<th >回复时间</th>
-	            	<td colspan="5">
-	            		<input id="replyTime" name="sq.replyTime" class="nui-datepicker nui-form-input" format="yyyy-MM-dd HH:mm:ss" 
-	            		 showButton="false" readonly="readonly" borderStyle="border:0"/>
-	            	</td>            		
-            	</tr>
-            	<tr>
-            		<th >回复内容</th>
-	                <td colspan="5">    
-	                	<span id="reContent"></span>
-                	</td>
-            	</tr>             	   	
-	        </table>
-	        <!--endprint-->	        	        	       
-	    </div>
-	    <div align="center">
-			<a id="nobtn1" class="nui-button" style="width:40px;" onclick="onPrint()">打印</a>
-		</div>     
+			
+			<div>
+		        <table id="table1" border="1" style="width:98%; table-layout:fixed;" align="center" class="nui-form-table">
+	        	 	<tr>
+	             		<th colspan="6" align="center" style="font-size: 23">信件内容</th>	                			                            
+	        		</tr> 
+	            	<tr>
+	            		<th >来信人姓名</th>
+		                <td colspan="5"> 
+		                    <input id="username" name="sq.username" class="nui-textbox" readonly="readonly" borderStyle="border:0" />
+		                </td>
+	            	</tr>
+	            	<tr>
+	            		<th >来信标题</th>
+		                <td colspan="5">    
+		                    <input id="title" name="sq.title" class="nui-textbox nui-form-input" readonly="readonly" borderStyle="border:0"/> 
+		                </td>            	
+	            	</tr>
+	            	<tr>
+	            		<th >提交时间</th>
+		                <td colspan="5">    
+		                    <input id="createTime" name="sq.createTime" class="nui-datepicker nui-form-input" format="yyyy-MM-dd HH:mm:ss" 
+		                     showButton="false" readonly="readonly" borderStyle="border:0"/>
+		                </td>
+	            	</tr>
+	            	<tr>
+	            		<th >来信内容</th>
+		                <td colspan="5">    
+		                	<span id="toContent"></span>
+	                	</td>
+	            	</tr>           	
+		        </table>
+	        </div>
+	        <br />
+	        <div>
+		        <table id="table2" border="1" style="width:98%; table-layout:fixed;" align="center" class="nui-form-table">        	
+	            	<tr>
+	            		<th colspan="6" style="float:center;font-size: 23">回复内容</th>	               
+	            	</tr>
+	            	<tr>
+	            		<th >回复部门</th>
+		            	<td colspan="5">
+		            		<input id="replyOrgName" name="sq.replyOrgName" class="nui-textbox nui-form-input" readonly="readonly" borderStyle="border:0"/>
+		            	</td>            		
+	            	</tr> 
+	            	<tr>
+	            		<th >回复时间</th>
+		            	<td colspan="5">
+		            		<input id="replyTime" name="sq.replyTime" class="nui-datepicker nui-form-input" format="yyyy-MM-dd HH:mm:ss" 
+		            		 showButton="false" readonly="readonly" borderStyle="border:0"/>
+		            	</td>            		
+	            	</tr>
+	            	<tr>
+	            		<th >回复内容</th>
+		                <td colspan="5">    
+		                	<span id="reContent"></span>
+	                	</td>
+	            	</tr>             	   	
+		        </table>
+	        </div>	        	        	       
+	    </div>    
 	</div>
-	<div id="nobtn2" class="nui-toolbar" style="text-align:center;padding-top:5px;padding-bottom:5px;">	
-		 <a class="nui-button" style="width:60px;" iconCls="icon-cancel" onclick="onCancel()">关闭</a>
+	<div id="nobtn1" class="nui-toolbar" style="text-align:center;padding-top:5px;padding-bottom:5px;">	
+		<a class="nui-button" style="width:60px;" iconCls="icon-print" onclick="onPrint()">打印</a>
+		<span style="display:inline-block;width:25px;"></span>
+		<a class="nui-button" style="width:60px;" iconCls="icon-cancel" onclick="onCancel()">关闭</a>
 	</div>
 </body>
 <script type="text/javascript">
@@ -115,11 +118,16 @@
 		//单击打印按钮
 		function onPrint(){
 			document.getElementById('nobtn1').style.display='none';//不需要打印的部分隐藏
-			document.getElementById('nobtn2').style.display='none';//不需要打印的部分隐藏
+			
+			
+			$('div').css({
+			   'height' : 'auto', //高度自动
+			   'overflow' : 'visible' //在打印之前把div的overflow改成全部显示
+			});
 			
 	        window.print();
 	        document.getElementById('nobtn1').style.display='block';//恢复打印前的页面
-	        document.getElementById('nobtn2').style.display='block';//恢复打印前的页面
+	       
 	        onCancel();
 	        return false;
 

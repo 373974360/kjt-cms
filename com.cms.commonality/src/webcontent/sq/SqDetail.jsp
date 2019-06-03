@@ -166,7 +166,7 @@
     				<input id ="subOrgName" name="sqPro.subOrgName" class="nui-hidden"/>
 					<table style="width:100%; table-layout:fixed;" class="nui-form-table">
 						<tr>			                
-			                <th class="nui-form-label">转办部门：</th>
+			                <th class="nui-form-label">移交部门：</th>
 			                <td >
 								<input id="toOrgName" name="sqPro.toOrgName" textName="orgname" class="nui-buttonedit " 
 								onbuttonclick="selectOrg" allowinput="false" style="width:15%;" 

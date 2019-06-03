@@ -216,7 +216,7 @@
 				var row = grid.getSelected();
 					nui.open({
 						url : "<%=request.getContextPath()%>/commonality/sq/SqDetail.jsp?sqId="+row.id,
-						title : "来信详情",
+						title : "来信详情&处理",
 						width : '80%',
 						height : '100%',
 						onload : function() {
