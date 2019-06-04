@@ -3,13 +3,15 @@
  */
 package com.cms.content;
 
-import com.eos.system.annotation.Bizlet;import java.sql.Connection;
+import com.eos.system.annotation.Bizlet;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.eos.common.connection.ConnectionHelper;
 import com.eos.foundation.data.DataObjectUtil;
+
 import commonj.sdo.DataObject;
 
 /**
@@ -120,6 +122,51 @@ public class QueryCategoryAllTreeNode {
 				rs.beforeFirst();
 			}
 			return counts;
+		} catch (Throwable e) {
+			throw new RuntimeException(e);
+		} finally {
+			close(rs);
+			close(stmt);
+			close(conn);
+		}
+	}
+	
+	
+	/**
+	 * 根据栏目ID查询栏目
+	 * */
+	@Bizlet("栏目树结构处理")
+	public static DataObject[] getCategoryById(String catId){
+		int counts = 0;
+		int it = 0;
+		String sql = "select * from cms_info_category where parent_id = "+catId+" order by cat_sort asc";
+		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			rs = stmt.executeQuery(sql);
+			it = 0;
+			if (null != rs) {
+				rs.last();
+				counts = rs.getRow();
+				rs.beforeFirst();
+			}
+			DataObject[] dobj = new DataObject[counts];
+			while (rs.next()) {
+				DataObject dtr = DataObjectUtil.createDataObject("com.cms.content.category.CmsInfoCategory");
+				dtr.setString("id", rs.getString("id"));
+				dtr.setString("parentId", rs.getString("parent_id"));
+				dtr.setString("chName", rs.getString("ch_name"));
+				dtr.setString("enName", rs.getString("en_name"));
+				dtr.setString("indexTemplet", rs.getString("index_templet"));
+				dtr.setString("listTemplet", rs.getString("list_templet"));
+				dtr.setString("linkUrl", rs.getString("link_url"));
+				dtr.setString("remark", rs.getString("remark"));
+				dobj[it] = dtr;
+				it++;
+			}
+			return dobj;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		} finally {

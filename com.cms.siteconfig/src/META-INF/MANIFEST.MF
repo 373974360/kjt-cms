@@ -1,7 +1,8 @@
 Manifest-Version: 1.0
-Require-Bundle: com.primeton.eos.richweb,com.eos.foundation
-eos-webCtxPath: siteconfig
+Require-Bundle: com.primeton.eos.richweb,com.eos.foundation,com.cms.co
+ ntent
 Bundle-Vendor: chaoweima
+eos-webCtxPath: siteconfig
 Bundle-Version: 1.0.0
 Bundle-Name: com.cms.siteconfig
 Bundle-Description: 

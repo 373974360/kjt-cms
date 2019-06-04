@@ -16,5 +16,11 @@
 	<classpathentry excluding="**/**.SpringXml|**/**.bizlet|**/**.bizx|**/**.componentType|**/**.compositex|**/**.datasetx|**/**.eosComponentType|**/**.flowx|**/**.namingsqlx|**/**.wsdl|**/**.xsd|**/.copyarea.db|**/**.desc" kind="src" output="com.cms.content/bin" path="com.cms.content/src"/>
 	<classpathentry excluding="**/**.SpringXml|**/**.bizlet|**/**.bizx|**/**.componentType|**/**.compositex|**/**.datasetx|**/**.eosComponentType|**/**.flowx|**/**.namingsqlx|**/**.wsdl|**/**.xsd|**/.copyarea.db|**/**.desc" kind="src" output="com.cms.siteconfig/bin" path="com.cms.siteconfig/src"/>
 	<classpathentry kind="con" path="com.primeton.studio.workbench.classPath"/>
+	<classpathentry kind="lib" path="eos-web/WEB-INF/lib/lucene-core-3.0.3.jar"/>
+	<classpathentry kind="lib" path="eos-web/WEB-INF/lib/lucene-highlighter-3.0.3.jar"/>
+	<classpathentry kind="lib" path="eos-web/WEB-INF/lib/lucene-memory-3.0.3.jar"/>
+	<classpathentry kind="lib" path="eos-web/WEB-INF/lib/pinyin4j-2.5.0.jar"/>
+	<classpathentry kind="lib" path="eos-web/WEB-INF/lib/xalan.jar"/>
+	<classpathentry kind="lib" path="eos-web/WEB-INF/lib/IKAnalyzer3.2.8.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

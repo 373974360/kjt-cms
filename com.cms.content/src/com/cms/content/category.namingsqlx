@@ -115,17 +115,17 @@
 		FROM
 			(
 		SELECT DISTINCT
-			u.operator_id,
+			u.empid,
 			r.res_id 
 		FROM
-			cap_user u,
+			org_employee u,
 			cap_partyauth p,
 			cap_resauth r 
 		WHERE
-			u.operator_id = p.party_id 
+			u.empid = p.party_id 
 			AND p.role_id = r.party_id 
 			AND r.res_type = 'function' 
-			AND u.operator_id = $userId$ 
+			AND u.empid = $userId$ 
 			) t left join app_function f ON t.res_id = f.funccode 
 		WHERE
 			f.funcgroupid = $funId$

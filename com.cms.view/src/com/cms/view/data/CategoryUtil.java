@@ -52,7 +52,7 @@ public class CategoryUtil {
 	 * 根据栏目ID查询栏目
 	 * */
 	public static DataObject getCategoryById(String catId){
-		String sql = "select * from cms_info_category where id = "+catId+" order by cat_sort desc";
+		String sql = "select * from cms_info_category where id = "+catId+" order by cat_sort asc";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -89,7 +89,7 @@ public class CategoryUtil {
 	public static DataObject[] getCategoryChildById(String catId){
 		int counts = 0;
 		int it = 0;
-		String sql = "select * from cms_info_category where parent_id = "+catId+" order by cat_sort desc";
+		String sql = "select * from cms_info_category where parent_id = "+catId+" order by cat_sort asc";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		Statement stmt = null;
 		ResultSet rs = null;

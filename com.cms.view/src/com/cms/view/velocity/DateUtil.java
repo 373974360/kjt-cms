@@ -5,6 +5,7 @@ package com.cms.view.velocity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,6 +21,50 @@ import com.eos.system.annotation.Bizlet;
 public class DateUtil {
     private static final String DATE_PATTERN = "yyyy-MM-dd";
     private static final String DATETIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
+
+    public static String getCurrentDateTime() {
+        return getCurrentDateTime(DATETIME_PATTERN);
+    }
+
+    /**
+     * 获取当前系统同期。
+     * @return 当前系统日期
+     * @author zhenggz 2003-11-09
+     */
+    public static String getCurrentDate() {
+        return getCurrentDateTime(DATE_PATTERN);
+    }
+    /**
+     * 获取当前系统时间.
+     * @param strPattern 时间模板
+     * @return 当前系统时间
+     */
+    public static String getCurrentDateTime(String pattern) {
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+        return sdf.format(cal.getTime());
+    }
+    
+    /**
+	 * 得到某个数值之前的日期
+	 * 
+	 * @param String
+	 *            yyyy-MM-dd HH:mm:ss　or yyyy-MM-dd
+	 * @param int
+	 *            整数
+	 * @return String yyyy-MM-dd
+	 */
+	public static String getDateBefore(String datetimes,int day){   
+		   Calendar now =Calendar.getInstance(); 
+		   try{
+			   now.setTime(getDate(datetimes, DATE_PATTERN));   
+		   }catch (ParseException e) {
+				System.out.println("时间格式 [ " + datetimes + " ]  无法被解析");				
+				return null;
+		   }
+		   now.set(Calendar.DATE,now.get(Calendar.DATE)-day);   
+		   return getString(now.getTime(),"yyyy-MM-dd");   
+	}
 	 /**
      * 格式化日期时间字串为指定的格式字串
      * @param String 时间字串

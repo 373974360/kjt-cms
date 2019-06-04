@@ -21,6 +21,10 @@ public class VelocityInfoContextImp extends VelocityContextAbstract {
 	public VelocityInfoContextImp(HttpServletRequest request){
 		super(request);
 	}
+
+	public void vcontextPut(String key,Object o){
+		vcontext.put(key, o);	
+	}	
 	public VelocityInfoContextImp(String infoId,String templet_id){
 		DataObject infoData = InfoDataUtil.getInfoData(infoId);
 		vcontext.put("cat_id", infoData.getString("catId"));
