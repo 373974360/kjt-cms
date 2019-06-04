@@ -1,3 +1,4 @@
+<%@page import="com.eos.data.datacontext.UserObject"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -22,6 +23,8 @@
 	
 	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	String curTime = df.format(new Date());
+	
+	UserObject userObject = (UserObject)request.getSession().getAttribute("userObject");
 %>
 <style>
 	#table1 .tit{
@@ -44,6 +47,7 @@
 		<div class="nui-fit" style="padding-top:5px">
 			<div id="form1" method="post">
 				<input id="sq.id" name="sq.id" class="nui-hidden" />
+				<input id="sq.subOrgId" name="sq.subOrgId" class="nui-hidden" value="<%=userObject.getUserOrgId() %>">
 		        <table id="table1" style="width:100%; table-layout:fixed;" class="nui-form-table">
 		            <tr>
 		                <th class="nui-form-label">来信标题：</th>
@@ -87,31 +91,33 @@
 		            	<th class="nui-form-label">来信目的：</th>
 		                <td colspan="2"> 
 		                	<input name="sq.mdId" class="nui-combobox nui-form-input" style="width:150px;" textField="mdName" valueField="id"
-								url="com.cms.basics.LxmdService.queryLxmdName.biz.ext" dataField="data"  showNullItem="true" emptyText="请选择"/>		                    
+								url="com.cms.basics.LxmdService.queryLxmdName.biz.ext" dataField="data" showNullItem="true" emptyText="请选择"/>		                    
 		                </td>
 		                <th class="nui-form-label">是否回复：</th>
 		                <td colspan="2">    
-		                    <input name="sq.isReply" class="nui-dictcombobox nui-form-input" emptyText="请选择" dictTypeId="CMS_YESORNO"/>
+		                    <input name="sq.isReply" class="nui-dictcombobox nui-form-input" showNullItem="true" emptyText="请选择" dictTypeId="CMS_YESORNO"/>
 		                </td>		              
 		            </tr>
 		            <tr>
 		                <th class="nui-form-label">是否公开：</th>
 		                <td colspan="2">    
-		                    <input name="sq.isOpen" class="nui-dictcombobox nui-form-input" emptyText="请选择" dictTypeId="CMS_YESORNO"/>
+		                    <input name="sq.isOpen" class="nui-dictcombobox nui-form-input" showNullItem="true" emptyText="请选择" dictTypeId="CMS_YESORNO"/>
 		                </td>
 		                <th class="nui-form-label">是否发布：</th>
 		                <td colspan="2">    
-		                    <input name="sq.isPublish" class="nui-dictcombobox nui-form-input" emptyText="请选择" dictTypeId="CMS_YESORNO"/>
+		                    <input name="sq.isPublish" class="nui-dictcombobox nui-form-input" showNullItem="true" emptyText="请选择" dictTypeId="CMS_YESORNO"/>
 		                </td>
 		            </tr>
 		            <tr>
 		                <th class="nui-form-label">提交时间：</th>
 		                <td colspan="2">    
-		                    <input name="sq.createTime" class="nui-datepicker nui-form-input" format="yyyy-MM-dd HH:mm:ss" value="<%=curTime %>" showTime="true"/>
+		                    <input name="sq.createTime" class="nui-datepicker nui-form-input" format="yyyy-MM-dd HH:mm:ss" 
+		                     allowinput="false" value="<%=curTime %>" showTime="true"/>
 		                </td>	
 		                <th class="nui-form-label">回复时间：</th>
 		                <td colspan="2">    
-		                    <input name="sq.replyTime" class="nui-datepicker nui-form-input" format="yyyy-MM-dd HH:mm:ss" value="<%=curTime %>" showTime="true"/>
+		                    <input name="sq.replyTime" class="nui-datepicker nui-form-input" format="yyyy-MM-dd HH:mm:ss"
+		                     allowinput="false" value="<%=curTime %>" showTime="true"/>
 		                </td>                
 		            </tr>
 		            <tr>

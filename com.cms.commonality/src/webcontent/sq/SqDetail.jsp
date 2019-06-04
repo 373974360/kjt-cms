@@ -164,6 +164,7 @@
     				<input id="reType" name="sqPro.reType" class="nui-hidden"/>
     				<input id="subOrgId" name="sqPro.subOrgId" class="nui-hidden"/>
     				<input id ="subOrgName" name="sqPro.subOrgName" class="nui-hidden"/>
+    				<input id="toOrgId" name="sqPro.toOrgId" class="nui-hidden"/>
 					<table style="width:100%; table-layout:fixed;" class="nui-form-table">
 						<tr>			                
 			                <th class="nui-form-label">移交部门：</th>
@@ -299,7 +300,7 @@
 	    	}
 	    	
 	    	//保存'转办记录'并刷新记录列表
-	    	function SaveData() {
+	    	function SaveData(toOrgId) {
 	           	form3.validate();
 		        if(form3.isValid()==false) return;
 		        var data = form3.getData(false,true);		     
@@ -308,6 +309,7 @@
 		        data.sqPro.sqId = "<%=sqId %>";
 		        data.sqPro.subOrgId = "<%=userObject.getUserOrgId() %>";
 		        data.sqPro.subOrgName = "<%=userObject.getUserOrgName() %>";
+		        data.sqPro.toOrgId = toOrgId;
 		        var json = nui.encode(data);
 	            $.ajax({
 	                url: "com.cms.commonality.SqProcess.addSqProcess.biz.ext",
@@ -325,9 +327,41 @@
 	                }
 	            });
 	        }
+	        //更新sq
+	        function updateSqData(toOrgId){
+	        	form3.validate();
+		        if(form3.isValid()==false) return;
+		        var data3 = form3.getData(false,true);	        
+	        	form.validate();
+				if (form.isValid() == false)
+					return;
+				var data = form.getData(false, true);
+				data.sq.id = "<%=sqId %>";								
+				data.sq.subOrgId = toOrgId;
+				data.sq.subOrgName = data3.sqPro.toOrgName;															
+				var json = nui.encode(data);
+				$.ajax({
+						url : "com.cms.commonality.SqService.updateSq.biz.ext",
+						type : 'POST',
+						data : json,
+						cache : false,
+						contentType : 'text/json',
+						success : function(text) {
+							 onCancel();							
+						},
+						error : function(jqXHR, textStatus,
+								errorThrown) {
+							alert(jqXHR.responseText);
+							onCancel();
+						}
+					});
+	        }
+	        
 			
 			function onOkTo(e) {
-	            SaveData();
+				var toOrgId = $("#toOrgId").val();
+				updateSqData(toOrgId);
+	            SaveData(toOrgId);
 	        }
 	    	//保存'回复记录'并更新sq表回复内容
 	    	function SaveReData() {
@@ -424,12 +458,12 @@
 	    		return nui.getDictText('CMS_REORTO',e.value);
 	    	}
 	    				
-			//重新刷新页面
+			//重新刷新表单页面
 			function refresh() {
 				var form = new nui.Form("#queryform");
 				var json = form.getData(false, false);
-				grid.load(json);//grid查询
-				
+				grid.load(json);//grid查询	
+										
 			}
 			
 			//选择机构
@@ -449,7 +483,12 @@
 		                    if (data) {
 		                        btnEdit.setValue(data.orgname);
 		                        btnEdit.setText(data.orgname);
+		                        //设置转办部门Id	
+		                         $("#toOrgId").val(data.orgid);
+		                             
 		                    }
+		                    
+		                    
 		                }
 		            }
 		        });            

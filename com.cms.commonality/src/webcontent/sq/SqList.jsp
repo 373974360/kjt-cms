@@ -176,8 +176,8 @@
 				}
 			}
 	
-			//重新刷新页面
-			function refresh() {
+			//重新刷新此页面
+			function refreshIt() {
 				var form = new nui.Form("#queryform");
 				var json = form.getData(false, false);
 				grid.load(json);//grid查询
@@ -226,6 +226,7 @@
 							//iframe.contentWindow.setData(data);
 							//iframe.contentWindow.setData2(data);
 							iframe.contentWindow.setDataParams(data);
+
 						},
 						ondestroy : function(action) {
 							if (action == "saveSuccess") {
