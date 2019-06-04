@@ -38,10 +38,9 @@ public class VelocityInfoContextImp extends VelocityContextAbstract {
 		if(tempType.equals("info")){
 			DataObject infoData = InfoDataUtil.getInfoData(catId);
 			if(infoData!=null){
-				DataObject modelData = InfoDataUtil.getModelById(infoData.getString("modelId"));
 				vcontext.put("cat_id", infoData.getString("catId"));
 				vcontext.put("infoData", infoData);
-				template_id = modelData.getString("infoTemplet");
+				template_id = InfoDataUtil.getTempletId(infoData.getString("modelId"),infoData.getString("catId"));
 			}else{
 				template_id = "";
 			}
@@ -55,10 +54,9 @@ public class VelocityInfoContextImp extends VelocityContextAbstract {
 		if(tempType.equals("info")){
 			DataObject infoData = InfoDataUtil.getInfoData(catId,infoStatus);
 			if(infoData!=null){
-				DataObject modelData = InfoDataUtil.getModelById(infoData.getString("modelId"));
 				vcontext.put("cat_id", infoData.getString("catId"));
 				vcontext.put("infoData", infoData);
-				template_id = modelData.getString("infoTemplet");
+				template_id = InfoDataUtil.getTempletId(infoData.getString("modelId"),infoData.getString("catId"));
 			}else{
 				template_id = "";
 			}

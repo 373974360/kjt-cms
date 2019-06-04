@@ -205,24 +205,19 @@ public class InfoDataUtil {
 		}
 	}
 	
-	public static DataObject getModelById(String modelId){
-		String sql = "select * from cms_model where model_en_name='"+modelId+"'";
+	public static String getTempletId(String modelId,String catId){
+		String templetid = "";
+		String sql = "select templet_id from cms_info_category_model where model_id='"+modelId+"' and cat_id="+catId+"";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		Statement stmt = null;
 		ResultSet rs = null;
 		try {
 			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = stmt.executeQuery(sql);
-			DataObject[] dobj = new DataObject[1];
 			while (rs.next()) {
-				DataObject dtr = DataObjectUtil.createDataObject("com.cms.siteconfig.model.CmsModel");
-				dtr.setString("id", rs.getString("id"));
-				dtr.setString("modelName", rs.getString("model_name"));
-				dtr.setString("modelEnName", rs.getString("model_en_name"));
-				dtr.setString("infoTemplet", rs.getString("info_templet"));
-				dobj[0] = dtr;
+				templetid = rs.getString("templet_id");
 			}
-			return dobj[0];
+			return templetid;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		} finally {

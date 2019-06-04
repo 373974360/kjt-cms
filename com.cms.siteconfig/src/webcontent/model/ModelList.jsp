@@ -33,15 +33,6 @@
 			</div>
 		</div>
 		<div class="nui-panel" title="模型列表" iconCls="icon-add" style="width: 100%; height: 85%;" showToolbar="false" showFooter="false">
-			<div class="nui-toolbar" style="border-bottom: 0; padding: 0px;">
-				<table style="width: 100%;">
-					<tr>
-						<td style="width: 100%;">
-							<a id="update" class="nui-button" iconCls="icon-edit" onclick="edit()">模板配置 </a>
-						</td>
-					</tr>
-				</table>
-			</div>
 			<div class="nui-fit">
 				<div id="datagrid1" dataField="model" class="nui-datagrid" style="width: 100%; height: 100%;"
 					url="com.cms.siteconfig.ModelService.queryModel.biz.ext"
@@ -83,31 +74,6 @@
 			    }
 			});
 			
-			//编辑
-			function edit() {
-				var row = grid.getSelected();
-				if (row) {
-					nui.open({
-						url : "<%=request.getContextPath()%>/siteconfig/model/ModelUpdate.jsp",
-						title : "配置模板",
-						width : "80%",
-						height : "80%",
-						onload : function() {
-							var iframe = this.getIFrameEl();
-							var data = row;
-							//直接从页面获取，不用去后台获取
-							iframe.contentWindow.setData(data);
-						},
-						ondestroy : function(action) {
-							if (action == "saveSuccess") {
-								grid.reload();
-							}
-						}
-					});
-				} else {
-					nui.alert("请选中一条记录", "提示");
-				}
-			}
 			//重新刷新页面
 			function refresh() {
 				var form = new nui.Form("#queryform");
@@ -132,16 +98,6 @@
 			//enter键触发查询
 			function onKeyEnter(e) {
 				search();
-			}
-	
-			//当选择列时
-			function selectionChanged() {
-				var rows = grid.getSelecteds();
-				if (rows.length > 1) {
-					nui.get("update").disable();
-				} else {
-					nui.get("update").enable();
-				}
 			}
 		</script>
 	</body>

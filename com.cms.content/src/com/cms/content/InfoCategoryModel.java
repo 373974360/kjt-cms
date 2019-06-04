@@ -116,7 +116,7 @@ public class InfoCategoryModel {
 		int counts = 0;
 		if (dsName == null || dsName.length() == 0)
 			dsName = "default";
-		String sql = "select id,cat_id,model_id from cms_info_category_model where cat_id="+catId;
+		String sql = "select id,cat_id,model_id,templet_id from cms_info_category_model where cat_id="+catId;
 		Connection conn = ConnectionHelper.getCurrentContributionConnection(dsName);
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -136,6 +136,7 @@ public class InfoCategoryModel {
 				dtr.setString("id", rs.getString("id"));
 				dtr.setString("catId",rs.getString("cat_id"));
 				dtr.setString("modelId",rs.getString("model_id"));
+				dtr.setString("templetId",rs.getString("templet_id"));
 				dobj[it] = dtr;
 				it++;
 			}

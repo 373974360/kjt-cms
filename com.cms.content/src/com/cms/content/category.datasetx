@@ -145,95 +145,6 @@
       </viewField>
     </columnProperty>
   </nodes>
-  <nodes xsi:type="model:PEntityNode" id="node3" name="CmsInfoCategoryModel" nodeType="table" displayName="CmsInfoCategoryModel" author="chaoweima" open="true" table="CMS_INFO_CATEGORY_MODEL" genStrategy="assigned">
-    <location x="510" y="450"/>
-    <size height="84" width="150"/>
-    <figSize height="20" width="150"/>
-    <columnProperty id="property47" name="id" displayName="id" columnName="ID" nullAble="false" PK="true" columnType="NUMBER" eosDataType="Long" length="22" dasType="long" overWriteDefaultColumnType="false" showType="Long" update="true" insert="true">
-      <comment xsi:nil="true"/>
-      <viewField dict="false" displayName="id" id="id" label="id" name="id" userDefined="true">
-        <fieldView>
-          <type name="write"/>
-          <attr name="formatPattern"/>
-          <attr name="srcFormatPattern"/>
-          <attr name="maxLength"/>
-          <attr attrValue="" defaultValue="" name="filter"/>
-          <attr attrValue="" defaultValue="" name="maxLengthString"/>
-          <attr name="value"/>
-        </fieldView>
-        <fieldEdit>
-          <type name="text"/>
-          <attr attrValue="" defaultValue="" name="value"/>
-          <attr attrValue="" defaultValue="" name="extAttr"/>
-          <attr attrValue="" defaultValue="" name="tabindex"/>
-          <attr attrValue="" defaultValue="" name="readonly"/>
-          <attr attrValue="" defaultValue="" name="disabled"/>
-          <attr attrValue="" defaultValue="" name="size"/>
-          <attr attrValue="" defaultValue="" name="maxlength"/>
-          <attr attrValue="" defaultValue="" name="title"/>
-          <attr attrValue="" defaultValue="" name="style"/>
-          <attr attrValue="" defaultValue="" name="styleClass"/>
-          <attr attrValue="" defaultValue="" name="validateAttr"/>
-        </fieldEdit>
-      </viewField>
-    </columnProperty>
-    <columnProperty id="property48" name="catId" displayName="catId" columnName="CAT_ID" nullAble="true" columnType="NUMBER" eosDataType="Long" length="22" dasType="long" overWriteDefaultColumnType="false" showType="Long" update="true" insert="true">
-      <comment xsi:nil="true"/>
-      <viewField dict="false" displayName="catId" id="catId" label="catId" name="catId" userDefined="true">
-        <fieldView>
-          <type name="write"/>
-          <attr name="formatPattern"/>
-          <attr name="srcFormatPattern"/>
-          <attr name="maxLength"/>
-          <attr attrValue="" defaultValue="" name="filter"/>
-          <attr attrValue="" defaultValue="" name="maxLengthString"/>
-          <attr name="value"/>
-        </fieldView>
-        <fieldEdit>
-          <type name="text"/>
-          <attr attrValue="" defaultValue="" name="value"/>
-          <attr attrValue="" defaultValue="" name="extAttr"/>
-          <attr attrValue="" defaultValue="" name="tabindex"/>
-          <attr attrValue="" defaultValue="" name="readonly"/>
-          <attr attrValue="" defaultValue="" name="disabled"/>
-          <attr attrValue="" defaultValue="" name="size"/>
-          <attr attrValue="" defaultValue="" name="maxlength"/>
-          <attr attrValue="" defaultValue="" name="title"/>
-          <attr attrValue="" defaultValue="" name="style"/>
-          <attr attrValue="" defaultValue="" name="styleClass"/>
-          <attr attrValue="" defaultValue="" name="validateAttr"/>
-        </fieldEdit>
-      </viewField>
-    </columnProperty>
-    <columnProperty id="property49" name="modelId" displayName="modelId" columnName="MODEL_ID" nullAble="true" columnType="NVARCHAR2" eosDataType="String" length="510" dasType="string" overWriteDefaultColumnType="false" showType="String" update="true" insert="true">
-      <comment xsi:nil="true"/>
-      <viewField dict="false" displayName="modelId" id="modelId" label="modelId" name="modelId" userDefined="true">
-        <fieldView>
-          <type name="write"/>
-          <attr name="formatPattern"/>
-          <attr name="srcFormatPattern"/>
-          <attr name="maxLength"/>
-          <attr attrValue="" defaultValue="" name="filter"/>
-          <attr attrValue="" defaultValue="" name="maxLengthString"/>
-          <attr name="value"/>
-        </fieldView>
-        <fieldEdit>
-          <type name="text"/>
-          <attr attrValue="" defaultValue="" name="value"/>
-          <attr attrValue="" defaultValue="" name="extAttr"/>
-          <attr attrValue="" defaultValue="" name="tabindex"/>
-          <attr attrValue="" defaultValue="" name="readonly"/>
-          <attr attrValue="" defaultValue="" name="disabled"/>
-          <attr attrValue="" defaultValue="" name="size"/>
-          <attr attrValue="" defaultValue="" name="maxlength"/>
-          <attr attrValue="" defaultValue="" name="title"/>
-          <attr attrValue="" defaultValue="" name="style"/>
-          <attr attrValue="" defaultValue="" name="styleClass"/>
-          <attr attrValue="" defaultValue="" name="validateAttr"/>
-        </fieldEdit>
-      </viewField>
-    </columnProperty>
-  </nodes>
   <nodes xsi:type="model:PEntityNode" id="node4" name="CmsInfoCat" nodeType="table" displayName="CmsInfoCat" author="chaoweima" open="true" table="CMS_INFO_CAT" genStrategy="assigned">
     <location x="330" y="285"/>
     <size height="84" width="150"/>
@@ -1502,8 +1413,8 @@
     </columnProperty>
   </nodes>
   <nodes xsi:type="model:PEntityNode" id="node1" name="CmsInfo" nodeType="table" displayName="CmsInfo" author="chaoweima" open="true" table="CMS_INFO" genStrategy="assigned">
-    <location x="675" y="45"/>
-    <size height="556" width="150"/>
+    <location x="690" y="91"/>
+    <size height="552" width="150"/>
     <figSize height="20" width="150"/>
     <columnProperty id="property29" name="id" displayName="id" columnName="ID" nullAble="false" PK="true" columnType="NUMBER" eosDataType="Long" length="22" dasType="long" overWriteDefaultColumnType="false" showType="Long" update="true" insert="true">
       <comment xsi:nil="true"/>
@@ -1757,35 +1668,7 @@
         </fieldEdit>
       </viewField>
     </columnProperty>
-    <columnProperty id="property38" name="description" displayName="description" columnName="DESCRIPTION" nullAble="true" columnType="NCLOB" eosDataType="String" length="1" lazy="true" dasType="com.primeton.das.entity.impl.lob.type.ClobStringType" overWriteDefaultColumnType="false" showType="ClobString" update="true" insert="true">
-      <comment>文章概述</comment>
-      <viewField dict="false" displayName="description" id="description" label="description" name="description" userDefined="true">
-        <fieldView>
-          <type name="write"/>
-          <attr name="formatPattern"/>
-          <attr name="srcFormatPattern"/>
-          <attr name="maxLength"/>
-          <attr attrValue="" defaultValue="" name="filter"/>
-          <attr attrValue="" defaultValue="" name="maxLengthString"/>
-          <attr name="value"/>
-        </fieldView>
-        <fieldEdit>
-          <type name="text"/>
-          <attr attrValue="" defaultValue="" name="value"/>
-          <attr attrValue="" defaultValue="" name="extAttr"/>
-          <attr attrValue="" defaultValue="" name="tabindex"/>
-          <attr attrValue="" defaultValue="" name="readonly"/>
-          <attr attrValue="" defaultValue="" name="disabled"/>
-          <attr attrValue="" defaultValue="" name="size"/>
-          <attr attrValue="" defaultValue="" name="maxlength"/>
-          <attr attrValue="" defaultValue="" name="title"/>
-          <attr attrValue="" defaultValue="" name="style"/>
-          <attr attrValue="" defaultValue="" name="styleClass"/>
-          <attr attrValue="" defaultValue="" name="validateAttr"/>
-        </fieldEdit>
-      </viewField>
-    </columnProperty>
-    <columnProperty id="property39" name="author" displayName="author" columnName="AUTHOR" nullAble="true" columnType="NVARCHAR2" eosDataType="String" length="510" dasType="string" overWriteDefaultColumnType="false" showType="String" update="true" insert="true">
+    <columnProperty id="property38" name="author" displayName="author" columnName="AUTHOR" nullAble="true" columnType="NVARCHAR2" eosDataType="String" length="510" dasType="string" overWriteDefaultColumnType="false" showType="String" update="true" insert="true">
       <comment>作者</comment>
       <viewField dict="false" displayName="author" id="author" label="author" name="author" userDefined="true">
         <fieldView>
@@ -1813,7 +1696,7 @@
         </fieldEdit>
       </viewField>
     </columnProperty>
-    <columnProperty id="property40" name="editor" displayName="editor" columnName="EDITOR" nullAble="true" columnType="NVARCHAR2" eosDataType="String" length="510" dasType="string" overWriteDefaultColumnType="false" showType="String" update="true" insert="true">
+    <columnProperty id="property39" name="editor" displayName="editor" columnName="EDITOR" nullAble="true" columnType="NVARCHAR2" eosDataType="String" length="510" dasType="string" overWriteDefaultColumnType="false" showType="String" update="true" insert="true">
       <comment>网络编辑</comment>
       <viewField dict="false" displayName="editor" id="editor" label="editor" name="editor" userDefined="true">
         <fieldView>
@@ -1841,7 +1724,7 @@
         </fieldEdit>
       </viewField>
     </columnProperty>
-    <columnProperty id="property41" name="source" displayName="source" columnName="SOURCE" nullAble="true" columnType="NVARCHAR2" eosDataType="String" length="510" dasType="string" overWriteDefaultColumnType="false" showType="String" update="true" insert="true">
+    <columnProperty id="property40" name="source" displayName="source" columnName="SOURCE" nullAble="true" columnType="NVARCHAR2" eosDataType="String" length="510" dasType="string" overWriteDefaultColumnType="false" showType="String" update="true" insert="true">
       <comment>来源</comment>
       <viewField dict="false" displayName="source" id="source" label="source" name="source" userDefined="true">
         <fieldView>
@@ -1869,7 +1752,7 @@
         </fieldEdit>
       </viewField>
     </columnProperty>
-    <columnProperty id="property12" name="keywords" displayName="keywords" columnName="KEYWORDS" nullAble="true" columnType="NVARCHAR2" eosDataType="String" length="510" dasType="string" overWriteDefaultColumnType="false" showType="String" update="true" insert="true">
+    <columnProperty id="property41" name="keywords" displayName="keywords" columnName="KEYWORDS" nullAble="true" columnType="NVARCHAR2" eosDataType="String" length="510" dasType="string" overWriteDefaultColumnType="false" showType="String" update="true" insert="true">
       <comment>关键字</comment>
       <viewField dict="false" displayName="keywords" id="keywords" label="keywords" name="keywords" userDefined="true">
         <fieldView>
@@ -1897,7 +1780,7 @@
         </fieldEdit>
       </viewField>
     </columnProperty>
-    <columnProperty id="property42" name="contentUrl" displayName="contentUrl" columnName="CONTENT_URL" nullAble="true" columnType="NVARCHAR2" eosDataType="String" length="510" dasType="string" overWriteDefaultColumnType="false" showType="String" update="true" insert="true">
+    <columnProperty id="property12" name="contentUrl" displayName="contentUrl" columnName="CONTENT_URL" nullAble="true" columnType="NVARCHAR2" eosDataType="String" length="510" dasType="string" overWriteDefaultColumnType="false" showType="String" update="true" insert="true">
       <comment>内容地址</comment>
       <viewField dict="false" displayName="contentUrl" id="contentUrl" label="contentUrl" name="contentUrl" userDefined="true">
         <fieldView>
@@ -1925,7 +1808,7 @@
         </fieldEdit>
       </viewField>
     </columnProperty>
-    <columnProperty id="property14" name="infoStatus" displayName="infoStatus" columnName="INFO_STATUS" nullAble="true" columnType="NUMBER" eosDataType="Long" length="22" dasType="long" overWriteDefaultColumnType="false" showType="Long" update="true" insert="true">
+    <columnProperty id="property42" name="infoStatus" displayName="infoStatus" columnName="INFO_STATUS" nullAble="true" columnType="NUMBER" eosDataType="Long" length="22" dasType="long" overWriteDefaultColumnType="false" showType="Long" update="true" insert="true">
       <comment>文章状态：1：草稿，2：审核中，3：已发布，4：已撤稿，5：已删除</comment>
       <viewField dict="false" displayName="infoStatus" id="infoStatus" label="infoStatus" name="infoStatus" userDefined="true">
         <fieldView>
@@ -1953,7 +1836,7 @@
         </fieldEdit>
       </viewField>
     </columnProperty>
-    <columnProperty id="property15" name="weight" displayName="weight" columnName="WEIGHT" nullAble="true" columnType="NUMBER" eosDataType="Long" length="22" dasType="long" overWriteDefaultColumnType="false" showType="Long" update="true" insert="true">
+    <columnProperty id="property14" name="weight" displayName="weight" columnName="WEIGHT" nullAble="true" columnType="NUMBER" eosDataType="Long" length="22" dasType="long" overWriteDefaultColumnType="false" showType="Long" update="true" insert="true">
       <comment>权重</comment>
       <viewField dict="false" displayName="weight" id="weight" label="weight" name="weight" userDefined="true">
         <fieldView>
@@ -1981,7 +1864,7 @@
         </fieldEdit>
       </viewField>
     </columnProperty>
-    <columnProperty id="property16" name="hits" displayName="hits" columnName="HITS" nullAble="true" columnType="NUMBER" eosDataType="Long" length="22" dasType="long" overWriteDefaultColumnType="false" showType="Long" update="true" insert="true">
+    <columnProperty id="property15" name="hits" displayName="hits" columnName="HITS" nullAble="true" columnType="NUMBER" eosDataType="Long" length="22" dasType="long" overWriteDefaultColumnType="false" showType="Long" update="true" insert="true">
       <comment>点击数</comment>
       <viewField dict="false" displayName="hits" id="hits" label="hits" name="hits" userDefined="true">
         <fieldView>
@@ -2009,7 +1892,7 @@
         </fieldEdit>
       </viewField>
     </columnProperty>
-    <columnProperty id="property17" name="isTop" displayName="isTop" columnName="IS_TOP" nullAble="true" columnType="NUMBER" eosDataType="Long" length="22" dasType="long" overWriteDefaultColumnType="false" showType="Long" update="true" insert="true">
+    <columnProperty id="property16" name="isTop" displayName="isTop" columnName="IS_TOP" nullAble="true" columnType="NUMBER" eosDataType="Long" length="22" dasType="long" overWriteDefaultColumnType="false" showType="Long" update="true" insert="true">
       <comment>是否置顶1：是，2：否</comment>
       <viewField dict="false" displayName="isTop" id="isTop" label="isTop" name="isTop" userDefined="true">
         <fieldView>
@@ -2037,7 +1920,7 @@
         </fieldEdit>
       </viewField>
     </columnProperty>
-    <columnProperty id="property18" name="isTuijian" displayName="isTuijian" columnName="IS_TUIJIAN" nullAble="true" columnType="NUMBER" eosDataType="Long" length="22" dasType="long" overWriteDefaultColumnType="false" showType="Long" update="true" insert="true">
+    <columnProperty id="property17" name="isTuijian" displayName="isTuijian" columnName="IS_TUIJIAN" nullAble="true" columnType="NUMBER" eosDataType="Long" length="22" dasType="long" overWriteDefaultColumnType="false" showType="Long" update="true" insert="true">
       <comment>是否推荐1：是，2：否</comment>
       <viewField dict="false" displayName="isTuijian" id="isTuijian" label="isTuijian" name="isTuijian" userDefined="true">
         <fieldView>
@@ -2065,7 +1948,7 @@
         </fieldEdit>
       </viewField>
     </columnProperty>
-    <columnProperty id="property19" name="releasedDtime" displayName="releasedDtime" columnName="RELEASED_DTIME" nullAble="true" columnType="NVARCHAR2" eosDataType="String" length="40" dasType="string" overWriteDefaultColumnType="false" showType="String" update="true" insert="true">
+    <columnProperty id="property18" name="releasedDtime" displayName="releasedDtime" columnName="RELEASED_DTIME" nullAble="true" columnType="NVARCHAR2" eosDataType="String" length="40" dasType="string" overWriteDefaultColumnType="false" showType="String" update="true" insert="true">
       <comment>发布时间</comment>
       <viewField dict="false" displayName="releasedDtime" id="releasedDtime" label="releasedDtime" name="releasedDtime" userDefined="true">
         <fieldView>
@@ -2093,7 +1976,7 @@
         </fieldEdit>
       </viewField>
     </columnProperty>
-    <columnProperty id="property20" name="inputUser" displayName="inputUser" columnName="INPUT_USER" nullAble="true" columnType="NVARCHAR2" eosDataType="String" length="510" dasType="string" overWriteDefaultColumnType="false" showType="String" update="true" insert="true">
+    <columnProperty id="property19" name="inputUser" displayName="inputUser" columnName="INPUT_USER" nullAble="true" columnType="NVARCHAR2" eosDataType="String" length="510" dasType="string" overWriteDefaultColumnType="false" showType="String" update="true" insert="true">
       <comment>提交人ID</comment>
       <viewField dict="false" displayName="inputUser" id="inputUser" label="inputUser" name="inputUser" userDefined="true">
         <fieldView>
@@ -2121,7 +2004,7 @@
         </fieldEdit>
       </viewField>
     </columnProperty>
-    <columnProperty id="property21" name="inputDtime" displayName="inputDtime" columnName="INPUT_DTIME" nullAble="true" columnType="NVARCHAR2" eosDataType="String" length="40" dasType="string" overWriteDefaultColumnType="false" showType="String" update="true" insert="true">
+    <columnProperty id="property20" name="inputDtime" displayName="inputDtime" columnName="INPUT_DTIME" nullAble="true" columnType="NVARCHAR2" eosDataType="String" length="40" dasType="string" overWriteDefaultColumnType="false" showType="String" update="true" insert="true">
       <comment>提交时间</comment>
       <viewField dict="false" displayName="inputDtime" id="inputDtime" label="inputDtime" name="inputDtime" userDefined="true">
         <fieldView>
@@ -2149,7 +2032,7 @@
         </fieldEdit>
       </viewField>
     </columnProperty>
-    <columnProperty id="property22" name="orgId" displayName="orgId" columnName="ORG_ID" nullAble="true" columnType="NVARCHAR2" eosDataType="String" length="510" dasType="string" overWriteDefaultColumnType="false" showType="String" update="true" insert="true">
+    <columnProperty id="property21" name="orgId" displayName="orgId" columnName="ORG_ID" nullAble="true" columnType="NVARCHAR2" eosDataType="String" length="510" dasType="string" overWriteDefaultColumnType="false" showType="String" update="true" insert="true">
       <comment>提交人所属部门ID</comment>
       <viewField dict="false" displayName="orgId" id="orgId" label="orgId" name="orgId" userDefined="true">
         <fieldView>
@@ -2177,7 +2060,7 @@
         </fieldEdit>
       </viewField>
     </columnProperty>
-    <columnProperty id="property23" name="orgName" displayName="orgName" columnName="ORG_NAME" nullAble="true" columnType="NVARCHAR2" eosDataType="String" length="510" dasType="string" overWriteDefaultColumnType="false" showType="String" update="true" insert="true">
+    <columnProperty id="property22" name="orgName" displayName="orgName" columnName="ORG_NAME" nullAble="true" columnType="NVARCHAR2" eosDataType="String" length="510" dasType="string" overWriteDefaultColumnType="false" showType="String" update="true" insert="true">
       <comment>发布机构</comment>
       <viewField dict="false" displayName="orgName" id="orgName" label="orgName" name="orgName" userDefined="true">
         <fieldView>
@@ -2205,7 +2088,7 @@
         </fieldEdit>
       </viewField>
     </columnProperty>
-    <columnProperty id="property24" name="gkNo" displayName="gkNo" columnName="GK_NO" nullAble="true" columnType="NVARCHAR2" eosDataType="String" length="510" dasType="string" overWriteDefaultColumnType="false" showType="String" update="true" insert="true">
+    <columnProperty id="property23" name="gkNo" displayName="gkNo" columnName="GK_NO" nullAble="true" columnType="NVARCHAR2" eosDataType="String" length="510" dasType="string" overWriteDefaultColumnType="false" showType="String" update="true" insert="true">
       <comment>文号</comment>
       <viewField dict="false" displayName="gkNo" id="gkNo" label="gkNo" name="gkNo" userDefined="true">
         <fieldView>
@@ -2233,7 +2116,7 @@
         </fieldEdit>
       </viewField>
     </columnProperty>
-    <columnProperty id="property25" name="gkIndex" displayName="gkIndex" columnName="GK_INDEX" nullAble="true" columnType="NVARCHAR2" eosDataType="String" length="510" dasType="string" overWriteDefaultColumnType="false" showType="String" update="true" insert="true">
+    <columnProperty id="property24" name="gkIndex" displayName="gkIndex" columnName="GK_INDEX" nullAble="true" columnType="NVARCHAR2" eosDataType="String" length="510" dasType="string" overWriteDefaultColumnType="false" showType="String" update="true" insert="true">
       <comment>索引码</comment>
       <viewField dict="false" displayName="gkIndex" id="gkIndex" label="gkIndex" name="gkIndex" userDefined="true">
         <fieldView>
@@ -2261,7 +2144,7 @@
         </fieldEdit>
       </viewField>
     </columnProperty>
-    <columnProperty id="property26" name="gkYear" displayName="gkYear" columnName="GK_YEAR" nullAble="true" columnType="NUMBER" eosDataType="Long" length="22" dasType="long" overWriteDefaultColumnType="false" showType="Long" update="true" insert="true">
+    <columnProperty id="property25" name="gkYear" displayName="gkYear" columnName="GK_YEAR" nullAble="true" columnType="NUMBER" eosDataType="Long" length="22" dasType="long" overWriteDefaultColumnType="false" showType="Long" update="true" insert="true">
       <comment>所属年份</comment>
       <viewField dict="false" displayName="gkYear" id="gkYear" label="gkYear" name="gkYear" userDefined="true">
         <fieldView>
@@ -2289,9 +2172,154 @@
         </fieldEdit>
       </viewField>
     </columnProperty>
-    <columnProperty id="property27" name="gkNum" displayName="gkNum" columnName="GK_NUM" nullAble="true" columnType="NUMBER" eosDataType="Long" length="22" dasType="long" overWriteDefaultColumnType="false" showType="Long" update="true" insert="true">
+    <columnProperty id="property26" name="gkNum" displayName="gkNum" columnName="GK_NUM" nullAble="true" columnType="NUMBER" eosDataType="Long" length="22" dasType="long" overWriteDefaultColumnType="false" showType="Long" update="true" insert="true">
       <comment>公开序号</comment>
       <viewField dict="false" displayName="gkNum" id="gkNum" label="gkNum" name="gkNum" userDefined="true">
+        <fieldView>
+          <type name="write"/>
+          <attr name="formatPattern"/>
+          <attr name="srcFormatPattern"/>
+          <attr name="maxLength"/>
+          <attr attrValue="" defaultValue="" name="filter"/>
+          <attr attrValue="" defaultValue="" name="maxLengthString"/>
+          <attr name="value"/>
+        </fieldView>
+        <fieldEdit>
+          <type name="text"/>
+          <attr attrValue="" defaultValue="" name="value"/>
+          <attr attrValue="" defaultValue="" name="extAttr"/>
+          <attr attrValue="" defaultValue="" name="tabindex"/>
+          <attr attrValue="" defaultValue="" name="readonly"/>
+          <attr attrValue="" defaultValue="" name="disabled"/>
+          <attr attrValue="" defaultValue="" name="size"/>
+          <attr attrValue="" defaultValue="" name="maxlength"/>
+          <attr attrValue="" defaultValue="" name="title"/>
+          <attr attrValue="" defaultValue="" name="style"/>
+          <attr attrValue="" defaultValue="" name="styleClass"/>
+          <attr attrValue="" defaultValue="" name="validateAttr"/>
+        </fieldEdit>
+      </viewField>
+    </columnProperty>
+    <columnProperty id="property27" name="description" displayName="description" columnName="DESCRIPTION" nullAble="true" columnType="NVARCHAR2" eosDataType="String" length="2000" dasType="string" overWriteDefaultColumnType="false" showType="String" update="true" insert="true">
+      <comment xsi:nil="true"/>
+      <viewField dict="false" displayName="description" id="description" label="description" name="description" userDefined="true">
+        <fieldView>
+          <type name="write"/>
+          <attr name="formatPattern"/>
+          <attr name="srcFormatPattern"/>
+          <attr name="maxLength"/>
+          <attr attrValue="" defaultValue="" name="filter"/>
+          <attr attrValue="" defaultValue="" name="maxLengthString"/>
+          <attr name="value"/>
+        </fieldView>
+        <fieldEdit>
+          <type name="text"/>
+          <attr attrValue="" defaultValue="" name="value"/>
+          <attr attrValue="" defaultValue="" name="extAttr"/>
+          <attr attrValue="" defaultValue="" name="tabindex"/>
+          <attr attrValue="" defaultValue="" name="readonly"/>
+          <attr attrValue="" defaultValue="" name="disabled"/>
+          <attr attrValue="" defaultValue="" name="size"/>
+          <attr attrValue="" defaultValue="" name="maxlength"/>
+          <attr attrValue="" defaultValue="" name="title"/>
+          <attr attrValue="" defaultValue="" name="style"/>
+          <attr attrValue="" defaultValue="" name="styleClass"/>
+          <attr attrValue="" defaultValue="" name="validateAttr"/>
+        </fieldEdit>
+      </viewField>
+    </columnProperty>
+  </nodes>
+  <nodes xsi:type="model:PEntityNode" id="node3" name="CmsInfoCategoryModel" nodeType="table" displayName="CmsInfoCategoryModel" author="chaoweima" open="true" table="CMS_INFO_CATEGORY_MODEL" genStrategy="assigned">
+    <location x="510" y="478"/>
+    <size height="106" width="150"/>
+    <figSize height="20" width="150"/>
+    <columnProperty id="property47" name="id" displayName="id" columnName="ID" nullAble="false" PK="true" columnType="NUMBER" eosDataType="Long" length="22" dasType="long" overWriteDefaultColumnType="false" showType="Long" update="true" insert="true">
+      <comment xsi:nil="true"/>
+      <viewField dict="false" displayName="id" id="id" label="id" name="id" userDefined="true">
+        <fieldView>
+          <type name="write"/>
+          <attr name="formatPattern"/>
+          <attr name="srcFormatPattern"/>
+          <attr name="maxLength"/>
+          <attr attrValue="" defaultValue="" name="filter"/>
+          <attr attrValue="" defaultValue="" name="maxLengthString"/>
+          <attr name="value"/>
+        </fieldView>
+        <fieldEdit>
+          <type name="text"/>
+          <attr attrValue="" defaultValue="" name="value"/>
+          <attr attrValue="" defaultValue="" name="extAttr"/>
+          <attr attrValue="" defaultValue="" name="tabindex"/>
+          <attr attrValue="" defaultValue="" name="readonly"/>
+          <attr attrValue="" defaultValue="" name="disabled"/>
+          <attr attrValue="" defaultValue="" name="size"/>
+          <attr attrValue="" defaultValue="" name="maxlength"/>
+          <attr attrValue="" defaultValue="" name="title"/>
+          <attr attrValue="" defaultValue="" name="style"/>
+          <attr attrValue="" defaultValue="" name="styleClass"/>
+          <attr attrValue="" defaultValue="" name="validateAttr"/>
+        </fieldEdit>
+      </viewField>
+    </columnProperty>
+    <columnProperty id="property48" name="catId" displayName="catId" columnName="CAT_ID" nullAble="true" columnType="NUMBER" eosDataType="Long" length="22" dasType="long" overWriteDefaultColumnType="false" showType="Long" update="true" insert="true">
+      <comment xsi:nil="true"/>
+      <viewField dict="false" displayName="catId" id="catId" label="catId" name="catId" userDefined="true">
+        <fieldView>
+          <type name="write"/>
+          <attr name="formatPattern"/>
+          <attr name="srcFormatPattern"/>
+          <attr name="maxLength"/>
+          <attr attrValue="" defaultValue="" name="filter"/>
+          <attr attrValue="" defaultValue="" name="maxLengthString"/>
+          <attr name="value"/>
+        </fieldView>
+        <fieldEdit>
+          <type name="text"/>
+          <attr attrValue="" defaultValue="" name="value"/>
+          <attr attrValue="" defaultValue="" name="extAttr"/>
+          <attr attrValue="" defaultValue="" name="tabindex"/>
+          <attr attrValue="" defaultValue="" name="readonly"/>
+          <attr attrValue="" defaultValue="" name="disabled"/>
+          <attr attrValue="" defaultValue="" name="size"/>
+          <attr attrValue="" defaultValue="" name="maxlength"/>
+          <attr attrValue="" defaultValue="" name="title"/>
+          <attr attrValue="" defaultValue="" name="style"/>
+          <attr attrValue="" defaultValue="" name="styleClass"/>
+          <attr attrValue="" defaultValue="" name="validateAttr"/>
+        </fieldEdit>
+      </viewField>
+    </columnProperty>
+    <columnProperty id="property49" name="modelId" displayName="modelId" columnName="MODEL_ID" nullAble="true" columnType="NVARCHAR2" eosDataType="String" length="510" dasType="string" overWriteDefaultColumnType="false" showType="String" update="true" insert="true">
+      <comment xsi:nil="true"/>
+      <viewField dict="false" displayName="modelId" id="modelId" label="modelId" name="modelId" userDefined="true">
+        <fieldView>
+          <type name="write"/>
+          <attr name="formatPattern"/>
+          <attr name="srcFormatPattern"/>
+          <attr name="maxLength"/>
+          <attr attrValue="" defaultValue="" name="filter"/>
+          <attr attrValue="" defaultValue="" name="maxLengthString"/>
+          <attr name="value"/>
+        </fieldView>
+        <fieldEdit>
+          <type name="text"/>
+          <attr attrValue="" defaultValue="" name="value"/>
+          <attr attrValue="" defaultValue="" name="extAttr"/>
+          <attr attrValue="" defaultValue="" name="tabindex"/>
+          <attr attrValue="" defaultValue="" name="readonly"/>
+          <attr attrValue="" defaultValue="" name="disabled"/>
+          <attr attrValue="" defaultValue="" name="size"/>
+          <attr attrValue="" defaultValue="" name="maxlength"/>
+          <attr attrValue="" defaultValue="" name="title"/>
+          <attr attrValue="" defaultValue="" name="style"/>
+          <attr attrValue="" defaultValue="" name="styleClass"/>
+          <attr attrValue="" defaultValue="" name="validateAttr"/>
+        </fieldEdit>
+      </viewField>
+    </columnProperty>
+    <columnProperty id="property81" name="templetId" displayName="templetId" columnName="TEMPLET_ID" nullAble="true" columnType="NUMBER" eosDataType="Long" length="22" dasType="long" overWriteDefaultColumnType="false" showType="Long" update="true" insert="true">
+      <comment xsi:nil="true"/>
+      <viewField dict="false" displayName="templetId" id="templetId" label="templetId" name="templetId" userDefined="true">
         <fieldView>
           <type name="write"/>
           <attr name="formatPattern"/>

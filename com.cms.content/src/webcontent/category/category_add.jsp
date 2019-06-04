@@ -18,6 +18,7 @@
 			<div id="form1" method="post">
 				<input id="category.id" name="category.id" class="nui-hidden" />
 				<input id="category.parentId" name="category.parentId" class="nui-hidden" value="<%=parentId %>" />
+				<input id="categoryModels" name="categoryModels" class="nui-hidden"/>
 		        <table style="width:100%;table-layout:fixed;" class="nui-form-table" >
 		            <tr>
 		                <th class="nui-form-label">中文名称：</th>
@@ -58,10 +59,40 @@
 		            <tr>
 		                <th class="nui-form-label">关联模型：</th>
 		                <td colspan=3>    
-		                    <div id="selectModel" class="nui-checkboxlist" name="categoryModels.modelId" repeatItems="3" repeatLayout="table" style="width:100%;"
-							    textField="modelName" valueField="modelEnName" onload="onLoad"
-							    url="com.cms.siteconfig.ModelService.queryModelAll.biz.ext" dataField="data"  >
-							</div>
+		                    <table>
+		                    	<tr>
+		                    		<td><input type="checkbox" name="modelId" value="article"/> 文章</td>
+		                    		<td><input name="templetId_article" class="nui-combobox" textField="templetName" valueField="id" url="com.cms.siteconfig.TempletService.queryTempletAll.biz.ext" dataField="data" showNullItem="true" /></td>
+		                    	</tr>
+		                    	<tr>
+		                    		<td><input type="checkbox" name="modelId" value="video"/> 视频</td>
+		                    		<td><input name="templetId_video" class="nui-combobox" textField="templetName" valueField="id" url="com.cms.siteconfig.TempletService.queryTempletAll.biz.ext" dataField="data" showNullItem="true" /></td>
+		                    	</tr>
+		                    	<tr>
+		                    		<td><input type="checkbox" name="modelId" value="pic"/> 组图</td>
+		                    		<td><input name="templetId_pic" class="nui-combobox" textField="templetName" valueField="id" url="com.cms.siteconfig.TempletService.queryTempletAll.biz.ext" dataField="data" showNullItem="true" /></td>
+		                    	</tr>
+		                    	<tr>
+		                    		<td><input type="checkbox" name="modelId" value="link"/> 链接</td>
+		                    		<td><input name="templetId_link" class="nui-combobox" textField="templetName" valueField="id" url="com.cms.siteconfig.TempletService.queryTempletAll.biz.ext" dataField="data" showNullItem="true" /></td>
+		                    	</tr>
+		                    	<tr>
+		                    		<td><input type="checkbox" name="modelId" value="leader"/> 领导</td>
+		                    		<td><input name="templetId_leader" class="nui-combobox" textField="templetName" valueField="id" url="com.cms.siteconfig.TempletService.queryTempletAll.biz.ext" dataField="data" showNullItem="true" /></td>
+		                    	</tr>
+		                    	<tr>
+		                    		<td><input type="checkbox" name="modelId" value="doc"/> 文件</td>
+		                    		<td><input name="templetId_doc" class="nui-combobox" textField="templetName" valueField="id" url="com.cms.siteconfig.TempletService.queryTempletAll.biz.ext" dataField="data" showNullItem="true" /></td>
+		                    	</tr>
+		                    	<tr>
+		                    		<td><input type="checkbox" name="modelId" value="expert"/> 专家</td>
+		                    		<td><input name="templetId_expert" class="nui-combobox" textField="templetName" valueField="id" url="com.cms.siteconfig.TempletService.queryTempletAll.biz.ext" dataField="data" showNullItem="true" /></td>
+		                    	</tr>
+		                    	<tr>
+		                    		<td><input type="checkbox" name="modelId" value="download"/> 下载</td>
+		                    		<td><input name="templetId_download" class="nui-combobox" textField="templetName" valueField="id" url="com.cms.siteconfig.TempletService.queryTempletAll.biz.ext" dataField="data" showNullItem="true" /></td>
+		                    	</tr>
+		                    </table>
 		                </td>
 		            </tr>
 		            <tr>
@@ -85,19 +116,23 @@
 	           	form.validate();
 		        if(form.isValid()==false) return;
 		        var data = form.getData(false,true);
-		        var json = nui.encode(data);
-		        json = json.substring(0,json.indexOf("categoryModels")-2);
-		        var modelId = data.categoryModels.modelId;
-		        if(modelId!=undefined && modelId.length>0){
-		        	var json_1 = ',"categoryModels":[';
-			        var modelArray = modelId.split(",");
-			        for(var i=0;i<modelArray.length;i++){
-			        	json_1 = json_1 + '{"modelId":'+'"'+modelArray[i]+'"},';
-			        }
-			        json_1 = json_1.substring(0, json_1.length-1)+"]";
-			        json = json+json_1;
+		        var modelId_array = [];
+		        var templetId_array = [];
+		        $("input[name='modelId']:checked").each(function(){
+		            modelId_array.push($(this).val());
+		            templetId_array.push($("input[name='templetId_"+$(this).val()+"']").val());
+		        });
+		        var model_json = "[";
+		        for(var i=0;i<modelId_array.length;i++){
+		        	if(i>0){
+		        		model_json += ',{"modelId":"'+modelId_array[i]+'","templetId":"'+templetId_array[i]+'"}';
+		        	}else{
+		        		model_json += '{"modelId":"'+modelId_array[i]+'","templetId":"'+templetId_array[i]+'"}';
+		        	}
 		        }
-        		json = json + "}";
+		        model_json+="]";
+		        data.categoryModels = JSON.parse(model_json);
+		        var json = nui.encode(data);
 	            $.ajax({
 	                url: "com.cms.content.CategoryService.addCategory.biz.ext",
 	                type: 'POST',

@@ -55,8 +55,7 @@ public class CreateContentHTML {
             if (obj != null) {
                 //发布状态下才生成页面,必须不是链接类型的
                 if (obj.getString("infoStatus").equals("3") && !obj.getString("modelId").equals("link")) {
-                	DataObject modelData = InfoDataUtil.getModelById(obj.getString("modelId"));
-                    String template_id = modelData.getString("infoTemplet");
+                    String template_id = InfoDataUtil.getTempletId(obj.getString("modelId"),obj.getString("catId"));
                     String content_url = obj.getString("contentUrl");
                     if (StringUtil.isBlank(content_url)) {
                         content_url = getFoldePathByCategoryID(obj.getString("catId"))+"/";
