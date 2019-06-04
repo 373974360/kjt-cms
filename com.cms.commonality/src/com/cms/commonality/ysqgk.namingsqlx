@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- author:Administrator -->
+<sqlMap>
+		<select id="queryYsqgkList" parameterClass="commonj.sdo.DataObject" resultClass="com.cms.commonality.ysqgk.CmsYsqgk">
+	    	SELECT
+				id,
+				YSQ_CODE AS ysqCode,
+				QUERY_CODE AS queryCode,
+				CREATE_DTIME as createDtime,
+				REPLY_DTIME AS replyDtime,
+				IS_OPEN AS isOpen,
+				IS_REPLY AS isReply,
+				IS_PUBLISH AS isPublish 
+			FROM
+				CMS_YSQGK 
+			WHERE
+				1 = 1			    	
+	    	<dynamic>
+	    		<isNotNull prepend="and" property="isReply">
+	    			IS_REPLY = $isReply$
+	    		</isNotNull>
+	    		<isNotNull prepend="and" property="isOpen">
+	    			IS_OPEN = $isOpen$
+	    		</isNotNull>
+	    		<isNotNull prepend="and" property="isPublish">
+	    			IS_PUBLISH = $isPublish$
+	    		</isNotNull>
+	    		<isNotNull prepend="and" property="ysqCode">
+	    			YSQ_CODE like '%$ysqCode$%'
+	    		</isNotNull> 
+	    		<isNotNull prepend="and" property="queryCode">
+	    			QUERY_CODE like '%$queryCode$%'
+	    		</isNotNull>   		
+	    	</dynamic>	    	
+	    	ORDER BY REPLY_DTIME DESC
+	    </select>
+</sqlMap>
