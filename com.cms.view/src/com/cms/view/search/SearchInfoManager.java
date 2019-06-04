@@ -31,6 +31,7 @@ import org.apache.lucene.search.highlight.SimpleHTMLFormatter;
 import org.apache.lucene.util.Version;
 import org.wltea.analyzer.lucene.IKAnalyzer;
 
+import com.cms.view.data.CategoryUtil;
 import com.eos.system.annotation.Bizlet;
 
 /**
@@ -296,7 +297,7 @@ public class SearchInfoManager {
 				resultBean.setTime(time);
 				resultBean.setId(id);
 				resultBean.setCategory_id(categoryId);
-				resultBean.setCategory_name("");
+				resultBean.setCategory_name(CategoryUtil.getCategoryById(categoryId).getString("chName"));
 				resultBean.setSite_id(site_id);
 				resultBean.setContent(content);
 				resultBean.setModel_id(model_id);
