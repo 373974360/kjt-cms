@@ -60,7 +60,11 @@ public class CreateContentHTML {
                     if (StringUtil.isBlank(content_url)) {
                         content_url = getFoldePathByCategoryID(obj.getString("catId"))+"/";
                         content_url = content_url + obj.getString("id") + ".html";
-                        updateContentUrl(content_url, obj.getString("id"));
+                        String save_url = content_url.substring(1);
+                        save_url = save_url.substring(save_url.indexOf("/"),save_url.length());
+                        updateContentUrl(save_url, obj.getString("id"));
+                    }else{
+                    	content_url = getFoldeRootPathByCategoryID(obj.getString("catId"))+content_url;
                     }
                     VelocityInfoContextImp vici = new VelocityInfoContextImp(obj.getString("id"),template_id);
                     String content = vici.parseTemplate();
@@ -80,9 +84,10 @@ public class CreateContentHTML {
     public static boolean deleteContentHTML(DataObject obj) {
         try {
         	if(obj!=null){
-        		String contentUrl = obj.getString("contentUrl");
+        		String contentUrl = getFoldeRootPathByCategoryID(obj.getString("catId"))+obj.getString("contentUrl");
                 String savePath = TempletUtils.class.getClassLoader().getResource("/").getPath();
                 savePath = savePath.substring(0,savePath.indexOf("WEB-INF"))+contentUrl;
+                System.out.print(savePath);
                 File f = new File(savePath);
                 if (f.exists())
                     f.delete();
@@ -107,6 +112,24 @@ public class CreateContentHTML {
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
+	}
+	
+	public static String getFoldeRootPathByCategoryID(String catId){
+		DataObject currObj = CategoryUtil.getCategoryById(catId);
+		String catIds = catId;
+		for(int i=0;i<10;i++){
+			currObj = CategoryUtil.getCategoryById(currObj.getString("parentId"));
+			if(currObj==null||currObj.getString("id")==null){
+				break;
+			}
+			catIds += ","+currObj.getString("id");
+		}
+		String[] catArray = catIds.split(",");
+		String[] reverseArray = new String[catArray.length];
+		for (int i = 0; i < catArray.length; i++) {
+			reverseArray[i] = catArray[catArray.length - i - 1];
+        }
+		return CategoryUtil.getCategoryById(reverseArray[0]).getString("enName");
 	}
 	
 	public static String getFoldePathByCategoryID(String catId){

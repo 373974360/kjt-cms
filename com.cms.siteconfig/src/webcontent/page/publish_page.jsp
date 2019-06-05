@@ -40,10 +40,10 @@
 					<tr>
 						<td class="form_label">发布时间:</td>
 						<td>
-							<input id="date2" class="mini-datepicker" style="width:200px;" nullValue="null"
+							<input id="date2" class="mini-datepicker" style="width:200px;"
         					format="yyyy-MM-dd HH:mm:ss" timeFormat="HH:mm:ss" showTime="true" showOkButton="true" showClearButton="false"/>
         					至
-							<input id="date3" class="mini-datepicker" style="width:200px;" nullValue="null"
+							<input id="date3" class="mini-datepicker" style="width:200px;"
         					format="yyyy-MM-dd HH:mm:ss" timeFormat="HH:mm:ss" showTime="true" showOkButton="true" showClearButton="false"/>
 						</td>
 						<td>

@@ -4,6 +4,7 @@
 package com.cms.view.velocity;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.Reader;
 import java.sql.Clob;
 import java.text.ParseException;
@@ -137,5 +138,33 @@ public class FormatUtil {
 		}
 		return content;
 	}
+    
+    /**
+
+     * 格式化路径，分隔符用系统分隔符，结尾不带分隔符
+
+     *
+
+     * @param pathStr 被格式化的路径
+
+     * @return 格式化后的路径
+
+     * */
+
+    public static String formatPath(String pathStr) {
+    	   	
+    	pathStr = pathStr.replace('/', File.separatorChar);    		
+	    pathStr = pathStr.replace('\\', File.separatorChar);
+    	
+        if (pathStr.endsWith(File.separator)) {
+
+            pathStr = pathStr.substring(0, pathStr.length() - 1);
+
+            pathStr = formatPath(pathStr);
+
+        }
+        return pathStr;
+
+    }
     
 }

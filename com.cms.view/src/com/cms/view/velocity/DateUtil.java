@@ -3,12 +3,14 @@
  */
 package com.cms.view.velocity;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.sql.Timestamp;
 
 import com.eos.system.annotation.Bizlet;
 
@@ -163,4 +165,51 @@ public class DateUtil {
         ParseException {
         return getDate(dateStr, DATETIME_PATTERN);
     }
+    
+    /**
+	 * 得到指定时间之后的时间
+	 * @param String time
+	 * @param int num
+	 * @return String yyyy-MM-dd hh:mm:ss
+	 */
+	public static String getDateTimeAfter(String times,int num)
+	{
+		if(times == null || "".equals(times))
+			times = getCurrentDateTime();
+		
+		long tl = dateToTimestamp(times)+num * 1000;
+		return timestampToDate(tl,"yyyy-MM-dd HH:mm:ss");
+	}
+	/**
+	 * 将某个时间的Datetime转换成Timestamp
+	 * 
+	 * @param dateFormat
+	 *            yyyy-MM-dd HH:mm:ss
+	 * @return long
+	 */
+	public static long dateToTimestamp(String dateFormat) {
+		long timestamp = -1;
+		try {
+			DateFormat df = new SimpleDateFormat(DATETIME_PATTERN);
+			Date date = df.parse(dateFormat);
+			timestamp = date.getTime();
+		} catch (Exception e) {
+			System.out.println("时间格式 [ " + dateFormat + " ] 无法被解析");
+		}
+		return timestamp;
+	}
+	/**
+	 * 将某个时间的Timestamp转换成Datetime
+	 * 
+	 * @param long
+	 *            时间数值
+	 * @param String
+	 *            时间格式　yyyy-MM-dd hh:mm:ss           
+	 * @return String yyyy-MM-dd hh:mm:ss
+	 */
+	public static String timestampToDate(long timestamp, String format) {
+		Date date = new Timestamp(timestamp);
+		DateFormat df = new SimpleDateFormat(format);
+		return df.format(date);
+	}
 }

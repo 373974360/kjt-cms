@@ -30,12 +30,11 @@ public class VelocityEngineInstance {
 		VelocityEngine velocityEngine = new VelocityEngine();
 		velocityEngine.setProperty("input.encoding", "utf-8");
 		velocityEngine.setProperty("output.encoding", "utf-8");
-		velocityEngine.setProperty("file.resource.loader.path", host_rootPath.substring(1));
+		velocityEngine.setProperty("file.resource.loader.path", host_rootPath);
 		velocityEngine.setProperty("velocimacro.library.autoreload", "true");
 		velocityEngine.setProperty("resource.loader.cache", "false");
 		velocityEngine.setProperty("velocimacro.max.depth", 100);
 		velocityEngine.init();
-		
 		return velocityEngine;
 	}
 }
