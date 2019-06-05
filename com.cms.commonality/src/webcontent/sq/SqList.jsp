@@ -212,8 +212,8 @@
 				}
 			}
 			//单击详情按钮时发生
-			function detailsRow() {
-				var row = grid.getSelected();
+			function detailsRow(row_uid) {
+				var row = grid.getRowByUID(row_uid);
 					nui.open({
 						url : "<%=request.getContextPath()%>/commonality/sq/SqDetail.jsp?sqId="+row.id,
 						title : "来信详情&处理",

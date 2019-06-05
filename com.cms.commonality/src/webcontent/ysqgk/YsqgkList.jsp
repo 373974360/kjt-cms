@@ -57,6 +57,7 @@
 							<a class="nui-button" iconCls="icon-add" onclick="add()">录入 </a>
 							<a id="update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑 </a>
 							<a class="nui-button" iconCls="icon-remove" onclick="remove()">删除</a>
+							<a class="nui-button" iconCls="icon-reload" onclick="reload()">刷新</a>
 						</td>
 					</tr>
 				</table>
@@ -68,14 +69,16 @@
 					<div property="columns">
 						<div type="checkcolumn" align="center" width="10"></div>
 						<div field="id" headerAlign="center" allowSort="true" visible="false">ID</div>
+						<div field="ysqType" headerAlign="center" allowSort="true" visible="false" >申请人类型</div>
 						<div field="ysqCode" headerAlign="center" allowSort="true" >申请编码</div>							
 						<div field="createDtime" headerAlign="center" width="60" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm:ss">提交时间</div>		
 						<div field="replyDtime" headerAlign="center" width="60" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm:ss">回复时间</div>
 						<div field="replyContent" headerAlign="center" allowSort="true" visible="false">回复内容</div>
 						<div field="isReply" width="30" align="center" headerAlign="center" allowSort="true" renderer="onYesOrNoRenderer">回复</div>
+						<div field="content" headerAlign="center" allowSort="true" visible="false">内容描述</div>
 						<div field="isPublish" width="30" align="center" headerAlign="center" allowSort="true" renderer="onYesOrNoRenderer">发布</div>
 						<div field="isOpen" width="30" align="center" headerAlign="center" allowSort="true" renderer="onYesOrNoRenderer">公开</div>
-						<div name="action" width="40" headerAlign="center" align="center" renderer="onActionRenderer" cellStyle="padding:0;">来信内容</div>
+						<div name="action" width="40" headerAlign="center" align="center" renderer="onActionRenderer" cellStyle="padding:0;">申请详情</div>
 					</div>
 				</div>
 			</div>
@@ -142,11 +145,11 @@
 					function(action) {
 						if (action == "ok") {
 							var json = nui.encode({
-								sqs : rows
+								ysqgks : rows
 							});
 							grid.loading("正在删除中,请稍等...");
 							$.ajax({
-								url : "com.cms.commonality.SqService.deleteSqs.biz.ext",
+								url : "com.cms.commonality.YsqgkService.deleteYsqgks.biz.ext",
 								type : 'POST',
 								data : json,
 								cache : false,
@@ -184,6 +187,11 @@
 				var json = form.getData(false, false);
 				grid.load(json);//grid查询
 			}
+			
+			//刷新
+			function reload(){
+				grid.reload();
+			}
 	
 			//重置查询条件
 			function reset() {
@@ -206,28 +214,28 @@
 				}
 			}
 			//单击详情按钮时发生
-			function detailsRow() {
-				var row = grid.getSelected();
+			function detailsRow(row_uid) {
+				var row = grid.getRowByUID(row_uid);
+				if (row){
 					nui.open({
-						url : "<%=request.getContextPath()%>/commonality/sq/SqDetail.jsp?sqId="+row.id,
-						title : "来信详情&处理",
+						url : "<%=request.getContextPath()%>/commonality/ysqgk/ysqgkDetail.jsp?ysqgkId="+row.id,
+						title : "依申请公开详情&处理",
 						width : '80%',
 						height : '100%',
 						onload : function() {
 							var iframe = this.getIFrameEl();
 							var data = row;
 							//直接从页面获取，不用去后台获取
-							//iframe.contentWindow.setData(data);
-							//iframe.contentWindow.setData2(data);
-							iframe.contentWindow.setDataParams(data);
-
+							iframe.contentWindow.setData(data);		
 						},
 						ondestroy : function(action) {
 							if (action == "saveSuccess") {
 								grid.reload();
 							}
 						}
-					});				
+					});		
+				}
+							
 			}			
 			function onActionRenderer(e) {	            
 	            var record = e.record;

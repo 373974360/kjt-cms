@@ -36,7 +36,7 @@
     <location x="165" y="143"/>
     <size height="24" width="24"/>
     <nodeLabel>loopstart0label</nodeLabel>
-    <process:iterate iterable="sqs" iterableElement="temp"/>
+    <process:iterate iterable="ysqgks" iterableElement="temp"/>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="loopstart0label" name="label" nodeType="label">
     <location x="162" y="175"/>

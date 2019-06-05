@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<process:tBusinessLogic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://com.primeton.emf.core" xmlns:process="http://primeton.com/emf/core/process" name="updateYsqgk" detailDescription="" demonstration="" urls="" gridVisibility="false" rulerVisibility="true" snapToGeometry="true" productVersion="7.0.0.0">
+<process:tBusinessLogic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://com.primeton.emf.core" xmlns:process="http://primeton.com/emf/core/process" name="UpdateYsqgkWithReTime" detailDescription="" demonstration="" urls="" gridVisibility="false" rulerVisibility="true" snapToGeometry="true" productVersion="7.0.0.0">
   <nodes xsi:type="process:tStart" id="start0" name="开始" displayName="开始" type="start">
     <sourceConnections xsi:type="process:tLink" id="link5" name="link5" displayName="连接线" isDefault="true" type="transition">
       <sourceNode>start0</sourceNode>
@@ -60,8 +60,8 @@
     <size height="28" width="28"/>
     <nodeLabel>assign0label</nodeLabel>
     <process:copy>
-      <process:from type="query" pattern="reference">createDtime</process:from>
-      <process:to type="query">ysqgk/createDtime</process:to>
+      <process:from type="query" pattern="reference">replyDtime</process:from>
+      <process:to type="query">ysqgk/replyDtime</process:to>
     </process:copy>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="assign0label" name="label" nodeType="label">
@@ -84,10 +84,10 @@
       <process:instance instanceName=""/>
     </process:pojo>
     <process:inputVariables>
-      <process:inputVariable id="0" name="date" type="query" value="java.lang.String" valueType="Java" pattern="reference">ysqgk/createDtime</process:inputVariable>
+      <process:inputVariable id="0" name="date" type="query" value="java.lang.String" valueType="Java" pattern="reference">ysqgk/replyDtime</process:inputVariable>
     </process:inputVariables>
     <process:outputVariables>
-      <process:outputVariable id="0" name="out1" type="query" value="java.lang.String" valueType="Java">createDtime</process:outputVariable>
+      <process:outputVariable id="0" name="out1" type="query" value="java.lang.String" valueType="Java">replyDtime</process:outputVariable>
     </process:outputVariables>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="invokePojo2label" name="label" nodeType="label">

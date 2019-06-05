@@ -6,6 +6,7 @@
 <html>
 <%@page import="com.eos.foundation.eoscommon.ResourcesMessageUtil"%>
 <%
+	String ysqgkId = request.getParameter("ysqgkId");
 	
 	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	String curTime = df.format(new Date());
@@ -22,26 +23,20 @@
 <body>
 	<div class="nui-fit" style="padding-top:5px">
 		<div id="form1" method="post">
-			<div id="panel1" class="nui-panel" title="申请人信息" iconCls="icon-add" style="width:100%;height:300px;" 
+			<div id="panel1" class="nui-panel" title="申请人信息" iconCls="icon-add" style="width:100%;height:250px;" 
 			showToolbar="true" showCollapseButton="true" showFooter="true" allowResize="true" collapseOnTitleClick="true">
-				<input name="ysqgk.createDtime" class="nui-hidden" value="<%=curTime %>"/>
+				<input id="ysqgk.id" name="ysqgk.id" class="nui-hidden">
+				<input name="ysqgk.createDtime" class="nui-hidden" />
+				<input id="ysqType" name="ysqgk.ysqType" class="nui-hidden"/>
 				<table id="table1" style="width:70%; table-layout:fixed;">
-					<tr>
-						<th class="nui-form-label">申请人类型：</th>
-    					<td colspan="2">
-    						<input name="ysqgk.ysqType" class="nui-radiobuttonlist" textField="text" 
-		    					dataField="ysqType" valueField="id" value="1"
-		    					url="<%=request.getContextPath()%>/commonality/ysqgk/ysqType.txt" onvaluechanged="onSelected" />
-    					</td>  					
-					</tr> 
 					<tr>
 						<th class="nui-form-label">申请编号：</th>
 		                <td colspan="2">    
-		                    <input name="ysqgk.ysqCode" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空"/> 
+		                    <input name="ysqgk.ysqCode" class="nui-textbox nui-form-input" readonly="readonly" borderStyle="border:none" /> 
 		                </td>
 		                <th class="nui-form-label">查询密码：</th>
 		                <td colspan="2">    
-		                    <input name="ysqgk.queryCode" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空"/> 
+		                    <input name="ysqgk.queryCode" class="nui-textbox nui-form-input" readonly="readonly" borderStyle="border:0" /> 
 		                </td>
 					</tr>  					    				
 				</table>
@@ -49,11 +44,11 @@
 					<tr>
 		                <th class="nui-form-label">申请人姓名：</th>
 		                <td colspan="2">    
-		                    <input name="ysqgk.name" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空"/> 
+		                    <input name="ysqgk.name" class="nui-textbox nui-form-input" readonly="readonly" borderStyle="border:0" /> 
 		                </td>	
 		                <th class="nui-form-label">工作单位：</th>
 		                <td colspan="2">    
-		                    <input name="ysqgk.orgName" class="nui-textbox nui-form-input"/> 
+		                    <input name="ysqgk.orgName" class="nui-textbox nui-form-input" readonly="readonly" borderStyle="border:0" /> 
 		                </td>	                
 	            	</tr>
 	            	<tr>
@@ -62,11 +57,12 @@
 		                    <input name="ysqgk.cardName" class="nui-combobox nui-form-input" style="width:150px;" 
 		                    dataField="cardName" textField="text" valueField="id" 
 							url="<%=request.getContextPath()%>/commonality/ysqgk/cardName.txt"  
-							showNullItem="true" allowInput="true"/> 
+							showNullItem="true" allowInput="true" borderStyle="border:none"
+							 showButton="false" readonly="readonly" /> 
 		                </td>	
 		                <th class="nui-form-label">证件号码：</th>
 		                <td colspan="2">    
-		                    <input name="ysqgk.cardCode" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空"/> 
+		                    <input name="ysqgk.cardCode" class="nui-textbox nui-form-input" readonly="readonly" borderStyle="border:0"/> 
 		                </td>	                
 	            	</tr>
 	            </table>
@@ -74,21 +70,21 @@
 	            	<tr>
 		                <th class="nui-form-label">组织机构代码：</th>
 		                <td colspan="2">    
-		                    <input name="ysqgk.orgCode" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空"/> 
+		                    <input name="ysqgk.orgCode" class="nui-textbox nui-form-input" readonly="readonly" borderStyle="border:0"/> 
 		                </td>	
 		                <th class="nui-form-label">营业执照代码：</th>
 		                <td colspan="2">    
-		                    <input name="ysqgk.licence" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空"/> 
+		                    <input name="ysqgk.licence" class="nui-textbox nui-form-input" readonly="readonly" borderStyle="border:0"/> 
 		                </td>	                
 	            	</tr>
 	            	<tr>
 		                <th class="nui-form-label">法人代表：</th>
 		                <td colspan="2">    
-		                    <input name="ysqgk.legalperson" class="nui-textbox nui-form-input" /> 
+		                    <input name="ysqgk.legalperson" class="nui-textbox nui-form-input" readonly="readonly" borderStyle="border:0"/> 
 		                </td>	
 		                <th class="nui-form-label">联系人：</th>
 		                <td colspan="2">    
-		                    <input name="ysqgk.linkman" class="nui-textbox nui-form-input" /> 
+		                    <input name="ysqgk.linkman" class="nui-textbox nui-form-input" readonly="readonly" borderStyle="border:0"/> 
 		                </td>	                
 	            	</tr>
 	            </table>
@@ -96,124 +92,123 @@
 	            	<tr>
 		                <th class="nui-form-label">联系电话：</th>
 		                <td colspan="2">    
-		                    <input name="ysqgk.tel" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空"/> 
+		                    <input name="ysqgk.tel" class="nui-textbox nui-form-input" readonly="readonly" borderStyle="border:0"/> 
 		                </td>	
 		                <th class="nui-form-label">联系传真：</th>
 		                <td colspan="2">    
-		                    <input name="ysqgk.telCz" class="nui-textbox nui-form-input" /> 
+		                    <input name="ysqgk.telCz" class="nui-textbox nui-form-input" readonly="readonly" borderStyle="border:0"/> 
 		                </td>	                
 	            	</tr>
 	            	<tr>
 		                <th class="nui-form-label">手机号码：</th>
 		                <td colspan="2">    
-		                    <input name="ysqgk.mobile" class="nui-textbox nui-form-input" /> 
+		                    <input name="ysqgk.mobile" class="nui-textbox nui-form-input" readonly="readonly" borderStyle="border:0"/> 
 		                </td>	
 		                <th class="nui-form-label">电子邮箱：</th>
 		                <td colspan="2">    
-		                    <input name="ysqgk.email" class="nui-textbox nui-form-input" /> 
+		                    <input name="ysqgk.email" class="nui-textbox nui-form-input" readonly="readonly" borderStyle="border:0"/> 
 		                </td>	                
 	            	</tr>
 	            	<tr>
 		                <th class="nui-form-label">通讯地址：</th>
 		                <td colspan="2">    
-		                    <input name="ysqgk.address" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空"/> 
+		                    <input name="ysqgk.address" class="nui-textbox nui-form-input" readonly="readonly" borderStyle="border:0"/> 
 		                </td>	
 		                <th class="nui-form-label">邮政编码：</th>
 		                <td colspan="2">    
-		                    <input name="ysqgk.yzbm" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空"/> 
+		                    <input name="ysqgk.yzbm" class="nui-textbox nui-form-input" readonly="readonly" borderStyle="border:0"/> 
 		                </td>	                
 	            	</tr>
 				</table>
 			</div>	
-			<div id="panel2" class="nui-panel" title="所需信息情况" iconCls="icon-add" style="width:100%;height:350px;" 
-			showToolbar="true" showCollapseButton="true" showFooter="true" allowResize="true" collapseOnTitleClick="true">
+			<div id="panel2" class="nui-panel" title="所需信息情况" iconCls="icon-add" style="width:100%;height:350;" 	
+    					showToolbar="true" showCollapseButton="true" showFooter="true" allowResize="true" collapseOnTitleClick="true">
 				<table id="table5" style="width:70%; table-layout:fixed;">
 					<tr>
 						<th class="nui-form-label">所需内容描述：</th>
 						<td>
-							<input name="ysqgk.content" class="nui-textarea" style="width:90%;height:80px" />
+						<span id="content"></span>							
     					</td>
 					</tr>   
 					<tr>
 						<th class="nui-form-label">用途描述：</th>
 						<td>
-							<input name="ysqgk.description" class="nui-textarea" style="width:90%;height:80px" />
+						<span id="DesContent"></span>
     					</td>
 					</tr>
 					<tr>
 						<th class="nui-form-label">是否申请减免费用：</th>
     					<td>
-    						<div name="ysqgk.isDerate" class="nui-radiobuttonlist" textField="text" 
+    						<input name="ysqgk.isDerate" class="nui-radiobuttonlist" textField="text" 
 		    					dataField="isDerate" valueField="id" value="1"
-		    					url="<%=request.getContextPath()%>/commonality/ysqgk/isDerate.txt" >
-							</div>
+		    					url="<%=request.getContextPath()%>/commonality/ysqgk/isDerate.txt"
+		    					showButton="false" readonly="readonly" />
     					</td>
 					</tr>  
 					<tr>
 						<th class="nui-form-label">信息指定提供方式：</th>
     					<td>
-    						<div name="ysqgk.offerType" class="nui-radiobuttonlist" textField="text" 
+    						<input name="ysqgk.offerType" class="nui-radiobuttonlist" textField="text" 
 		    					dataField="offerType" valueField="id" value="1"
-		    					url="<%=request.getContextPath()%>/commonality/ysqgk/offerType.txt" >
-							</div>
+		    					url="<%=request.getContextPath()%>/commonality/ysqgk/offerType.txt" readonly="readonly"/>							
     					</td>
 					</tr> 
 					<tr>
 						<th class="nui-form-label">获取信息方式：</th>
     					<td>
-    						<div name="ysqgk.getMethod" class="nui-radiobuttonlist" textField="text" 
+    						<input name="ysqgk.getMethod" class="nui-radiobuttonlist" textField="text" 
 		    					dataField="getMethod" valueField="id" value="1"
-		    					url="<%=request.getContextPath()%>/commonality/ysqgk/getMethod.txt" >
-							</div>
+		    					url="<%=request.getContextPath()%>/commonality/ysqgk/getMethod.txt" readonly="readonly"/>						
     					</td>
 					</tr> 
 					<tr>
 						<th class="nui-form-label">是否接受其他方式：</th>
     					<td>
-    						<div name="ysqgk.isOther" class="nui-radiobuttonlist" textField="text" 
+    						<input name="ysqgk.isOther" class="nui-radiobuttonlist" textField="text" 
 		    					dataField="isOther" valueField="id" value="1"
-		    					url="<%=request.getContextPath()%>/commonality/ysqgk/isOther.txt" >
-							</div>
+		    					url="<%=request.getContextPath()%>/commonality/ysqgk/isOther.txt" readonly="readonly"/>					
     					</td>
 					</tr> 					    				
 				</table>
 			</div>
+			<div property="footer" style="text-align:center;padding-top:5px;padding-bottom:5px;" borderStyle="border:0;">		        
+		        <a class="nui-button" style="width:85px;" iconCls="icon-edit" onclick="onReply()">回复申请</a>
+		        <span style="display:inline-block;width:20px;"></span>
+		        <a class="nui-button" style="width:85px;" iconCls="icon-print" onclick="onPrint()">打印详情</a>		        
+			</div>
 		</div> 
 	</div>
-	<div class="nui-toolbar" style="text-align:center;padding-top:5px;padding-bottom:5px;" borderStyle="border:0;">
-		 <a class="nui-button" style="width:60px;" iconCls="icon-save" onclick="onOk()">保存</a>
-		 <span style="display:inline-block;width:25px;"></span>
-		 <a class="nui-button" style="width:60px;" iconCls="icon-cancel" onclick="onCancel()">取消</a>
+	<div class="nui-toolbar" style="text-align:center;padding-top:5px;padding-bottom:5px;" borderStyle="border:0;">		 
+		 <a class="nui-button" style="width:60px;" iconCls="icon-close" onclick="onCancel()">关闭</a>
 	</div>
     <script type="text/javascript">
 	        nui.parse();
-	        var form = new nui.Form("form1");	        
-	      
-	        function SaveData() {
-	           	form.validate();
-		        if(form.isValid()==false) return;
-		        var data = form.getData(false,true);
-		        var json = nui.encode(data);
-	            $.ajax({
-	                url: "com.cms.commonality.YsqgkService.addYsqgk.biz.ext",
-	                type: 'POST',
-	                data: json,
-	                cache: false,
-	                contentType:'text/json',
-	                success: function (text) {
-	                    CloseWindow("saveSuccess");
-	                },
-	                error: function (jqXHR, textStatus, errorThrown) {
-	                    alert(jqXHR.responseText);
-	                    CloseWindow();
-	                }
-	            });
-	        }
-	        
+	        var form = new nui.Form("form1");	        	      	
+	     
+			function setData(data) {
+				data = nui.clone(data);				
+				var json = nui.encode({
+					ysqgk : data
+				});
+				$.ajax({
+						url : "com.cms.commonality.YsqgkService.getYsqgk.biz.ext",
+						type : 'POST',
+						data : json,
+						cache : false,
+						contentType : 'text/json',
+						success : function(text) {
+							obj = nui.decode(text);
+							//区别申请人列表
+							onSelected(obj.ysqgk.ysqType);	
+							$("span[id=content]").html(obj.ysqgk.content);	
+							$("span[id=DesContent]").html(obj.ysqgk.description);											
+							form.setData(obj);
+							form.setChanged(false);
+						}
+					});
+			}
 	        //申请人类型不同时的页面展示处理
-	        function onSelected(){
-	        	var obj = $("input[name='ysqgk.ysqType']").val();
-	        		
+	        function onSelected(obj){	        	
 	        	if(obj == 2){	        		
 	        		$("#table2").hide();
 	        		$("#table3").show();
@@ -221,9 +216,19 @@
 	        		$("#table2").show();
 	        		$("#table3").hide();	
 	        	}
-	        	
 	        }
-	        	        
+	       	//回复申请	
+	        function onReply(){
+	        	nui.open({
+						url : "<%=request.getContextPath()%>/commonality/ysqgk/ysqgkReply.jsp?ysqgkId="+"<%=ysqgkId %>",
+						title : "回复",
+						width : '60%',
+						height : '70%',
+						onload : function() {						
+						}
+					});		
+	        
+	        }        
 			function CloseWindow(action){
 				if(action=="close"){
 

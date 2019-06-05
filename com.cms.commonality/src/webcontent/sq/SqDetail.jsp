@@ -287,7 +287,6 @@
 	    		form3.clear();  
 	    		ue1.execCommand('cleardoc');  	
 	    		$("#panel4").hide();
-	    		$("input[id=reTime]").text("<%=df.format(new Date()) %>");
 	    		$("#panel5").show();	    	
 	    	}
 	    	
