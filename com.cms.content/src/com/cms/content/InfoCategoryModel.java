@@ -51,7 +51,7 @@ public class InfoCategoryModel {
 		for(int i=0;i<reverseArray.length;i++){
 			dobj[i] = getCategoryById(reverseArray[i]);
 		}
-		siteId = dobj[0].getString("enName");
+		siteId = dobj[0].getString("id");
 		return siteId;
 	}
 	

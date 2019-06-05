@@ -24,7 +24,7 @@ public class IndexManager {
 
 	public static String indexDir() {
 		String savePath = TempletUtils.class.getClassLoader().getResource("/").getPath();
-		savePath = savePath.substring(0, savePath.indexOf("WEB-INF")) + "/search/";
+		savePath = savePath.substring(0, savePath.indexOf("WEB-INF")) + "search/";
 		return savePath;
 	}
 
@@ -55,7 +55,7 @@ public class IndexManager {
 		DataObject[] siteObj =QueryCategoryAllTreeNode.getCategoryById("0");
 
 		for (DataObject obj:siteObj) {
-			createAllIndexBySite(obj.getString("enName"));
+			createAllIndexBySite(obj.getString("id"));
 		}
 	}
 	public static void createAllIndexBySite(String siteId){

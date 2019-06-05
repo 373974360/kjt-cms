@@ -103,7 +103,7 @@ public class SearchUtil {
 				URL url = new URL(request.getRequestURL().toString());
 				String domain = url.getHost();
 				DataObject siteObj = CategoryUtil.getSiteByDomain(domain);
-				site_id = siteObj.getString("enName");
+				site_id = siteObj.getString("id");
 				sb.append("<param><key>siteId</key><value><![CDATA[" + site_id + "]]></value></param>");
 			} else {
 				sb.append("<param><key>siteId</key><value><![CDATA[" + site_id + "]]></value></param>");
