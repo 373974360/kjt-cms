@@ -5,18 +5,14 @@
 		<link id="css_skin" rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/coframe/tools/skins/skin1/css/style.css"/>
 		<link id="css_icon" rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/coframe/tools/icons/icon.css"/>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/common/nui/nui.js"></script>
-		
-  		
 		<link rel="stylesheet" href="<%=request.getContextPath()%>/siteconfig/codemirror/codemirror.css"/>
 		<script src="<%=request.getContextPath()%>/siteconfig/codemirror/codemirror.js"></script>
 		<script src="<%=request.getContextPath()%>/siteconfig/codemirror/xml.js"></script>
 		<script src="<%=request.getContextPath()%>/siteconfig/codemirror/css.js"></script>
 		<script src="<%=request.getContextPath()%>/siteconfig/codemirror/javascript.js"></script>
 		<script src="<%=request.getContextPath()%>/siteconfig/codemirror/htmlmixed.js"></script>
-		
-		
 	  	<style>
-	    	.CodeMirror {border: 1px solid #CCC;height:500px;}
+	    	.CodeMirror {border: 1px solid #CCC;min-height:800px;}
 	  	</style>
 	</head>
 	<body>

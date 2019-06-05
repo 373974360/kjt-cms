@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- author:chaoweima -->
 <sqlMap>
-        <select id="queryInfoList" parameterClass="commonj.sdo.DataObject" resultClass="com.cms.content.category.CmsInfo">
+	<select id="queryInfoList" parameterClass="commonj.sdo.DataObject" resultClass="com.cms.content.category.CmsInfo">
     	select 
     		id,
     		info_title as infoTitle,
@@ -180,4 +180,34 @@
 		ORDER BY
 			wf_opt_time ASC
     </select>
+    
+    <select id="queryPublishPageInfoList" parameterClass="commonj.sdo.DataObject" resultClass="com.cms.content.category.CmsInfo">
+    	select 
+    		id,
+    		info_title as infoTitle,
+    		editor,
+    		input_dtime as inputDtime,
+    		released_dtime as releasedDtime,
+    		is_top as isTop,
+    		is_tuijian as isTuijian,
+    		model_id as modelId,
+    		cat_id as catId,
+    		info_status as infoStatus,
+    		content_url as contentUrl
+    	from 
+    		cms_info
+    	where info_status = 3
+    	<dynamic>
+    		<isNotNull prepend="and" property="catId">
+    			cat_id in ($catId$)
+    		</isNotNull>
+    		<isNotNull prepend="and" property="startTime">
+    			<![CDATA[released_dtime > '$startTime$']]>
+    		</isNotNull>
+    		<isNotNull prepend="and" property="endTime">
+    			<![CDATA[released_dtime < '$endTime$']]>
+    		</isNotNull>
+    	</dynamic>
+    	 order by released_dtime desc
+	</select>
 </sqlMap>

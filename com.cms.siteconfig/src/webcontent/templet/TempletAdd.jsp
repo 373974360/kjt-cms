@@ -12,9 +12,8 @@
 		<script src="<%=request.getContextPath()%>/siteconfig/codemirror/css.js"></script>
 		<script src="<%=request.getContextPath()%>/siteconfig/codemirror/javascript.js"></script>
 		<script src="<%=request.getContextPath()%>/siteconfig/codemirror/htmlmixed.js"></script>
-		  
 	  	<style>
-	    	.CodeMirror {border: 1px solid #CCC;height:500px;}
+	    	.CodeMirror {border: 1px solid #CCC;min-height:800px;}
 	  	</style>
 	</head>
 	<body>
