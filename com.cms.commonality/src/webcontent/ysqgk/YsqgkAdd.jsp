@@ -22,10 +22,10 @@
 <body>
 	<div class="nui-fit" style="padding-top:5px">
 		<div id="form1" method="post">
-			<div id="panel1" class="nui-panel" title="申请人信息" iconCls="icon-add" style="width:100%;height:300px;" 
-			showToolbar="true" showCollapseButton="true" showFooter="true" allowResize="true" collapseOnTitleClick="true">
+			<div id="panel1" class="nui-panel" title="申请人信息" iconCls="icon-add" style="width:100%;height:280px;" 
+			showToolbar="true" showCollapseButton="true" showFooter="true" allowResize="true" collapseOnTitleClick="true" maskOnLoad="false">
 				<input name="ysqgk.createDtime" class="nui-hidden" value="<%=curTime %>"/>
-				<table id="table1" style="width:70%; table-layout:fixed;">
+				<table id="table1" align="center" style="width:90%; table-layout:fixed;" class="nui-form-table">
 					<tr>
 						<th class="nui-form-label">申请人类型：</th>
     					<td colspan="2">
@@ -34,6 +34,8 @@
 		    					url="<%=request.getContextPath()%>/commonality/ysqgk/ysqType.txt" onvaluechanged="onSelected" />
     					</td>  					
 					</tr> 
+					</table>
+				<table id="table6" align="center" style="width:90%; table-layout:fixed;" class="nui-form-table">
 					<tr>
 						<th class="nui-form-label">申请编号：</th>
 		                <td colspan="2">    
@@ -45,7 +47,7 @@
 		                </td>
 					</tr>  					    				
 				</table>
-				<table id="table2" style="width:70%; table-layout:fixed;">
+				<table id="table2" align="center" style="width:90%; table-layout:fixed;" class="nui-form-table">
 					<tr>
 		                <th class="nui-form-label">申请人姓名：</th>
 		                <td colspan="2">    
@@ -70,7 +72,7 @@
 		                </td>	                
 	            	</tr>
 	            </table>
-	            <table id="table3" style="width:70%; table-layout:fixed; display: none;">
+	            <table id="table3" align="center" style="width:90%; table-layout:fixed;display: none;" class="nui-form-table">	            
 	            	<tr>
 		                <th class="nui-form-label">组织机构代码：</th>
 		                <td colspan="2">    
@@ -92,7 +94,7 @@
 		                </td>	                
 	            	</tr>
 	            </table>
-	            <table id="table4" style="width:70%; table-layout:fixed;">
+	           <table id="table4" align="center" style="width:90%; table-layout:fixed;" class="nui-form-table">
 	            	<tr>
 		                <th class="nui-form-label">联系电话：</th>
 		                <td colspan="2">    
@@ -125,9 +127,9 @@
 	            	</tr>
 				</table>
 			</div>	
-			<div id="panel2" class="nui-panel" title="所需信息情况" iconCls="icon-add" style="width:100%;height:350px;" 
-			showToolbar="true" showCollapseButton="true" showFooter="true" allowResize="true" collapseOnTitleClick="true">
-				<table id="table5" style="width:70%; table-layout:fixed;">
+			<div id="panel2" class="nui-panel" title="所需信息情况" iconCls="icon-add" style="width:100%;height:350;" 
+			showToolbar="true" showCollapseButton="true" showFooter="true" allowResize="true" collapseOnTitleClick="true" maskOnLoad="false">
+				<table id="table5" align="center" style="width:90%; table-layout:fixed;" class="nui-form-table">
 					<tr>
 						<th class="nui-form-label">所需内容描述：</th>
 						<td>
@@ -213,13 +215,18 @@
 	        //申请人类型不同时的页面展示处理
 	        function onSelected(){
 	        	var obj = $("input[name='ysqgk.ysqType']").val();
-	        		
-	        	if(obj == 2){	        		
-	        		$("#table2").hide();
+	        	//首先清空输入框
+	        	$(":input").val("");	
+	        	$(":textarea").val("");
+	        	if(obj == 2){
+	        		      		   		
+	        		$("#table2").hide();					        		
 	        		$("#table3").show();
-	        	}else{
-	        		$("#table2").show();
-	        		$("#table3").hide();	
+	        		
+	        	}else if(obj == 1){
+	        			
+	        		$("#table3").hide();
+	        		$("#table2").show();	
 	        	}
 	        	
 	        }

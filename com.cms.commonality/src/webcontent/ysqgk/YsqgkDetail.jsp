@@ -28,7 +28,7 @@
 				<input id="ysqgk.id" name="ysqgk.id" class="nui-hidden">
 				<input name="ysqgk.createDtime" class="nui-hidden" />
 				<input id="ysqType" name="ysqgk.ysqType" class="nui-hidden"/>
-				<table id="table1" style="width:70%; table-layout:fixed;">
+				<table id="table1" align="center" style="width:90%; table-layout:fixed;">
 					<tr>
 						<th class="nui-form-label">申请编号：</th>
 		                <td colspan="2">    
@@ -40,7 +40,7 @@
 		                </td>
 					</tr>  					    				
 				</table>
-				<table id="table2" style="width:70%; table-layout:fixed;">
+				<table id="table2" align="center" style="width:90%; table-layout:fixed;">
 					<tr>
 		                <th class="nui-form-label">申请人姓名：</th>
 		                <td colspan="2">    
@@ -66,7 +66,7 @@
 		                </td>	                
 	            	</tr>
 	            </table>
-	            <table id="table3" style="width:70%; table-layout:fixed; display: none;">
+	            <table id="table3" align="center" style="width:90%; table-layout:fixed; display: none;">
 	            	<tr>
 		                <th class="nui-form-label">组织机构代码：</th>
 		                <td colspan="2">    
@@ -88,7 +88,7 @@
 		                </td>	                
 	            	</tr>
 	            </table>
-	            <table id="table4" style="width:70%; table-layout:fixed;">
+	            <table id="table4" align="center" style="width:90%; table-layout:fixed;">
 	            	<tr>
 		                <th class="nui-form-label">联系电话：</th>
 		                <td colspan="2">    
@@ -123,7 +123,7 @@
 			</div>	
 			<div id="panel2" class="nui-panel" title="所需信息情况" iconCls="icon-add" style="width:100%;height:350;" 	
     					showToolbar="true" showCollapseButton="true" showFooter="true" allowResize="true" collapseOnTitleClick="true">
-				<table id="table5" style="width:70%; table-layout:fixed;">
+				<table id="table5" align="center" style="width:90%; table-layout:fixed;">
 					<tr>
 						<th class="nui-form-label">所需内容描述：</th>
 						<td>

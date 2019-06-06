@@ -52,7 +52,7 @@
     				<input name="sq.replyOrgName" class="nui-hidden"/>
     				<input name="sq.subOrgId" class="nui-hidden"/>
     				<input name="sq.subOrgName" class="nui-hidden"/>    				
-					<table id="table1" style="width:70%; table-layout:fixed;" border="0">
+					<table id="table1" align="center" style="width:90%; table-layout:fixed;" border="0">
 						<tr>			                
 			                <th class="nui-form-label">来信人姓名：</th>
 			                <td >    
@@ -77,7 +77,7 @@
     			</div>
     			<div id="panel2" class="nui-panel" title="信件信息" iconCls="icon-add" style="width:100%;height:350;" 
     					showToolbar="true" showCollapseButton="true" showFooter="true" allowResize="true" collapseOnTitleClick="true">  				
-					<table id="table2" style="width:90%; table-layout:fixed;" border="0">
+					<table id="table2" align="center" style="width:90%; table-layout:fixed;" border="0">
 						<tr>
 			                <th class="nui-form-label">来信标题：</th>
 			                <td colspan="1">    
