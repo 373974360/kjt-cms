@@ -53,6 +53,7 @@
 							<a class="nui-button" iconCls="icon-add" onclick="add()">录入 </a>
 							<a id="update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑 </a>
 							<a class="nui-button" iconCls="icon-remove" onclick="remove()">删除</a>
+							<a class="nui-button" iconCls="icon-reload" onclick="reload()">刷新</a>
 						</td>
 					</tr>
 				</table>
@@ -195,6 +196,11 @@
 			function reset() {
 				var form = new nui.Form("#queryform");//将普通form转为nui的form
 				form.reset();
+			}
+			
+			//刷新
+			function reload(){
+				grid.reload();
 			}
 	
 			//enter键触发查询

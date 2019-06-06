@@ -218,7 +218,7 @@
 				var row = grid.getRowByUID(row_uid);
 				if (row){
 					nui.open({
-						url : "<%=request.getContextPath()%>/commonality/ysqgk/ysqgkDetail.jsp?ysqgkId="+row.id,
+						url : "<%=request.getContextPath()%>/commonality/ysqgk/YsqgkDetail.jsp?ysqgkId="+row.id,
 						title : "依申请公开详情&处理",
 						width : '80%',
 						height : '100%',

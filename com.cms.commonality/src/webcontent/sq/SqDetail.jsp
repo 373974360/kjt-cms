@@ -494,8 +494,8 @@
 		    }
 		    
 		    //单击展开详情按钮时发生
-			function detailsRow() {
-				var row = grid.getSelected();
+			function detailsRow(row_uid) {
+				var row = grid.getRowByUID(row_uid);
 					nui.open({
 						url : "<%=request.getContextPath()%>/commonality/sqProcess/SqProDetail.jsp",
 						title : "处理内容",

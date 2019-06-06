@@ -217,18 +217,33 @@
 	        		$("#table3").hide();	
 	        	}
 	        }
-	       	//回复申请	
+	       	//回复申请弹出框	
 	        function onReply(){
 	        	nui.open({
-						url : "<%=request.getContextPath()%>/commonality/ysqgk/ysqgkReply.jsp?ysqgkId="+"<%=ysqgkId %>",
+						url : "<%=request.getContextPath()%>/commonality/ysqgk/YsqgkReply.jsp?ysqgkId="+"<%=ysqgkId %>",
 						title : "回复",
 						width : '60%',
 						height : '70%',
 						onload : function() {						
 						}
 					});		
-	        
-	        }        
+	        }    
+	        //打印详页 
+	        function onPrint(){
+	        	var data = form.getData(false,true);
+	        	nui.open({
+						url : "<%=request.getContextPath()%>/commonality/ysqgk/YsqgkPrint.jsp",
+						title : "打印",
+						width : '80%',
+						height : '100%',
+						onload : function() {
+							var iframe = this.getIFrameEl();						
+							//直接从页面获取，不用去后台获取
+							iframe.contentWindow.setData(data);							
+						}
+					});		
+	        } 
+	          
 			function CloseWindow(action){
 				if(action=="close"){
 
