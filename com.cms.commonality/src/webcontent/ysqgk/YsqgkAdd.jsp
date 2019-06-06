@@ -216,8 +216,8 @@
 	        function onSelected(){
 	        	var obj = $("input[name='ysqgk.ysqType']").val();
 	        	//首先清空输入框
-	        	$(":input").val("");	
-	        	$(":textarea").val("");
+	        	$("input").val('');	
+	        	$("textarea").val('');
 	        	if(obj == 2){
 	        		      		   		
 	        		$("#table2").hide();					        		
