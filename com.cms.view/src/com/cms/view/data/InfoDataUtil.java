@@ -4,6 +4,7 @@
 package com.cms.view.data;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -27,6 +28,41 @@ import commonj.sdo.DataObject;
  */
 @Bizlet("网站前台获取信息相关类")
 public class InfoDataUtil {
+	public static int getHits(String infoId){
+		int hits = 0;
+		String sql = "select hits from cms_info where id="+infoId+"";
+		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				hits = rs.getInt("hits");
+			}
+			updateHits(infoId);
+			return hits+1;
+		} catch (Throwable e) {
+			throw new RuntimeException(e);
+		} finally {
+			close(rs);
+			close(stmt);
+			close(conn);
+		}
+	}
+	public static void updateHits(String infoId) {
+		String sql = "update cms_info set hits = hits+1 where id = "+infoId;
+		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
+		PreparedStatement pstmt;
+		try {
+	        pstmt = (PreparedStatement) conn.prepareStatement(sql);
+	        pstmt.executeUpdate();
+	        pstmt.close();
+	        conn.close();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
 
 	public static DataObject getInfoData(String infoId,String infoStatus){
 		String sql = "select * from cms_info i,cms_info_category c where i.cat_id=c.id and i.id="+infoId+"";
