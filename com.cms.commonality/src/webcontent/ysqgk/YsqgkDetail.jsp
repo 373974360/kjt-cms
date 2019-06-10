@@ -171,6 +171,17 @@
 					</tr> 					    				
 				</table>
 			</div>
+			<div id="panel3" class="nui-panel" title="回复内容" iconCls="icon-add" style="display:none;width:100%;height:350;" 	
+    					showToolbar="true" showCollapseButton="true" showFooter="true" allowResize="true" collapseOnTitleClick="true">
+    			<table style="width:100%; table-layout:fixed;" class="nui-form-table">
+    				<tr>
+    					
+						<td>
+						<span id="ReplyContent"></span>
+    					</td>    					
+    				</tr>
+    			</table>
+    		</div>
 			<div property="footer" style="text-align:center;padding-top:5px;padding-bottom:5px;" borderStyle="border:0;">		        
 		        <a class="nui-button" style="width:85px;" iconCls="icon-edit" onclick="onReply()">回复申请</a>
 		        <span style="display:inline-block;width:20px;"></span>
@@ -185,10 +196,15 @@
 	        nui.parse();
 	        var form = new nui.Form("form1");	        	      	
 	     
-			function setData(data) {
-				data = nui.clone(data);				
+	     	var data_;
+			function setDataParams(data){
+				data_ = nui.clone(data);
+	  	       	setData();
+			}  
+	     
+			function setData() {							
 				var json = nui.encode({
-					ysqgk : data
+					ysqgk : data_
 				});
 				$.ajax({
 						url : "com.cms.commonality.YsqgkService.getYsqgk.biz.ext",
@@ -201,7 +217,8 @@
 							//区别申请人列表
 							onSelected(obj.ysqgk.ysqType);	
 							$("span[id=content]").html(obj.ysqgk.content);	
-							$("span[id=DesContent]").html(obj.ysqgk.description);											
+							$("span[id=DesContent]").html(obj.ysqgk.description);
+							$("span[id=ReplyContent]").html(obj.ysqgk.replyContent);											
 							form.setData(obj);
 							form.setChanged(false);
 						}
@@ -225,6 +242,13 @@
 						width : '60%',
 						height : '70%',
 						onload : function() {						
+						},
+						ondestroy : function(action) {
+							if (action == "saveSuccess") {
+								//实时显示回复内容在详情页
+								setData();
+								$("#panel3").show();
+							}
 						}
 					});		
 	        }    

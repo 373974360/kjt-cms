@@ -22,11 +22,7 @@
 						<td class="form_label">申请编码:</td>
 						<td colspan="1">
 							<input name="params/ysqCode" class="nui-textbox" />							
-						</td>
-						<td class="form_label">查询密码:</td>
-						<td colspan="1">
-							<input name="params/queryCode" class="nui-textbox" />							
-						</td>
+						</td>						
 						<td class="nui-form-label">回复：</td>
 		                <td colspan="1">    
 		                    <input name="params/isReply" width="40" class="nui-dictcombobox" dictTypeId="CMS_YESORNO" showNullItem="true"/>
@@ -226,7 +222,7 @@
 							var iframe = this.getIFrameEl();
 							var data = row;
 							//直接从页面获取，不用去后台获取
-							iframe.contentWindow.setData(data);		
+							iframe.contentWindow.setDataParams(data);		
 						},
 						ondestroy : function(action) {
 							if (action == "saveSuccess") {
