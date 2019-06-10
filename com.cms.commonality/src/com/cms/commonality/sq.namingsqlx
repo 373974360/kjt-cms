@@ -35,6 +35,6 @@
 				   	</isEqual>
 	    		</isNotNull>
 	    	</dynamic>	    	
-	    	ORDER BY REPLY_TIME DESC
+	    	ORDER BY create_time DESC
 	    </select>
 </sqlMap>
