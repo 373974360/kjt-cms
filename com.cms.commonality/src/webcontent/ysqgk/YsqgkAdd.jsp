@@ -15,13 +15,16 @@
 %>
 
 <head>
+	<meta http-equiv="pragma" content="no-cache">
+ 	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">
 	<link id="css_skin" rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/coframe/tools/skins/skin1/css/style.css"/>
 	<link id="css_icon" rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/coframe/tools/icons/icon.css"/>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/common/nui/nui.js"></script>	
 </head>
 <body>
 	<div class="nui-fit" style="padding-top:5px">
-		<div id="form1" method="post">
+		<div id="form1" method="post" autocomplete="off">
 			<div id="panel1" class="nui-panel" title="申请人信息" iconCls="icon-add" style="width:100%;height:280px;" 
 			showToolbar="true" showCollapseButton="true" showFooter="true" allowResize="true" collapseOnTitleClick="true" maskOnLoad="false">
 				<input name="ysqgk.createDtime" class="nui-hidden" value="<%=curTime %>"/>
@@ -39,7 +42,8 @@
 					<tr>
 						<th class="nui-form-label">申请编号：</th>
 		                <td colspan="2">    
-		                    <input name="ysqgk.ysqCode" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空" onvalidation="onEnglishAndNumberValidation"/> 
+		                    <input name="ysqgk.ysqCode" class="nui-textbox nui-form-input" required="true"
+		                     requiredErrorText="不能为空" onvalidation="onEnglishAndNumberValidation"/> 
 		                </td>
 		                <th class="nui-form-label">查询密码：</th>
 		                <td colspan="2">    
@@ -51,11 +55,11 @@
 					<tr>
 		                <th class="nui-form-label">申请人姓名：</th>
 		                <td colspan="2">    
-		                    <input name="ysqgk.name" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空"/> 
+		                    <input name="ysqgk.name" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空"  autocomplete="off"/> 
 		                </td>	
 		                <th class="nui-form-label">工作单位：</th>
 		                <td colspan="2">    
-		                    <input name="ysqgk.orgName" class="nui-textbox nui-form-input"/> 
+		                    <input name="ysqgk.orgName" class="nui-textbox nui-form-input" autocomplete="off"/> 
 		                </td>	                
 	            	</tr>
 	            	<tr>
@@ -64,12 +68,12 @@
 		                    <input name="ysqgk.cardName" class="nui-combobox nui-form-input" style="width:150px;" 
 		                    dataField="cardName" textField="text" valueField="id" 
 							url="<%=request.getContextPath()%>/commonality/ysqgk/cardName.txt"  
-							showNullItem="true" allowInput="false"/> 
+							showNullItem="true" allowInput="false" autocomplete="off"/> 
 		                </td>	
 		                <th class="nui-form-label">证件号码：</th>
 		                <td colspan="2">    
 		                    <input name="ysqgk.cardCode" class="nui-textbox nui-form-input" 
-		                    required="true" requiredErrorText="不能为空" onvalidation="onIDCardsValidation"/> 
+		                    required="true" requiredErrorText="不能为空" onvalidation="onIDCardsValidation" autocomplete="off"/> 
 		                </td>	                
 	            	</tr>
 	            </table>
@@ -191,9 +195,9 @@
     <script type="text/javascript">
 	        nui.parse();
 	        var form = new nui.Form("form1");	        
-	      
+	      	
 	        function SaveData() {
-	           	form.validate();
+	           	form.validate();	           	
 		        if(form.isValid()==false) return;
 		        var data = form.getData(false,true);
 		        var json = nui.encode(data);
@@ -217,8 +221,8 @@
 	        function onSelected(){
 	        	var obj = $("input[name='ysqgk.ysqType']").val();
 	        	//首先清空输入框
-	        	$("input").val('');	
-	        	$("textarea").val('');
+	        	$("input").attr("value","");	
+	        	$("textarea").attr("value","");
 	        	if(obj == 2){
 	        		      		   		
 	        		$("#table2").hide();					        		
