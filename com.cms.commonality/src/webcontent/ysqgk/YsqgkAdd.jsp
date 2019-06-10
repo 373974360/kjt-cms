@@ -39,7 +39,7 @@
 					<tr>
 						<th class="nui-form-label">申请编号：</th>
 		                <td colspan="2">    
-		                    <input name="ysqgk.ysqCode" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空"/> 
+		                    <input name="ysqgk.ysqCode" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空" onvalidation="onEnglishAndNumberValidation"/> 
 		                </td>
 		                <th class="nui-form-label">查询密码：</th>
 		                <td colspan="2">    
@@ -64,11 +64,12 @@
 		                    <input name="ysqgk.cardName" class="nui-combobox nui-form-input" style="width:150px;" 
 		                    dataField="cardName" textField="text" valueField="id" 
 							url="<%=request.getContextPath()%>/commonality/ysqgk/cardName.txt"  
-							showNullItem="true" allowInput="true"/> 
+							showNullItem="true" allowInput="false"/> 
 		                </td>	
 		                <th class="nui-form-label">证件号码：</th>
 		                <td colspan="2">    
-		                    <input name="ysqgk.cardCode" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空"/> 
+		                    <input name="ysqgk.cardCode" class="nui-textbox nui-form-input" 
+		                    required="true" requiredErrorText="不能为空" onvalidation="onIDCardsValidation"/> 
 		                </td>	                
 	            	</tr>
 	            </table>
@@ -112,7 +113,7 @@
 		                </td>	
 		                <th class="nui-form-label">电子邮箱：</th>
 		                <td colspan="2">    
-		                    <input name="ysqgk.email" class="nui-textbox nui-form-input" /> 
+		                    <input name="ysqgk.email" class="nui-textbox nui-form-input" vtype="email;rangeLength:5,20;" emailErrorText="请输入邮箱格式"/> 
 		                </td>	                
 	            	</tr>
 	            	<tr>
@@ -229,6 +230,41 @@
 	        		$("#table2").show();	
 	        	}
 	        	
+	        }
+	        
+	        //身份证号验证
+	        function onIDCardsValidation(e){
+	        	if(e.isValid){
+	        		if (e.value.length < 15 || e.value.length > 18 || isIdentity(e.value) == false) {		        		
+		        			e.errorText = "请输入正确身份证号";
+	                    	e.isValid = false;		        		
+		        	}
+	        	}
+	        }
+	        
+	        function isIdentity(v){	        	
+		        	var re = new RegExp("^([0-9]){7,18}(x|X)?$");
+	            	if (re.test(v)){
+	            		return true;
+	            	}else{
+	            		return false;	
+	            	}	            	            
+	        }
+	        
+	        //申请编号验证
+	        function onEnglishAndNumberValidation(e){
+	        	if (e.isValid) {
+	                if (isEnglishAndNumber(e.value) == false) {
+	                    e.errorText = "请输入正确编号";
+	                    e.isValid = false;
+	                }
+            	}
+	        }
+	         /* 是否英文+数字 */
+        	function isEnglishAndNumber(v) {           
+	            var re = new RegExp("^[0-9a-zA-Z\_]+$");
+	            if (re.test(v)) return true;
+	            return false;
 	        }
 	        	        
 			function CloseWindow(action){
