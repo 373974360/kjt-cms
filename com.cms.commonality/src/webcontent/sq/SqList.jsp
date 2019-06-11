@@ -53,9 +53,10 @@
 							<a class="nui-button" iconCls="icon-add" onclick="add()">录入 </a>
 							<a id="update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑 </a>
 							<a class="nui-button" iconCls="icon-remove" onclick="remove()">删除</a>
-							<a class="nui-button" iconCls="icon-goto" onclick="isPublishOrNot(1,'发布')">发布</a>
-							<a class="nui-button" iconCls="icon-undo" onclick="isPublishOrNot(2,'撤销')">发布撤销</a>
-							<a class="nui-button" iconCls="icon-reload" onclick="reload()">刷新</a>
+							<a class="nui-button" iconCls="icon-goto" onclick="isPublishOrNot(1,'更新','是')">发布</a>
+							<a class="nui-button" iconCls="icon-undo" onclick="isPublishOrNot(2,'更新','否')">撤销发布</a>
+							<a class="nui-button" iconCls="icon-goto" onclick="isOpenOrNot(1,'更新','是')">公开</a>
+							<a class="nui-button" iconCls="icon-undo" onclick="isOpenOrNot(2,'更新','否')">撤销公开</a>						
 						</td>
 					</tr>
 				</table>
@@ -179,13 +180,13 @@
 				}
 			}
 			//发布or撤销发布
-			function isPublishOrNot(isPublish,msg){
+			function isPublishOrNot(isPublish,msg,state){
 				var rows = grid.getSelecteds();
 				for(var i=0;i<rows.length;i++){
 					rows[i].isPublish = isPublish;
 				}
 				if (rows.length > 0) {
-					nui.confirm("确定"+msg+"选中记录的发布状态？","系统提示",
+					nui.confirm("确定"+msg+"选中记录的发布状态为‘"+state+"’？","系统提示",
 					function(action) {
 						if (action == "ok") {
 							var json = nui.encode({
@@ -193,7 +194,7 @@
 							});
 							grid.loading("正在"+msg+"中,请稍等...");
 							$.ajax({
-								url : "com.cms.commonality.SqService.setSqPublishOrNot.biz.ext",
+								url : "com.cms.commonality.SqService.setSqStateOrNot.biz.ext",
 								type : 'POST',
 								data : json,
 								cache : false,
@@ -216,6 +217,45 @@
 					nui.alert("请选中一条记录！");
 				}
 			}
+			//公开or撤销公开
+			function isOpenOrNot(isOpen,msg,state){
+				var rows = grid.getSelecteds();
+				for(var i=0;i<rows.length;i++){
+					rows[i].isOpen = isOpen;
+				}
+				if (rows.length > 0) {
+					nui.confirm("确定"+msg+"选中记录的公开状态为‘"+state+"’？","系统提示",
+					function(action) {
+						if (action == "ok") {
+							var json = nui.encode({
+								sqs : rows
+							});
+							grid.loading("正在"+msg+"中,请稍等...");
+							$.ajax({
+								url : "com.cms.commonality.SqService.setSqStateOrNot.biz.ext",
+								type : 'POST',
+								data : json,
+								cache : false,
+								contentType : 'text/json',
+								success : function(text) {
+									var returnJson = nui.decode(text);
+									if (returnJson.exception == null) {
+										grid.reload();
+										nui.alert(msg+"成功","系统提示",function(action) {
+										});
+									} else {
+										grid.unmask();
+										nui.alert(msg+"失败","系统提示");
+									}
+								}
+							});
+						}
+					});
+				} else {
+					nui.alert("请选中一条记录！");
+				}
+			
+			}
 			//重新刷新此页面
 			function refreshIt() {
 				var form = new nui.Form("#queryform");
@@ -235,11 +275,6 @@
 			function reset() {
 				var form = new nui.Form("#queryform");//将普通form转为nui的form
 				form.reset();
-			}
-			
-			//刷新
-			function reload(){
-				grid.reload();
 			}
 	
 			//enter键触发查询
@@ -271,7 +306,6 @@
 							//iframe.contentWindow.setData(data);
 							//iframe.contentWindow.setData2(data);
 							iframe.contentWindow.setDataParams(data);
-
 						},						
 						ondestroy : function(action) {							
 							if (action == "saveSuccess") {

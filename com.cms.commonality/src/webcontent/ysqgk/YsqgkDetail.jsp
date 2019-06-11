@@ -291,7 +291,7 @@
 						}
 					});		
 	        } 
-	          
+	        //一键发布or撤销
 	        function onSetPublish(isPublish,msg){
 	        	data_.isPublish = isPublish;
 	        	var json = nui.encode({
@@ -310,11 +310,11 @@
 									if (returnJson.exception == null) {										
 										nui.alert(msg+"成功","系统提示",function(action) {
 										});
-										onCancel();
+										CloseWindow("saveSuccess");
 									} else {
 										grid.unmask();
 										nui.alert(msg+"失败","系统提示");
-										onCancel();
+										CloseWindow();
 									}
 								},								
 						});
@@ -334,7 +334,7 @@
 	            SaveData();
 	        }
 	        function onCancel(e) {
-	            CloseWindow("cancel");
+	            CloseWindow("saveSuccess");
 	        }
 	  
 	    </script>

@@ -173,7 +173,7 @@
 		        <span style="display:inline-block;width:20px;"></span>
 		        <a class="nui-button" style="width:85px;" iconCls="icon-print" onclick="onPrint()">信件打印</a>	
 		        <span style="display:inline-block;width:20px;"></span>
-		        <a class="nui-button" style="width:85px;" iconCls="icon-goto" onclick="onSetPublish(1,'一键发布')">一键发布</a>
+		        <a class="nui-button" style="width:85px;" iconCls="icon-goto" onclick="onSetPublish(1,'发布')">一键发布</a>
 	        <%
 	        	}
 	         %>	        
@@ -459,9 +459,9 @@
 				else
 					return window.close();
 			}
-			
+			//关闭弹出框，此时（saveSuccess）传到父页面的回调函数，刷新父页面表单
 			function onClose(e) {
-				CloseWindow("cancel");
+				CloseWindow("saveSuccess");
 			}
 			
 			function onCancel(){
@@ -560,7 +560,7 @@
 						}
 					});			
 	        }
-	        //一键发布
+	        //一键发布or一键撤销
 	        function onSetPublish(isPublish,msg){
 	        	data_.isPublish = isPublish;
 	        	var json = nui.encode({
@@ -579,12 +579,11 @@
 									if (returnJson.exception == null) {										
 										nui.alert(msg+"成功","系统提示",function(action) {
 										});
-										
-										onClose();
+										CloseWindow("saveSuccess");
 									} else {
 										grid.unmask();
 										nui.alert(msg+"失败","系统提示");
-										onClose();
+										CloseWindow();
 									}
 								},								
 						});
