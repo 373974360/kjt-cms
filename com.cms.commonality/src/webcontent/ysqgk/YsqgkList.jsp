@@ -63,7 +63,7 @@
 			<div class="nui-fit">
 				<div id="datagrid1" dataField="ysqgk" class="nui-datagrid" style="width: 100%; height: 100%;"
 					url="com.cms.commonality.YsqgkService.queryYsqgkByNamedSQL.biz.ext"
-					pageSize="10" showPageInfo="true" multiSelect="true" onselectionchanged="selectionChanged" allowSortColumn="false">
+					pageSize="20" showPageInfo="true" multiSelect="true" onselectionchanged="selectionChanged" allowSortColumn="false">
 					<div property="columns">
 						<div type="checkcolumn" align="center" width="10"></div>
 						<div field="id" headerAlign="center" allowSort="true" visible="false">ID</div>

@@ -26,10 +26,10 @@ import commonj.sdo.DataObject;
  *
  */
 @Bizlet("")
-public class AppealUtil {
+public class YsqgklUtil {
 	
-	public static DataObject getAppealContent(String sqId){
-		String sql = "select * from cms_sq where id="+sqId+"";
+	public static DataObject getYsqgkContent(String sqId){
+		String sql = "select * from cms_ysqgk where id="+sqId+"";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -38,27 +38,37 @@ public class AppealUtil {
 			rs = stmt.executeQuery(sql);
 			DataObject[] dobj = new DataObject[1];
 			while (rs.next()) {
-				DataObject dtr = DataObjectUtil.createDataObject("com.cms.view.sq.CmsSq");
+				DataObject dtr = DataObjectUtil.createDataObject("com.cms.view.ysqgk.CmsYsqgk");
 				dtr.setString("id", rs.getString("id"));
-				dtr.setString("mdId", rs.getString("md_id"));
-				dtr.setString("title", rs.getString("title"));
-				dtr.setString("username", rs.getString("username"));
-				dtr.setString("address", rs.getString("address"));
-				dtr.setString("phone", rs.getString("phone"));
+				dtr.setString("ysqCode", rs.getString("ysq_code"));
+				dtr.setString("queryCode", rs.getString("query_code"));
+				dtr.setString("ysqType", rs.getString("ysq_type"));
+				dtr.setString("name", rs.getString("name"));
+				dtr.setString("orgName", rs.getString("org_name"));
+				dtr.setString("cardName", rs.getString("card_name"));
+				dtr.setString("cardCode", rs.getString("card_code"));
+				dtr.setString("tel", rs.getString("tel"));
+				dtr.setString("mobile", rs.getString("tel"));
+				dtr.setString("telCz", rs.getString("tel_cz"));
 				dtr.setString("email", rs.getString("email"));
-				dtr.setString("isOpen", rs.getString("is_open"));
+				dtr.setString("address", rs.getString("address"));
+				dtr.setString("yzbm", rs.getString("yzbm"));
+				dtr.setString("orgCode", rs.getString("org_code"));
+				dtr.setString("licence", rs.getString("licence"));
+				dtr.setString("legalperson", rs.getString("legalperson"));
+				dtr.setString("linkman", rs.getString("linkman"));
 				dtr.setString("content", FormatUtil.clobToStr(rs.getClob("content")));
-				dtr.setString("createTime", rs.getString("create_time"));
-				dtr.setString("subOrgId", rs.getString("sub_org_id"));
-				dtr.setString("subOrgName", rs.getString("sub_org_name"));
-				dtr.setString("replyOrgId", rs.getString("reply_org_id"));
-				dtr.setString("replyOrgName", rs.getString("reply_org_name"));
-				dtr.setString("replyTime", rs.getString("reply_time"));
+				dtr.setString("description", FormatUtil.clobToStr(rs.getClob("description")));
+				dtr.setString("isDerate", rs.getString("is_derate"));
+				dtr.setString("offerType", rs.getString("offer_type"));
+				dtr.setString("getMethod", rs.getString("get_method"));
+				dtr.setString("isOther", rs.getString("is_other"));
+				dtr.setString("createDtime", rs.getString("create_dtime"));
 				dtr.setString("replyContent", FormatUtil.clobToStr(rs.getClob("reply_content")));
+				dtr.setString("replyDtime", rs.getString("reply_dtime"));
 				dtr.setString("isReply", rs.getString("is_reply"));
 				dtr.setString("isPublish", rs.getString("is_publish"));
-				dtr.setString("searchCode", rs.getString("search_code"));
-				dtr.setString("searchPwd", rs.getString("search_pwd"));
+				dtr.setString("isOpen", rs.getString("is_open"));
 				dobj[0] = dtr;
 			}
 			return dobj[0];
@@ -71,12 +81,12 @@ public class AppealUtil {
 		}
 	}
 	
-	public static DataObject[] getAppealList(String params){
+	public static DataObject[] getYsqgkList(String params){
 		Map<String, String> con_map = new HashMap<String, String>();
 		getInfoSearchCon(params,con_map);
 		int counts = 0;
 		int it = 0;
-		String sql = "select * from (select row_.*, rownum rownum_ from (select * from cms_sq where 1=1";
+		String sql = "select * from (select row_.*, rownum rownum_ from (select * from cms_ysqgk where 1=1";
 		sql = initSql(sql,con_map);
 		sql += " order by "+con_map.get("orderby")+") row_ where rownum <="+con_map.get("page_size")+"+"+con_map.get("start_num")+") where rownum_ >="+con_map.get("start_num")+" + 1";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
@@ -93,27 +103,37 @@ public class AppealUtil {
 			}
 			DataObject[] dobj = new DataObject[counts];
 			while (rs.next()) {
-				DataObject dtr = DataObjectUtil.createDataObject("com.cms.view.sq.CmsSq");
+				DataObject dtr = DataObjectUtil.createDataObject("com.cms.view.ysqgk.CmsYsqgk");
 				dtr.setString("id", rs.getString("id"));
-				dtr.setString("mdId", rs.getString("md_id"));
-				dtr.setString("title", rs.getString("title"));
-				dtr.setString("username", rs.getString("username"));
-				dtr.setString("address", rs.getString("address"));
-				dtr.setString("phone", rs.getString("phone"));
+				dtr.setString("ysqCode", rs.getString("ysq_code"));
+				dtr.setString("queryCode", rs.getString("query_code"));
+				dtr.setString("ysqType", rs.getString("ysq_type"));
+				dtr.setString("name", rs.getString("name"));
+				dtr.setString("orgName", rs.getString("org_name"));
+				dtr.setString("cardName", rs.getString("card_name"));
+				dtr.setString("cardCode", rs.getString("card_code"));
+				dtr.setString("tel", rs.getString("tel"));
+				dtr.setString("mobile", rs.getString("tel"));
+				dtr.setString("telCz", rs.getString("tel_cz"));
 				dtr.setString("email", rs.getString("email"));
-				dtr.setString("isOpen", rs.getString("is_open"));
+				dtr.setString("address", rs.getString("address"));
+				dtr.setString("yzbm", rs.getString("yzbm"));
+				dtr.setString("orgCode", rs.getString("org_code"));
+				dtr.setString("licence", rs.getString("licence"));
+				dtr.setString("legalperson", rs.getString("legalperson"));
+				dtr.setString("linkman", rs.getString("linkman"));
 				dtr.setString("content", FormatUtil.clobToStr(rs.getClob("content")));
-				dtr.setString("createTime", rs.getString("create_time"));
-				dtr.setString("subOrgId", rs.getString("sub_org_id"));
-				dtr.setString("subOrgName", rs.getString("sub_org_name"));
-				dtr.setString("replyOrgId", rs.getString("reply_org_id"));
-				dtr.setString("replyOrgName", rs.getString("reply_org_name"));
-				dtr.setString("replyTime", rs.getString("reply_time"));
+				dtr.setString("description", FormatUtil.clobToStr(rs.getClob("description")));
+				dtr.setString("isDerate", rs.getString("is_derate"));
+				dtr.setString("offerType", rs.getString("offer_type"));
+				dtr.setString("getMethod", rs.getString("get_method"));
+				dtr.setString("isOther", rs.getString("is_other"));
+				dtr.setString("createDtime", rs.getString("create_dtime"));
 				dtr.setString("replyContent", FormatUtil.clobToStr(rs.getClob("reply_content")));
+				dtr.setString("replyDtime", rs.getString("reply_dtime"));
 				dtr.setString("isReply", rs.getString("is_reply"));
 				dtr.setString("isPublish", rs.getString("is_publish"));
-				dtr.setString("searchCode", rs.getString("search_code"));
-				dtr.setString("searchPwd", rs.getString("search_pwd"));
+				dtr.setString("isOpen", rs.getString("is_open"));
 				dobj[it] = dtr;
 				it++;
 			}
@@ -127,9 +147,9 @@ public class AppealUtil {
 		}
 	}
 	
-	public static int getAppealCount(Map<String, String> con_map){
+	public static int getYsqgkCount(Map<String, String> con_map){
 		int totle = 0;
-		String sql = "select count(id) as totle from cms_sq where 1=1";
+		String sql = "select count(id) as totle from cms_ysqgk where 1=1";
 		sql = initSql(sql,con_map);
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		Statement stmt = null;
@@ -153,33 +173,21 @@ public class AppealUtil {
 	public static String initSql(String sql, Map<String, String> con_map){
 		Set<String> keys = con_map.keySet();
 		for(String key : keys){
-			if(key.equals("md_id") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
-				sql += " and md_id in ("+con_map.get(key)+")";
+			if(key.equals("ysq_code") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+				sql += " and ysq_code = '"+con_map.get(key)+"'";
 			}
-			if(key.equals("title") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
-				sql += " and title like '%"+con_map.get(key)+"%'";
-			}
-			if(key.equals("is_reply") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
-				sql += " and is_reply = "+con_map.get(key);
-			}
-			if(key.equals("dept_id") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
-				sql += " and sub_org_id = '"+con_map.get(key)+"'";
-			}
-			if(key.equals("search_code") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
-				sql += " and search_code = '"+con_map.get(key)+"'";
-			}
-			if(key.equals("search_pwd") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
-				sql += " and search_pwd = '"+con_map.get(key)+"'";
+			if(key.equals("query_code") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+				sql += " and query_code = '"+con_map.get(key)+"'";
 			}
 		}
 		sql += " and is_publish = 1";
 		return sql;
 	}
-	public static TurnPageBean getAppealCount(String params){
+	public static TurnPageBean getYsqgkCount(String params){
 		Map<String, String> con_map = new HashMap<String, String>();
 		getInfoSearchCon(params,con_map);
         TurnPageBean tpb = new TurnPageBean();
-        tpb.setCount(getAppealCount(con_map));
+        tpb.setCount(getYsqgkCount(con_map));
         int cur_page = Integer.parseInt((String)con_map.get("current_page"));
         int page_size = Integer.parseInt((String)con_map.get("page_size"));
 
@@ -211,7 +219,7 @@ public class AppealUtil {
 	public static void getInfoSearchCon(String params, Map<String, String> con_map){
 		int cur_page = 1;
         int page_size = 15;
-        String orderby = "create_time desc";
+        String orderby = "create_dtime desc";
         String[] tempA = params.split(";");
         for (int i = 0; i < tempA.length; i++){
             if (tempA[i].toLowerCase().startsWith("orderby=")){
@@ -232,40 +240,16 @@ public class AppealUtil {
                     page_size = Integer.parseInt(ps);
                 }
             }
-            if (tempA[i].toLowerCase().startsWith("md_id=")){
-                String md_id = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
-                if ((!"".equals(md_id)) && (!md_id.startsWith("$md_id")) && (FormatUtil.isNumeric(md_id))) {
-                	con_map.put("md_id", md_id);
+            if (tempA[i].toLowerCase().startsWith("ysq_code=")){
+                String ysq_code = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
+                if ((!"".equals(ysq_code)) && (!ysq_code.startsWith("$ysq_code"))) {
+                    con_map.put("ysq_code", ysq_code);
                 }
             }
-            if (tempA[i].toLowerCase().startsWith("title=")){
-                String title = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
-                if ((!"".equals(title)) && (!title.startsWith("$title"))) {
-                    con_map.put("title", title);
-                }
-            }
-            if (tempA[i].toLowerCase().startsWith("is_reply=")){
-                String is_reply = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
-                if ((!"".equals(is_reply)) && (!is_reply.startsWith("$is_reply")) && (FormatUtil.isNumeric(is_reply))) {
-                    con_map.put("is_reply", is_reply);
-                }
-            }
-            if (tempA[i].toLowerCase().startsWith("dept_id=")){
-                String dept_id = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
-                if ((!"".equals(dept_id)) && (!dept_id.startsWith("$dept_id")) && (FormatUtil.isNumeric(dept_id))) {
-                    con_map.put("dept_id", dept_id);
-                }
-            }
-            if (tempA[i].toLowerCase().startsWith("search_code=")){
-                String search_code = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
-                if ((!"".equals(search_code)) && (!search_code.startsWith("$search_code"))) {
-                    con_map.put("search_code", search_code);
-                }
-            }
-            if (tempA[i].toLowerCase().startsWith("search_pwd=")){
-                String search_pwd = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
-                if ((!"".equals(search_pwd)) && (!search_pwd.startsWith("$search_pwd"))) {
-                    con_map.put("search_pwd", search_pwd);
+            if (tempA[i].toLowerCase().startsWith("query_code=")){
+                String query_code = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
+                if ((!"".equals(query_code)) && (!query_code.startsWith("$query_code"))) {
+                    con_map.put("query_code", query_code);
                 }
             }
         }

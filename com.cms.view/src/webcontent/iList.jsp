@@ -2,8 +2,14 @@
 <%@page pageEncoding="UTF-8"%>
 <%
 	String catId = request.getParameter("cat_id");
+	String t_id = request.getParameter("tm_id");
+	
 	VelocityInfoContextImp vc = new VelocityInfoContextImp(request);
-	vc.setTemplateID(catId,"listTemplet");
+	if(t_id!=null&&t_id!=""){
+		vc.setTemplateID(t_id);
+	}else{
+		vc.setTemplateID(catId,"listTemplet");
+	}
 	String content = vc.parseTemplate();
 	if(content != null && !"".equals(content) && content.length() > 0){
 		out.println(content);
