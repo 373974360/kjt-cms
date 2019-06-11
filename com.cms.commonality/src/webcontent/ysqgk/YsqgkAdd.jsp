@@ -200,6 +200,17 @@
 	           	form.validate();	           	
 		        if(form.isValid()==false) return;
 		        var data = form.getData(false,true);
+		        if(data.ysqgk.ysqType == 1){
+		        	data.ysqgk.orgCode = null;
+		        	data.ysqgk.licence = null;
+		        	data.ysqgk.legalperson = null;
+		        	data.ysqgk.linkman = null;
+		        }else{
+		        	data.ysqgk.name = null;
+		        	data.ysqgk.orgName = null;
+		        	data.ysqgk.cardName = null;
+		        	data.ysqgk.cardCode = null;		        		        
+		        }
 		        var json = nui.encode(data);
 	            $.ajax({
 	                url: "com.cms.commonality.YsqgkService.addYsqgk.biz.ext",
@@ -247,12 +258,12 @@
 	        }
 	        
 	        function isIdentity(v){	        	
-		        	var re = new RegExp("^([0-9]){7,18}(x|X)?$");
-	            	if (re.test(v)){
-	            		return true;
-	            	}else{
-	            		return false;	
-	            	}	            	            
+	        	var re = new RegExp("^([0-9]){7,18}(x|X)?$");
+            	if (re.test(v)){
+            		return true;
+            	}else{
+            		return false;	
+            	}	            	            
 	        }
 	        
 	        //申请编号验证
@@ -282,6 +293,7 @@
 	        function onOk(e) {
 	            SaveData();
 	        }
+	        
 	        function onCancel(e) {
 	            CloseWindow("cancel");
 	        }

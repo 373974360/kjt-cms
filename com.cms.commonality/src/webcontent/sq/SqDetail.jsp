@@ -151,32 +151,30 @@
 				</div>
     		</div>		    		   
 		    <div property="footer" style="text-align:center;padding-top:5px;padding-bottom:5px;" borderStyle="border:0;">
-		    <%
-		    	if(isPublish.equals("1")){
-		     %>		        
+		    	        
 		        <a class="nui-button" style="width:85px;" iconCls="icon-goto" onclick="onTo()">信件转办</a>
 		        <span style="display:inline-block;width:20px;"></span>
 		        <a class="nui-button" style="width:85px;" iconCls="icon-edit" onclick="onReply()">信件回复</a>
 		        <span style="display:inline-block;width:20px;"></span>
-		        <a class="nui-button" style="width:85px;" iconCls="icon-print" onclick="onPrint()">信件打印</a>	
+		        <a class="nui-button" style="width:85px;" iconCls="icon-print" onclick="onPrint()">信件打印</a>
+		        
+		    	<%
+		    	if(isPublish.equals("1")){
+		    	%>		
 		        <span style="display:inline-block;width:20px;"></span>
 		        <a class="nui-button" style="width:85px;" iconCls="icon-undo" onclick="onSetPublish(2,'撤销发布')">撤销发布</a>
-	        <%
+	        	<%
 	        	}
-	         %>	
-	         <%
+	         	%>
+	         		
+	         	<%
 		    	if(isPublish.equals("2")){
-		     %>		        
-		        <a class="nui-button" style="width:85px;" iconCls="icon-goto" onclick="onTo()">信件转办</a>
-		        <span style="display:inline-block;width:20px;"></span>
-		        <a class="nui-button" style="width:85px;" iconCls="icon-edit" onclick="onReply()">信件回复</a>
-		        <span style="display:inline-block;width:20px;"></span>
-		        <a class="nui-button" style="width:85px;" iconCls="icon-print" onclick="onPrint()">信件打印</a>	
+		     	%>		        
 		        <span style="display:inline-block;width:20px;"></span>
 		        <a class="nui-button" style="width:85px;" iconCls="icon-goto" onclick="onSetPublish(1,'发布')">一键发布</a>
-	        <%
+	        	<%
 	        	}
-	         %>	        
+	         	%>	        
 			</div>
 			<div id="panel4" style="display:none;width: 100%; height: 100%" class="nui-panel" title="转办信件" iconCls="icon-add"  
 	    			showCloseButton="true" showToolbar="false" showFooter="false">

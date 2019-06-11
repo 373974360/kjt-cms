@@ -184,12 +184,13 @@
     			</table>
     		</div>
 			<div property="footer" style="text-align:center;padding-top:5px;padding-bottom:5px;" borderStyle="border:0;">	
-				<%
-					if(isPublish.equals("1") ){
-				%>	 
+				 
 					<a class="nui-button" style="width:85px;" iconCls="icon-edit" onclick="onReply()">回复申请</a>  
 					<span style="display:inline-block;width:20px;"></span>     			       
 			        <a class="nui-button" style="width:85px;" iconCls="icon-print" onclick="onPrint()">打印详情</a>
+			    <%
+					if(isPublish.equals("1") ){
+				%>	
 			        <span style="display:inline-block;width:20px;"></span>
 			        <a class="nui-button" style="width:85px;" iconCls="icon-undo" onclick="onSetPublish(2,'撤销发布')">撤销发布</a>	
 		        <% 
@@ -198,9 +199,6 @@
 		        <%
 					if(isPublish.equals("2") ){
 				%>	        
-			        <a class="nui-button" style="width:85px;" iconCls="icon-edit" onclick="onReply()">回复申请</a>
-			        <span style="display:inline-block;width:20px;"></span>
-			        <a class="nui-button" style="width:85px;" iconCls="icon-print" onclick="onPrint()">打印详情</a>
 			        <span style="display:inline-block;width:20px;"></span>
 			        <a class="nui-button" style="width:85px;" iconCls="icon-goto" onclick="onSetPublish(1,'一键发布')">一键发布</a>	
 		        <% 
@@ -316,7 +314,7 @@
 										nui.alert(msg+"失败","系统提示");
 										CloseWindow();
 									}
-								},								
+								}							
 						});
 	        	 	}
 	        	});
