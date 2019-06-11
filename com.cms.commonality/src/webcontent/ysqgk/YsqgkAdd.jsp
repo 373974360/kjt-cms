@@ -33,7 +33,7 @@
 						<th class="nui-form-label">申请人类型：</th>
     					<td colspan="2">
     						<input name="ysqgk.ysqType" class="nui-radiobuttonlist" textField="text" 
-		    					dataField="ysqType" valueField="id" value="1"
+		    					dataField="ysqType" valueField="id" required="true" requiredErrorText="请选择申请人类型"
 		    					url="<%=request.getContextPath()%>/commonality/ysqgk/ysqType.txt" onvaluechanged="onSelected" />
     					</td>  					
 					</tr> 
@@ -68,7 +68,7 @@
 		                    <input name="ysqgk.cardName" class="nui-combobox nui-form-input" style="width:150px;" 
 		                    dataField="cardName" textField="text" valueField="id" 
 							url="<%=request.getContextPath()%>/commonality/ysqgk/cardName.txt"  
-							showNullItem="true" allowInput="false" autocomplete="off"/> 
+							value="1" allowInput="false" autocomplete="off"/> 
 		                </td>	
 		                <th class="nui-form-label">证件号码：</th>
 		                <td colspan="2">    
@@ -151,7 +151,7 @@
 						<th class="nui-form-label">是否申请减免费用：</th>
     					<td>
     						<div name="ysqgk.isDerate" class="nui-radiobuttonlist" textField="text" 
-		    					dataField="isDerate" valueField="id" value="1"
+		    					dataField="isDerate" valueField="id" value="2"
 		    					url="<%=request.getContextPath()%>/commonality/ysqgk/isDerate.txt" >
 							</div>
     					</td>
@@ -200,6 +200,7 @@
 	           	form.validate();	           	
 		        if(form.isValid()==false) return;
 		        var data = form.getData(false,true);
+		        //保存前再次对不需要提交的输入项进行简单清空
 		        if(data.ysqgk.ysqType == 1){
 		        	data.ysqgk.orgCode = null;
 		        	data.ysqgk.licence = null;
