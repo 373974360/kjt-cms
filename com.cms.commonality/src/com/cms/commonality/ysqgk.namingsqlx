@@ -32,6 +32,6 @@
 	    			QUERY_CODE like '%$queryCode$%'
 	    		</isNotNull>   		
 	    	</dynamic>	    	
-	    	ORDER BY REPLY_DTIME DESC
+	    	ORDER BY CREATE_DTIME DESC
 	    </select>
 </sqlMap>

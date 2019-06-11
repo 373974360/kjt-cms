@@ -7,6 +7,8 @@
 <%@page import="com.eos.foundation.eoscommon.ResourcesMessageUtil"%>
 <%
 	String ysqgkId = request.getParameter("ysqgkId");
+	String isPublish = request.getParameter("isPublish");
+	String isOpen = request.getParameter("isOpen");
 	
 	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	String curTime = df.format(new Date());
@@ -174,18 +176,36 @@
 			<div id="panel3" class="nui-panel" title="回复内容" iconCls="icon-add" style="display:none;width:100%;height:350;" 	
     					showToolbar="true" showCollapseButton="true" showFooter="true" allowResize="true" collapseOnTitleClick="true">
     			<table style="width:100%; table-layout:fixed;" class="nui-form-table">
-    				<tr>
-    					
+    				<tr>    					
 						<td>
 						<span id="ReplyContent"></span>
     					</td>    					
     				</tr>
     			</table>
     		</div>
-			<div property="footer" style="text-align:center;padding-top:5px;padding-bottom:5px;" borderStyle="border:0;">		        
-		        <a class="nui-button" style="width:85px;" iconCls="icon-edit" onclick="onReply()">回复申请</a>
-		        <span style="display:inline-block;width:20px;"></span>
-		        <a class="nui-button" style="width:85px;" iconCls="icon-print" onclick="onPrint()">打印详情</a>		        
+			<div property="footer" style="text-align:center;padding-top:5px;padding-bottom:5px;" borderStyle="border:0;">	
+				<%
+					if(isPublish.equals("1") ){
+				%>	 
+					<a class="nui-button" style="width:85px;" iconCls="icon-edit" onclick="onReply()">回复申请</a>  
+					<span style="display:inline-block;width:20px;"></span>     			       
+			        <a class="nui-button" style="width:85px;" iconCls="icon-print" onclick="onPrint()">打印详情</a>
+			        <span style="display:inline-block;width:20px;"></span>
+			        <a class="nui-button" style="width:85px;" iconCls="icon-undo" onclick="onSetPublish(2,'撤销发布')">撤销发布</a>	
+		        <% 
+		        	} 
+		        %>	
+		        <%
+					if(isPublish.equals("2") ){
+				%>	        
+			        <a class="nui-button" style="width:85px;" iconCls="icon-edit" onclick="onReply()">回复申请</a>
+			        <span style="display:inline-block;width:20px;"></span>
+			        <a class="nui-button" style="width:85px;" iconCls="icon-print" onclick="onPrint()">打印详情</a>
+			        <span style="display:inline-block;width:20px;"></span>
+			        <a class="nui-button" style="width:85px;" iconCls="icon-goto" onclick="onSetPublish(1,'一键发布')">一键发布</a>	
+		        <% 
+		        	} 
+		        %>	         
 			</div>
 		</div> 
 	</div>
@@ -195,7 +215,7 @@
     <script type="text/javascript">
 	        nui.parse();
 	        var form = new nui.Form("form1");	        	      	
-	     
+	     	
 	     	var data_;
 			function setDataParams(data){
 				data_ = nui.clone(data);
@@ -221,6 +241,10 @@
 							$("span[id=ReplyContent]").html(obj.ysqgk.replyContent);											
 							form.setData(obj);
 							form.setChanged(false);
+							//对已回复得申请展示回复内容
+							if(obj.ysqgk.isReply == 1){
+								$("#panel3").show();
+							}
 						}
 					});
 			}
@@ -268,6 +292,36 @@
 					});		
 	        } 
 	          
+	        function onSetPublish(isPublish,msg){
+	        	data_.isPublish = isPublish;
+	        	var json = nui.encode({
+					ysqgk : data_
+				});
+				nui.confirm("确定"+msg+"该申请吗？","系统提示",function(action) {
+					if (action == "ok") {
+						$.ajax({
+								url : "com.cms.commonality.YsqgkService.updateYsqgk.biz.ext",
+								type : 'POST',
+								data : json,
+								cache : false,
+								contentType : 'text/json',
+								success : function(text) {
+									var returnJson = nui.decode(text);
+									if (returnJson.exception == null) {										
+										nui.alert(msg+"成功","系统提示",function(action) {
+										});
+										onCancel();
+									} else {
+										grid.unmask();
+										nui.alert(msg+"失败","系统提示");
+										onCancel();
+									}
+								},								
+						});
+	        	 	}
+	        	});
+	        }  
+	        
 			function CloseWindow(action){
 				if(action=="close"){
 

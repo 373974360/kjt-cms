@@ -53,6 +53,8 @@
 							<a class="nui-button" iconCls="icon-add" onclick="add()">录入 </a>
 							<a id="update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑 </a>
 							<a class="nui-button" iconCls="icon-remove" onclick="remove()">删除</a>
+							<a class="nui-button" iconCls="icon-goto" onclick="isPublishOrNot(1,'发布')">发布</a>
+							<a class="nui-button" iconCls="icon-undo" onclick="isPublishOrNot(2,'撤销')">发布撤销</a>
 							<a class="nui-button" iconCls="icon-reload" onclick="reload()">刷新</a>
 						</td>
 					</tr>
@@ -176,7 +178,44 @@
 					nui.alert("请选中一条记录！");
 				}
 			}
-	
+			//发布or撤销发布
+			function isPublishOrNot(isPublish,msg){
+				var rows = grid.getSelecteds();
+				for(var i=0;i<rows.length;i++){
+					rows[i].isPublish = isPublish;
+				}
+				if (rows.length > 0) {
+					nui.confirm("确定"+msg+"选中记录的发布状态？","系统提示",
+					function(action) {
+						if (action == "ok") {
+							var json = nui.encode({
+								sqs : rows
+							});
+							grid.loading("正在"+msg+"中,请稍等...");
+							$.ajax({
+								url : "com.cms.commonality.SqService.setSqPublishOrNot.biz.ext",
+								type : 'POST',
+								data : json,
+								cache : false,
+								contentType : 'text/json',
+								success : function(text) {
+									var returnJson = nui.decode(text);
+									if (returnJson.exception == null) {
+										grid.reload();
+										nui.alert(msg+"成功","系统提示",function(action) {
+										});
+									} else {
+										grid.unmask();
+										nui.alert(msg+"失败","系统提示");
+									}
+								}
+							});
+						}
+					});
+				} else {
+					nui.alert("请选中一条记录！");
+				}
+			}
 			//重新刷新此页面
 			function refreshIt() {
 				var form = new nui.Form("#queryform");
@@ -221,7 +260,7 @@
 			function detailsRow(row_uid) {
 				var row = grid.getRowByUID(row_uid);
 					nui.open({
-						url : "<%=request.getContextPath()%>/commonality/sq/SqDetail.jsp?sqId="+row.id,
+						url : "<%=request.getContextPath()%>/commonality/sq/SqDetail.jsp?sqId="+row.id +"&isPublish=" + row.isPublish,
 						title : "来信详情&处理",
 						width : '80%',
 						height : '100%',
@@ -233,10 +272,10 @@
 							//iframe.contentWindow.setData2(data);
 							iframe.contentWindow.setDataParams(data);
 
-						},
-						ondestroy : function(action) {
+						},						
+						ondestroy : function(action) {							
 							if (action == "saveSuccess") {
-								grid.reload();
+								grid.reload();					
 							}
 						}
 					});				

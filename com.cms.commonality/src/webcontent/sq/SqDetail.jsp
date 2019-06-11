@@ -25,6 +25,7 @@
 	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	String sqId = request.getParameter("sqId");
+	String isPublish = request.getParameter("isPublish");
 	Integer reType1 = 1;//处理类型-转办
 	Integer reType2 = 2;//处理类型-回复
 	
@@ -149,12 +150,33 @@
 					</div>
 				</div>
     		</div>		    		   
-		    <div property="footer" style="text-align:center;padding-top:5px;padding-bottom:5px;" borderStyle="border:0;">		        
+		    <div property="footer" style="text-align:center;padding-top:5px;padding-bottom:5px;" borderStyle="border:0;">
+		    <%
+		    	if(isPublish.equals("1")){
+		     %>		        
 		        <a class="nui-button" style="width:85px;" iconCls="icon-goto" onclick="onTo()">信件转办</a>
 		        <span style="display:inline-block;width:20px;"></span>
 		        <a class="nui-button" style="width:85px;" iconCls="icon-edit" onclick="onReply()">信件回复</a>
 		        <span style="display:inline-block;width:20px;"></span>
-		        <a class="nui-button" style="width:85px;" iconCls="icon-print" onclick="onPrint()">信件打印</a>		        
+		        <a class="nui-button" style="width:85px;" iconCls="icon-print" onclick="onPrint()">信件打印</a>	
+		        <span style="display:inline-block;width:20px;"></span>
+		        <a class="nui-button" style="width:85px;" iconCls="icon-undo" onclick="onSetPublish(2,'撤销发布')">撤销发布</a>
+	        <%
+	        	}
+	         %>	
+	         <%
+		    	if(isPublish.equals("2")){
+		     %>		        
+		        <a class="nui-button" style="width:85px;" iconCls="icon-goto" onclick="onTo()">信件转办</a>
+		        <span style="display:inline-block;width:20px;"></span>
+		        <a class="nui-button" style="width:85px;" iconCls="icon-edit" onclick="onReply()">信件回复</a>
+		        <span style="display:inline-block;width:20px;"></span>
+		        <a class="nui-button" style="width:85px;" iconCls="icon-print" onclick="onPrint()">信件打印</a>	
+		        <span style="display:inline-block;width:20px;"></span>
+		        <a class="nui-button" style="width:85px;" iconCls="icon-goto" onclick="onSetPublish(1,'一键发布')">一键发布</a>
+	        <%
+	        	}
+	         %>	        
 			</div>
 			<div id="panel4" style="display:none;width: 100%; height: 100%" class="nui-panel" title="转办信件" iconCls="icon-add"  
 	    			showCloseButton="true" showToolbar="false" showFooter="false">
@@ -538,7 +560,37 @@
 						}
 					});			
 	        }
-	        
+	        //一键发布
+	        function onSetPublish(isPublish,msg){
+	        	data_.isPublish = isPublish;
+	        	var json = nui.encode({
+					sq : data_
+				});
+				nui.confirm("确定"+msg+"该来信吗？","系统提示",function(action) {
+					if (action == "ok") {
+						$.ajax({
+								url : "com.cms.commonality.SqService.updateSq.biz.ext",
+								type : 'POST',
+								data : json,
+								cache : false,
+								contentType : 'text/json',
+								success : function(text) {
+									var returnJson = nui.decode(text);
+									if (returnJson.exception == null) {										
+										nui.alert(msg+"成功","系统提示",function(action) {
+										});
+										
+										onClose();
+									} else {
+										grid.unmask();
+										nui.alert(msg+"失败","系统提示");
+										onClose();
+									}
+								},								
+						});
+	        	 	}
+	        	});
+	        }  
 		</script>
 	</body>
 </html>
