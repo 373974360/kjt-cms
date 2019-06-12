@@ -34,14 +34,14 @@
 		            <tr>
 		                <th class="nui-form-label">开始时间：</th>
 		                <td>    
-		                    <input name="interview.startTime" class="nui-datepicker nui-form-input" format="yyyy-MM-dd HH:mm" dateFormat="yyyy-MM-dd HH:mm" showTime="true" required="true" />
+		                    <input name="interview.startTime" class="nui-datepicker nui-form-input" format="yyyy-MM-dd HH:mm" dateFormat="yyyy-MM-dd HH:mm" showTime="true"/>
 		                </td>
 		                <td></td>
 		            </tr>
 		            <tr>
 		                <th class="nui-form-label">截止时间：</th>
 		                <td>    
-		                    <input name="interview.endTime" class="nui-datepicker nui-form-input" format="yyyy-MM-dd HH:mm" dateFormat="yyyy-MM-dd HH:mm" showTime="true" required="true" />
+		                    <input name="interview.endTime" class="nui-datepicker nui-form-input" format="yyyy-MM-dd HH:mm" dateFormat="yyyy-MM-dd HH:mm" showTime="true"/>
 		                </td>
 		                <td></td>
 		            </tr>
