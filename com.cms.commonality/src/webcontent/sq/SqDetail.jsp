@@ -337,12 +337,10 @@
 	                cache: false,
 	                contentType:'text/json',
 	                success: function (text) {	                	
-	                    onCancel();
 	                    refresh();
 	                },
 	                error: function (jqXHR, textStatus, errorThrown) {
-	                    alert(jqXHR.responseText);	 
-	                    onCancel();                   
+	                    alert(jqXHR.responseText);	              
 	                }
 	            });
 	        }
@@ -378,9 +376,9 @@
 	        
 			
 			function onOkTo(e) {
-				var toOrgId = $("#toOrgId").val();
-				updateSqData(toOrgId);
+				var toOrgId = $("#toOrgId").val();				
 	            SaveData(toOrgId);
+	            updateSqData(toOrgId);
 	        }
 	    	//保存'回复记录'并更新sq表回复内容
 	    	function SaveReData() {
@@ -400,12 +398,10 @@
 	                cache: false,
 	                contentType:'text/json',
 	                success: function (text) {	                	
-	                    onCancel();
 	                    refresh();
 	                },
 	                error: function (jqXHR, textStatus, errorThrown) {
 	                    alert(jqXHR.responseText);
-	                    onCancel();
 	                }
 	            });
 	        }
