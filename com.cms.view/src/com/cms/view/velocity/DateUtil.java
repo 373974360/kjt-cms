@@ -23,7 +23,8 @@ import com.eos.system.annotation.Bizlet;
 public class DateUtil {
     private static final String DATE_PATTERN = "yyyy-MM-dd";
     private static final String DATETIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
-
+    
+    @Bizlet("")
     public static String getCurrentDateTime() {
         return getCurrentDateTime(DATETIME_PATTERN);
     }
@@ -33,6 +34,7 @@ public class DateUtil {
      * @return 当前系统日期
      * @author zhenggz 2003-11-09
      */
+    @Bizlet("")
     public static String getCurrentDate() {
         return getCurrentDateTime(DATE_PATTERN);
     }
@@ -95,6 +97,7 @@ public class DateUtil {
      * @param String 时间字串
      * @return String　格式化后的字串，格式如：2003-12-02 12:12:10 
      * */
+    @Bizlet("")
     public static String format(String dateStr) {
         Pattern pattern = Pattern.compile("\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2}.*");
         Matcher matcher = pattern.matcher(dateStr);
@@ -212,4 +215,36 @@ public class DateUtil {
 		DateFormat df = new SimpleDateFormat(format);
 		return df.format(date);
 	}
+	/**
+     * 判断两个日期之间相差的天数
+     * @param String day1 时间1  2010-01-03
+     * @param String day1 时间2  2010-01-05
+     * @return long 相差天数
+     */
+    public static long daysOf2Day(String day1,String day2){
+        try{
+            day1+=" 00:00:00";
+            day2+=" 00:00:00";
+            long secs=secsOf2Day(day1,day2);
+            return secs/(24*60*60);
+        }catch(Exception e){
+            return -1;
+        }
+    }
+    /**
+     * 判断两个时间之间相差的天数
+     * @param String day1 时间1  2010-01-03 00:00:00
+     * @param String day1 时间2  2010-01-05 10:25:44
+     * @return long 相差天数
+     */
+    public static long secsOf2Day(String day1,String day2){
+        try{
+            Date date1 = getDate(day1);
+            Date date2 = getDate(day2);
+            long secs=Math.abs(date1.getTime()-date2.getTime())/1000;
+            return secs;
+        }catch(Exception e){
+            return -1;
+        }
+    }
 }

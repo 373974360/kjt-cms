@@ -11,8 +11,12 @@ import java.text.ParseException;
 import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.cms.siteconfig.TempletUtils;
+import com.eos.data.datacontext.IMapContextFactory;
+import com.eos.data.datacontext.IRequestMap;
+import com.eos.data.datacontext.ISessionMap;
 import com.eos.system.annotation.Bizlet;
 
 /**
@@ -166,5 +170,38 @@ public class FormatUtil {
         return pathStr;
 
     }
+    @Bizlet("")
+    public static String getIpAddr(){
+		IMapContextFactory contextFactory = com.primeton.ext.common.muo.MUODataContextHelper.getMapContextFactory();
+		IRequestMap requestMap = contextFactory.getRequestMap();
+		Object requestRoot = requestMap.getRootObject();
+		HttpServletRequest request = (HttpServletRequest)requestRoot;
+		String ip = request.getHeader("x-forwarded-for");
+        if (ip != null && ip.length() != 0 && !"unknown".equalsIgnoreCase(ip)) {
+            // 多次反向代理后会有多个ip值，第一个ip才是真实ip
+            if( ip.indexOf(",")!=-1 ){
+                ip = ip.split(",")[0];
+            }
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("HTTP_CLIENT_IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("X-Real-IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getRemoteAddr();
+        }
+        return ip;
+	}
     
 }

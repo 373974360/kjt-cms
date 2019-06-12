@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- author:chaoweima -->
+<sqlMap>
+    <select id="queryItemsList" parameterClass="commonj.sdo.DataObject" resultClass="com.cms.commonality.survey.CmsSurveyItem">
+    	select id,item_name as itemName,sort from cms_survey_item where sub_id=$id$
+    	 order by sort asc
+    </select>
+    <delete id="deleteItemBySurveyId" parameterClass="commonj.sdo.DataObject">
+    	delete from cms_survey_item where survey_id = $id$
+    </delete>
+    <delete id="deleteItemBySubId" parameterClass="commonj.sdo.DataObject">
+    	delete from cms_survey_item where sub_id = $id$
+    </delete>
+    <delete id="deleteSubBySurveyId" parameterClass="commonj.sdo.DataObject">
+    	delete from cms_survey_sub where survey_id = $id$
+    </delete>
+</sqlMap>

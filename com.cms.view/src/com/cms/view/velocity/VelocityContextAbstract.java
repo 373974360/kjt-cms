@@ -66,6 +66,7 @@ public class VelocityContextAbstract {
 		//从配置文件中得来
 		try {
 			try{
+				map.put("SurveyUtil", Class.forName("com.cms.view.data.SurveyUtil"));
 				map.put("YsqgkUtil", Class.forName("com.cms.view.data.YsqgklUtil"));
 				map.put("AppealUtil", Class.forName("com.cms.view.data.AppealUtil"));
 				map.put("InfoDataUtil", Class.forName("com.cms.view.data.InfoDataUtil"));
