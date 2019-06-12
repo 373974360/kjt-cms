@@ -53,8 +53,10 @@
 							<a class="nui-button" iconCls="icon-add" onclick="add()">录入 </a>
 							<a id="update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑 </a>
 							<a class="nui-button" iconCls="icon-remove" onclick="remove()">删除</a>
+							<span class="separator"></span>
 							<a class="nui-button" iconCls="icon-goto" onclick="isPublishOrNot(1,'更新','是')">发布</a>
 							<a class="nui-button" iconCls="icon-undo" onclick="isPublishOrNot(2,'更新','否')">撤销发布</a>
+							<span class="separator"></span>
 							<a class="nui-button" iconCls="icon-goto" onclick="isOpenOrNot(1,'更新','是')">公开</a>
 							<a class="nui-button" iconCls="icon-undo" onclick="isOpenOrNot(2,'更新','否')">撤销公开</a>						
 						</td>
@@ -295,7 +297,7 @@
 			function detailsRow(row_uid) {
 				var row = grid.getRowByUID(row_uid);
 					nui.open({
-						url : "<%=request.getContextPath()%>/commonality/sq/SqDetail.jsp?sqId="+row.id +"&isPublish=" + row.isPublish,
+						url : "<%=request.getContextPath()%>/commonality/sq/SqDetail.jsp?sqId="+row.id +"&isPublish=" + row.isPublish+"&isOpen=" + row.isOpen,
 						title : "来信详情&处理",
 						width : '80%',
 						height : '100%',

@@ -26,6 +26,7 @@
 	
 	String sqId = request.getParameter("sqId");
 	String isPublish = request.getParameter("isPublish");
+	String isOpen = request.getParameter("isOpen");
 	Integer reType1 = 1;//处理类型-转办
 	Integer reType2 = 2;//处理类型-回复
 	
@@ -174,6 +175,24 @@
 		        <a class="nui-button" style="width:85px;" iconCls="icon-goto" onclick="onSetPublish(1,'发布')">一键发布</a>
 	        	<%
 	        	}
+	         	%>
+	         	
+	         	<%
+		    	if(isOpen.equals("1")){
+		    	%>		
+		        <span style="display:inline-block;width:20px;"></span>
+		        <a class="nui-button" style="width:85px;" iconCls="icon-undo" onclick="onSetOpen(2,'撤销公开')">撤销公开</a>
+	        	<%
+	        	}
+	         	%>
+	         		
+	         	<%
+		    	if(isOpen.equals("2")){
+		     	%>		        
+		        <span style="display:inline-block;width:20px;"></span>
+		        <a class="nui-button" style="width:85px;" iconCls="icon-goto" onclick="onSetOpen(1,'发布')">一键公开</a>
+	        	<%
+	        	}
 	         	%>	        
 			</div>
 			<div id="panel4" style="display:none;width: 100%; height: 100%" class="nui-panel" title="转办信件" iconCls="icon-add"  
@@ -298,8 +317,7 @@
 						}
 					});				
 			}	
-	    	
-	    	
+	    	  	
 	    	var ue1 = UE.getEditor('remark1');	
 	    	var ue2 = UE.getEditor('remark2');	    	    	
 	    	//回复信件
@@ -554,7 +572,7 @@
 						}
 					});			
 	        }
-	        //一键发布or一键撤销
+	        //一键发布or撤销
 	        function onSetPublish(isPublish,msg){
 	        	data_.isPublish = isPublish;
 	        	var json = nui.encode({
@@ -583,7 +601,39 @@
 						});
 	        	 	}
 	        	});
-	        }  
+	        } 
+	        
+	        //一键公开or撤销
+	        function onSetOpen(isOpen,msg){
+	        	data_.isOpen = isOpen;
+	        	var json = nui.encode({
+					sq : data_
+				});
+				nui.confirm("确定"+msg+"该来信吗？","系统提示",function(action) {
+					if (action == "ok") {
+						$.ajax({
+								url : "com.cms.commonality.SqService.updateSq.biz.ext",
+								type : 'POST',
+								data : json,
+								cache : false,
+								contentType : 'text/json',
+								success : function(text) {
+									var returnJson = nui.decode(text);
+									if (returnJson.exception == null) {										
+										nui.alert(msg+"成功","系统提示",function(action) {
+										});
+										CloseWindow("saveSuccess");
+									} else {
+										grid.unmask();
+										nui.alert(msg+"失败","系统提示");
+										CloseWindow();
+									}
+								},								
+						});
+	        	 	}
+	        	});
+	        
+	        } 
 		</script>
 	</body>
 </html>

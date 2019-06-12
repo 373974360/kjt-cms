@@ -200,10 +200,27 @@
 					if(isPublish.equals("2") ){
 				%>	        
 			        <span style="display:inline-block;width:20px;"></span>
-			        <a class="nui-button" style="width:85px;" iconCls="icon-goto" onclick="onSetPublish(1,'一键发布')">一键发布</a>	
+			        <a class="nui-button" style="width:85px;" iconCls="icon-goto" onclick="onSetPublish(1,'发布')">一键发布</a>	
 		        <% 
 		        	} 
-		        %>	         
+		        %>	
+		        
+		        <%
+					if(isOpen.equals("1") ){
+				%>	
+			        <span style="display:inline-block;width:20px;"></span>
+			        <a class="nui-button" style="width:85px;" iconCls="icon-undo" onclick="onSetOpen(2,'撤销公开')">撤销公开</a>	
+		        <% 
+		        	} 
+		        %>	
+		        <%
+					if(isOpen.equals("2") ){
+				%>	        
+			        <span style="display:inline-block;width:20px;"></span>
+			        <a class="nui-button" style="width:85px;" iconCls="icon-goto" onclick="onSetOpen(1,'公开')">一键公开</a>	
+		        <% 
+		        	} 
+		        %>         
 			</div>
 		</div> 
 	</div>
@@ -319,6 +336,37 @@
 	        	 	}
 	        	});
 	        }  
+	        //一键公开or撤销
+	        function onSetOpen(isOpen,msg){
+		        data_.isOpen = isOpen;
+	        	var json = nui.encode({
+					ysqgk : data_
+				});
+				nui.confirm("确定"+msg+"该申请吗？","系统提示",function(action) {
+					if (action == "ok") {
+						$.ajax({
+								url : "com.cms.commonality.YsqgkService.updateYsqgk.biz.ext",
+								type : 'POST',
+								data : json,
+								cache : false,
+								contentType : 'text/json',
+								success : function(text) {
+									var returnJson = nui.decode(text);
+									if (returnJson.exception == null) {										
+										nui.alert(msg+"成功","系统提示",function(action) {
+										});
+										CloseWindow("saveSuccess");
+									} else {
+										grid.unmask();
+										nui.alert(msg+"失败","系统提示");
+										CloseWindow();
+									}
+								}							
+						});
+	        	 	}
+	        	});
+	        
+	        }
 	        
 			function CloseWindow(action){
 				if(action=="close"){
