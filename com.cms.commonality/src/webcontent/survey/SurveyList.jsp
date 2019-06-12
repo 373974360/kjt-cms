@@ -61,6 +61,7 @@
 						<div field="startTime" width="170" headerAlign="center" align="center" allowSort="true">开始时间</div>
 						<div field="endTime" width="170" headerAlign="center" align="center" allowSort="true">截止时间</div>
 						<div field="isPublish" width="100" headerAlign="center" align="center" allowSort="true">发布状态</div>
+						<div field="isEnd" width="100" headerAlign="center" align="center" allowSort="true">投票状态</div>
 					</div>
 				</div>
 			</div>
@@ -80,6 +81,13 @@
 			        	e.cellHtml = "未发布";
 			        }else{
 			        	e.cellHtml = "已发布";
+			        }
+			    }
+			    if (field == "isEnd") {
+			        if (value == 1){
+			        	e.cellHtml = "进行中";
+			        }else{
+			        	e.cellHtml = "已截止";
 			        }
 			    }
 			});
