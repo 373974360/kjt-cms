@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- author:chaoweima -->
+<sqlMap>
+    <delete id="deleteGuestByInterId" parameterClass="commonj.sdo.DataObject">
+    	delete from cms_interview_guest where inter_id = $id$
+    </delete>
+</sqlMap>

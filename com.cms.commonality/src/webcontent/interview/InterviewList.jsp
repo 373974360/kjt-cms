@@ -2,21 +2,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
-		<title>调查管理</title>
+		<title>访谈管理</title>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		<script src="<%=request.getContextPath()%>/common/nui/nui.js" type="text/javascript"></script>
 	</head>
 	<body style="width: 98%; height: 95%;">
-		<div class="nui-panel" title="问卷查询" iconCls="icon-add" style="width: 100%; height: 15%;" showToolbar="false" showFooter="true">
+		<div class="nui-panel" title="访谈查询" iconCls="icon-add" style="width: 100%; height: 15%;" showToolbar="false" showFooter="true">
 			<div id="queryform" class="nui-form" align="center" style="height: 100%">
 				<!-- 数据实体的名称 -->
-				<input class="nui-hidden" name="criteria/_entity" value="com.cms.commonality.survey.CmsSurvey">
+				<input class="nui-hidden" name="criteria/_entity" value="com.cms.commonality.interview.CmsInterview">
 				<!-- 排序字段 -->
-				<input class="nui-hidden" name="criteria/_orderby[1]/_property" value="createTime">
+				<input class="nui-hidden" name="criteria/_orderby[1]/_property" value="startTime">
 				<input class="nui-hidden" name="criteria/_orderby[1]/_sort" value="desc">
 				<table id="table1" class="table" style="height: 100%;float:left;">
 					<tr>
-						<td class="form_label">问卷标题:</td>
+						<td class="form_label">访谈主题:</td>
 						<td colspan="1">
 							<input class="nui-textbox" name="criteria/_expr[2]/title" />
 							<input class="nui-hidden" name="criteria/_expr[2]/_op" value="like">
@@ -32,7 +32,7 @@
 				</table>
 			</div>
 		</div>
-		<div class="nui-panel" title="问卷列表" iconCls="icon-add" style="width: 100%; height: 85%;" showToolbar="false" showFooter="false">
+		<div class="nui-panel" title="访谈列表" iconCls="icon-add" style="width: 100%; height: 85%;" showToolbar="false" showFooter="false">
 			<div class="nui-toolbar" style="border-bottom: 0; padding: 0px;">
 				<table style="width: 100%;">
 					<tr>
@@ -44,23 +44,24 @@
 							<a id="update" class="nui-button" iconCls="icon-ok" onclick="setPublish(2,'发布')">发布 </a>
 							<a class="nui-button" iconCls="icon-redo" onclick="setPublish(1,'撤销')">撤销发布</a>
 	            			<span class="separator"></span>
-							<a class="nui-button" iconCls="icon-collapse" onclick="subConfig()">题目设置</a>
-							<a class="nui-button" iconCls="icon-sort" onclick="surveyCount()">数据统计</a>
+							<a class="nui-button" iconCls="icon-user" onclick="guestConfig()">嘉宾设置</a>
 						</td>
 					</tr>
 				</table>
 			</div>
 			<div class="nui-fit">
-				<div id="datagrid1" dataField="survey" class="nui-datagrid" style="width: 100%; height: 100%;"
-					url="com.cms.commonality.SurveyService.querySurvey.biz.ext"
+				<div id="datagrid1" dataField="interview" class="nui-datagrid" style="width: 100%; height: 100%;"
+					url="com.cms.commonality.InterviewService.queryInterview.biz.ext"
 					pageSize="20" showPageInfo="true" multiSelect="true" onselectionchanged="selectionChanged" allowSortColumn="false">
 					<div property="columns">
 						<div type="checkcolumn" width="40"></div>
 						<div field="id" headerAlign="center" allowSort="true" visible="false">ID</div>
-						<div field="title" width="auto" headerAlign="center" allowSort="true">标题</div>
-						<div field="startTime" width="170" headerAlign="center" align="center" allowSort="true">开始时间</div>
-						<div field="endTime" width="170" headerAlign="center" align="center" allowSort="true">截止时间</div>
-						<div field="isPublish" width="100" headerAlign="center" align="center" allowSort="true">发布状态</div>
+						<div field="title" width="auto" headerAlign="center" allowSort="true">访谈主题</div>
+						<div field="startTime" width="170" headerAlign="center" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm">开始时间</div>
+						<div field="endTime" width="170" headerAlign="center" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm">结束时间</div>
+						<div field="status" width="100" headerAlign="center" align="center" allowSort="true">发布状态</div>
+						<div field="inputDtime" width="170" headerAlign="center" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm">录入时间</div>
+						<div field="inputUser" width="100" headerAlign="center" align="center" allowSort="true">录入人</div>
 					</div>
 				</div>
 			</div>
@@ -71,11 +72,10 @@
 	
 			var formData = new nui.Form("#queryform").getData(false, false);
 			grid.load(formData);
-	
 			grid.on("drawcell", function (e) {
 			    var field = e.field,
 			        value = e.value;
-			    if (field == "isPublish") {
+			    if (field == "status") {
 			        if (value == 1){
 			        	e.cellHtml = "未发布";
 			        }else{
@@ -83,14 +83,13 @@
 			        }
 			    }
 			});
-	
 			//新增
 			function add() {
 				nui.open({
-					url : "<%=request.getContextPath()%>/commonality/survey/SurveyAdd.jsp",
+					url : "<%=request.getContextPath()%>/commonality/interview/InterviewAdd.jsp",
 					title : "新增记录",
-					width : "70%",
-					height : "70%",
+					width : "80%",
+					height : "100%",
 					onload : function() {
 					},
 					ondestroy : function(action) {//弹出页面关闭前
@@ -106,10 +105,10 @@
 				var row = grid.getSelected();
 				if (row) {
 					nui.open({
-						url : "<%=request.getContextPath()%>/commonality/survey/SurveyUpdate.jsp",
+						url : "<%=request.getContextPath()%>/commonality/interview/InterviewUpdate.jsp",
 						title : "编辑数据",
-						width : "70%",
-						height : "70%",
+						width : "80%",
+						height : "100%",
 						onload : function() {
 							var iframe = this.getIFrameEl();
 							var data = row;
@@ -135,11 +134,11 @@
 					function(action) {
 						if (action == "ok") {
 							var json = nui.encode({
-								surveys : rows
+								interviews : rows
 							});
 							grid.loading("正在删除中,请稍等...");
 							$.ajax({
-								url : "com.cms.commonality.SurveyService.deleteSurveys.biz.ext",
+								url : "com.cms.commonality.InterviewService.deleteInterviews.biz.ext",
 								type : 'POST',
 								data : json,
 								cache : false,
@@ -162,7 +161,7 @@
 					nui.alert("请选中一条记录！");
 				}
 			}
-			
+	
 			function setPublish(status,msg) {
 				var rows = grid.getSelecteds();
 				if (rows.length > 0) {
@@ -170,14 +169,14 @@
 					function(action) {
 						if (action == "ok") {
 							for(var i=0;i<rows.length;i++){
-								rows[i].isPublish = status;
+								rows[i].status = status;
 							}
 							var json = nui.encode({
-								surveys : rows
+								interviews : rows
 							});
 							grid.loading("正在"+msg+"中,请稍等...");
 							$.ajax({
-								url : "com.cms.commonality.SurveyService.setPublish.biz.ext",
+								url : "com.cms.commonality.InterviewService.setPublish.biz.ext",
 								type : 'POST',
 								data : json,
 								cache : false,
@@ -200,15 +199,14 @@
 					nui.alert("请选中一条记录！");
 				}
 			}
-			
-			//题目设置
-			function subConfig() {
+			//嘉宾设置
+			function guestConfig() {
 				var row = grid.getSelected();
 				if (row) {
 					nui.open({
-						url : "<%=request.getContextPath()%>/commonality/survey/SubList.jsp?surveyId="+row.id,
-						title : "题目设置",
-						width : "100%",
+						url : "<%=request.getContextPath()%>/commonality/interview/GuestList.jsp?interviewId="+row.id,
+						title : "嘉宾设置",
+						width : "80%",
 						height : "100%",
 						onload : function() {
 						},
@@ -223,25 +221,6 @@
 				}
 			}
 			
-			//数据统计
-			function surveyCount() {
-				var row = grid.getSelected();
-				if (row) {
-					nui.open({
-						url : "<%=request.getContextPath()%>/commonality/survey/SurveyCount.jsp?surveyId="+row.id,
-						title : "数据统计",
-						width : "80%",
-						height : "100%",
-						onload : function() {
-						},
-						ondestroy : function(action) {
-						}
-					});
-				} else {
-					nui.alert("请选中一条记录", "提示");
-				}
-			}
-	
 			//重新刷新页面
 			function refresh() {
 				var form = new nui.Form("#queryform");

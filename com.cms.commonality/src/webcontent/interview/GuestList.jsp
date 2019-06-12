@@ -1,21 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%>
 <%
-	String surveyId = request.getParameter("surveyId");
+	String interviewId = request.getParameter("interviewId");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
-		<title>调查管理</title>
+		<title>访谈管理</title>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		<script src="<%=request.getContextPath()%>/common/nui/nui.js" type="text/javascript"></script>
 	</head>
 	<body style="width: 98%; height: 95%;">
 		<div id="queryform" class="nui-form" align="center">
 			<!-- 数据实体的名称 -->
-			<input class="nui-hidden" name="criteria/_entity" value="com.cms.commonality.survey.CmsSurveySub">
+			<input class="nui-hidden" name="criteria/_entity" value="com.cms.commonality.interview.CmsInterviewGuest">
 			<!-- 排序字段 -->
 			<input class="nui-hidden" name="criteria/_orderby[1]/_property" value="sort">
 			<input class="nui-hidden" name="criteria/_orderby[1]/_sort" value="asc">
+			<input class="nui-hidden" name="criteria/_expr[2]/interId" value="<%=interviewId %>"/>
+			<input class="nui-hidden" name="criteria/_expr[2]/_op" value="=">
 		</div>
 		<div class="nui-toolbar" style="border-bottom: 0; padding: 0px;">
 			<table style="width: 100%;">
@@ -29,15 +31,15 @@
 			</table>
 		</div>
 		<div class="nui-fit">
-			<div id="datagrid1" dataField="sub" class="nui-datagrid" style="width: 100%; height: 100%;"
-				url="com.cms.commonality.SubService.querySub.biz.ext" ajaxData="setSurveyId"
+			<div id="datagrid1" dataField="guest" class="nui-datagrid" style="width: 100%; height: 100%;"
+				url="com.cms.commonality.GuestService.queryGuest.biz.ext"
 				pageSize="20" showPageInfo="true" multiSelect="true" onselectionchanged="selectionChanged" allowSortColumn="false">
 				<div property="columns">
 					<div type="checkcolumn" width="40"></div>
 					<div field="id" headerAlign="center" allowSort="true" visible="false">ID</div>
-					<div field="subTitle" width="auto" headerAlign="center" allowSort="true">题目</div>
-					<div field="subType" width="100" headerAlign="center" align="center" allowSort="true">题目类型</div>
-					<div field="isRequired" width="100" headerAlign="center" align="center" allowSort="true">是否必填</div>
+					<div field="username" width="auto" headerAlign="center" allowSort="true">嘉宾姓名</div>
+					<div field="zw" width="170" headerAlign="center" align="center" allowSort="true">职务</div>
+					<div field="work" width="300" headerAlign="center" align="center" allowSort="true">工作单位</div>
 					<div field="sort" width="100" headerAlign="center" align="center" allowSort="true">排序</div>
 				</div>
 			</div>
@@ -47,41 +49,13 @@
 			var grid = nui.get("datagrid1");
 			var formData = new nui.Form("#queryform").getData(false, false);
 			grid.load(formData);
-			
-	        function setSurveyId(){
-				return {"criteria/_expr[2]/surveyId":<%=surveyId %>,"criteria/_expr[2]/_op":"="};
-			}
-	
-	
-			grid.on("drawcell", function (e) {
-			    var field = e.field,
-			        value = e.value;
-			    if (field == "subType") {
-			        if (value == 1){
-			        	e.cellHtml = "单选";
-			        }else if (value == 2){
-			        	e.cellHtml = "多选";
-			        }else if (value == 3){
-			        	e.cellHtml = "文本";
-			        }else if (value == 4){
-			        	e.cellHtml = "下拉框";
-			        }
-			    }
-			    if (field == "isRequired") {
-			        if (value == 1){
-			        	e.cellHtml = "必填";
-			        }else{
-			        	e.cellHtml = "非必填";
-			        }
-			    }
-			});
 			//新增
 			function add() {
 				nui.open({
-					url : "<%=request.getContextPath()%>/commonality/survey/SubAdd.jsp?surveyId=<%=surveyId %>",
+					url : "<%=request.getContextPath()%>/commonality/interview/GuestAdd.jsp?interviewId=<%=interviewId %>",
 					title : "新增记录",
-					width : "50%",
-					height : "70%",
+					width : 800,
+					height : 400,
 					onload : function() {
 					},
 					ondestroy : function(action) {//弹出页面关闭前
@@ -97,10 +71,10 @@
 				var row = grid.getSelected();
 				if (row) {
 					nui.open({
-						url : "<%=request.getContextPath()%>/commonality/survey/SubUpdate.jsp",
+						url : "<%=request.getContextPath()%>/commonality/interview/GuestUpdate.jsp",
 						title : "编辑数据",
-						width : "50%",
-						height : "70%",
+						width : 800,
+						height : 400,
 						onload : function() {
 							var iframe = this.getIFrameEl();
 							var data = row;
@@ -126,11 +100,11 @@
 					function(action) {
 						if (action == "ok") {
 							var json = nui.encode({
-								subs : rows
+								guests : rows
 							});
 							grid.loading("正在删除中,请稍等...");
 							$.ajax({
-								url : "com.cms.commonality.SubService.deleteSubs.biz.ext",
+								url : "com.cms.commonality.GuestService.deleteGuests.biz.ext",
 								type : 'POST',
 								data : json,
 								cache : false,
@@ -153,7 +127,7 @@
 					nui.alert("请选中一条记录！");
 				}
 			}
-			
+	
 			//重新刷新页面
 			function refresh() {
 				var form = new nui.Form("#queryform");
