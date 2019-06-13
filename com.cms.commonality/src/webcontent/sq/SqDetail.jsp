@@ -163,7 +163,7 @@
 		    	if(isPublish.equals("1")){
 		    	%>		
 		        <span style="display:inline-block;width:20px;"></span>
-		        <a class="nui-button" style="width:85px;" iconCls="icon-undo" onclick="onSetPublish(2,'撤销发布')">撤销发布</a>
+		        <a class="nui-button" style="width:85px;" iconCls="icon-redo" onclick="onSetPublish(2,'撤销发布')">撤销发布</a>
 	        	<%
 	        	}
 	         	%>
@@ -172,7 +172,7 @@
 		    	if(isPublish.equals("2")){
 		     	%>		        
 		        <span style="display:inline-block;width:20px;"></span>
-		        <a class="nui-button" style="width:85px;" iconCls="icon-goto" onclick="onSetPublish(1,'发布')">一键发布</a>
+		        <a class="nui-button" style="width:85px;" iconCls="icon-ok" onclick="onSetPublish(1,'发布')">一键发布</a>
 	        	<%
 	        	}
 	         	%>
@@ -181,7 +181,7 @@
 		    	if(isOpen.equals("1")){
 		    	%>		
 		        <span style="display:inline-block;width:20px;"></span>
-		        <a class="nui-button" style="width:85px;" iconCls="icon-undo" onclick="onSetOpen(2,'撤销公开')">撤销公开</a>
+		        <a class="nui-button" style="width:85px;" iconCls="icon-redo" onclick="onSetOpen(2,'撤销公开')">撤销公开</a>
 	        	<%
 	        	}
 	         	%>
@@ -190,7 +190,7 @@
 		    	if(isOpen.equals("2")){
 		     	%>		        
 		        <span style="display:inline-block;width:20px;"></span>
-		        <a class="nui-button" style="width:85px;" iconCls="icon-goto" onclick="onSetOpen(1,'发布')">一键公开</a>
+		        <a class="nui-button" style="width:85px;" iconCls="icon-ok" onclick="onSetOpen(1,'发布')">一键公开</a>
 	        	<%
 	        	}
 	         	%>	        

@@ -54,11 +54,11 @@
 							<a id="update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑 </a>
 							<a class="nui-button" iconCls="icon-remove" onclick="remove()">删除</a>
 							<span class="separator"></span>
-							<a class="nui-button" iconCls="icon-goto" onclick="isPublishOrNot(1,'更新','是')">发布</a>
-							<a class="nui-button" iconCls="icon-undo" onclick="isPublishOrNot(2,'更新','否')">撤销发布</a>
+							<a class="nui-button" iconCls="icon-ok" onclick="isPublishOrNot(1,'更新','是')">发布</a>
+							<a class="nui-button" iconCls="icon-redo" onclick="isPublishOrNot(2,'更新','否')">撤销发布</a>
 							<span class="separator"></span>
-							<a class="nui-button" iconCls="icon-goto" onclick="isOpenOrNot(1,'更新','是')">公开</a>
-							<a class="nui-button" iconCls="icon-undo" onclick="isOpenOrNot(2,'更新','否')">撤销公开</a>						
+							<a class="nui-button" iconCls="icon-ok" onclick="isOpenOrNot(1,'更新','是')">公开</a>
+							<a class="nui-button" iconCls="icon-redo" onclick="isOpenOrNot(2,'更新','否')">撤销公开</a>						
 						</td>
 					</tr>
 				</table>
