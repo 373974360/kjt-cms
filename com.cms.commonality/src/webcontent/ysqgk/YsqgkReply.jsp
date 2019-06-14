@@ -35,7 +35,7 @@
 						</div>   
 	                </td>
 	             <tr/>
-	             <tr>
+	             <tr class="odd">
 	                <th class="nui-form-label">是否发布：</th>
 	                <td > 
 	                	<div name="ysqgk.isPublish" class="nui-radiobuttonlist" textField="text" 
@@ -51,7 +51,7 @@
 	                  required="true" requiredErrorText="不能为空" style="width:90%;height:100px"/>
 	                </td>			              		                
 	            </tr>
-	            <tr>
+	            <tr class="odd">
 	                <th class="nui-form-label">回复时间：</th>
 	                <td colspan="1">    
 	                    <input id="ysqgk.replyDtime" name="ysqgk.replyDtime" class="nui-datepicker " style="width:21%;" 

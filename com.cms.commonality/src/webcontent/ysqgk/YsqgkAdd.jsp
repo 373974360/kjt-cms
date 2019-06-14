@@ -39,7 +39,7 @@
 					</tr> 
 					</table>
 				<table id="table6" align="center" style="width:90%; table-layout:fixed;" class="nui-form-table">
-					<tr>
+					<tr class="odd">
 						<th class="nui-form-label">申请编号：</th>
 		                <td colspan="2">    
 		                    <input name="ysqgk.ysqCode" class="nui-textbox nui-form-input" required="true"
@@ -62,7 +62,7 @@
 		                    <input name="ysqgk.orgName" class="nui-textbox nui-form-input" autocomplete="off"/> 
 		                </td>	                
 	            	</tr>
-	            	<tr>
+	            	<tr class="odd">
 		                <th class="nui-form-label">证件名称：</th>
 		                <td colspan="2">                     
 		                    <input name="ysqgk.cardName" class="nui-combobox nui-form-input" style="width:150px;" 
@@ -88,7 +88,7 @@
 		                    <input name="ysqgk.licence" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空"/> 
 		                </td>	                
 	            	</tr>
-	            	<tr>
+	            	<tr class="odd">
 		                <th class="nui-form-label">法人代表：</th>
 		                <td colspan="2">    
 		                    <input name="ysqgk.legalperson" class="nui-textbox nui-form-input" /> 
@@ -110,7 +110,7 @@
 		                    <input name="ysqgk.telCz" class="nui-textbox nui-form-input" /> 
 		                </td>	                
 	            	</tr>
-	            	<tr>
+	            	<tr class="odd">
 		                <th class="nui-form-label">手机号码：</th>
 		                <td colspan="2">    
 		                    <input name="ysqgk.mobile" class="nui-textbox nui-form-input" /> 
@@ -135,7 +135,7 @@
 			<div id="panel2" class="nui-panel" title="所需信息情况" iconCls="icon-add" style="width:100%;height:350;" 
 			showToolbar="true" showCollapseButton="true" showFooter="true" allowResize="true" collapseOnTitleClick="true" maskOnLoad="false">
 				<table id="table5" align="center" style="width:90%; table-layout:fixed;" class="nui-form-table">
-					<tr>
+					<tr class="odd">
 						<th class="nui-form-label">所需内容描述：</th>
 						<td>
 							<input name="ysqgk.content" class="nui-textarea" style="width:90%;height:80px" />
@@ -147,7 +147,7 @@
 							<input name="ysqgk.description" class="nui-textarea" style="width:90%;height:80px" />
     					</td>
 					</tr>
-					<tr>
+					<tr class="odd">
 						<th class="nui-form-label">是否申请减免费用：</th>
     					<td>
     						<div name="ysqgk.isDerate" class="nui-radiobuttonlist" textField="text" 
@@ -165,7 +165,7 @@
 							</div>
     					</td>
 					</tr> 
-					<tr>
+					<tr class="odd">
 						<th class="nui-form-label">获取信息方式：</th>
     					<td>
     						<div name="ysqgk.getMethod" class="nui-radiobuttonlist" textField="text" 

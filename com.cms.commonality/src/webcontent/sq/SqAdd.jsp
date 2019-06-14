@@ -55,7 +55,7 @@
 		                    <input name="sq.title" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空"/> 
 		                </td>		                
 		            </tr>
-		            <tr>
+		            <tr class="odd">
 		                <th class="nui-form-label">来信人姓名：</th>
 		                <td colspan="3">    
 		                    <input name="sq.username" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空"/>
@@ -75,7 +75,7 @@
 		                    <input name="sq.email" class="nui-textbox nui-form-input" vtype="email;rangeLength:5,20;" emailErrorText="请输入邮箱格式" required="true"  requiredErrorText="不能为空"/>
 		                </td>		               
 		            </tr>
-		            <tr>
+		            <tr class="odd">
 		            	<th class="nui-form-label">受理部门：</th>
 		                <td colspan="3" class="tit">
 							<input name="sq.subOrgName" textName="orgname"  class="nui-buttonedit nui-form-input" 
@@ -98,7 +98,7 @@
 		                    <input name="sq.isReply" class="nui-dictcombobox nui-form-input" showNullItem="true" emptyText="请选择" dictTypeId="CMS_YESORNO"/>
 		                </td>		              
 		            </tr>
-		            <tr>
+		            <tr class="odd">
 		                <th class="nui-form-label">是否公开：</th>
 		                <td colspan="3">    
 		                    <input name="sq.isOpen" class="nui-dictcombobox nui-form-input" showNullItem="true" emptyText="请选择" dictTypeId="CMS_YESORNO"/>
@@ -120,7 +120,7 @@
 		                     allowinput="false" value="<%=curTime %>" showTime="true"/>
 		                </td>                
 		            </tr>
-		            <tr>
+		            <tr class="odd">
 		                <th class="nui-form-label">来信内容：</th>
 		                <td colspan="7">    
 		                	<input name="sq.content" class="nui-hidden" />

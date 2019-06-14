@@ -213,7 +213,7 @@
 								required="true" requiredErrorText="请选择部门"emptyText="请选择"/>	  		                 
 		                	</td>			                		                
 			            </tr>
-			            <tr>
+			            <tr class="odd">
 			                <th class="nui-form-label">转办意见：</th>
 			                <td colspan="1">    
 			                   	<input id="remark" name="sqPro.remark" class="nui-hidden" />
@@ -251,7 +251,7 @@
 			                     emptyText="请选择" dictTypeId="CMS_YESORNO" required="true" requiredErrorText="不能为空"/>
 			                </td>
 			             <tr/>
-			             <tr>
+			             <tr class="odd">
 			                <th class="nui-form-label">是否发布：</th>
 			                <td >    
 			                	<input name="sqPro.isPublish" class="nui-dictcombobox" style="width:15%;" 

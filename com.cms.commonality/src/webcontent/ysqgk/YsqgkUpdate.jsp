@@ -40,7 +40,7 @@
 					</tr>  					    				
 				</table>
 				<table id="table2" align="center" style="width:90%; table-layout:fixed;" class="nui-form-table">
-					<tr>
+					<tr class="odd">
 		                <th class="nui-form-label">申请人姓名：</th>
 		                <td colspan="2">    
 		                    <input name="ysqgk.name" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空"/> 
@@ -65,7 +65,7 @@
 	            	</tr>
 	            </table>
 	            <table id="table3" align="center" style="width:90%; table-layout:fixed; display: none;" class="nui-form-table">
-	            	<tr>
+	            	<tr class="odd">
 		                <th class="nui-form-label">组织机构代码：</th>
 		                <td colspan="2">    
 		                    <input name="ysqgk.orgCode" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空"/> 
@@ -87,7 +87,7 @@
 	            	</tr>
 	            </table>
 	            <table id="table4" align="center" style="width:90%; table-layout:fixed;" class="nui-form-table">
-	            	<tr>
+	            	<tr class="odd">
 		                <th class="nui-form-label">联系电话：</th>
 		                <td colspan="2">    
 		                    <input name="ysqgk.tel" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空"/> 
@@ -107,7 +107,7 @@
 		                    <input name="ysqgk.email" class="nui-textbox nui-form-input" /> 
 		                </td>	                
 	            	</tr>
-	            	<tr>
+	            	<tr class="odd">
 		                <th class="nui-form-label">通讯地址：</th>
 		                <td colspan="2">    
 		                    <input name="ysqgk.address" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空"/> 
@@ -122,7 +122,7 @@
 			<div id="panel2" class="nui-panel" title="所需信息情况" iconCls="icon-add" style="width:100%;height:350;" 
 			showToolbar="true" showCollapseButton="true" showFooter="true" allowResize="true" collapseOnTitleClick="true">
 				<table id="table5" align="center" style="width:90%; table-layout:fixed;" class="nui-form-table">
-					<tr>
+					<tr class="odd">
 						<th class="nui-form-label">所需内容描述：</th>
 						<td>
 							<input name="ysqgk.content" class="nui-textarea" style="width:90%;height:80px"/>
@@ -134,7 +134,7 @@
 							<input name="ysqgk.description" class="nui-textarea" style="width:90%;height:80px"/>
     					</td>
 					</tr>
-					<tr>
+					<tr class="odd">
 						<th class="nui-form-label">是否申请减免费用：</th>
     					<td>
     						<div name="ysqgk.isDerate" class="nui-radiobuttonlist" textField="text" 
@@ -152,7 +152,7 @@
 							</div>
     					</td>
 					</tr> 
-					<tr>
+					<tr class="odd">
 						<th class="nui-form-label">获取信息方式：</th>
     					<td>
     						<div name="ysqgk.getMethod" class="nui-radiobuttonlist" textField="text" 

@@ -321,6 +321,7 @@
 	            var uid = record._uid;
 
 	            var s = '<a class="Edit_Button" href="javascript:detailsRow(\'' + uid + '\')">详情&处理</a>';
+	            
 	            return s;
 	        }
 	        
