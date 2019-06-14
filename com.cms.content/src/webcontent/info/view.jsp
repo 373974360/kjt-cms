@@ -17,8 +17,8 @@
 	padding: 5px 10px;
 	border: 1px solid #ccc
 }
-#viewLeft{width:20%;float:left;}
-#viewRight{width:80%;float:right;}
+#viewLeft{width:20%;height:100%;float:left;}
+#viewRight{width:79%;float:right;border-left:1px solid #ccc;}
 </style>
 </head>
 <body>

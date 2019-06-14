@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Require-Bundle: com.primeton.eos.richweb,com.eos.foundation
+eos-webCtxPath: count
+Bundle-Vendor: chaoweima
+Bundle-Version: 1.0.0
+Bundle-Name: com.cms.count
+Bundle-Description: 
+Bundle-SymbolicName: com.cms.count
+

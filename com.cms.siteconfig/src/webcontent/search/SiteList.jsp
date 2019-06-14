@@ -22,9 +22,9 @@
 				<div id="datagrid1" dataField="data" class="nui-datagrid" style="width: 100%; height: 100%;"
 					url="com.cms.siteconfig.SearchService.querySiteList.biz.ext" multiSelect="true" onselectionchanged="selectionChanged" allowSortColumn="false">
 					<div property="columns">
-						<div type="checkcolumn" width="10"></div>
+						<div type="checkcolumn" width="50"></div>
 						<div field="id" headerAlign="center" allowSort="true" visible="false">ID</div>
-						<div field="chName" headerAlign="center" allowSort="true">站点名称</div>
+						<div field="chName" width="auto" headerAlign="center" allowSort="true">站点名称</div>
 					</div>
 				</div>
 			</div>

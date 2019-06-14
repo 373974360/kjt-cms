@@ -216,7 +216,7 @@
 					nui.open({
 						url : "<%=request.getContextPath()%>/commonality/survey/SubList.jsp?surveyId="+row.id,
 						title : "题目设置",
-						width : "100%",
+						width : "80%",
 						height : "100%",
 						onload : function() {
 						},

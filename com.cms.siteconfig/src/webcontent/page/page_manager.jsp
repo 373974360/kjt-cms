@@ -51,12 +51,12 @@
 					url="com.cms.siteconfig.PageService.queryPage.biz.ext"
 					pageSize="20" showPageInfo="true" multiSelect="true" onselectionchanged="selectionChanged" allowSortColumn="false">
 					<div property="columns">
-						<div type="checkcolumn" width="10"></div>
+						<div type="checkcolumn" width="50"></div>
 						<div field="id" headerAlign="center" allowSort="true" visible="false">ID</div>
-						<div field="pageChname" headerAlign="center" allowSort="true">页面名称</div>
-						<div field="pageEnname" headerAlign="center" allowSort="true">英文名</div>
-						<div field="pageInterval" headerAlign="center" allowSort="true">更新频率</div>
-						<div field="lastDtime" headerAlign="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm:ss">更新时间</div>
+						<div field="pageChname" width="auto" headerAlign="center" allowSort="true">页面名称</div>
+						<div field="pageEnname" width="100" headerAlign="center" align="center" allowSort="true">英文名</div>
+						<div field="pageInterval" width="100" headerAlign="center" align="center" allowSort="true">更新频率</div>
+						<div field="lastDtime" width="150" headerAlign="center" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm:ss">更新时间</div>
 					</div>
 				</div>
 			</div>
