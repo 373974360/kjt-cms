@@ -38,7 +38,7 @@ public class TempletUtils {
 		int it = 0;
 		if (dsName == null || dsName.length() == 0)
 			dsName = "default";
-		String sql = "select id,templet_name from cms_templet order by id asc";
+		String sql = "select id,templet_name from cms_templet order by templet_name asc";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection(dsName);
 		Statement stmt = null;
 		ResultSet rs = null;
