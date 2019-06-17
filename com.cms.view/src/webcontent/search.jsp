@@ -7,7 +7,7 @@
 <%@page contentType="text/html; charset=utf-8"%>
 <%@page language="java" import="java.util.*" pageEncoding="utf-8" %>
 <%
-	String t_id = request.getParameter("t_id");
+	String t_id = request.getParameter("tm_id");
 	URL url = new URL(request.getRequestURL().toString());
 	String domain = url.getHost();
     DataObject siteObj = CategoryUtil.getSiteByDomain(domain);
