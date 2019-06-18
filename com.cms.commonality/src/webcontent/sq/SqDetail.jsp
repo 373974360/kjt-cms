@@ -562,7 +562,7 @@
 	        	var data = form.getData(false,true);
 	        	nui.open({
 						url : "<%=request.getContextPath()%>/commonality/sq/SqPrint.jsp",
-						title : "打印",
+						title : "打印预览",
 						width : '80%',
 						height : '100%',
 						onload : function() {
