@@ -68,11 +68,11 @@
 			            <tr>
 			                <th class="nui-form-label">联系电话：</th>
 			                <td >    
-			                    <input name="sq.phone" class="nui-textbox nui-form-input" vtype="float" readonly="readonly" borderStyle="border:0"/>
+			                    <input name="sq.phone" class="nui-textbox nui-form-input"  readonly="readonly" borderStyle="border:0"/>
 			                </td>
 			                <th class="nui-form-label">电子邮箱：</th>
 			                <td >    
-			                    <input name="sq.email" class="nui-textbox nui-form-input" vtype="email;rangeLength:5,20;" readonly="readonly" borderStyle="border:0"/>
+			                    <input name="sq.email" class="nui-textbox nui-form-input"  readonly="readonly" borderStyle="border:0"/>
 			                </td>		                
 			            </tr>		           
 					</table>
@@ -356,9 +356,11 @@
 	                contentType:'text/json',
 	                success: function (text) {	                	
 	                    refresh();
+	                    onCancel();
 	                },
 	                error: function (jqXHR, textStatus, errorThrown) {
-	                    alert(jqXHR.responseText);	              
+	                    alert(jqXHR.responseText);	
+	                    onCancel();              
 	                }
 	            });
 	        }
@@ -417,9 +419,11 @@
 	                contentType:'text/json',
 	                success: function (text) {	                	
 	                    refresh();
+	                    onCancel();
 	                },
 	                error: function (jqXHR, textStatus, errorThrown) {
 	                    alert(jqXHR.responseText);
+	                    onCancel();
 	                }
 	            });
 	        }
