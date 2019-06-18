@@ -59,6 +59,7 @@
 	                type: 'POST',
 	                cache: false,
 	                contentType:'text/json',
+	                async: false,
 	                success: function (text) {
 						selectRole = text.data;
 	                }
@@ -79,7 +80,7 @@
 							stepNum = text.steps.length+1;
 							for(var i=0;i<text.steps.length;i++){
 								var _html = "<tr id='step_"+text.steps[i].stepSort+"'>"+ 
-					        	"<td name='stepIndex'>第"+text.steps[i].stepSort+"步：<input type='hidden' name='stepId' value='"+text.steps[i].id+"'/></td>"+
+					        	"<td><span name='stepIndex'>第"+text.steps[i].stepSort+"步：</span><input type='hidden' name='stepId' value='"+text.steps[i].id+"'/></td>"+
 					        	"<td><input name='stepName' class='nui-textbox nui-form-input' value='"+text.steps[i].stepName+"'/></td>"+
 					        	"<td><select name='stepRole'>";
 						       	for(var j=0;j<selectRole.length;j++){
@@ -89,7 +90,7 @@
 						       			_html+="<option value='"+selectRole[j].roleId+"'>"+selectRole[j].roleName+"</option>";
 						       		}
 						       	}
-						       	_html += "</select></td><td><a class='nui-button icon-remove' onclick='removeStep("+text.steps[i].stepSort+")' style='padding-left:20px;'>删除</a></td>"+
+						       	_html += "</select></td><td><a class='nui-button icon-remove' onclick='removeStep("+text.steps[i].stepSort+","+text.steps[i].id+")' style='padding-left:20px;'>删除</a></td>"+
 						        "</tr>";
 						        $("#stepHtml").append(_html);
 							}
@@ -127,7 +128,7 @@
 		        }
 		        steps_json+="]";
 		        data.steps = JSON.parse(steps_json);
-		        data.workflow.stepNum = stepRole_array.length;
+		        data.workflow.stepNum = stepNum-1;
 		        var json = nui.encode(data);
 	            $.ajax({
 	                url: "com.cms.workflow.WorkFlowService.updateWorkFlow.biz.ext",
@@ -147,7 +148,7 @@
 	        
 	        function addStep(){
 	        	var _html = "<tr id='step_"+stepNum+"'>"+ 
-	        	"<td name='stepIndex'>第"+stepNum+"步：<input type='hidden' name='stepId'/></td>"+
+	        	"<td><span name='stepIndex'>第"+stepNum+"步：</span><input type='hidden' name='stepId'/></td>"+
 	        	"<td><input name='stepName' class='nui-textbox nui-form-input' value='步骤名称'/></td>"+
 	        	"<td><select name='stepRole'></select></td>"+
 	        	"<td><a class='nui-button icon-remove' onclick='removeStep("+stepNum+")' style='padding-left:20px;'>删除</a></td>"+
@@ -170,12 +171,25 @@
 	            });
 	        	stepNum++;
 	        }
-	        function removeStep(step){
+	        function removeStep(step,id){
 	        	$("#step_"+step).remove();
-	        	$("td[name='stepIndex']").each(function(index){
+	        	$("span[name='stepIndex']").each(function(index){
 					$(this).html("第"+(index+1)+"步：");
 				});
 	        	stepNum = stepNum-1;
+	        	if(id!=undefined){
+	        		var json = nui.encode({steps : [{"id":id}]});
+					$.ajax({
+						url : "com.cms.workflow.WorkFlowService.deleteSteps.biz.ext",
+						type : 'POST',
+						data : json,
+						cache : false,
+						contentType : 'text/json',
+						success : function(text) {
+							
+						}
+					});
+	        	}
 	        }
 	        
 			function CloseWindow(action){
