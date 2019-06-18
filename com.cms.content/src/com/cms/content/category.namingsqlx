@@ -166,6 +166,32 @@
 			WHERE
 				info.id = t1.bus_id and info.info_status=2 order by info.released_dtime desc
     </select>
+    <select id="myAgencyInfoCount" parameterClass="commonj.sdo.DataObject" resultClass="commonj.sdo.DataObject">
+	    	SELECT
+				count(info.id) as totle
+			FROM
+				cms_info info,
+				(
+			SELECT
+				i.bus_id ,i.id,t.work_id,t.step_sort
+			FROM
+				cms_workflow_item i,
+				(
+			SELECT
+				work_id,
+				step_sort 
+			FROM
+				cms_workflow_step 
+			WHERE
+				step_role IN ( SELECT role_id FROM cap_partyauth WHERE party_id = $userId$ )) t 
+			WHERE
+				i.wf_id = t.work_id 
+				AND i.step_id = t.step_sort 
+				AND i.is_handle = 1 
+				) t1 
+			WHERE
+				info.id = t1.bus_id and info.info_status=2 order by info.released_dtime desc
+    </select>
     
     <select id="queryWfInfoLogs" parameterClass="commonj.sdo.DataObject" resultClass="com.cms.content.category.CmsWorkflowLogs">
     	SELECT
@@ -209,5 +235,21 @@
     		</isNotNull>
     	</dynamic>
     	 order by released_dtime desc
+	</select>
+	
+	<select id="queryInfoInputCount" parameterClass="commonj.sdo.DataObject" resultClass="commonj.sdo.DataObject">
+    	select 
+    		count(id) as totle
+    	from 
+    		cms_info
+    	where input_dtime like '$currTime$%'
+	</select>
+	
+	<select id="queryInfoPublishCount" parameterClass="commonj.sdo.DataObject" resultClass="commonj.sdo.DataObject">
+    	select 
+    		count(id) as totle
+    	from 
+    		cms_info
+    	where input_dtime like '$currTime$%' and info_status = 3
 	</select>
 </sqlMap>

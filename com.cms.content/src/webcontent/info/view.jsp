@@ -9,6 +9,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<title>内容预览</title>
 <link id="css_skin" rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/content/layui/css/layui.css" />
 <script type="text/javascript" src="<%=request.getContextPath()%>/common/nui/nui.js"></script>
 <style type="text/css">
@@ -33,6 +34,7 @@
 	</div>
 	<script type="text/javascript">
 		var _ul = $(".layui-timeline");
+		$("#viewRight").css("height",document.documentElement.clientHeight);
 		loadInfoLogs();
 		function loadInfoLogs() {
 			var typeCode = ["通过","驳回","发布"];
@@ -51,6 +53,7 @@
 							_ul.append('<li class="layui-timeline-item"><i class="layui-icon layui-timeline-axis"></i>'
 									+ '<div class="layui-timeline-content layui-text">'
 									+ '<h3 class="layui-timeline-title">'+text.data[j].wfOptTime+'</h3>'
+									+ '<p>用户：' + text.data[j].wfOptUser+'</p>'
 									+ '<p>操作：' + typeCode[text.data[j].wfOptType-1]+'</p>'
 									+ '<p>意见：' + text.data[j].wfOptDesc+'</p>'
 									+ '</div></li>');

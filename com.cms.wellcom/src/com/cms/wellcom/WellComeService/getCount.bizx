@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process:tBusinessLogic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://com.primeton.emf.core" xmlns:process="http://primeton.com/emf/core/process" name="getCount.bizx" detailDescription="" demonstration="" urls="" gridVisibility="false" rulerVisibility="true" snapToGeometry="true" productVersion="7.0.0.0">
+  <nodes xsi:type="process:tStart" id="start0" name="开始" displayName="开始" type="start">
+    <sourceConnections xsi:type="process:tLink" id="link0" name="link0" displayName="连接线" isDefault="true" type="transition">
+      <sourceNode>start0</sourceNode>
+      <targetNode>subprocess2</targetNode>
+    </sourceConnections>
+    <location x="60" y="135"/>
+    <size height="28" width="28"/>
+    <nodeLabel>start0label</nodeLabel>
+  </nodes>
+  <nodes xsi:type="process:tEnd" description="" id="end0" name="结束" displayName="结束" type="end">
+    <targetConnections>link9</targetConnections>
+    <location x="720" y="160"/>
+    <size height="28" width="28"/>
+    <nodeLabel>end0label</nodeLabel>
+    <process:returns>
+      <process:return id="0" language="commonj.sdo.DataObject[]" name="dsData" type="query" valueType="Java">dsData</process:return>
+      <process:return id="1" language="commonj.sdo.DataObject[]" name="ysqgkInputData" type="query" valueType="Java">ysqgkInputData</process:return>
+      <process:return id="2" language="commonj.sdo.DataObject[]" name="noYsqgkReplyData" type="query" valueType="Java">noYsqgkReplyData</process:return>
+      <process:return id="3" language="commonj.sdo.DataObject[]" name="sqInputData" type="query" valueType="Java">sqInputData</process:return>
+      <process:return id="4" language="commonj.sdo.DataObject[]" name="sqNoReplyData" type="query" valueType="Java">sqNoReplyData</process:return>
+      <process:return id="5" language="commonj.sdo.DataObject[]" name="infoInputData" type="query" valueType="Java">infoInputData</process:return>
+      <process:return id="6" language="commonj.sdo.DataObject[]" name="infoPublishData" type="query" valueType="Java">infoPublishData</process:return>
+    </process:returns>
+  </nodes>
+  <nodes xsi:type="model:NodeElementLabel" id="start0label" name="label" displayName="label" nodeType="label">
+    <location x="62" y="171"/>
+    <figSize height="17" width="25"/>
+    <node>start0</node>
+  </nodes>
+  <nodes xsi:type="model:NodeElementLabel" id="end0label" name="label" displayName="label" nodeType="label">
+    <location x="722" y="196"/>
+    <figSize height="17" width="25"/>
+    <node>end0</node>
+  </nodes>
+  <nodes xsi:type="process:tSubprocess" description="" id="subprocess1" name="getSqInputCount" displayName="getSqInputCount" type="subprocess">
+    <sourceConnections xsi:type="process:tLink" id="link3" name="link3" displayName="连接线" isDefault="true" type="transition">
+      <sourceNode>subprocess1</sourceNode>
+      <targetNode>subprocess4</targetNode>
+    </sourceConnections>
+    <targetConnections>link2</targetConnections>
+    <location x="450" y="75"/>
+    <size height="27" width="27"/>
+    <nodeLabel>subprocess1label</nodeLabel>
+    <process:flow index="1" synchronization="true" transactionType="join" varArgs="false">
+      <process:partner type="literal">com.cms.commonality.SqService.getSqInputCount</process:partner>
+      <process:inputVariables>
+        <process:inputVariable id="0" name="params" type="query" value="commonj.sdo.DataObject" valueType="Java" pattern="reference">params</process:inputVariable>
+      </process:inputVariables>
+      <process:outputVariables>
+        <process:outputVariable id="0" name="data" type="query" value="commonj.sdo.DataObject[]" valueType="Java">sqInputData</process:outputVariable>
+      </process:outputVariables>
+    </process:flow>
+  </nodes>
+  <nodes xsi:type="model:NodeElementLabel" id="subprocess1label" name="label" nodeType="label">
+    <location x="414" y="110"/>
+    <figSize height="17" width="99"/>
+    <node>subprocess1</node>
+  </nodes>
+  <nodes xsi:type="process:tSubprocess" description="" id="subprocess0" name="noSqReplyCount" displayName="noSqReplyCount" type="subprocess">
+    <sourceConnections xsi:type="process:tLink" id="link2" name="link2" displayName="连接线" isDefault="true" type="transition">
+      <sourceNode>subprocess0</sourceNode>
+      <targetNode>subprocess1</targetNode>
+    </sourceConnections>
+    <targetConnections>link1</targetConnections>
+    <location x="296" y="75"/>
+    <size height="27" width="27"/>
+    <nodeLabel>subprocess0label</nodeLabel>
+    <process:flow index="1" synchronization="true" transactionType="join" varArgs="false">
+      <process:partner type="literal">com.cms.commonality.SqService.noSqReplyCount</process:partner>
+      <process:inputVariables>
+        <process:inputVariable id="0" name="params" type="query" value="commonj.sdo.DataObject" valueType="Java" pattern="reference">params</process:inputVariable>
+      </process:inputVariables>
+      <process:outputVariables>
+        <process:outputVariable id="0" name="data" type="query" value="commonj.sdo.DataObject[]" valueType="Java">sqNoReplyData</process:outputVariable>
+      </process:outputVariables>
+    </process:flow>
+  </nodes>
+  <nodes xsi:type="model:NodeElementLabel" id="subprocess0label" name="label" nodeType="label">
+    <location x="261" y="110"/>
+    <figSize height="17" width="97"/>
+    <node>subprocess0</node>
+  </nodes>
+  <nodes xsi:type="process:tSubprocess" description="" id="subprocess2" name="getYsqgkInputCount" displayName="getYsqgkInputCount" type="subprocess">
+    <sourceConnections xsi:type="process:tLink" id="link1" name="link1" displayName="连接线" isDefault="true" type="transition">
+      <sourceNode>subprocess2</sourceNode>
+      <targetNode>subprocess0</targetNode>
+    </sourceConnections>
+    <targetConnections>link0</targetConnections>
+    <location x="165" y="75"/>
+    <size height="27" width="27"/>
+    <nodeLabel>subprocess2label</nodeLabel>
+    <process:flow index="1" synchronization="true" transactionType="join" varArgs="false">
+      <process:partner type="literal">com.cms.commonality.YsqgkService.getYsqgkInputCount</process:partner>
+      <process:inputVariables>
+        <process:inputVariable id="0" name="params" type="query" value="commonj.sdo.DataObject" valueType="Java" pattern="reference">params</process:inputVariable>
+      </process:inputVariables>
+      <process:outputVariables>
+        <process:outputVariable id="0" name="data" type="query" value="commonj.sdo.DataObject[]" valueType="Java">ysqgkInputData</process:outputVariable>
+      </process:outputVariables>
+    </process:flow>
+  </nodes>
+  <nodes xsi:type="model:NodeElementLabel" id="subprocess2label" name="label" nodeType="label">
+    <location x="118" y="110"/>
+    <figSize height="17" width="120"/>
+    <node>subprocess2</node>
+  </nodes>
+  <nodes xsi:type="process:tSubprocess" description="" id="subprocess3" name="noYsqgkReplyCount" displayName="noYsqgkReplyCount" type="subprocess">
+    <sourceConnections xsi:type="process:tLink" id="link6" name="link6" displayName="连接线" isDefault="true" type="transition">
+      <sourceNode>subprocess3</sourceNode>
+      <targetNode>subprocess6</targetNode>
+    </sourceConnections>
+    <targetConnections>link5</targetConnections>
+    <location x="360" y="232"/>
+    <size height="27" width="27"/>
+    <nodeLabel>subprocess3label</nodeLabel>
+    <process:flow index="1" synchronization="true" transactionType="join" varArgs="false">
+      <process:partner type="literal">com.cms.commonality.YsqgkService.noYsqgkReplyCount</process:partner>
+      <process:inputVariables>
+        <process:inputVariable id="0" name="params" type="query" value="commonj.sdo.DataObject" valueType="Java" pattern="reference">params</process:inputVariable>
+      </process:inputVariables>
+      <process:outputVariables>
+        <process:outputVariable id="0" name="data" type="query" value="commonj.sdo.DataObject[]" valueType="Java">noYsqgkReplyData</process:outputVariable>
+      </process:outputVariables>
+    </process:flow>
+  </nodes>
+  <nodes xsi:type="model:NodeElementLabel" id="subprocess3label" name="label" nodeType="label">
+    <location x="314" y="267"/>
+    <figSize height="17" width="118"/>
+    <node>subprocess3</node>
+  </nodes>
+  <nodes xsi:type="process:tSubprocess" description="" id="subprocess4" name="myAgencyCount" displayName="myAgencyCount" type="subprocess">
+    <sourceConnections xsi:type="process:tLink" id="link4" name="link4" displayName="连接线" isDefault="true" type="transition">
+      <sourceNode>subprocess4</sourceNode>
+      <targetNode>subprocess5</targetNode>
+    </sourceConnections>
+    <targetConnections>link3</targetConnections>
+    <location x="120" y="213"/>
+    <size height="27" width="27"/>
+    <nodeLabel>subprocess4label</nodeLabel>
+    <process:flow index="1" synchronization="true" transactionType="join" varArgs="false">
+      <process:partner type="literal">com.cms.content.WellComeService.myAgencyCount</process:partner>
+      <process:inputVariables>
+        <process:inputVariable id="0" name="params" type="query" value="commonj.sdo.DataObject" valueType="Java" pattern="reference">params</process:inputVariable>
+      </process:inputVariables>
+      <process:outputVariables>
+        <process:outputVariable id="0" name="data" type="query" value="commonj.sdo.DataObject[]" valueType="Java">dsData</process:outputVariable>
+      </process:outputVariables>
+    </process:flow>
+  </nodes>
+  <nodes xsi:type="model:NodeElementLabel" id="subprocess4label" name="label" nodeType="label">
+    <location x="86" y="248"/>
+    <figSize height="17" width="94"/>
+    <node>subprocess4</node>
+  </nodes>
+  <nodes xsi:type="process:tSubprocess" description="" id="subprocess5" name="getInfoInputCount" displayName="getInfoInputCount" type="subprocess">
+    <sourceConnections xsi:type="process:tLink" id="link5" name="link5" displayName="连接线" isDefault="true" type="transition">
+      <sourceNode>subprocess5</sourceNode>
+      <targetNode>subprocess3</targetNode>
+    </sourceConnections>
+    <targetConnections>link4</targetConnections>
+    <location x="240" y="223"/>
+    <size height="27" width="27"/>
+    <nodeLabel>subprocess5label</nodeLabel>
+    <process:flow index="1" synchronization="true" transactionType="join" varArgs="false">
+      <process:partner type="literal">com.cms.content.WellComeService.getInfoInputCount</process:partner>
+      <process:inputVariables>
+        <process:inputVariable id="0" name="params" type="query" value="commonj.sdo.DataObject" valueType="Java" pattern="reference">params</process:inputVariable>
+      </process:inputVariables>
+      <process:outputVariables>
+        <process:outputVariable id="0" name="data" type="query" value="commonj.sdo.DataObject[]" valueType="Java">infoInputData</process:outputVariable>
+      </process:outputVariables>
+    </process:flow>
+  </nodes>
+  <nodes xsi:type="model:NodeElementLabel" id="subprocess5label" name="label" nodeType="label">
+    <location x="200" y="258"/>
+    <figSize height="17" width="107"/>
+    <node>subprocess5</node>
+  </nodes>
+  <nodes xsi:type="process:tSubprocess" description="" id="subprocess6" name="getInfoPublishCount" displayName="getInfoPublishCount" type="subprocess">
+    <sourceConnections xsi:type="process:tLink" id="link9" name="link9" displayName="连接线" isDefault="true" type="transition">
+      <sourceNode>subprocess6</sourceNode>
+      <targetNode>end0</targetNode>
+    </sourceConnections>
+    <targetConnections>link6</targetConnections>
+    <location x="486" y="223"/>
+    <size height="27" width="27"/>
+    <nodeLabel>subprocess6label</nodeLabel>
+    <process:flow index="1" synchronization="true" transactionType="join" varArgs="false">
+      <process:partner type="literal">com.cms.content.WellComeService.getInfoPublishCount</process:partner>
+      <process:inputVariables>
+        <process:inputVariable id="0" name="params" type="query" value="commonj.sdo.DataObject" valueType="Java" pattern="reference">params</process:inputVariable>
+      </process:inputVariables>
+      <process:outputVariables>
+        <process:outputVariable id="0" name="data" type="query" value="commonj.sdo.DataObject[]" valueType="Java">infoPublishData</process:outputVariable>
+      </process:outputVariables>
+    </process:flow>
+  </nodes>
+  <nodes xsi:type="model:NodeElementLabel" id="subprocess6label" name="label" nodeType="label">
+    <location x="440" y="258"/>
+    <figSize height="17" width="118"/>
+    <node>subprocess6</node>
+  </nodes>
+  <topRuler/>
+  <leftRuler/>
+  <process:info author="chaoweima" createTime="2019-06-18 11:38:19" date="2019-06-18Z" description="" name="getCount" version="7.0.0.0"/>
+  <process:variables/>
+  <process:inputs varArgs="false">
+    <process:input anyType="commonj.sdo.DataObject" description="" isArray="false" name="params"/>
+  </process:inputs>
+  <process:outputs>
+    <process:output anyType="commonj.sdo.DataObject" description="" isArray="true" name="dsData"/>
+    <process:output anyType="commonj.sdo.DataObject" description="" isArray="true" name="ysqgkInputData"/>
+    <process:output anyType="commonj.sdo.DataObject" description="" isArray="true" name="noYsqgkReplyData"/>
+    <process:output anyType="commonj.sdo.DataObject" description="" isArray="true" name="sqInputData"/>
+    <process:output anyType="commonj.sdo.DataObject" description="" isArray="true" name="sqNoReplyData"/>
+    <process:output anyType="commonj.sdo.DataObject" description="" isArray="true" name="infoInputData"/>
+    <process:output anyType="commonj.sdo.DataObject" description="" isArray="true" name="infoPublishData"/>
+  </process:outputs>
+  <process:extAttribute1>public</process:extAttribute1>
+  <process:transactionType>true</process:transactionType>
+</process:tBusinessLogic>

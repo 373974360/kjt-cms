@@ -34,4 +34,20 @@
 	    	</dynamic>	    	
 	    	ORDER BY CREATE_DTIME DESC
 	    </select>
+	    <select id="queryYsqgkNoReplyCount" parameterClass="commonj.sdo.DataObject" resultClass="commonj.sdo.DataObject">
+	    	SELECT
+				count(id) as totle
+			FROM
+				CMS_YSQGK 
+			WHERE
+				IS_REPLY = 2
+	    </select>
+	    <select id="queryYsqgkInputCount" parameterClass="commonj.sdo.DataObject" resultClass="commonj.sdo.DataObject">
+	    	SELECT
+				count(id) as totle
+			FROM
+				CMS_YSQGK 
+			WHERE
+				CREATE_DTIME like '$currTime$%'
+	    </select>
 </sqlMap>
