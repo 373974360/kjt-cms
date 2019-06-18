@@ -33,7 +33,7 @@
 						<th class="nui-form-label">申请人类型：</th>
     					<td colspan="2">
     						<input name="ysqgk.ysqType" class="nui-radiobuttonlist" textField="text" 
-		    					dataField="ysqType" valueField="id" required="true" requiredErrorText="请选择申请人类型"
+		    					dataField="ysqType" valueField="id" required="true" value="1"
 		    					url="<%=request.getContextPath()%>/commonality/ysqgk/ysqType.txt" onvaluechanged="onSelected" />
     					</td>  					
 					</tr> 
