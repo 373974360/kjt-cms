@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import com.cms.content.QueryInfoListUtils;
 import com.cms.view.velocity.FormatUtil;
 import com.cms.view.velocity.TurnPageBean;
 import com.eos.common.connection.ConnectionHelper;
@@ -268,9 +269,9 @@ public class InfoDataUtil {
 		getInfoSearchCon(params,con_map);
 		int counts = 0;
 		int it = 0;
-		String sql = "select * from (select row_.*, rownum rownum_ from (select i.*,c.ch_name from cms_info i,cms_info_category c where i.cat_id=c.id";
-		sql = initSql(sql,con_map);
-		sql += " order by i.is_top asc,i.weight desc,"+con_map.get("orderby")+") row_ where rownum <="+con_map.get("page_size")+"+"+con_map.get("start_num")+") where rownum_ >="+con_map.get("start_num")+" + 1";
+		String sql = "select * from (select row_.*, rownum rownum_ from (select * from (select i.*,c.ch_name from cms_info i,cms_info_category c where i.cat_id=c.id";
+		sql = initSql(sql,con_map,"list");
+		sql += ") i order by i.is_top asc,i.weight desc,"+con_map.get("orderby")+") row_ where rownum <="+con_map.get("page_size")+"+"+con_map.get("start_num")+") where rownum_ >="+con_map.get("start_num")+" + 1";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -324,8 +325,8 @@ public class InfoDataUtil {
 	}
 	public static int getBroInfoCount(Map<String, String> con_map){
 		int totle = 0;
-		String sql = "select count(i.id) as totle from cms_info i,cms_info_category c where i.cat_id=c.id";
-		sql = initSql(sql,con_map);
+		String sql = "select count(i.id) as totle from cms_info i where 1=1";
+		sql = initSql(sql,con_map,"count");
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -480,7 +481,7 @@ public class InfoDataUtil {
         con_map.put("orderby", orderby);
 	}
 	
-	public static String initSql(String sql, Map<String, String> con_map){
+	public static String initSql(String sql, Map<String, String> con_map,String type){
 		Set<String> keys = con_map.keySet();
 		for(String key : keys){
 			if(key.equals("cat_id") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
@@ -518,6 +519,42 @@ public class InfoDataUtil {
 			}
 		}
 		sql += " and i.info_status = 3";
+		if(type.equals("list")){
+			sql+=" union select i.*,c.ch_name from cms_info i,cms_info_category c where i.cat_id=c.id and i.id in ("+QueryInfoListUtils.getInfoCats(con_map.get("cat_id"))+")";
+			for(String key : keys){
+				if(key.equals("model_id") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.model_id = '"+con_map.get(key)+"'";
+				}
+				if(key.equals("title") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.info_title like '%"+con_map.get(key)+"%'";
+				}
+				if(key.equals("info_type") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.info_type = "+con_map.get(key);
+				}
+				if(key.equals("keywords") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and (i.info_title like '%"+con_map.get(key)+"%' or i.keywords like '%"+con_map.get(key)+"%')";
+				}
+				if(key.equals("gk_no") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.gk_no = '"+con_map.get(key)+"'";
+				}
+				if(key.equals("gk_index") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.gk_index = '"+con_map.get(key)+"'";
+				}
+				if(key.equals("is_top") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.is_top = "+con_map.get(key);
+				}
+				if(key.equals("is_tuijian") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.is_tuijian = "+con_map.get(key);
+				}
+				if(key.equals("weight") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.weight = "+con_map.get(key);
+				}
+				if(key.equals("thumb_url") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.thumb_url != null and i.thumb_url != ''";
+				}
+			}
+			sql += " and i.info_status = 3";
+		}
 		return sql;
 	}
 	
