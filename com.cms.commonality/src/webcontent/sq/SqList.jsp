@@ -289,6 +289,10 @@
 				var rows = grid.getSelecteds();
 				if (rows.length > 1) {
 					nui.get("update").disable();
+					nui.get("isPublish").enable();
+					nui.get("noPublish").enable();
+					nui.get("isOpen").enable();
+					nui.get("noOpen").enable();
 				} else {
 					nui.get("update").enable();
 					nui.get("isPublish").enable();
