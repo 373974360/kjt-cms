@@ -288,26 +288,9 @@
 			function selectionChanged() {
 				var rows = grid.getSelecteds();
 				if (rows.length > 1) {
-					nui.get("update").disable();
-					nui.get("isPublish").enable();
-					nui.get("noPublish").enable();
-					nui.get("isOpen").enable();
-					nui.get("noOpen").enable();
+					nui.get("update").disable();					
 				} else {
-					nui.get("update").enable();
-					nui.get("isPublish").enable();
-					nui.get("noPublish").enable();
-					nui.get("isOpen").enable();
-					nui.get("noOpen").enable();
-				}
-				
-				for(var i=0;i<rows.length;i++){
-					if (rows[i].isReply=="2"||rows[i].isReply==null) {
-						nui.get("isPublish").disable();
-						nui.get("noPublish").disable();
-						nui.get("isOpen").disable();
-						nui.get("noOpen").disable();
-					}
+					nui.get("update").enable();				
 				}
 			}
 			//单击详情按钮时发生

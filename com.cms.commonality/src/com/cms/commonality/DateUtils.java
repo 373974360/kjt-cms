@@ -25,6 +25,9 @@ public class DateUtils {
 	 */
 	@Bizlet("日期格式化")
 	public static String dateFormat(String date) {
+		if(date == null){
+			return null;
+		}
 		return date.replace("T", " ");
 	}
 	
