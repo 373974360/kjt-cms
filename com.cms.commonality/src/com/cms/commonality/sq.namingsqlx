@@ -55,4 +55,7 @@
 			WHERE
 				create_time like '$currTime$%'
 	    </select>
+	    <delete id="deleteSqProBySqId" parameterClass="commonj.sdo.DataObject">
+	    	delete from CMS_SQ_PROCESS where SQ_ID = $id$
+	    </delete>
 </sqlMap>
