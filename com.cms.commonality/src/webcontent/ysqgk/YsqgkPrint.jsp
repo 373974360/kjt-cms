@@ -64,7 +64,7 @@
 					<tr>
 						<th >信息指定提供方式</th>
     					<td colspan="5">
-    						<input name="ysqgk.offerType" class="nui-radiobuttonlist" textField="text" 
+    						<input name="ysqgk.offerType" class="nui-checkboxlist" textField="text" 
 		    					dataField="offerType" valueField="id" value="1"
 		    					url="<%=request.getContextPath()%>/commonality/ysqgk/offerType.txt" readonly="readonly"/>							
     					</td>
@@ -72,7 +72,7 @@
 					<tr>
 						<th >获取信息方式</th>
     					<td colspan="5">
-    						<input name="ysqgk.getMethod" class="nui-radiobuttonlist" textField="text" 
+    						<input name="ysqgk.getMethod" class="nui-checkboxlist" textField="text" 
 		    					dataField="getMethod" valueField="id" value="1"
 		    					url="<%=request.getContextPath()%>/commonality/ysqgk/getMethod.txt" readonly="readonly"/>						
     					</td>

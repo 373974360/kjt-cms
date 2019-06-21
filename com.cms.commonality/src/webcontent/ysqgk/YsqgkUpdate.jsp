@@ -90,7 +90,7 @@
 	            	<tr class="odd">
 		                <th class="nui-form-label">联系电话：</th>
 		                <td colspan="2">    
-		                    <input name="ysqgk.tel" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空"/> 
+		                    <input name="ysqgk.tel" class="nui-textbox nui-form-input"/> 
 		                </td>	
 		                <th class="nui-form-label">联系传真：</th>
 		                <td colspan="2">    
@@ -100,11 +100,11 @@
 	            	<tr>
 		                <th class="nui-form-label">手机号码：</th>
 		                <td colspan="2">    
-		                    <input name="ysqgk.mobile" class="nui-textbox nui-form-input" /> 
+		                    <input name="ysqgk.mobile" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空" onvalidation="phoneNumberValidation"/> 
 		                </td>	
 		                <th class="nui-form-label">电子邮箱：</th>
 		                <td colspan="2">    
-		                    <input name="ysqgk.email" class="nui-textbox nui-form-input" /> 
+		                    <input name="ysqgk.email" class="nui-textbox nui-form-input" vtype="email;rangeLength:5,20;" required="true" requiredErrorText="不能为空" emailErrorText="请输入邮箱格式"/> 
 		                </td>	                
 	            	</tr>
 	            	<tr class="odd">
@@ -114,7 +114,7 @@
 		                </td>	
 		                <th class="nui-form-label">邮政编码：</th>
 		                <td colspan="2">    
-		                    <input name="ysqgk.yzbm" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空"/> 
+		                    <input name="ysqgk.yzbm" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空" onvalidation="postalValidation"/> 
 		                </td>	                
 	            	</tr>
 				</table>
@@ -146,7 +146,7 @@
 					<tr>
 						<th class="nui-form-label">信息指定提供方式：</th>
     					<td>
-    						<div name="ysqgk.offerType" class="nui-radiobuttonlist" textField="text" 
+    						<div name="ysqgk.offerType" class="nui-checkboxlist" textField="text" 
 		    					dataField="offerType" valueField="id" value="1"
 		    					url="<%=request.getContextPath()%>/commonality/ysqgk/offerType.txt" >
 							</div>
@@ -155,7 +155,7 @@
 					<tr class="odd">
 						<th class="nui-form-label">获取信息方式：</th>
     					<td>
-    						<div name="ysqgk.getMethod" class="nui-radiobuttonlist" textField="text" 
+    						<div name="ysqgk.getMethod" class="nui-checkboxlist" textField="text" 
 		    					dataField="getMethod" valueField="id" value="1"
 		    					url="<%=request.getContextPath()%>/commonality/ysqgk/getMethod.txt" >
 							</div>
@@ -238,23 +238,41 @@
 	        	}
 	        	
 	        }
-	        //身份证号验证
+	        //证件号码验证
 	        function onIDCardsValidation(e){
-	        	if(e.isValid){
-	        		if (e.value.length < 15 || e.value.length > 18 || isIdentity(e.value) == false) {		        		
-		        			e.errorText = "请输入正确身份证号";
-	                    	e.isValid = false;		        		
+	        	if ($("input[name='ysqgk.cardName']").val() == 1) {	
+		        	if(e.isValid){
+		        		if (e.value.length < 15 || e.value.length > 18 || isIdentity(e.value) == false) {		        		
+			        			e.errorText = "请输入15-18位正确身份证号码";
+		                    	e.isValid = false;		        		
+			        	}
 		        	}
-	        	}
+		        	
+		        }else{  
+		        	//其他类型证件验证
+		        	if(e.isValid){
+		        		if(isOtherPapers(e.value) == false){
+		        				e.errorText = "请输入正确证件号码";
+		                    	e.isValid = false;		        		
+		        		}		        	
+		        	}		        
+		        }	        	
+	        }
+	        function isIdentity(v){	   /* 是否是身份证号 */     	
+	        	var re = new RegExp("^([0-9]){7,18}(x|X)?$");
+            	if (re.test(v)){
+            		return true;
+            	}else{
+            		return false;	
+            	}	            	            
 	        }	        
-	        function isIdentity(v){	        	
-		        	var re = new RegExp("^([0-9]){7,18}(x|X)?$");
-	            	if (re.test(v)) {
-	            		return true;
-	            	}else{
-	            		return false;
-	            	}
-	            		            
+	        function isOtherPapers(v){	/* 是否数字或数字英文字母组合*/ 
+	        	var re = new RegExp("^[A-Za-z0-9]+$");
+            	if (re.test(v)){
+            		return true;
+            	}else{
+            		return false;	
+            	}
 	        }
 	        //申请编号验证
 	        function onEnglishAndNumberValidation(e){
@@ -264,10 +282,39 @@
 	                    e.isValid = false;
 	                }
             	}
-	        }
-	         /* 是否英文+数字 */
-        	function isEnglishAndNumber(v) {           
+	        } 
+        	function isEnglishAndNumber(v) {   /* 是否英文+数字 */
 	            var re = new RegExp("^[0-9a-zA-Z\_]+$");
+	            if (re.test(v)) return true;
+	            return false;
+	        }
+	        
+	        //手机号码验证
+	         function phoneNumberValidation(e){
+	        	if (e.isValid) {
+	                if (isPhoneNumber(e.value) == false) {
+	                    e.errorText = "请输入正确手机号码";
+	                    e.isValid = false;
+	                }
+            	}
+	        }
+	        function isPhoneNumber(v){	/* 是否为手机号码 */
+	        	var re = new RegExp("^(13[0-9]|14[0-9]|15[0-9]|16[0-9]|17[0-9]|18[0-9]|19[8|9])\\d{8}$");
+	            if (re.test(v)) return true;
+	            return false;
+	        }
+	        
+	        //邮编验证	
+	        function postalValidation(e){
+	        	if (e.isValid) {
+	                if (isPostalNumber(e.value) == false) {
+	                    e.errorText = "请输入正确邮编号码";
+	                    e.isValid = false;
+	                }
+            	}
+	        }
+	        function isPostalNumber(v){	/* 是否为邮编号码 */
+	        	var re = new RegExp("^[0-9]\\d{5}$");
 	            if (re.test(v)) return true;
 	            return false;
 	        }

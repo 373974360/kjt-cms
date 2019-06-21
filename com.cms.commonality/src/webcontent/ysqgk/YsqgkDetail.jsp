@@ -150,7 +150,7 @@
 					<tr>
 						<th class="nui-form-label">信息指定提供方式：</th>
     					<td>
-    						<input name="ysqgk.offerType" class="nui-radiobuttonlist" textField="text" 
+    						<input name="ysqgk.offerType" class="nui-checkboxlist" textField="text" 
 		    					dataField="offerType" valueField="id" value="1"
 		    					url="<%=request.getContextPath()%>/commonality/ysqgk/offerType.txt" readonly="readonly"/>							
     					</td>
@@ -158,7 +158,7 @@
 					<tr>
 						<th class="nui-form-label">获取信息方式：</th>
     					<td>
-    						<input name="ysqgk.getMethod" class="nui-radiobuttonlist" textField="text" 
+    						<input name="ysqgk.getMethod" class="nui-checkboxlist" textField="text" 
 		    					dataField="getMethod" valueField="id" value="1"
 		    					url="<%=request.getContextPath()%>/commonality/ysqgk/getMethod.txt" readonly="readonly"/>						
     					</td>

@@ -290,9 +290,22 @@
 			var grid = nui.get("datagrid1");
 			var formData = new nui.Form("#queryform").getData(false, false);
   	       	grid.load(formData);
+  	       	grid.on("drawcell", function (e) {
+			    var field = e.field,
+			        value = e.value;
+			    if (field == "reType") {
+			        if (value == 1){
+			        	e.cellHtml = "转办";
+			        }else{
+			        	e.cellHtml = "回复";
+			        }
+			    }
+			});
+			
 	        var form = new nui.Form("form1");
 	        var form3 = new nui.Form("form3");
 	        var form4 = new nui.Form("form4");
+	        
 			
 			var data_;
 			function setDataParams(data){

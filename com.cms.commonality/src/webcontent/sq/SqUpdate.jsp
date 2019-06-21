@@ -86,17 +86,23 @@
 		                </td>
 		                <th class="nui-form-label">是否回复：</th>
 		                <td colspan="3">    
-		                    <input name="sq.isReply" class="nui-dictcombobox nui-form-input" showNullItem="true" emptyText="请选择" dictTypeId="CMS_YESORNO"/>
+		                    <input name="sq.isReply" class="nui-combobox nui-form-input" showNullItem="true" emptyText="请选择" 
+		                    textField="text" dataField="isOrNo" valueField="id" 
+		    					url="<%=request.getContextPath()%>/commonality/sq/IsorNo.txt"/>
 		                </td>		              
 		            </tr>
 		            <tr class="odd">
 		                <th class="nui-form-label">是否公开：</th>
 		                <td colspan="3">    
-		                    <input name="sq.isOpen" class="nui-dictcombobox nui-form-input" showNullItem="true" emptyText="请选择" dictTypeId="CMS_YESORNO"/>
+		                    <input name="sq.isOpen" class="nui-combobox nui-form-input" showNullItem="true" emptyText="请选择" 
+		                    textField="text" dataField="isOrNo" valueField="id" 
+		    					url="<%=request.getContextPath()%>/commonality/sq/IsorNo.txt"/>
 		                </td>
 		                <th class="nui-form-label">是否发布：</th>
 		                <td colspan="3">    
-		                    <input name="sq.isPublish" class="nui-dictcombobox nui-form-input" showNullItem="true" emptyText="请选择" dictTypeId="CMS_YESORNO"/>
+		                    <input name="sq.isPublish" class="nui-combobox nui-form-input" showNullItem="true" emptyText="请选择" 
+		                    textField="text" dataField="isOrNo" valueField="id" 
+		    					url="<%=request.getContextPath()%>/commonality/sq/IsorNo.txt"/>
 		                </td>
 		            </tr>
 		            <tr>
