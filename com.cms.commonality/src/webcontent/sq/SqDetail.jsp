@@ -108,7 +108,7 @@
 			                <th class="nui-form-label">是否发布：</th>
 			                <td >    
 			                    <input name="sq.isPublish" class="nui-combobox nui-form-input" showNullItem="true" emptyText="请选择" 
-		                    textField="text" dataField="isOrNo" valueField="id" 
+		                    	textField="text" dataField="isOrNo" valueField="id" 
 		    					url="<%=request.getContextPath()%>/commonality/sq/IsorNo.txt" readonly="readonly" showButton="false" borderStyle="border:0"/>
 			                </td>
 		            	</tr>
@@ -253,16 +253,18 @@
 					<table style="width:100%; table-layout:fixed;" class="nui-form-table">					 
 		                 <tr>			            	
 				            <th class="nui-form-label">是否公开：</th>
-			                <td >    
-			                    <input name="sqPro.isOpen" class="nui-dictcombobox" style="width:15%;"
-			                     emptyText="请选择" dictTypeId="CMS_YESORNO" required="true" requiredErrorText="不能为空"/>
+			                <td >   
+			                	<input name="sqPro.isOpen" class="nui-combobox" style="width:15%;" emptyText="请选择" 
+		                    	textField="text" dataField="isOrNo" valueField="id" 
+		    					url="<%=request.getContextPath()%>/commonality/sq/IsorNo.txt" required="true" requiredErrorText="不能为空"/>			                    
 			                </td>
 			             <tr/>
 			             <tr class="odd">
 			                <th class="nui-form-label">是否发布：</th>
-			                <td >    
-			                	<input name="sqPro.isPublish" class="nui-dictcombobox" style="width:15%;" 
-			                	required="true" requiredErrorText="不能为空" emptyText="请选择" dictTypeId="CMS_YESORNO"/>
+			                <td > 
+			                	<input name="sqPro.isPublish" class="nui-combobox" style="width:15%;" emptyText="请选择" 
+		                    	textField="text" dataField="isOrNo" valueField="id" 
+		    					url="<%=request.getContextPath()%>/commonality/sq/IsorNo.txt" required="true" requiredErrorText="不能为空"/>		   			                	
 		                	</td>
 		            	</tr>
 			            <tr>
