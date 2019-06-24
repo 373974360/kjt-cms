@@ -92,17 +92,24 @@
 			                </td>
 			                <th class="nui-form-label">是否公开：</th>
 			                <td >    
-			                    <input name="sq.isOpen" class="nui-dictcombobox" dictTypeId="CMS_YESORNO" readonly="readonly" showButton="false" borderStyle="border:0"/>
+			                    <input name="sq.isOpen" class="nui-combobox nui-form-input" showNullItem="true" emptyText="请选择" 
+		                    	textField="text" dataField="isOrNo" valueField="id" 
+		    					url="<%=request.getContextPath()%>/commonality/sq/IsorNo.txt" readonly="readonly" showButton="false" borderStyle="border:0"/>
 			                </td>		               
 		            	</tr>
 			            <tr>			            	
 			                <th class="nui-form-label">是否回复：</th>
-			                <td >    
-			                    <input name="sq.isReply" class="nui-dictcombobox " dictTypeId="CMS_YESORNO" readonly="readonly" showButton="false" borderStyle="border:0"/>
+			                <td >
+			                	<input name="sq.isReply" class="nui-combobox nui-form-input" showNullItem="true" emptyText="请选择" 
+		                    	textField="text" dataField="isOrNo" valueField="id" 
+		    					url="<%=request.getContextPath()%>/commonality/sq/IsorNo.txt" readonly="readonly" showButton="false" borderStyle="border:0"/> 
+			                 
 			                </td>		              		                
 			                <th class="nui-form-label">是否发布：</th>
 			                <td >    
-			                    <input name="sq.isPublish" class="nui-dictcombobox " dictTypeId="CMS_YESORNO" readonly="readonly" showButton="false" borderStyle="border:0"/>
+			                    <input name="sq.isPublish" class="nui-combobox nui-form-input" showNullItem="true" emptyText="请选择" 
+		                    textField="text" dataField="isOrNo" valueField="id" 
+		    					url="<%=request.getContextPath()%>/commonality/sq/IsorNo.txt" readonly="readonly" showButton="false" borderStyle="border:0"/>
 			                </td>
 		            	</tr>
 		            	<tr>

@@ -142,8 +142,8 @@
 						<th class="nui-form-label">是否申请减免费用：</th>
     					<td>
     						<input name="ysqgk.isDerate" class="nui-radiobuttonlist" textField="text" 
-		    					dataField="isDerate" valueField="id" value="1"
-		    					url="<%=request.getContextPath()%>/commonality/ysqgk/isDerate.txt"
+		    					dataField="isOrNot" valueField="id" value="1"
+		    					url="<%=request.getContextPath()%>/commonality/ysqgk/isOrNot.txt"
 		    					showButton="false" readonly="readonly" />
     					</td>
 					</tr>  
@@ -167,8 +167,8 @@
 						<th class="nui-form-label">是否接受其他方式：</th>
     					<td>
     						<input name="ysqgk.isOther" class="nui-radiobuttonlist" textField="text" 
-		    					dataField="isOther" valueField="id" value="1"
-		    					url="<%=request.getContextPath()%>/commonality/ysqgk/isOther.txt" readonly="readonly"/>					
+		    					dataField="isOrNot" valueField="id" value="1"
+		    					url="<%=request.getContextPath()%>/commonality/ysqgk/isOrNot.txt" readonly="readonly"/>					
     					</td>
 					</tr> 					    				
 				</table>

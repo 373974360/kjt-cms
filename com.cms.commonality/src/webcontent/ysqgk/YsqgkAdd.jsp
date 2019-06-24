@@ -50,7 +50,8 @@
 		                </td>
 		                <th class="nui-form-label">查询密码：</th>
 		                <td colspan="2">    
-		                    <input name="ysqgk.queryCode" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空"/> 
+		                    <input name="ysqgk.queryCode" class="nui-textbox nui-form-input" required="true" 
+		                    onvalidation="queryPasswordValidation" requiredErrorText="不能为空"/> 
 		                </td>
 					</tr>  					    				
 				</table>
@@ -154,8 +155,8 @@
 						<th class="nui-form-label">是否申请减免费用：</th>
     					<td>
     						<div name="ysqgk.isDerate" class="nui-radiobuttonlist" textField="text" 
-		    					dataField="isDerate" valueField="id" value="2"
-		    					url="<%=request.getContextPath()%>/commonality/ysqgk/isDerate.txt" >
+		    					dataField="isOrNot" valueField="id" value="2"
+		    					url="<%=request.getContextPath()%>/commonality/ysqgk/isOrNot.txt" >
 							</div>
     					</td>
 					</tr>  
@@ -181,8 +182,8 @@
 						<th class="nui-form-label">是否接受其他方式：</th>
     					<td>
     						<div name="ysqgk.isOther" class="nui-radiobuttonlist" textField="text" 
-		    					dataField="isOther" valueField="id" value="1"
-		    					url="<%=request.getContextPath()%>/commonality/ysqgk/isOther.txt" >
+		    					dataField="isOrNot" valueField="id" value="1"
+		    					url="<%=request.getContextPath()%>/commonality/ysqgk/isOrNot.txt" >
 							</div>
     					</td>
 					</tr> 					    				
@@ -287,19 +288,32 @@
             		return false;	
             	}
 	        }
-		
+	        //查询密码验证
+	        function queryPasswordValidation(e){
+	        	if (e.isValid) {
+	                if (isSixEnglishAndNumber(e.value) == false) {
+	                    e.errorText = "请输入正确查询密码";
+	                    e.isValid = false;
+	                }
+            	}
+	        }
+	        function isSixEnglishAndNumber(v) {   /* 是否6位英文+数字密码 */
+	            var re = new RegExp("^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6}$");
+	            if (re.test(v)) return true;
+	            return false;
+			}
 	        
 	        //申请编号验证
 	        function onEnglishAndNumberValidation(e){
 	        	if (e.isValid) {
 	                if (isEnglishAndNumber(e.value) == false) {
-	                    e.errorText = "请输入正确编号";
+	                    e.errorText = "请输入正确申请编号";
 	                    e.isValid = false;
 	                }
             	}
 	        } 
         	function isEnglishAndNumber(v) {   /* 是否英文+数字 */
-	            var re = new RegExp("^[0-9a-zA-Z\_]+$");
+	            var re = new RegExp("^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{19}$");
 	            if (re.test(v)) return true;
 	            return false;
 	        }
@@ -323,7 +337,7 @@
 	        function postalValidation(e){
 	        	if (e.isValid) {
 	                if (isPostalNumber(e.value) == false) {
-	                    e.errorText = "请输入正确邮编号码";
+	                    e.errorText = "请输入正确邮政编码";
 	                    e.isValid = false;
 	                }
             	}

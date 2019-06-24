@@ -75,10 +75,10 @@
 						<div field="createDtime" headerAlign="center" width="60" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm:ss">提交时间</div>		
 						<div field="replyDtime" headerAlign="center" width="60" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm:ss">回复时间</div>
 						<div field="replyContent" headerAlign="center" allowSort="true" visible="false">回复内容</div>
-						<div field="isReply" width="30" align="center" headerAlign="center" allowSort="true" renderer="onYesOrNoRenderer">回复</div>
+						<div field="isReply" width="30" align="center" headerAlign="center" allowSort="true">回复</div>
 						<div field="content" headerAlign="center" allowSort="true" visible="false">内容描述</div>
-						<div field="isPublish" width="30" align="center" headerAlign="center" allowSort="true" renderer="onYesOrNoRenderer">发布</div>
-						<div field="isOpen" width="30" align="center" headerAlign="center" allowSort="true" renderer="onYesOrNoRenderer">公开</div>
+						<div field="isPublish" width="30" align="center" headerAlign="center" allowSort="true">发布</div>
+						<div field="isOpen" width="30" align="center" headerAlign="center" allowSort="true">公开</div>
 						<div name="action" width="40" headerAlign="center" align="center" renderer="onActionRenderer" cellStyle="padding:0;">申请详情</div>
 					</div>
 				</div>
@@ -90,10 +90,33 @@
 	
 			var formData = new nui.Form("#queryform").getData(false, false);
 			grid.load(formData);
-			//判断是否
-			function onYesOrNoRenderer(e){
-				return nui.getDictText('CMS_YESORNO',e.value);
-			}			
+			grid.load(formData);
+			grid.on("drawcell", function (e) {
+			    var field = e.field,
+			        value = e.value;
+			    if (field == "isReply") {
+			        if (value == 1){
+			        	e.cellHtml = "是";
+			        }else{
+			        	e.cellHtml = "否";
+			        }
+			    }
+			    if (field == "isPublish") {
+			        if (value == 1){
+			        	e.cellHtml = "是";
+			        }else{
+			        	e.cellHtml = "否";
+			        }
+			    }
+			    if (field == "isOpen") {
+			        if (value == 1){
+			        	e.cellHtml = "是";
+			        }else{
+			        	e.cellHtml = "否";
+			        }
+			    }
+			});
+					
 	
 			//新增
 			function add() {

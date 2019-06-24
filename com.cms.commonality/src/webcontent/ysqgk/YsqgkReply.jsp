@@ -30,8 +30,8 @@
 		            <th class="nui-form-label">是否公开：</th>
 	                <td > 
 	                	<div name="ysqgk.isOpen" class="nui-radiobuttonlist" textField="text" 
-		    					dataField="isOpen" valueField="id" value="1"
-		    					url="<%=request.getContextPath()%>/commonality/ysqgk/isOpen.txt" >
+		    					dataField="isOrNot" valueField="id" value="1"
+		    					url="<%=request.getContextPath()%>/commonality/ysqgk/isOrNot.txt" >
 						</div>   
 	                </td>
 	             <tr/>
@@ -39,8 +39,8 @@
 	                <th class="nui-form-label">是否发布：</th>
 	                <td > 
 	                	<div name="ysqgk.isPublish" class="nui-radiobuttonlist" textField="text" 
-		    					dataField="isPublish" valueField="id" value="1"
-		    					url="<%=request.getContextPath()%>/commonality/ysqgk/isPublish.txt" >
+		    					dataField="isOrNot" valueField="id" value="1"
+		    					url="<%=request.getContextPath()%>/commonality/ysqgk/isOrNot.txt" >
 						</div>    	                	
                 	</td>
             	</tr>
