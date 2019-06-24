@@ -121,7 +121,7 @@
 		                </td>	
 		                <th class="nui-form-label">电子邮箱：</th>
 		                <td colspan="2">    
-		                    <input name="ysqgk.email" class="nui-textbox nui-form-input" vtype="email;rangeLength:5,20;" emailErrorText="请输入邮箱格式" required="true" requiredErrorText="不能为空"/> 
+		                    <input name="ysqgk.email" class="nui-textbox nui-form-input" vtype="email;rangeLength:5,20;" emailErrorText="请输入正确电子邮箱" required="true" requiredErrorText="不能为空"/> 
 		                </td>	                
 	            	</tr>
 	            	<tr>

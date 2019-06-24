@@ -53,14 +53,21 @@
 				var startTime = $("input[name='startTime']").val();
 				var endTime = $("input[name='endTime']").val();
 				var url = "";
-				if(countType==1){
-					url = "sqMd_count.jsp?startTime="+startTime+"&endTime="+endTime;
-				}
-				if(countType==2){
-					url = "subOrg_count.jsp?startTime="+startTime+"&endTime="+endTime;
+				if(startTime < endTime){
+					if(countType==1){
+						url = "sqMd_count.jsp?startTime="+startTime+"&endTime="+endTime;
+					}
+					if(countType==2){
+						url = "subOrg_count.jsp?startTime="+startTime+"&endTime="+endTime;
+					}
+					
+					$("#countFrame").attr("src",url);
+					
+				}else{
+					nui.alert("请确保日期范围正确！")
+					return false;
 				}
 				
-				$("#countFrame").attr("src",url);
 			}
 		</script>
 	</body>

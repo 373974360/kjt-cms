@@ -53,7 +53,7 @@
 		                </td>
 		                <th class="nui-form-label">联系电话：</th>
 		                <td colspan="3">    
-		                    <input name="sq.phone" class="nui-textbox nui-form-input" vtype="float" floatErrorText="请输入电话号码" required="true" requiredErrorText="不能为空"/>
+		                    <input name="sq.phone" class="nui-textbox nui-form-input"  required="true" requiredErrorText="不能为空" onvalidation="contactNumberValidation"/>
 		                </td>
 		            </tr>
 		            <tr>
@@ -63,7 +63,7 @@
 		                </td>
 		                <th class="nui-form-label">电子邮箱：</th>
 		                <td colspan="3">    
-		                    <input name="sq.email" class="nui-textbox nui-form-input" vtype="email;rangeLength:5,20;" emailErrorText="请输入邮箱格式" required="true"  requiredErrorText="不能为空"/>
+		                    <input name="sq.email" class="nui-textbox nui-form-input" vtype="email;rangeLength:5,20;" emailErrorText="请输入正确电子邮箱" required="true"  requiredErrorText="不能为空"/>
 		                </td>		               
 		            </tr>
 		            <tr class="odd">
@@ -194,6 +194,21 @@
 					});
 			}
 
+			//联系电话验证
+	        function contactNumberValidation(e){
+		        if (e.isValid) {
+	                if (isPhoneNumber(e.value) == false) {
+	                    e.errorText = "请输入正确电话号码";
+	                    e.isValid = false;
+	                }
+            	}
+	        }
+	        function isPhoneNumber(v){	/* 是否为手机号码 */
+	        	var re = new RegExp("^(13[0-9]|14[0-9]|15[0-9]|16[0-9]|17[0-9]|18[0-9]|19[8|9])\\d{8}$");
+	            if (re.test(v)) return true;
+	            return false;
+	        }
+	        	        
 			function CloseWindow(action) {
 				if (action == "close") {
 				} else if (window.CloseOwnerWindow)
