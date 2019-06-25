@@ -64,7 +64,7 @@
 					$("#countFrame").attr("src",url);
 					
 				}else{
-					nui.alert("请确保日期范围正确！")
+					nui.alert("请确定日期范围是否正确！");
 					return false;
 				}
 				

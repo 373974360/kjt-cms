@@ -103,7 +103,7 @@
 		            <tr class="odd">
 		                <th class="nui-form-label">是否公开：</th>
 		                <td colspan="3">    
-		                     <input name="sq.isOpen" class="nui-combobox nui-form-input" showNullItem="true" emptyText="请选择" 
+		                    <input name="sq.isOpen" class="nui-combobox nui-form-input" showNullItem="true" emptyText="请选择" 
 		                    textField="text" dataField="isOrNo" valueField="id" 
 		    					url="<%=request.getContextPath()%>/commonality/sq/IsorNo.txt"/>
 		                </td>

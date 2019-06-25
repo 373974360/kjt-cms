@@ -24,16 +24,22 @@
 							<input name="params/ysqCode" class="nui-textbox" />							
 						</td>						
 						<td class="nui-form-label">回复：</td>
-		                <td colspan="1">    
-		                    <input name="params/isReply" width="40" class="nui-dictcombobox" dictTypeId="CMS_YESORNO" showNullItem="true"/>
+		                <td colspan="1"> 
+		                	<input name="params/isReply" width="40" class="nui-combobox nui-form-input" showNullItem="true"  
+		                    textField="text" dataField="isOrNo" valueField="id" 
+		    					url="<%=request.getContextPath()%>/commonality/sq/IsorNo.txt"/>   		                  
 		                </td>
 						<td class="nui-form-label">公开：</td>
-		                <td colspan="1">    
-		                    <input name="params/isOpen" width="40" class="nui-dictcombobox" dictTypeId="CMS_YESORNO" showNullItem="true"/>
+		                <td colspan="1">
+		                	<input name="params/isOpen" width="40" class="nui-combobox nui-form-input" showNullItem="true" 
+		                    textField="text" dataField="isOrNo" valueField="id" 
+		    					url="<%=request.getContextPath()%>/commonality/sq/IsorNo.txt"/>    
 		                </td>
 		                <td class="nui-form-label">发布：</td>
-		                <td colspan="1">    
-		                    <input name="params/isPublish" width="40" class="nui-dictcombobox" dictTypeId="CMS_YESORNO" showNullItem="true"/>
+		                <td colspan="1">
+		                	<input name="params/isPublish" width="40" class="nui-combobox nui-form-input" showNullItem="true" 
+		                    textField="text" dataField="isOrNo" valueField="id" 
+		    					url="<%=request.getContextPath()%>/commonality/sq/IsorNo.txt"/>    
 		                </td>
 						<td>
 							<div property="footer" align="center">
