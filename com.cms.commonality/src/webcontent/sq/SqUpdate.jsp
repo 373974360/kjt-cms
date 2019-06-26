@@ -39,11 +39,17 @@
 		<div class="nui-fit" style="padding-top:5px">
 			<div id="form1" method="post">
 				<input id="sq.id" name="sq.id" class="nui-hidden" />
+				<input id="sq.isReply" name="sq.isReply" class="nui-hidden">
 		        <table id="table1" align="center" style="width:100%; table-layout:fixed;" class="nui-form-table">
 		            <tr>
 		                <th class="nui-form-label">来信标题：</th>
-		                <td colspan="7">    
+		                <td colspan="3">    
 		                    <input name="sq.title" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空"/> 
+		                </td>
+		                <th class="nui-form-label">来信目的：</th>
+		                <td colspan="3"> 
+		                	<input name="sq.mdId" class="nui-combobox nui-form-input" style="width:150px;" textField="mdName" valueField="id"
+								url="com.cms.basics.LxmdService.queryLxmdName.biz.ext" dataField="data" required="true" requiredErrorText="不能为空"/>		                    
 		                </td>		                
 		            </tr>
 		            <tr class="odd">
@@ -78,34 +84,22 @@
 							onbuttonclick="selectOrg" style="width:80%" allowinput="false" emptyText="请选择"/>				    		                 							
 		                </td>
 		            </tr>
+		            
 		            <tr>
-		            	<th class="nui-form-label">来信目的：</th>
-		                <td colspan="3"> 
-		                	<input name="sq.mdId" class="nui-combobox nui-form-input" style="width:150px;" textField="mdName" valueField="id"
-								url="com.cms.basics.LxmdService.queryLxmdName.biz.ext" dataField="data" showNullItem="true" emptyText="请选择"/>		                    
-		                </td>
-		                <th class="nui-form-label">是否回复：</th>
-		                <td colspan="3">    
-		                    <input name="sq.isReply" class="nui-combobox nui-form-input" showNullItem="true" emptyText="请选择" 
-		                    textField="text" dataField="isOrNo" valueField="id" 
-		    					url="<%=request.getContextPath()%>/commonality/sq/IsorNo.txt"/>
-		                </td>		              
-		            </tr>
-		            <tr class="odd">
-		                <th class="nui-form-label">是否公开：</th>
-		                <td colspan="3">    
-		                    <input name="sq.isOpen" class="nui-combobox nui-form-input" showNullItem="true" emptyText="请选择" 
-		                    textField="text" dataField="isOrNo" valueField="id" 
-		    					url="<%=request.getContextPath()%>/commonality/sq/IsorNo.txt"/>
-		                </td>
 		                <th class="nui-form-label">是否发布：</th>
 		                <td colspan="3">    
 		                    <input name="sq.isPublish" class="nui-combobox nui-form-input" showNullItem="true" emptyText="请选择" 
 		                    textField="text" dataField="isOrNo" valueField="id" 
 		    					url="<%=request.getContextPath()%>/commonality/sq/IsorNo.txt"/>
 		                </td>
+		                <th class="nui-form-label">是否公开：</th>
+		                <td colspan="3">    
+		                    <input name="sq.isOpen" class="nui-combobox nui-form-input" showNullItem="true" emptyText="请选择" 
+		                    textField="text" dataField="isOrNo" valueField="id" 
+		    					url="<%=request.getContextPath()%>/commonality/sq/IsorNo.txt"/>
+		                </td>
 		            </tr>
-		            <tr>
+		            <tr class="odd">
 		                <th class="nui-form-label">提交时间：</th>
 		                <td colspan="3">    
 		                    <input name="sq.createTime" class="nui-datepicker nui-form-input" allowinput="false" format="yyyy-MM-dd HH:mm:ss" showTime="true"/>
@@ -115,14 +109,14 @@
 		                    <input name="sq.replyTime" class="nui-datepicker nui-form-input" allowinput="false" format="yyyy-MM-dd HH:mm:ss" showTime="true"/>
 		                </td>                
 		            </tr>
-		            <tr class="odd">
+		            <tr>
 		                <th class="nui-form-label">来信内容：</th>
 		                <td colspan="7">    
 		                	<input name="sq.content" class="nui-hidden" />
 		                   <textarea id="content1" style="height:300px;width:98%;"></textarea>
 		                </td>		                			                            
 		            </tr>
-		            <tr>
+		            <tr class="odd">
 			            <th class="nui-form-label">回复内容：</th>
 		                <td colspan="7"> 
 		                   <input name="sq.replyContent" class="nui-hidden" />
@@ -163,6 +157,16 @@
 							if(obj.sq.replyContent!=null){
 								ue2.setContent(obj.sq.replyContent);
 							}
+							//与后台手动录入相对应显示在编辑页面
+							if(obj.sq.isReply == null){
+								obj.sq.isReply = 2;
+							}
+							if(obj.sq.isPublish == null){
+								obj.sq.isPublish = 2;
+							}
+							if(obj.sq.isOpen == null){
+								obj.sq.isOpen = 2;
+							}
 							form.setData(obj);
 							form.setChanged(false);
 						}
@@ -175,7 +179,15 @@
 					return;
 				var data = form.getData(false, true);
 				data.sq.content = ue.getContent();
-				data.sq.replyContent = ue2.getContent();
+				var content = ue2.getContent();
+		        if(content != ''){
+			        data.sq.replyContent = content;
+		        	data.sq.isReply = 1;
+		        }else{
+		        	data.sq.isReply = 2;
+		        	data.sq.replyContent = content;
+		        	data.sq.replyTime = null;
+		        }
 				var json = nui.encode(data);
 				$.ajax({
 						url : "com.cms.commonality.SqService.updateSq.biz.ext",

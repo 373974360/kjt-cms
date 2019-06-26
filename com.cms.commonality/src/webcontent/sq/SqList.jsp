@@ -195,7 +195,7 @@
 									if (returnJson.exception == null) {
 										grid.reload();
 										nui.alert("删除成功","系统提示",function(action) {
-										});
+										});										
 									} else {
 										grid.unmask();
 										nui.alert("删除失败","系统提示");

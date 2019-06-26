@@ -100,24 +100,24 @@
 			                <td colspan="1"> 
 			                	<input name="sq.mdId" class="nui-combobox nui-form-input" textField="mdName" valueField="id" borderStyle="border:none"
 								url="com.cms.basics.LxmdService.queryLxmdName.biz.ext" dataField="data" showNullItem="true" showButton="false" readonly="readonly"/>		                    
-			                </td>
-			                <th class="nui-form-label">是否公开：</th>
-			                <td >    
-			                    <input name="sq.isOpen" class="nui-combobox nui-form-input" showNullItem="true" emptyText="请选择" 
-		                    	textField="text" dataField="isOrNo" valueField="id" 
-		    					url="<%=request.getContextPath()%>/commonality/sq/IsorNo.txt" readonly="readonly" showButton="false" borderStyle="border:0"/>
-			                </td>			            	
+			                </td>		                			            	
 			                <th class="nui-form-label">是否回复：</th>
 			                <td >
-			                	<input name="sq.isReply" class="nui-combobox nui-form-input" showNullItem="true" emptyText="请选择" 
+			                	<input id="isReply" name="sq.isReply" class="nui-combobox nui-form-input" showNullItem="true"  
 		                    	textField="text" dataField="isOrNo" valueField="id" 
 		    					url="<%=request.getContextPath()%>/commonality/sq/IsorNo.txt" readonly="readonly" showButton="false" borderStyle="border:0"/> 			                 
+			                </td>
+			                <th class="nui-form-label">是否发布：</th>
+			                <td >    
+			                    <input name="sq.isPublish" class="nui-combobox nui-form-input" showNullItem="true" 
+		                    	textField="text" dataField="isOrNo" valueField="id" 
+		    					url="<%=request.getContextPath()%>/commonality/sq/IsorNo.txt" readonly="readonly" showButton="false" borderStyle="border:0"/>
 			                </td>		              		                			                
 		            	</tr>
 		            	<tr>		            		
-		            		<th class="nui-form-label">是否发布：</th>
+		            		<th class="nui-form-label">是否公开：</th>
 			                <td >    
-			                    <input name="sq.isPublish" class="nui-combobox nui-form-input" showNullItem="true" emptyText="请选择" 
+			                    <input name="sq.isOpen" class="nui-combobox nui-form-input" showNullItem="true"
 		                    	textField="text" dataField="isOrNo" valueField="id" 
 		    					url="<%=request.getContextPath()%>/commonality/sq/IsorNo.txt" readonly="readonly" showButton="false" borderStyle="border:0"/>
 			                </td>
@@ -341,7 +341,15 @@
 						contentType : 'text/json',
 						success : function(text) {
 							obj = nui.decode(text);						
-							$("span[id=content]").html(obj.sq.content);						
+							$("span[id=content]").html(obj.sq.content);	
+							
+							//与后台手动录入相对应显示在展示详情页面
+							if(obj.sq.isPublish == null){
+								obj.sq.isPublish = 2;
+							}
+							if(obj.sq.isOpen == null){
+								obj.sq.isOpen = 2;
+							}					
 							form.setData(obj);
 							form.setChanged(false);
 						}
@@ -423,13 +431,13 @@
 						}
 					});
 	        }
-	        
-			
 			function onOkTo(e) {
 				var toOrgId = $("#toOrgId").val();				
 	            SaveData(toOrgId);
-	            updateSqData(toOrgId);
+	            updateSqData(toOrgId);   
 	        }
+	        
+	        
 	    	//保存'回复记录'并更新sq表回复内容
 	    	function SaveReData() {
 	           	form4.validate();
@@ -497,7 +505,7 @@
 				SaveReData();
 				updateReData();
 			}
-
+			
 			function CloseWindow(action) {
 				if (action == "close") {
 				} else if (window.CloseOwnerWindow)
