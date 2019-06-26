@@ -60,11 +60,11 @@
 							<a id="update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑 </a>
 							<a class="nui-button" iconCls="icon-remove" onclick="remove()">删除</a>
 							<span class="separator"></span>
-							<a id="isPublish" class="nui-button" iconCls="icon-ok" onclick="isPublishOrNot(1,'更新','是')">发布</a>
-							<a id="noPublish" class="nui-button" iconCls="icon-redo" onclick="isPublishOrNot(2,'更新','否')">撤销发布</a>
+							<a id="isPublish" class="nui-button" iconCls="icon-ok" onclick="isPublishOrNot(1,'发布')">发布</a>
+							<a id="noPublish" class="nui-button" iconCls="icon-redo" onclick="isPublishOrNot(2,'撤销发布')">撤销发布</a>
 							<span class="separator"></span>
-							<a id="isOpen" class="nui-button" iconCls="icon-ok" onclick="isOpenOrNot(1,'更新','是')">公开</a>
-							<a id="noOpen" class="nui-button" iconCls="icon-redo" onclick="isOpenOrNot(2,'更新','否')">撤销公开</a>						
+							<a id="isOpen" class="nui-button" iconCls="icon-ok" onclick="isOpenOrNot(1,'公开')">公开</a>
+							<a id="noOpen" class="nui-button" iconCls="icon-redo" onclick="isOpenOrNot(2,'撤销公开')">撤销公开</a>						
 						</td>
 					</tr>
 				</table>
@@ -209,13 +209,13 @@
 				}
 			}
 			//发布or撤销发布
-			function isPublishOrNot(isPublish,msg,state){
+			function isPublishOrNot(isPublish,msg){
 				var rows = grid.getSelecteds();
 				for(var i=0;i<rows.length;i++){
 					rows[i].isPublish = isPublish;
 				}
 				if (rows.length > 0) {
-					nui.confirm("确定"+msg+"选中记录的发布状态为‘"+state+"’？","系统提示",
+					nui.confirm("确定"+msg+"选中记录"+"？","系统提示",
 					function(action) {
 						if (action == "ok") {
 							var json = nui.encode({
@@ -232,11 +232,11 @@
 									var returnJson = nui.decode(text);
 									if (returnJson.exception == null) {
 										grid.reload();
-										nui.alert(msg+"成功","系统提示",function(action) {
+										nui.alert("信件已"+ msg,"系统提示",function(action) {
 										});
 									} else {
 										grid.unmask();
-										nui.alert(msg+"失败","系统提示");
+										nui.alert("信件已"+ msg,"系统提示");
 									}
 								}
 							});
@@ -253,7 +253,7 @@
 					rows[i].isOpen = isOpen;
 				}
 				if (rows.length > 0) {
-					nui.confirm("确定"+msg+"选中记录的公开状态为‘"+state+"’？","系统提示",
+					nui.confirm("确定"+msg+"选中记录"+"？","系统提示",
 					function(action) {
 						if (action == "ok") {
 							var json = nui.encode({
@@ -270,11 +270,11 @@
 									var returnJson = nui.decode(text);
 									if (returnJson.exception == null) {
 										grid.reload();
-										nui.alert(msg+"成功","系统提示",function(action) {
+										nui.alert("信件已"+ msg,"系统提示",function(action) {
 										});
 									} else {
 										grid.unmask();
-										nui.alert(msg+"失败","系统提示");
+										nui.alert("信件已"+ msg,"系统提示");
 									}
 								}
 							});
