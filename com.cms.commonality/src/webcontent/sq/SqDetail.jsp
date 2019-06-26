@@ -85,7 +85,18 @@
 			                <td colspan="1">    
 			                    <input name="sq.title" class="nui-textbox nui-form-input" readonly="readonly"  borderStyle="border:0"/> 
 			                </td>
-			                <th class="nui-form-label">来信目的：</th>
+			                <th class="nui-form-label">信件编码：</th>
+			                <td colspan="1">    
+			                    <input name="sq.searchCode" class="nui-textbox nui-form-input" readonly="readonly"  borderStyle="border:0"/> 
+			                </td>
+			                <th class="nui-form-label">查询密码：</th>
+			                <td colspan="1">    
+			                    <input name="sq.searchPwd" class="nui-textbox nui-form-input" readonly="readonly"  borderStyle="border:0"/> 
+			                </td>
+			                		               
+		            	</tr>
+			            <tr>
+			            	<th class="nui-form-label">来信目的：</th>
 			                <td colspan="1"> 
 			                	<input name="sq.mdId" class="nui-combobox nui-form-input" textField="mdName" valueField="id" borderStyle="border:none"
 								url="com.cms.basics.LxmdService.queryLxmdName.biz.ext" dataField="data" showNullItem="true" showButton="false" readonly="readonly"/>		                    
@@ -95,24 +106,21 @@
 			                    <input name="sq.isOpen" class="nui-combobox nui-form-input" showNullItem="true" emptyText="请选择" 
 		                    	textField="text" dataField="isOrNo" valueField="id" 
 		    					url="<%=request.getContextPath()%>/commonality/sq/IsorNo.txt" readonly="readonly" showButton="false" borderStyle="border:0"/>
-			                </td>		               
-		            	</tr>
-			            <tr>			            	
+			                </td>			            	
 			                <th class="nui-form-label">是否回复：</th>
 			                <td >
 			                	<input name="sq.isReply" class="nui-combobox nui-form-input" showNullItem="true" emptyText="请选择" 
 		                    	textField="text" dataField="isOrNo" valueField="id" 
-		    					url="<%=request.getContextPath()%>/commonality/sq/IsorNo.txt" readonly="readonly" showButton="false" borderStyle="border:0"/> 
-			                 
-			                </td>		              		                
-			                <th class="nui-form-label">是否发布：</th>
+		    					url="<%=request.getContextPath()%>/commonality/sq/IsorNo.txt" readonly="readonly" showButton="false" borderStyle="border:0"/> 			                 
+			                </td>		              		                			                
+		            	</tr>
+		            	<tr>		            		
+		            		<th class="nui-form-label">是否发布：</th>
 			                <td >    
 			                    <input name="sq.isPublish" class="nui-combobox nui-form-input" showNullItem="true" emptyText="请选择" 
 		                    	textField="text" dataField="isOrNo" valueField="id" 
 		    					url="<%=request.getContextPath()%>/commonality/sq/IsorNo.txt" readonly="readonly" showButton="false" borderStyle="border:0"/>
 			                </td>
-		            	</tr>
-		            	<tr>
 			                <th class="nui-form-label">提交时间：</th>
 			                <td colspan="1">    
 			                    <input name="sq.createTime" class="nui-datepicker nui-form-input" format="yyyy-MM-dd HH:mm:ss" showTime="true" showButton="false" readonly="readonly" borderStyle="border:0"/>
