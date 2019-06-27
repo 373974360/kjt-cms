@@ -128,7 +128,7 @@
 			function add() {
 				nui.open({
 					url : "<%=request.getContextPath()%>/commonality/ysqgk/YsqgkAdd.jsp",
-					title : "新增记录",
+					title : "录入数据",
 					width : '60%',
 					height : '80%',
 					onload : function() {

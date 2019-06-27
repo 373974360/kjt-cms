@@ -32,7 +32,7 @@
 				<input name="ysqgk.isReply" class="nui-hidden" value="2"/>
 				<input name="ysqgk.isOpen" class="nui-hidden" value="2"/>
 				<table id="table1" align="center" style="width:90%; table-layout:fixed;" class="nui-form-table">
-					<tr>
+					<tr class="odd">
 						<th class="nui-form-label">申请人类型：</th>
     					<td colspan="2">
     						<input name="ysqgk.ysqType" class="nui-radiobuttonlist" textField="text" 
@@ -233,17 +233,18 @@
 	        	}else if(obj == 1){
 	        			
 	        		$("#table3").hide();
-	        		$("#table2").show();	
+	        		$("#table2").show();	        		
+	        		$("input[name='ysqgk.cardName']").val('1');
 	        	}	        	
 	        }
-	        
-	        			
+  			
 	        //证件号码验证
 	        function onIDCardsValidation(e){
-	        	if ($("input[name='ysqgk.cardName']").val() == 1) {	
+	        	var cardNameVal = $("input[name='ysqgk.cardName']").val();	      
+	        	if (cardNameVal == 1 || cardNameVal == '') {	
 		        	if(e.isValid){
-		        		if (e.value.length < 15 || e.value.length > 18 || isIdentity(e.value) == false) {		        		
-			        			e.errorText = "请输入15-18位正确身份证号码";
+		        		if (isIdentity(e.value) == false) {		        		
+			        			e.errorText = "请输入15或18位正确身份证号码";
 		                    	e.isValid = false;		        		
 			        	}
 		        	}
@@ -259,7 +260,7 @@
 		        }	        	
 	        }
 	        function isIdentity(v){	   /* 是否是身份证号 */     	
-	        	var re = new RegExp("^([0-9]){7,18}(x|X)?$");
+	        	var re = new RegExp("^([0-9]){15,18}(x|X)?$");
             	if (re.test(v)){
             		return true;
             	}else{
