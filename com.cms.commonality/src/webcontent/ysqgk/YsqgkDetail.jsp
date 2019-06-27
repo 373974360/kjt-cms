@@ -278,8 +278,8 @@
 	        	nui.open({
 						url : "<%=request.getContextPath()%>/commonality/ysqgk/YsqgkReply.jsp?ysqgkId="+"<%=ysqgkId %>",
 						title : "回复",
-						width : '60%',
-						height : '70%',
+						width : '40%',
+						height : '50%',
 						onload : function() {						
 						},
 						ondestroy : function(action) {
@@ -297,8 +297,8 @@
 	        	nui.open({
 						url : "<%=request.getContextPath()%>/commonality/ysqgk/YsqgkPrint.jsp",
 						title : "打印预览",
-						width : '80%',
-						height : '100%',
+						width : '60%',
+						height : '80%',
 						onload : function() {
 							var iframe = this.getIFrameEl();						
 							//直接从页面获取，不用去后台获取

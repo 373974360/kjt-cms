@@ -129,8 +129,8 @@
 				nui.open({
 					url : "<%=request.getContextPath()%>/commonality/ysqgk/YsqgkAdd.jsp",
 					title : "新增记录",
-					width : '80%',
-					height : '100%',
+					width : '60%',
+					height : '80%',
 					onload : function() {
 					},
 					ondestroy : function(action) {//弹出页面关闭前
@@ -148,8 +148,8 @@
 					nui.open({
 						url : "<%=request.getContextPath()%>/commonality/ysqgk/YsqgkUpdate.jsp",
 						title : "编辑数据",
-						width : '80%',
-						height : '100%',
+						width : '60%',
+						height : '80%',
 						onload : function() {
 							var iframe = this.getIFrameEl();
 							var data = row;
@@ -323,8 +323,8 @@
 					nui.open({
 						url : "<%=request.getContextPath()%>/commonality/ysqgk/YsqgkDetail.jsp?ysqgkId="+row.id +"&isPublish=" + row.isPublish +"&isOpen=" + row.isOpen,
 						title : "依申请公开详情&处理",
-						width : '80%',
-						height : '100%',
+						width : '60%',
+						height : '80%',
 						onload : function() {
 							var iframe = this.getIFrameEl();
 							var data = row;

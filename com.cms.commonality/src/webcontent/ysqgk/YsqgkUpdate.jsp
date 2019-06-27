@@ -22,23 +22,11 @@
 <body>
 	<div class="nui-fit" style="padding-top:5px">
 		<div id="form1" method="post">
-			<div id="panel1" class="nui-panel" title="申请人信息" iconCls="icon-add" style="width:100%;height:260px;" 
+			<div id="panel1" class="nui-panel" title="申请人信息" iconCls="icon-add" style="width:100%;height:220px;" 
 			showToolbar="true" showCollapseButton="true" showFooter="true" allowResize="true" collapseOnTitleClick="true">
 				<input id="ysqgk.id" name="ysqgk.id" class="nui-hidden">
 				<input name="ysqgk.createDtime" class="nui-hidden" />
-				<input id="ysqType" name="ysqgk.ysqType" class="nui-hidden"/>
-				<table id="table1" align="center" style="width:90%; table-layout:fixed;" class="nui-form-table">
-					<tr>
-						<th class="nui-form-label">申请编号：</th>
-		                <td colspan="2">    
-		                    <input name="ysqgk.ysqCode" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空" onvalidation="onEnglishAndNumberValidation"/> 
-		                </td>
-		                <th class="nui-form-label">查询密码：</th>
-		                <td colspan="2">    
-		                    <input name="ysqgk.queryCode" class="nui-textbox nui-form-input" required="true" requiredErrorText="不能为空" onvalidation="queryPasswordValidation" /> 
-		                </td>
-					</tr>  					    				
-				</table>
+				<input id="ysqType" name="ysqgk.ysqType" class="nui-hidden"/>			
 				<table id="table2" align="center" style="width:90%; table-layout:fixed;" class="nui-form-table">
 					<tr class="odd">
 		                <th class="nui-form-label">申请人姓名：</th>
@@ -274,20 +262,7 @@
             		return false;	
             	}
 	        }
-	        //申请编号验证
-	        function onEnglishAndNumberValidation(e){
-	        	if (e.isValid) {
-	                if (isEnglishAndNumber(e.value) == false) {
-	                    e.errorText = "请输入正确编号";
-	                    e.isValid = false;
-	                }
-            	}
-	        } 
-        	function isEnglishAndNumber(v) {   /* 是否英文+数字 */
-	            var re = new RegExp("^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{19}$");
-	            if (re.test(v)) return true;
-	            return false;
-	        }
+	       
 	        
 	        //手机号码验证
 	         function phoneNumberValidation(e){
@@ -318,20 +293,7 @@
 	            if (re.test(v)) return true;
 	            return false;
 	        }
-	        //查询密码验证	
-	        function queryPasswordValidation(e){
-	        	if (e.isValid) {
-	                if (isSixEnglishAndNumber(e.value) == false) {
-	                    e.errorText = "请输入正确查询密码";
-	                    e.isValid = false;
-	                }
-            	}
-	        }
-	        function isSixEnglishAndNumber(v) {   /* 是否6位英文+数字密码 */
-	            var re = new RegExp("^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6}$");
-	            if (re.test(v)) return true;
-	            return false;
-			}
+	       
 			        
 			function CloseWindow(action){
 				if(action=="close"){
