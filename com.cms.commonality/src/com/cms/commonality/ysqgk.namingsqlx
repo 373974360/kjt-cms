@@ -4,6 +4,9 @@
 		<select id="queryYsqgkList" parameterClass="commonj.sdo.DataObject" resultClass="com.cms.commonality.ysqgk.CmsYsqgk">
 	    	SELECT
 				id,
+				YSQ_TYPE as ysqType,
+				NAME as name,
+				ORG_CODE as orgCode,
 				YSQ_CODE AS ysqCode,
 				QUERY_CODE AS queryCode,
 				CREATE_DTIME as createDtime,
