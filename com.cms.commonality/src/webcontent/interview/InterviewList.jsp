@@ -44,7 +44,7 @@
 							<a id="replay" class="nui-button" iconCls="icon-ok" onclick="setPublish(2,'发布')">发布 </a>
 							<a class="nui-button" iconCls="icon-redo" onclick="setPublish(1,'撤销')">撤销发布</a>
 	            			<span class="separator"></span>
-							<a class="nui-button" iconCls="icon-user" onclick="guestConfig()">嘉宾设置</a>
+							<a id="vip" class="nui-button" iconCls="icon-user" onclick="guestConfig()">嘉宾设置</a>
 						</td>
 					</tr>
 				</table>
@@ -252,8 +252,10 @@
 				var rows = grid.getSelecteds();
 				if (rows.length > 1) {
 					nui.get("update").disable();
+					nui.get("vip").disable();
 				} else {
 					nui.get("update").enable();
+					nui.get("vip").enable();
 				}
 			}
 		</script>

@@ -41,11 +41,11 @@
 							<a id="update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑 </a>
 							<a class="nui-button" iconCls="icon-remove" onclick="remove()">删除</a>
 	            			<span class="separator"></span>
-							<a id="update" class="nui-button" iconCls="icon-ok" onclick="setPublish(2,'发布')">发布 </a>
+							<a id="reply" class="nui-button" iconCls="icon-ok" onclick="setPublish(2,'发布')">发布 </a>
 							<a class="nui-button" iconCls="icon-redo" onclick="setPublish(1,'撤销')">撤销发布</a>
 	            			<span class="separator"></span>
-							<a class="nui-button" iconCls="icon-collapse" onclick="subConfig()">题目设置</a>
-							<a class="nui-button" iconCls="icon-sort" onclick="surveyCount()">数据统计</a>
+							<a id="sub" class="nui-button" iconCls="icon-collapse" onclick="subConfig()">题目设置</a>
+							<a id="count" class="nui-button" iconCls="icon-sort" onclick="surveyCount()">数据统计</a>
 						</td>
 					</tr>
 				</table>
@@ -281,8 +281,12 @@
 				var rows = grid.getSelecteds();
 				if (rows.length > 1) {
 					nui.get("update").disable();
+					nui.get("sub").disable();
+					nui.get("count").disable();
 				} else {
 					nui.get("update").enable();
+					nui.get("sub").enable();
+					nui.get("count").enable();
 				}
 			}
 		</script>
