@@ -76,8 +76,10 @@
 					<div property="columns">
 						<div type="checkcolumn" align="center" width="10"></div>
 						<div field="id" headerAlign="center" allowSort="true" visible="false">ID</div>
-						<div field="ysqType" headerAlign="center" allowSort="true" visible="false" >申请人类型</div>
-						<div field="ysqCode" headerAlign="center" allowSort="true" >申请编码</div>							
+						<div field="ysqCode" headerAlign="center" align="center" allowSort="true" >申请编码</div>							
+						<div field="ysqType" headerAlign="center" width="40" align="center" allowSort="true" >申请类型</div>
+						<div field="name" headerAlign="center" width="40" align="center" allowSort="true" >申请人员</div>
+						<div field="orgCode" headerAlign="center" width="40" align="center" allowSort="true" >组织机构代码</div>
 						<div field="createDtime" headerAlign="center" width="60" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm:ss">提交时间</div>		
 						<div field="replyDtime" headerAlign="center" width="60" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm:ss">回复时间</div>
 						<div field="replyContent" headerAlign="center" allowSort="true" visible="false">回复内容</div>
@@ -119,6 +121,23 @@
 			        	e.cellHtml = "是";
 			        }else{
 			        	e.cellHtml = "否";
+			        }
+			    }
+			    if (field == "ysqType") {
+			        if (value == 1){
+			        	e.cellHtml = "公民";
+			        }else{
+			        	e.cellHtml = "法人或其他组织";
+			        }
+			    }
+			    if (field == "name") {
+			        if (value == null){
+			        	e.cellHtml = "——";
+			        }
+			    }
+			    if (field == "orgCode") {
+			        if (value == null){
+			        	e.cellHtml = "——";
 			        }
 			    }
 			});
