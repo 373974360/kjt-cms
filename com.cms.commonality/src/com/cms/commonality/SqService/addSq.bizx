@@ -12,7 +12,7 @@
   </nodes>
   <nodes xsi:type="process:tEnd" id="end0" name="结束" displayName="结束" type="end">
     <targetConnections>link1</targetConnections>
-    <location x="795" y="150"/>
+    <location x="990" y="195"/>
     <size height="28" width="28"/>
     <nodeLabel>end0label</nodeLabel>
     <process:returns/>
@@ -23,7 +23,7 @@
     <node>start0</node>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="end0label" name="label" displayName="label" nodeType="label">
-    <location x="794" y="186"/>
+    <location x="989" y="231"/>
     <figSize height="20" width="31"/>
     <node>end0</node>
   </nodes>
@@ -33,7 +33,7 @@
       <targetNode>end0</targetNode>
     </sourceConnections>
     <targetConnections>link5</targetConnections>
-    <location x="645" y="150"/>
+    <location x="855" y="255"/>
     <size height="28" width="22"/>
     <nodeLabel>invokePojo0label</nodeLabel>
     <process:pojo methodType="instance" synchronization="true" transactionType="join">
@@ -47,7 +47,7 @@
     <process:outputVariables/>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="invokePojo0label" name="label" nodeType="label">
-    <location x="615" y="186"/>
+    <location x="825" y="291"/>
     <figSize height="20" width="83"/>
     <node>invokePojo0</node>
   </nodes>
@@ -77,7 +77,7 @@
   <nodes xsi:type="process:tInvoke" description="" id="invokePojo3" name="dateFormat" displayName="dateFormat" type="invoke" index="1" invokeType="invoke_pojo" varArgs="false">
     <sourceConnections xsi:type="process:tLink" id="link7" name="link7" displayName="连接线" isDefault="true" type="transition">
       <sourceNode>invokePojo3</sourceNode>
-      <targetNode>assign0</targetNode>
+      <targetNode>invokePojo5</targetNode>
     </sourceConnections>
     <targetConnections>link2</targetConnections>
     <location x="405" y="150"/>
@@ -99,13 +99,13 @@
     <figSize height="20" width="86"/>
     <node>invokePojo3</node>
   </nodes>
-  <nodes xsi:type="process:tAssign" description="" id="assign0" name="时间赋值" displayName="赋值" type="assign">
+  <nodes xsi:type="process:tAssign" description="" id="assign0" name="赋值" displayName="赋值" type="assign">
     <sourceConnections xsi:type="process:tLink" id="link5" name="link5" displayName="连接线" isDefault="true" type="transition">
       <sourceNode>assign0</sourceNode>
       <targetNode>invokePojo0</targetNode>
     </sourceConnections>
-    <targetConnections>link7</targetConnections>
-    <location x="510" y="150"/>
+    <targetConnections>link4</targetConnections>
+    <location x="795" y="325"/>
     <size height="28" width="28"/>
     <nodeLabel>assign0label</nodeLabel>
     <process:copy>
@@ -116,10 +116,18 @@
       <process:from type="query" pattern="reference">replyTime</process:from>
       <process:to type="query">sq/replyTime</process:to>
     </process:copy>
+    <process:copy>
+      <process:from type="query" pattern="reference">SearchCode</process:from>
+      <process:to type="query">sq/searchCode</process:to>
+    </process:copy>
+    <process:copy>
+      <process:from type="query" pattern="reference">SearchPwd</process:from>
+      <process:to type="query">sq/searchPwd</process:to>
+    </process:copy>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="assign0label" name="label" nodeType="label">
-    <location x="494" y="186"/>
-    <figSize height="20" width="61"/>
+    <location x="794" y="361"/>
+    <figSize height="20" width="31"/>
     <node>assign0</node>
   </nodes>
   <nodes xsi:type="process:tInvoke" description="" id="invokePojo4" name="dateFormat1" displayName="dateFormat" type="invoke" index="1" invokeType="invoke_pojo" varArgs="false">
@@ -169,6 +177,52 @@
     <location x="290" y="306"/>
     <figSize height="20" width="117"/>
     <node>invokePojo2</node>
+  </nodes>
+  <nodes xsi:type="process:tInvoke" description="" id="invokePojo5" name="getSearchCode" displayName="" type="invoke" index="0" invokeType="invoke_pojo" varArgs="false">
+    <sourceConnections xsi:type="process:tLink" id="link3" name="link3" displayName="连接线" isDefault="true" type="transition">
+      <sourceNode>invokePojo5</sourceNode>
+      <targetNode>invokePojo6</targetNode>
+    </sourceConnections>
+    <targetConnections>link7</targetConnections>
+    <location x="525" y="231"/>
+    <size height="28" width="22"/>
+    <nodeLabel>invokePojo5label</nodeLabel>
+    <process:pojo methodType="instance" synchronization="true" transactionType="join">
+      <process:partner type="literal">com.cms.view.form.SqForm.getSearchCode</process:partner>
+      <process:instance instanceName=""/>
+    </process:pojo>
+    <process:inputVariables/>
+    <process:outputVariables>
+      <process:outputVariable id="0" name="out0" type="query" value="java.lang.String" valueType="Java">SearchCode</process:outputVariable>
+    </process:outputVariables>
+  </nodes>
+  <nodes xsi:type="model:NodeElementLabel" id="invokePojo5label" name="label" nodeType="label">
+    <location x="479" y="267"/>
+    <figSize height="20" width="114"/>
+    <node>invokePojo5</node>
+  </nodes>
+  <nodes xsi:type="process:tInvoke" description="" id="invokePojo6" name="getSearchPwd" displayName="" type="invoke" index="0" invokeType="invoke_pojo" varArgs="false">
+    <sourceConnections xsi:type="process:tLink" id="link4" name="link4" displayName="连接线" isDefault="true" type="transition">
+      <sourceNode>invokePojo6</sourceNode>
+      <targetNode>assign0</targetNode>
+    </sourceConnections>
+    <targetConnections>link3</targetConnections>
+    <location x="645" y="302"/>
+    <size height="28" width="22"/>
+    <nodeLabel>invokePojo6label</nodeLabel>
+    <process:pojo methodType="instance" synchronization="true" transactionType="join">
+      <process:partner type="literal">com.cms.view.form.SqForm.getSearchPwd</process:partner>
+      <process:instance instanceName=""/>
+    </process:pojo>
+    <process:inputVariables/>
+    <process:outputVariables>
+      <process:outputVariable id="0" name="out0" type="query" value="java.lang.String" valueType="Java">SearchPwd</process:outputVariable>
+    </process:outputVariables>
+  </nodes>
+  <nodes xsi:type="model:NodeElementLabel" id="invokePojo6label" name="label" nodeType="label">
+    <location x="603" y="338"/>
+    <figSize height="20" width="106"/>
+    <node>invokePojo6</node>
   </nodes>
   <topRuler/>
   <leftRuler/>

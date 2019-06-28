@@ -92,7 +92,7 @@
 	        var stepNum = 1;
 	        function addStep(){
 	        	var _html = "<tr id='step_"+stepNum+"'>"+ 
-	        	"<td name='stepIndex'>第"+stepNum+"步：</td>"+
+	        	"<td name='stepIndex' width='45' style='padding-right:0px;'>第"+stepNum+"步：</td>"+
 	        	"<td><input name='stepName' class='nui-textbox nui-form-input' value='步骤名称'/></td>"+
 	        	"<td><select name='stepRole'></select></td>"+
 	        	"<td><a class='nui-button icon-remove' onclick='removeStep("+stepNum+")' style='padding-left:20px;'>删除</a></td>"+

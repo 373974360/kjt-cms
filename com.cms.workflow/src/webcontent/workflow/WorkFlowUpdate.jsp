@@ -80,7 +80,7 @@
 							stepNum = text.steps.length+1;
 							for(var i=0;i<text.steps.length;i++){
 								var _html = "<tr id='step_"+text.steps[i].stepSort+"'>"+ 
-					        	"<td><span name='stepIndex'>第"+text.steps[i].stepSort+"步：</span><input type='hidden' name='stepId' value='"+text.steps[i].id+"'/></td>"+
+					        	"<td><span name='stepIndex' width='45' style='padding-right:0px;'>第"+text.steps[i].stepSort+"步：</span><input type='hidden' name='stepId' value='"+text.steps[i].id+"'/></td>"+
 					        	"<td><input name='stepName' class='nui-textbox nui-form-input' value='"+text.steps[i].stepName+"'/></td>"+
 					        	"<td><select name='stepRole'>";
 						       	for(var j=0;j<selectRole.length;j++){

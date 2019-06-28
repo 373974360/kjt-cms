@@ -25,14 +25,14 @@
 <body>
 	<div class="nui-fit" style="padding-top:5px">
 		<div id="form1" method="post" autocomplete="off">
-			<div id="panel1" class="nui-panel" title="申请人信息" iconCls="icon-add" style="width:100%;height:280px;" 
+			<div id="panel1" class="nui-panel" title="申请人信息" iconCls="icon-add" style="width:100%;height:260px;" 
 			showToolbar="true" showCollapseButton="true" showFooter="true" allowResize="true" collapseOnTitleClick="true" maskOnLoad="false">
 				<input name="ysqgk.createDtime" class="nui-hidden" value="<%=curTime %>"/>
 				<input name="ysqgk.isPublish" class="nui-hidden" value="2"/>
 				<input name="ysqgk.isReply" class="nui-hidden" value="2"/>
 				<input name="ysqgk.isOpen" class="nui-hidden" value="2"/>
 				<table id="table1" align="center" style="width:90%; table-layout:fixed;" class="nui-form-table">
-					<tr>
+					<tr class="odd">
 						<th class="nui-form-label">申请人类型：</th>
     					<td colspan="2">
     						<input name="ysqgk.ysqType" class="nui-radiobuttonlist" textField="text" 
@@ -40,20 +40,6 @@
 		    					url="<%=request.getContextPath()%>/commonality/ysqgk/ysqType.txt" onvaluechanged="onSelected" />
     					</td>  					
 					</tr> 
-					</table>
-				<table id="table6" align="center" style="width:90%; table-layout:fixed;" class="nui-form-table">
-					<tr class="odd">
-						<th class="nui-form-label">申请编号：</th>
-		                <td colspan="2">    
-		                    <input name="ysqgk.ysqCode" class="nui-textbox nui-form-input" required="true"
-		                     requiredErrorText="不能为空" onvalidation="onEnglishAndNumberValidation"/> 
-		                </td>
-		                <th class="nui-form-label">查询密码：</th>
-		                <td colspan="2">    
-		                    <input name="ysqgk.queryCode" class="nui-textbox nui-form-input" required="true" 
-		                    onvalidation="queryPasswordValidation" requiredErrorText="不能为空"/> 
-		                </td>
-					</tr>  					    				
 				</table>
 				<table id="table2" align="center" style="width:90%; table-layout:fixed;" class="nui-form-table">
 					<tr>
@@ -247,17 +233,18 @@
 	        	}else if(obj == 1){
 	        			
 	        		$("#table3").hide();
-	        		$("#table2").show();	
+	        		$("#table2").show();	        		
+	        		$("input[name='ysqgk.cardName']").val('1');
 	        	}	        	
 	        }
-	        
-	        			
+  			
 	        //证件号码验证
 	        function onIDCardsValidation(e){
-	        	if ($("input[name='ysqgk.cardName']").val() == 1) {	
+	        	var cardNameVal = $("input[name='ysqgk.cardName']").val();	      
+	        	if (cardNameVal == 1 || cardNameVal == '') {	
 		        	if(e.isValid){
-		        		if (e.value.length < 15 || e.value.length > 18 || isIdentity(e.value) == false) {		        		
-			        			e.errorText = "请输入15-18位正确身份证号码";
+		        		if (isIdentity(e.value) == false) {		        		
+			        			e.errorText = "请输入15或18位正确身份证号码";
 		                    	e.isValid = false;		        		
 			        	}
 		        	}
@@ -273,7 +260,7 @@
 		        }	        	
 	        }
 	        function isIdentity(v){	   /* 是否是身份证号 */     	
-	        	var re = new RegExp("^([0-9]){7,18}(x|X)?$");
+	        	var re = new RegExp("^([0-9]){15,18}(x|X)?$");
             	if (re.test(v)){
             		return true;
             	}else{
@@ -287,36 +274,7 @@
             	}else{
             		return false;	
             	}
-	        }
-	        //查询密码验证
-	        function queryPasswordValidation(e){
-	        	if (e.isValid) {
-	                if (isSixEnglishAndNumber(e.value) == false) {
-	                    e.errorText = "请输入正确查询密码";
-	                    e.isValid = false;
-	                }
-            	}
-	        }
-	        function isSixEnglishAndNumber(v) {   /* 是否6位英文+数字密码 */
-	            var re = new RegExp("^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6}$");
-	            if (re.test(v)) return true;
-	            return false;
-			}
-	        
-	        //申请编号验证
-	        function onEnglishAndNumberValidation(e){
-	        	if (e.isValid) {
-	                if (isEnglishAndNumber(e.value) == false) {
-	                    e.errorText = "请输入正确申请编号";
-	                    e.isValid = false;
-	                }
-            	}
-	        } 
-        	function isEnglishAndNumber(v) {   /* 是否英文+数字 */
-	            var re = new RegExp("^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{19}$");
-	            if (re.test(v)) return true;
-	            return false;
-	        }
+	        }	       
 	        
 	        //手机号码验证
 	         function phoneNumberValidation(e){

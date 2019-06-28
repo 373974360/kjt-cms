@@ -72,6 +72,7 @@
 <script type="text/javascript">
     nui.parse();
     var tree = nui.get("tree1");
+    var tabs = nui.get("infotabs");
     
     function setRoleId(){
 		return {"userId":"<%=userObject.getUserId() %>","nodeId":0};
@@ -92,7 +93,7 @@
 		if(!url){
 			return url;
 		}
-		return url + "&nodeId=" + params.realId+"&searchKey="+$("input[name=searchKey]").val()+"&infoType="+$("input[name=infoType]").val()+"&isAdd="+params.isLeaf;
+		return url + "&nodeId=" + params.realId+"&isAdd="+params.isLeaf+"&searchKey="+$("input[name=searchKey]").val()+"&infoType="+$("input[name=infoType]").val();
 	}
 	
 	function refreshTab(node){
@@ -120,20 +121,29 @@
 		refreshTab(node);
 	}
 	
-		//查询
-		function search() {
-			var node = tree.getSelectedNode();
-			if(!node){
-				node = tree.getNode("root");
-			}
-			refreshTab(node);
+	//查询
+	function search() {
+		var tab = tabs.getActiveTab();
+		var node = tree.getSelectedNode();
+		if(!node){
+			node = tree.getNode("root");
 		}
+		refreshTab(node);
+		tabs.activeTab(tab);
+	}
 
-		//重置查询条件
-		function reset() {
-			var form = new nui.Form("#queryform");//将普通form转为nui的form
-			form.reset();
+	//重置查询条件
+	function reset() {
+		var form = new nui.Form("#queryform");//将普通form转为nui的form
+		form.reset();
+		var tab = tabs.getActiveTab();
+		var node = tree.getSelectedNode();
+		if(!node){
+			node = tree.getNode("root");
 		}
+		refreshTab(node);
+		tabs.activeTab(tab);
+	}
 </script>
 </body>
 </html>

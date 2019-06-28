@@ -24,7 +24,7 @@ public class GetTimerSurveyList {
 	 */
 	@Bizlet("")
 	public static void setEndSurvey(String currTime) {
-		String sql = "update cms_survey set is_end = 2 where end_time = '"+currTime+"'";
+		String sql = "update cms_survey set is_end = 2 where end_time <= '"+currTime+"'";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		PreparedStatement pstmt;
 		try {

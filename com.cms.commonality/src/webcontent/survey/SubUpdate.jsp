@@ -56,10 +56,8 @@
 		            </tr>
 		            <tr>
 		                <th class="nui-form-label"></th>
-		                <td>    
-		                    <table id="itemHtml"></table>
-		                </td>
-		                <td>
+		                <td colspan="2">    
+		                    <table id="itemHtml" style="width:100%"></table>
 		                </td>
 		            </tr>
 		        </table>    
@@ -77,9 +75,9 @@
 	        var itemNum = 1;
 	        function addItem(){
 	        	var _html = "<tr id='item_"+itemNum+"'>"+ 
-	        	"<td name='itemIndex'>选项"+itemNum+"：<input type='hidden' name='itemId' value=''/></td>"+
+	        	"<td name='itemIndex' width='45' style='padding-right:0px;'>选项"+itemNum+"：<input type='hidden' name='itemId' value=''/></td>"+
 	        	"<td><input name='itemName' class='nui-textbox nui-form-input'/></td>"+
-	        	"<td><a class='nui-button icon-remove' onclick='removeItem("+itemNum+")' style='padding-left:20px;'>删除</a></td>"+
+	        	"<td width='60'><a class='nui-button icon-remove' onclick='removeItem("+itemNum+")' style='padding-left:20px;'>删除</a></td>"+
 		        "</tr>";
 	        	$("#itemHtml").append(_html);
 	        	itemNum++;
@@ -122,9 +120,9 @@
 							itemNum = text.items.length+1;
 							for(var i=0;i<text.items.length;i++){
 								var _html = "<tr id='item_"+text.items[i].sort+"'>"+ 
-					        	"<td name='itemIndex'>选项"+text.items[i].sort+"：<input type='hidden' name='itemId' value='"+text.items[i].id+"'/></td>"+
+					        	"<td name='itemIndex' width='45' style='padding-right:0px;'>选项"+text.items[i].sort+"：<input type='hidden' name='itemId' value='"+text.items[i].id+"'/></td>"+
 					        	"<td><input name='itemName' class='nui-textbox nui-form-input' value='"+text.items[i].itemName+"'/></td>"+
-					        	"<td><a class='nui-button icon-remove' onclick='removeItem("+text.items[i].sort+","+text.items[i].id+")' style='padding-left:20px;'>删除</a></td>"+
+					        	"<td width='60'><a class='nui-button icon-remove' onclick='removeItem("+text.items[i].sort+","+text.items[i].id+")' style='padding-left:20px;'>删除</a></td>"+
 						        "</tr>";
 						        $("#itemHtml").append(_html);
 							}
