@@ -56,7 +56,7 @@
 				<table style="width: 100%;">
 					<tr>
 						<td style="width: 100%;">
-							<a class="nui-button" iconCls="icon-add" onclick="add()">录入 </a>
+							<a class="nui-button" iconCls="icon-add" onclick="add()">新增 </a>
 							<a id="update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑 </a>
 							<a class="nui-button" iconCls="icon-remove" onclick="remove()">删除</a>
 							<span class="separator"></span>
@@ -134,7 +134,7 @@
 			function add() {
 				nui.open({
 					url : "<%=request.getContextPath()%>/commonality/sq/SqAdd.jsp",
-					title : "录入数据",
+					title : "新增记录",
 					width : '80%',
 					height : '100%',
 					onload : function() {
@@ -215,7 +215,7 @@
 					rows[i].isPublish = isPublish;
 				}
 				if (rows.length > 0) {
-					nui.confirm("确定"+msg+"选中记录"+"？","系统提示",
+					nui.confirm("确定"+msg+"选中记录？","系统提示",
 					function(action) {
 						if (action == "ok") {
 							var json = nui.encode({
@@ -243,7 +243,7 @@
 						}
 					});
 				} else {
-					nui.alert("请选中一条记录！");
+					nui.alert("请选中一条或多条记录！");
 				}
 			}
 			//公开or撤销公开
@@ -253,7 +253,7 @@
 					rows[i].isOpen = isOpen;
 				}
 				if (rows.length > 0) {
-					nui.confirm("确定"+msg+"选中记录"+"？","系统提示",
+					nui.confirm("确定"+msg+"选中记录？","系统提示",
 					function(action) {
 						if (action == "ok") {
 							var json = nui.encode({
@@ -281,7 +281,7 @@
 						}
 					});
 				} else {
-					nui.alert("请选中一条记录！");
+					nui.alert("请选中一条或多条记录！");
 				}
 			
 			}

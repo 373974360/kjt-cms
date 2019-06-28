@@ -9,7 +9,7 @@
 	String ysqgkId = request.getParameter("ysqgkId");
 	String isPublish = request.getParameter("isPublish");
 	String isOpen = request.getParameter("isOpen");
-	
+	String isReply = request.getParameter("isReply");
 	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	String curTime = df.format(new Date());
 	
@@ -185,7 +185,13 @@
     		</div>
 			<div property="footer" style="text-align:center;padding-top:5px;padding-bottom:5px;" borderStyle="border:0;">	
 				 
-					<a class="nui-button" style="width:85px;" iconCls="icon-edit" onclick="onReply()">回复申请</a>  
+					<a id="button" class="nui-button" style="width:85px;" iconCls="icon-edit" onclick="onReply()">
+						<% if(isReply.equals("2")){ %>
+								回复申请
+						<% }else{ %>
+								重新回复
+						<% } %>
+					</a>  
 					<span style="display:inline-block;width:20px;"></span>     			       
 			        <a class="nui-button" style="width:85px;" iconCls="icon-print" onclick="onPrint()">打印详情</a>
 			    <%
@@ -287,6 +293,7 @@
 								//实时显示回复内容在详情页
 								setData();
 								$("#panel3").show();
+								$("#button").text("重新回复");
 							}
 						}
 					});		

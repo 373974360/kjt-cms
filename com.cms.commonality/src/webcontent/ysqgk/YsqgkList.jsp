@@ -56,15 +56,15 @@
 				<table style="width: 100%;">
 					<tr>
 						<td style="width: 100%;">
-							<a class="nui-button" iconCls="icon-add" onclick="add()">录入 </a>
+							<a class="nui-button" iconCls="icon-add" onclick="add()">新增 </a>
 							<a id="update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑 </a>
 							<a class="nui-button" iconCls="icon-remove" onclick="remove()">删除</a>
 							<span class="separator"></span>
-							<a id="isPublish" class="nui-button" iconCls="icon-ok" onclick="isPublishOrNot(1,'更新','是')">发布</a>
-							<a id="noPublish" class="nui-button" iconCls="icon-redo" onclick="isPublishOrNot(2,'更新','否')">撤销发布</a>
+							<a id="isPublish" class="nui-button" iconCls="icon-ok" onclick="isPublishOrNot(1,'发布')">发布</a>
+							<a id="noPublish" class="nui-button" iconCls="icon-redo" onclick="isPublishOrNot(2,'撤销发布')">撤销发布</a>
 							<span class="separator"></span>
-							<a id="isOpen" class="nui-button" iconCls="icon-ok" onclick="isOpenOrNot(1,'更新','是')">公开</a>
-							<a id="noOpen" class="nui-button" iconCls="icon-redo" onclick="isOpenOrNot(2,'更新','否')">撤销公开</a>
+							<a id="isOpen" class="nui-button" iconCls="icon-ok" onclick="isOpenOrNot(1,'公开')">公开</a>
+							<a id="noOpen" class="nui-button" iconCls="icon-redo" onclick="isOpenOrNot(2,'撤销公开')">撤销公开</a>
 						</td>
 					</tr>
 				</table>
@@ -80,7 +80,7 @@
 						<div field="ysqType" headerAlign="center" width="40" align="center" allowSort="true" >申请类型</div>
 						<div field="name" headerAlign="center" width="40" align="center" allowSort="true" >申请人员</div>
 						<div field="orgCode" headerAlign="center" width="40" align="center" allowSort="true" >组织机构代码</div>
-						<div field="createDtime" headerAlign="center" width="60" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm:ss">提交时间</div>		
+						<div field="createDtime" headerAlign="center" width="60" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm:ss">申请时间</div>		
 						<div field="replyDtime" headerAlign="center" width="60" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm:ss">回复时间</div>
 						<div field="replyContent" headerAlign="center" allowSort="true" visible="false">回复内容</div>
 						<div field="isReply" width="30" align="center" headerAlign="center" allowSort="true">回复</div>
@@ -147,7 +147,7 @@
 			function add() {
 				nui.open({
 					url : "<%=request.getContextPath()%>/commonality/ysqgk/YsqgkAdd.jsp",
-					title : "录入数据",
+					title : "新增记录",
 					width : '60%',
 					height : '80%',
 					onload : function() {
@@ -222,13 +222,13 @@
 				}
 			}
 			//发布or撤销发布
-			function isPublishOrNot(isPublish,msg,state){
+			function isPublishOrNot(isPublish,msg){
 				var rows = grid.getSelecteds();
 				for(var i=0;i<rows.length;i++){
 					rows[i].isPublish = isPublish;
 				}
 				if (rows.length > 0) {
-					nui.confirm("确定"+msg+"选中记录的发布状态为‘"+state+"’？","系统提示",
+					nui.confirm("确定"+msg+"选中记录？","系统提示",
 					function(action) {
 						if (action == "ok") {
 							var json = nui.encode({
@@ -245,28 +245,28 @@
 									var returnJson = nui.decode(text);
 									if (returnJson.exception == null) {
 										grid.reload();
-										nui.alert(msg+"成功","系统提示",function(action) {
+										nui.alert("申请已"+msg,"系统提示",function(action) {
 										});
 									} else {
 										grid.unmask();
-										nui.alert(msg+"失败","系统提示");
+										nui.alert("申请已"+msg,"系统提示");
 									}
 								}
 							});
 						}
 					});
 				} else {
-					nui.alert("请选中一条记录！");
+					nui.alert("请选中一条或多条记录！");
 				}
 			}
 			//公开or撤销公开
-			function isOpenOrNot(isOpen,msg,state){
+			function isOpenOrNot(isOpen,msg){
 				var rows = grid.getSelecteds();
 				for(var i=0;i<rows.length;i++){
 					rows[i].isOpen = isOpen;
 				}
 				if (rows.length > 0) {
-					nui.confirm("确定"+msg+"选中记录的公开状态为‘"+state+"’？","系统提示",
+					nui.confirm("确定"+msg+"选中记录？","系统提示",
 					function(action) {
 						if (action == "ok") {
 							var json = nui.encode({
@@ -283,18 +283,18 @@
 									var returnJson = nui.decode(text);
 									if (returnJson.exception == null) {
 										grid.reload();
-										nui.alert(msg+"成功","系统提示",function(action) {
+										nui.alert("申请已"+msg,"系统提示",function(action) {
 										});
 									} else {
 										grid.unmask();
-										nui.alert(msg+"失败","系统提示");
+										nui.alert("申请已"+msg,"系统提示");
 									}
 								}
 							});
 						}
 					});
 				} else {
-					nui.alert("请选中一条记录！");
+					nui.alert("请选中一条或多条记录！");
 				}
 			
 			}
@@ -340,7 +340,7 @@
 				var row = grid.getRowByUID(row_uid);
 				if (row){
 					nui.open({
-						url : "<%=request.getContextPath()%>/commonality/ysqgk/YsqgkDetail.jsp?ysqgkId="+row.id +"&isPublish=" + row.isPublish +"&isOpen=" + row.isOpen,
+						url : "<%=request.getContextPath()%>/commonality/ysqgk/YsqgkDetail.jsp?ysqgkId="+row.id +"&isPublish=" + row.isPublish +"&isOpen=" + row.isOpen +"&isReply=" + row.isReply,
 						title : "依申请公开详情&处理",
 						width : '60%',
 						height : '80%',

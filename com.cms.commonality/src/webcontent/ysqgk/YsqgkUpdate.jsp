@@ -44,7 +44,7 @@
 		                    <input name="ysqgk.cardName" class="nui-combobox nui-form-input" style="width:150px;" 
 		                    dataField="cardName" textField="text" valueField="id" 
 							url="<%=request.getContextPath()%>/commonality/ysqgk/cardName.txt"  
-							showNullItem="true" allowInput="false"/> 
+							allowInput="false" required="true" requiredErrorText="不能为空" /> 
 		                </td>	
 		                <th class="nui-form-label">证件号码：</th>
 		                <td colspan="2">    

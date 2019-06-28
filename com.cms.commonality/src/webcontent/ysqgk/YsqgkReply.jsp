@@ -54,7 +54,7 @@
 	            <tr class="odd">
 	                <th class="nui-form-label">回复时间：</th>
 	                <td colspan="1">    
-	                    <input id="ysqgk.replyDtime" name="ysqgk.replyDtime" class="nui-datepicker " style="width:21%;" 
+	                    <input id="ysqgk.replyDtime" name="ysqgk.replyDtime" class="nui-datepicker " style="width:26%;" 
 	                    format="yyyy-MM-dd HH:mm:ss" showTime="true" allowinput="false" 
 	                    value="<%=curTime %>" required="true" requiredErrorText="请选择时间"/>
 	                </td>		                
