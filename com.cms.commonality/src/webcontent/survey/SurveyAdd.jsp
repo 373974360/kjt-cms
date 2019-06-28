@@ -74,7 +74,14 @@
 		        var data1 = form1.getData(false,true);
 		        data1.survey.content = ue.getContent();
 		        var json1 = nui.encode(data1);
-	           $.ajax({
+		        
+	        	var startTime = new Date(data1.survey.startTime).getTime();
+	        	var endTime = new Date(data1.survey.endTime).getTime();
+	        	if(startTime>=endTime){
+	        		nui.alert("截止日期不能小于开始日期", "提示");
+	        		return;
+	        	}
+	           	$.ajax({
 	                url: "com.cms.commonality.SurveyService.addSurvey.biz.ext",
 	                type: 'POST',
 	                data: json1,

@@ -37,7 +37,7 @@
 		            <tr>
 		                <th class="nui-form-label">备注：</th>
 		                <td colspan="3">    
-		                    <input name="category.remark" class="nui-textbox nui-form-input"/>
+		                    <textarea name="category.remark" class="mini-textarea" style="width:100%"></textarea>
 		                </td>
 		            </tr>	 	            
 		        </table>      

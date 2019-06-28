@@ -70,7 +70,7 @@
 		                    	</tr>
 		                    	<tr>
 		                    		<td style="width:100px;"><input type="checkbox" name="modelId" value="link"/> 链接</td>
-		                    		<td><input style="width:100%" name="templetId_link" id="templetId_link" class="nui-combobox" textField="templetName" valueField="id" url="com.cms.siteconfig.TempletService.queryTempletAll.biz.ext" dataField="data" showNullItem="true" /></td>
+		                    		<td><input name="templetId_link" id="templetId_link" class="nui-hidden" value="0"/></td>
 		                    	</tr>
 		                    	<tr>
 		                    		<td style="width:100px;"><input type="checkbox" name="modelId" value="leader"/> 领导</td>
@@ -94,7 +94,7 @@
 		            <tr>
 		                <th class="nui-form-label">备注：</th>
 		                <td colspan="3">    
-		                    <input name="category.remark" class="nui-textbox nui-form-input"/>
+		                    <textarea name="category.remark" class="mini-textarea" style="width:100%"></textarea>
 		                </td>
 		            </tr>	 	            
 		        </table>    
@@ -117,6 +117,7 @@
 			         data:json,
 			         cache:false,
 			         contentType:'text/json',
+			         sync:false,
 			         success:function(text){
 						obj = nui.decode(text);
 						var json = nui.encode(obj);
@@ -149,13 +150,18 @@
 		        });
 		        var model_json = "[";
 		        for(var i=0;i<modelId_array.length;i++){
+		        	var tempId = templetId_array[i];
+		        	if(tempId=="undefined"||tempId==""){
+		        		tempId = 0;
+		        	}
 		        	if(i>0){
-		        		model_json += ',{"modelId":"'+modelId_array[i]+'","templetId":"'+templetId_array[i]+'"}';
+		        		model_json += ',{"modelId":"'+modelId_array[i]+'","templetId":"'+tempId+'"}';
 		        	}else{
-		        		model_json += '{"modelId":"'+modelId_array[i]+'","templetId":"'+templetId_array[i]+'"}';
+		        		model_json += '{"modelId":"'+modelId_array[i]+'","templetId":"'+tempId+'"}';
 		        	}
 		        }
 		        model_json+="]";
+		        console.log(model_json);
 		        data.categoryModels = JSON.parse(model_json);
 		        var json = nui.encode(data);
 	            $.ajax({

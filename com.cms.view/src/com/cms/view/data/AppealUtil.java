@@ -172,7 +172,9 @@ public class AppealUtil {
 				sql += " and search_pwd = '"+con_map.get(key)+"'";
 			}
 		}
-		sql += " and is_publish = 1";
+		if(!con_map.containsKey("search_code")&&!con_map.containsKey("search_pwd")){
+			sql += " and is_publish = 1 and is_open = 1";
+		}
 		return sql;
 	}
 	public static TurnPageBean getAppealCount(String params){

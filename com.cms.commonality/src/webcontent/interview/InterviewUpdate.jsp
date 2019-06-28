@@ -143,6 +143,13 @@
 		        data.interview.videoUrl = $("input[name='interview.videoUrl']").val();
 		        data.interview.content = ue.getContent();
 		        var json = nui.encode(data);
+		        
+	        	var startTime = new Date(data.interview.startTime).getTime();
+	        	var endTime = new Date(data.interview.endTime).getTime();
+	        	if(startTime>=endTime){
+	        		nui.alert("截止日期不能小于开始日期", "提示");
+	        		return;
+	        	}
 	            $.ajax({
 	                url: "com.cms.commonality.InterviewService.updateInterview.biz.ext",
 	                type: 'POST',

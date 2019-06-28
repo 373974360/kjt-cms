@@ -41,7 +41,7 @@
 							<a id="update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑 </a>
 							<a class="nui-button" iconCls="icon-remove" onclick="remove()">删除</a>
 	            			<span class="separator"></span>
-							<a id="update" class="nui-button" iconCls="icon-ok" onclick="setPublish(2,'发布')">发布 </a>
+							<a id="replay" class="nui-button" iconCls="icon-ok" onclick="setPublish(2,'发布')">发布 </a>
 							<a class="nui-button" iconCls="icon-redo" onclick="setPublish(1,'撤销')">撤销发布</a>
 	            			<span class="separator"></span>
 							<a class="nui-button" iconCls="icon-user" onclick="guestConfig()">嘉宾设置</a>
@@ -207,7 +207,7 @@
 						url : "<%=request.getContextPath()%>/commonality/interview/GuestList.jsp?interviewId="+row.id,
 						title : "嘉宾设置",
 						width : "80%",
-						height : "100%",
+						height : "80%",
 						onload : function() {
 						},
 						ondestroy : function(action) {

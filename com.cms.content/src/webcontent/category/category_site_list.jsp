@@ -51,7 +51,7 @@
 					url : "<%=request.getContextPath()%>/content/category/category_site_add.jsp",
 					title : "新增记录",
 					width : 700,
-					height : "100%",
+					height : 330,
 					onload : function() {
 					},
 					ondestroy : function(action) {//弹出页面关闭前
@@ -70,7 +70,7 @@
 						url : "<%=request.getContextPath()%>/content/category/category_site_update.jsp",
 						title : "编辑数据",
 						width : 700,
-						height : "100%",
+						height : 330,
 						onload : function() {
 							var iframe = this.getIFrameEl();
 							var data = row;

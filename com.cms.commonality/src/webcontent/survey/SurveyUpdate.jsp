@@ -1,4 +1,8 @@
+<%@page import="com.cms.view.velocity.DateUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%>
+<%
+	String currTime = DateUtil.getCurrentDate();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -14,6 +18,7 @@
 				<input id="survey.id" name="survey.id" class="nui-hidden" />
 				<input id="survey.isPublish" name="survey.isPublish" class="nui-hidden" value="1"/>
                 <input id="survey.content" name="survey.content" class="nui-hidden"/>
+                <input id="survey.isEnd" name="survey.isEnd" class="nui-hidden"/>
 		        <table style="width:100%;table-layout:fixed;" class="nui-form-table" >
 		            <tr>
 		                <th class="nui-form-label">问卷标题：</th>
@@ -93,6 +98,18 @@
 		        if(form.isValid()==false) return;
 		        var data = form.getData(false,true);
 		        data.survey.content = ue.getContent();
+	        	var startTime = new Date(data.survey.startTime).getTime();
+	        	var endTime = new Date(data.survey.endTime).getTime();
+	        	if(startTime>=endTime){
+	        		nui.alert("截止日期不能小于开始日期", "提示");
+	        		return;
+	        	}
+	        	var currTime = new Date('<%=currTime %>').getTime();
+	        	if(endTime>currTime){
+	        		data.survey.isEnd = 1;
+	        	}else{
+	        		data.survey.isEnd = 0;
+	        	}
 		        var json = nui.encode(data);
 	            $.ajax({
 	                url: "com.cms.commonality.SurveyService.updateSurvey.biz.ext",
