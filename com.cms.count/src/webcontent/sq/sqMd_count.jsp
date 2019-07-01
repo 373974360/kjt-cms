@@ -12,10 +12,11 @@
 		<link id="css_icon" rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/coframe/tools/icons/icon.css"/>
 		<script src="<%=request.getContextPath()%>/common/nui/nui.js" type="text/javascript"></script>
 	</head>
-	<body style="width: 98%; height: 95%;">
+	<body style="width: 100%; height: 98%;">
 		<div id="datagrid1" dataField="data" ajaxData="setRoleId" class="nui-datagrid" style="width: 100%; height: 100%;"
-			url="com.cms.count.vo.sqCountService.sqCountByLxmd.biz.ext" multiSelect="true" allowSortColumn="false">
+			url="com.cms.count.vo.sqCountService.sqCountByLxmd.biz.ext" multiSelect="true" allowSortColumn="false" showPager="false" allowAlternating="true">
 			<div property="columns">
+				<div type="indexcolumn" width="10" ></div>
 				<div field="mdName" headerAlign="center" align="center" allowSort="true">来信目的</div>
 				<div field="count" width="100" headerAlign="center" align="center" allowSort="true">总件数</div>
 				<div field="repliedCount" width="100" headerAlign="center" align="center" allowSort="true">已回复</div>

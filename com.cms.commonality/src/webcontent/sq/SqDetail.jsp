@@ -151,7 +151,7 @@
     			<div class="nui-fit">
 					<div id="datagrid1" dataField="sqProcess" class="nui-datagrid" style="width: 100%; height: 100%;" 
 						url="com.cms.commonality.SqProcess.querySqProcess.biz.ext"
-						pageSize="10" showPageInfo="true" multiSelect="true" allowSortColumn="false" showEmptyText="true" emptyText="暂无处理数据">
+						pageSize="10" showPageInfo="true" multiSelect="true" allowSortColumn="false" showEmptyText="true" emptyText="暂无处理数据" allowAlternating="true">
 						<div property="columns">
 							<div type="indexcolumn" headerAlign="center" align="center">处理步骤</div>								
 							<div field="id" headerAlign="center" align="center" allowSort="true" visible="false">ID</div>

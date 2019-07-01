@@ -15,7 +15,7 @@
 		<link id="css_icon" rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/coframe/tools/icons/icon.css"/>
 		<script src="<%=request.getContextPath()%>/common/nui/nui.js" type="text/javascript"></script>
 	</head>
-	<body style="width: 98%; height: 95%;">
+	<body style="width: 100%; height: 98%;">
 		<div class="nui-panel" title="统计条件设置" iconCls="icon-add" style="width: 100%; height: 15%;" showToolbar="false" showFooter="true">
 			<div id="queryform" class="nui-form" align="center" style="height: 100%">
 				<table id="table1" class="table" style="height: 100%;float:left;">
@@ -53,7 +53,7 @@
 				var startTime = $("input[name='startTime']").val();
 				var endTime = $("input[name='endTime']").val();
 				var url = "";
-				if(startTime < endTime){
+				if(startTime <= endTime){
 					if(countType==1){
 						url = "sqMd_count.jsp?startTime="+startTime+"&endTime="+endTime;
 					}

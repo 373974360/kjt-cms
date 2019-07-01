@@ -12,15 +12,18 @@
 		<link id="css_icon" rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/coframe/tools/icons/icon.css"/>
 		<script src="<%=request.getContextPath()%>/common/nui/nui.js" type="text/javascript"></script>
 	</head>
-	<body style="width: 98%; height: 95%;">
-		<div id="datagrid1" dataField="data" ajaxData="setRoleId" class="nui-datagrid" style="width: 100%; height: 100%;"
-			url="com.cms.count.vo.sqCountService.sqCountByOrg.biz.ext" multiSelect="true" allowSortColumn="false">
-			<div property="columns">				
-				<div field="orgName" headerAlign="center" align="center" allowSort="true">处理部门</div>
-				<div field="count" width="100" headerAlign="center" align="center"allowSort="true">总件数</div>
-				<div field="inHand" width="100" headerAlign="center" align="center" allowSort="true">处理中</div>
-				<div field="replied" width="100" headerAlign="center" align="center" allowSort="true">已办结</div>
-				<div field="proportion" width="100" headerAlign="center" align="center" allowSort="true">办结率</div>
+	<body style="width: 100%; height: 99%;">
+		<div class="nui-fit">
+			<div id="datagrid1" dataField="data" ajaxData="setRoleId" class="nui-datagrid" style="width: 100%; height: 100%;"
+				url="com.cms.count.vo.sqCountService.sqCountByOrg.biz.ext" multiSelect="true" allowSortColumn="false" showPager="false" allowAlternating="true">
+				<div property="columns">
+					<div type="indexcolumn" width="10" ></div>				
+					<div field="orgName" headerAlign="center" align="center" allowSort="true">处理部门</div>
+					<div field="count" width="100" headerAlign="center" align="center"allowSort="true">总件数</div>
+					<div field="inHand" width="100" headerAlign="center" align="center" allowSort="true">处理中</div>
+					<div field="replied" width="100" headerAlign="center" align="center" allowSort="true">已办结</div>
+					<div field="proportion" width="100" headerAlign="center" align="center" allowSort="true">办结率</div>
+				</div>
 			</div>
 		</div>
 		<script type="text/javascript">
