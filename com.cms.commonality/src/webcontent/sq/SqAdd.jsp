@@ -181,13 +181,13 @@
 	        function contactNumberValidation(e){
 		        if (e.isValid) {
 	                if (isPhoneNumber(e.value) == false) {
-	                    e.errorText = "请输入正确电话号码";
+	                    e.errorText = "请输入正确电话或手机号码";
 	                    e.isValid = false;
 	                }
             	}
 	        }
-	        function isPhoneNumber(v){	/* 是否为手机号码 */
-	        	var re = new RegExp("^(13[0-9]|14[0-9]|15[0-9]|16[0-9]|17[0-9]|18[0-9]|19[8|9])\\d{8}$");
+	        function isPhoneNumber(v){	/* 是否为手机或固话号码 */
+	        	var re = new RegExp("(^(13[0-9]|14[0-9]|15[0-9]|16[0-9]|17[0-9]|18[0-9]|19[8|9])\\d{8}$)|(^(0[0-9]{2,3}\-)?([2-9][0-9]{6,7})+(\-[0-9]{1,4})?$)");
 	            if (re.test(v)) return true;
 	            return false;
 	        }
