@@ -34,6 +34,20 @@ public class DateUtils {
 		}
 	}
 	
+	/**
+	 * @param date
+	 * @return
+	 * @author chaoweima
+	 */
+	@Bizlet("日期格式化")
+	public static String dateFormat2(String date) {
+		if(!StringUtil.isBlank(date)){
+			return date.replace("T", " ").substring(0,10);
+		}else{
+			return null;
+		}
+	}
+	
 
 	@Bizlet("日期格式化")
 	public static String getCurrTime() {

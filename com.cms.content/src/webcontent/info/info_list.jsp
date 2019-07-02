@@ -184,7 +184,7 @@
 				nui.open({
 					url : url,
 					title : "新增记录",
-					width : '80%',
+					width : '90%',
 					height : '100%',
 					onload : function() {
 					},
@@ -199,16 +199,16 @@
 			
 			//编辑
 			function edit() {
-				var row = grid.getSelected();
-				if (row) {
+				var rows = grid.getSelecteds();
+				if (rows.length == 1) {
 					nui.open({
-						url : "<%=request.getContextPath()%>/content/info/info_"+row.modelId+"_edit.jsp?catId="+row.catId,
+						url : "<%=request.getContextPath()%>/content/info/info_"+rows[0].modelId+"_edit.jsp?catId="+rows[0].catId,
 						title : "编辑数据",
-						width : '80%',
+						width : '90%',
 						height : '100%',
 						onload : function() {
 							var iframe = this.getIFrameEl();
-							var data = row;
+							var data = rows[0];
 							//直接从页面获取，不用去后台获取
 							iframe.contentWindow.setData(data);
 						},
@@ -302,11 +302,29 @@
 			function selectionChanged() {
 				var rows = grid.getSelecteds();
 				if (rows.length > 1) {
-					nui.get("update").disable();
-					nui.get("publish_update").disable();
+					<%
+						if(infoStatus.equals("1")||infoStatus.equals("2")||infoStatus.equals("4")){
+					%>
+						nui.get("update").disable();
+					<%
+						}else{
+					%>
+						nui.get("publish_update").disable();
+					<%
+						}
+					%>
 				} else {
-					nui.get("update").enable();
-					nui.get("publish_update").disable();
+					<%
+						if(infoStatus.equals("1")||infoStatus.equals("2")||infoStatus.equals("4")){
+					%>
+						nui.get("update").enable();
+					<%
+						}else{
+					%>
+						nui.get("publish_update").enable();
+					<%
+						}
+					%>
 				}
 			}
 			function publishHtml(){

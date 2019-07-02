@@ -173,7 +173,7 @@
 				nui.open({
 					url : url,
 					title : "新增记录",
-					width : '80%',
+					width : '90%',
 					height : '100%',
 					onload : function() {
 					},
@@ -193,7 +193,7 @@
 					nui.open({
 						url : "<%=request.getContextPath()%>/content/info/info_"+row.modelId+"_edit.jsp?catId="+row.catId,
 						title : "编辑数据",
-						width : '80%',
+						width : '90%',
 						height : '100%',
 						onload : function() {
 							var iframe = this.getIFrameEl();
@@ -312,9 +312,22 @@
 			function selectionChanged() {
 				var rows = grid.getSelecteds();
 				if (rows.length > 1) {
-					nui.get("update").disable();
+					if (rows.length > 1) {
+					<%
+						if(infoStatus.equals("1")||infoStatus.equals("6")){
+					%>
+						nui.get("update").disable();
+					<%
+						}
+					%>
 				} else {
-					nui.get("update").enable();
+					<%
+						if(infoStatus.equals("1")||infoStatus.equals("6")){
+					%>
+						nui.get("update").enable();
+					<%
+						}
+					%>
 				}
 			}
 			//重新刷新页面

@@ -80,19 +80,29 @@
 		            </tr>  
 		            <tr>
 		                <th class="nui-form-label">来源：</th>
-		                <td>    
-		                	<div name="info.source" class="nui-combobox" style="width:100px;" popupWidth="400" textField="sourceName" valueField="sourceName"
-							    url="com.cms.basics.SourceService.querySourceAll.biz.ext" dataField="data" multiSelect="true"  >
+		                <td colspan = 3>    
+		                	<input id="infoSource" name="info.source" class="nui-textbox nui-form-input"/>
+		                </td>
+		                <td>
+		                	<div id="infoSourceCombobox" class="nui-combobox" style="width:100px;" popupWidth="400" textField="sourceName" valueField="sourceName"
+							    url="com.cms.basics.SourceService.querySourceAll.biz.ext" dataField="data" onvaluechanged="setInfoSource()">
 							</div>
 		                </td>
+		            </tr>
+		           	<tr>
 		                <th class="nui-form-label">作者：</th>
-		                <td>    
-		                	<div name="info.author" class="nui-combobox" style="width:100px;" popupWidth="400" textField="authorName" valueField="authorName"
-							    url="com.cms.basics.AuthorService.queryAuthorAll.biz.ext" dataField="data" multiSelect="true"  >
+		                <td colspan = 3>    
+		                	<input id="infoAuthor" name="info.author" class="nui-textbox nui-form-input"/>
+		                </td>
+		                <td>
+		                	<div id="infoAuthorCombobox" class="nui-combobox" style="width:100px;" popupWidth="400" textField="authorName" valueField="authorName"
+							    url="com.cms.basics.AuthorService.queryAuthorAll.biz.ext" dataField="data" onvaluechanged="setInfoAuthor()">
 							</div>
 		                </td>
+		            </tr>
+		           	<tr>
 		                <th class="nui-form-label">网络编辑：</th>
-		                <td>    
+		                <td colspan = "2">    
 		                    <input name="info.editor" class="nui-textbox nui-form-input" value="<%=userObject.getUserName() %>"/>
 		                </td>
 		            </tr>
@@ -109,7 +119,7 @@
 		            <tr>
 		                <th class="nui-form-label">摘要：</th>
 		                <td colspan="5">    
-		                   <textarea name="info.description" class="nui-textarea" style="width:560px;"></textarea>
+		                   <textarea name="info.description" class="nui-textarea" style="width:100%;"></textarea>
 		                </td>
 		            </tr>
 		            <tr>
@@ -173,6 +183,26 @@
 	    <script type="text/javascript">
 	        nui.parse();
 		    var tree = nui.get("select1");
+		    
+		   	function setInfoSource(){
+		   		var source = nui.get("infoSourceCombobox").getValue();
+		   		var infoSource = nui.get("infoSource");
+		   		if(infoSource.getValue()==""||infoSource.getValue().length==0){
+		   			infoSource.setValue(source);
+		   		}else{
+		   			infoSource.setValue(infoSource.getValue()+","+source);
+		   		}
+		   	}
+		    
+		   	function setInfoAuthor(){
+		   		var author = nui.get("infoAuthorCombobox").getValue();
+		   		var infoAuthor = nui.get("infoAuthor");
+		   		if(infoAuthor.getValue()==""||infoAuthor.getValue().length==0){
+		   			infoAuthor.setValue(author);
+		   		}else{
+		   			infoAuthor.setValue(infoAuthor.getValue()+","+author);
+		   		}
+		   	}
 		    
 		    function setRoleId(){
 				return {"userId":"<%=userObject.getUserId() %>","nodeId":0};
