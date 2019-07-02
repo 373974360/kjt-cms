@@ -20,7 +20,7 @@
 			</div>
 			<div class="nui-fit">
 				<div id="datagrid1" dataField="data" class="nui-datagrid" style="width: 100%; height: 100%;"
-					url="com.cms.siteconfig.SearchService.querySiteList.biz.ext" multiSelect="true" onselectionchanged="selectionChanged" allowSortColumn="false">
+					url="com.cms.siteconfig.SearchService.querySiteList.biz.ext" multiSelect="true" onselectionchanged="selectionChanged" allowSortColumn="false" allowAlternating="true">
 					<div property="columns">
 						<div type="checkcolumn" width="50"></div>
 						<div field="id" headerAlign="center" allowSort="true" visible="false">ID</div>

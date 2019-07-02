@@ -52,7 +52,7 @@
 			<div class="nui-fit">
 				<div id="datagrid1" dataField="category" class="nui-datagrid" style="width: 100%; height: 100%;"
 					url="com.cms.content.CategoryService.queryCategory.biz.ext"
-					pageSize="30" showPageInfo="true" multiSelect="true" onselectionchanged="selectionChanged" allowSortColumn="false">
+					pageSize="30" showPageInfo="true" multiSelect="true" onselectionchanged="selectionChanged" allowSortColumn="false" allowAlternating="true">
 					<div property="columns">
 						<div type="checkcolumn" width="20"></div>
 						<div field="id" headerAlign="center" align="center" allowSort="true" width="20">ID</div>
