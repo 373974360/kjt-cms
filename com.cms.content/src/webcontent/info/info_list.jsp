@@ -54,6 +54,8 @@
 							<a id="revoke" class="nui-button" iconCls="icon-redo" onclick="setInfoStatus(4,'撤稿')">撤稿 </a>
 							<a id="publish_update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑 </a>
 							<a id="remove" class="nui-button" iconCls="icon-remove" onclick="setInfoStatus(5,'删除')">删除</a>
+	            			<span class="separator"></span>
+							<a id="pushWeChat" class="nui-button" iconCls="icon-upload">微信推送</a>
 							<a id="publishHtml" class="nui-button" iconCls="icon-ok" onclick="publishHtml()">发布静态页</a>
 						<%
 							}
@@ -189,7 +191,7 @@
          	
          	setAuthBtn();
          	function setAuthBtn(){
-         		var btn = ["add","revoke","update","remove","publish","reduction","del"];
+         		var btn = ["add","revoke","update","remove","publish","reduction","del","pushWeChat"];
          		var json = nui.encode({params:{userId:<%=userObject.getUserId() %>,funId:1021}});
 				$.ajax({
 					url:"com.cms.content.ContentService.queryBtnAuth.biz.ext",
