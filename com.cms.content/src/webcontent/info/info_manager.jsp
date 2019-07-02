@@ -93,7 +93,7 @@
 		if(!url){
 			return url;
 		}
-		return url + "&nodeId=" + params.realId+"&isAdd="+params.isLeaf+"&searchKey="+$("input[name=searchKey]").val()+"&infoType="+$("input[name=infoType]").val();
+		return url + "&nodeId=" + params.realId+"&isAdd="+params.isLeaf+"&searchKey="+$("input[name=searchKey]").val().replace(/^\s+|\s+$/g,'')+"&infoType="+$("input[name=infoType]").val();
 	}
 	
 	function refreshTab(node){
