@@ -15,7 +15,7 @@
 	</head>
 	<body style="width: 98%; height: 95%;">
 		<div id="datagrid1" dataField="data" ajaxData="setRoleId" class="nui-datagrid" style="width: 100%; height: 100%;"
-			url="com.cms.count.vo.InfoCountService.infoCountByOrg.biz.ext" multiSelect="true" allowSortColumn="false">
+			url="com.cms.count.vo.InfoCountService.infoCountByOrg.biz.ext" multiSelect="true" allowSortColumn="false" allowAlternating="true">
 			<div property="columns">
 				<div type="checkcolumn" width="40"></div>
 				<div field="orgName" width="auto" headerAlign="center" allowSort="true">机构名称</div>

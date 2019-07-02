@@ -14,7 +14,7 @@
 		<script src="<%=request.getContextPath()%>/common/nui/nui.js" type="text/javascript"></script>
 	</head>
 	<body style="width: 98%; height: 95%;">
-		<div id="treegrid1" class="nui-treegrid" ajaxData="setRoleId" style="width:100%;height:100%;" url="com.cms.count.vo.InfoCountService.infoCountByCategory.biz.ext" showTreeIcon="true" treeColumn="text" dataField="data" idField="id" parentField="pid" resultAsTree="false">
+		<div id="treegrid1" class="nui-treegrid" ajaxData="setRoleId" style="width:100%;height:100%;" url="com.cms.count.vo.InfoCountService.infoCountByCategory.biz.ext" showTreeIcon="true" treeColumn="text" dataField="data" idField="id" parentField="pid" resultAsTree="false" allowAlternating="true">
 		    <div property="columns">
 		        <div type="indexcolumn" width="50"></div>
 		        <div name="text" field="text" width="auto">栏目名称</div>

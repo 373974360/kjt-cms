@@ -15,7 +15,7 @@
 	</head>
 	<body style="width: 98%; height: 95%;">
 		<div id="datagrid1" dataField="data" ajaxData="setRoleId" class="nui-datagrid" style="width: 100%; height: 100%;"
-			url="com.cms.count.vo.InfoCountService.infoCountByUser.biz.ext" multiSelect="true" allowSortColumn="false">
+			url="com.cms.count.vo.InfoCountService.infoCountByUser.biz.ext" multiSelect="true" allowSortColumn="false" allowAlternating="true">
 			<div property="columns">
 				<div type="checkcolumn" width="40"></div>
 				<div field="userName" width="auto" headerAlign="center" allowSort="true">姓名</div>

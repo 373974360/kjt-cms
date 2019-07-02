@@ -36,7 +36,7 @@
 			<div class="nui-fit">
 				<div id="datagrid1" dataField="model" class="nui-datagrid" style="width: 100%; height: 100%;"
 					url="com.cms.siteconfig.ModelService.queryModel.biz.ext"
-					pageSize="20" showPageInfo="true" multiSelect="true" onselectionchanged="selectionChanged" allowSortColumn="false">
+					pageSize="20" showPageInfo="true" multiSelect="true" onselectionchanged="selectionChanged" allowSortColumn="false" allowAlternating="true">
 					<div property="columns">
 						<div type="checkcolumn" width="10"></div>
 						<div field="id" headerAlign="center" allowSort="true" visible="false">模型ID</div>
