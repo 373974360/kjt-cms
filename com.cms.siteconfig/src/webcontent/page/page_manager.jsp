@@ -74,7 +74,7 @@
 					url : "<%=request.getContextPath()%>/siteconfig/page/page_add.jsp",
 					title : "新增记录",
 					width : 550,
-					height : 500,
+					height : 300,
 					onload : function() {
 					},
 					ondestroy : function(action) {//弹出页面关闭前
@@ -93,7 +93,7 @@
 						url : "<%=request.getContextPath()%>/siteconfig/page/page_update.jsp",
 						title : "编辑数据",
 						width : 500,
-						height : 500,
+						height : 300,
 						onload : function() {
 							var iframe = this.getIFrameEl();
 							var data = row;

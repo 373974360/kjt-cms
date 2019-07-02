@@ -68,6 +68,12 @@
 	function doPublishPage() {
 		var catId = getCheckedNodes();
 		var json = nui.encode({params:{catId : catId,startTime:mini.get("date2").getValue(),endTime:mini.get("date3").getValue()}});
+		var startTime = new Date(mini.get("date2").getValue()).getTime();
+    	var endTime = new Date(mini.get("date3").getValue()).getTime();
+    	if(startTime>=endTime){
+    		nui.alert("截止日期不能小于开始日期", "提示");
+    		return;
+    	}
 		$.ajax({
 			url : "com.cms.siteconfig.PageService.publishPage.biz.ext",
 			type : 'POST',

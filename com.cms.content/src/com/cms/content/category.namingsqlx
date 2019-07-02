@@ -14,7 +14,8 @@
     		cat_id as catId,
     		info_status as infoStatus,
     		content_url as contentUrl,
-    		weight
+    		weight,
+    		org_name as orgName
     	from 
     		cms_info
     	where 1=1
@@ -143,7 +144,8 @@
 				info.is_top AS isTop ,
 				t1.id as itemId,
 				t1.work_id as workId,
-				t1.step_sort as stepSort
+				t1.step_sort as stepSort,
+    			info.org_name as orgName
 			FROM
 				cms_info info,
 				(

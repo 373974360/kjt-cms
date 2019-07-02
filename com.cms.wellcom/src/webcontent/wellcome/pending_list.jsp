@@ -31,13 +31,12 @@
 				url="com.cms.content.WellComeService.myAgency.biz.ext"
 				pageSize="20" showPageInfo="true" multiSelect="true" onselectionchanged="selectionChanged" allowSortColumn="false">
 				<div property="columns">
-					<div type="checkcolumn" width="20"></div>
+					<div type="checkcolumn" width="40"></div>
 					<div field="id" headerAlign="center" allowSort="true" visible="false">内容ID</div>
-					<div field="title" width="300" headerAlign="left" allowSort="true">标题</div>
-					<div field="isTop" width="40" headerAlign="center" align="center" allowSort="true">置顶</div>
-					<div field="editor" width="70" headerAlign="center" align="center" allowSort="true">编辑</div>
-					<div field="inputDtime" width="80" headerAlign="center" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm">录入时间</div>
-					<div field="releasedDtime" width="80" headerAlign="center" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm">发布时间</div>
+					<div field="title" width="auto" headerAlign="left" allowSort="true">标题</div>
+					<div field="orgName" width="200" headerAlign="center" align="center" allowSort="true">部门</div>
+					<div field="editor" width="130" headerAlign="center" align="center" allowSort="true">编辑</div>
+					<div field="inputDtime" width="150" headerAlign="center" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm">报送时间</div>
 				</div>
 			</div>
 		</div>
