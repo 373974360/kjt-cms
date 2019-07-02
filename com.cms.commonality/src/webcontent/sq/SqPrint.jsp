@@ -90,7 +90,7 @@
 	<div id="nobtn1" class="nui-toolbar" style="text-align:center;padding-top:5px;padding-bottom:5px;">	
 		<a class="nui-button" style="width:60px;" iconCls="icon-print" onclick="onPrint()">打印</a>
 		<span style="display:inline-block;width:25px;"></span>
-		<a class="nui-button" style="width:60px;" iconCls="icon-cancel" onclick="onCancel()">关闭</a>
+		<a class="nui-button" style="width:60px;" iconCls="icon-cancel" onclick="onCancel()">取消</a>
 	</div>
 </body>
 <script type="text/javascript">

@@ -193,7 +193,7 @@
 						<% } %>
 					</a>  
 					<span style="display:inline-block;width:20px;"></span>     			       
-			        <a class="nui-button" style="width:85px;" iconCls="icon-print" onclick="onPrint()">打印详情</a>
+			        <a class="nui-button" style="width:85px;" iconCls="icon-print" onclick="onPrint()">打印申请</a>
 			    <%
 					if(isPublish.equals("1") ){
 				%>	
