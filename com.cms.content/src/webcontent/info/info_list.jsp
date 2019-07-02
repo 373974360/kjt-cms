@@ -97,7 +97,7 @@
 		<div class="nui-fit">
 			<div id="datagrid1" dataField="info" class="nui-datagrid" style="width: 100%; height: 100%;"
 				url="com.cms.content.ContentService.queryInfoListSql.biz.ext" idField="id" pageSize="20" showPageInfo="true" 
-				multiSelect="true" onselectionchanged="selectionChanged" allowSortColumn="false" allowCellEdit="true" allowCellSelect="true">
+				multiSelect="true" onselectionchanged="selectionChanged" allowSortColumn="false" allowCellEdit="true" allowCellSelect="true" allowAlternating="true">
 				<div property="columns">
 					<div type="checkcolumn" width="40"></div>
 					<div field="id" headerAlign="center" allowSort="true" visible="false">内容ID</div>

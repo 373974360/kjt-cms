@@ -52,7 +52,7 @@
 			<div class="nui-fit">
 				<div id="datagrid1" dataField="interview" class="nui-datagrid" style="width: 100%; height: 100%;"
 					url="com.cms.commonality.InterviewService.queryInterview.biz.ext"
-					pageSize="20" showPageInfo="true" multiSelect="true" onselectionchanged="selectionChanged" allowSortColumn="false">
+					pageSize="20" showPageInfo="true" multiSelect="true" onselectionchanged="selectionChanged" allowSortColumn="false" allowAlternating="true">
 					<div property="columns">
 						<div type="checkcolumn" width="40"></div>
 						<div field="id" headerAlign="center" allowSort="true" visible="false">ID</div>

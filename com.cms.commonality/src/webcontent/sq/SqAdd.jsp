@@ -58,7 +58,7 @@
 		                <th class="nui-form-label">来信目的：</th>
 		                <td colspan="3"> 
 		                	<input name="sq.mdId" class="nui-combobox nui-form-input" style="width:150px;" textField="mdName" valueField="id"
-								url="com.cms.basics.LxmdService.queryLxmdName.biz.ext" dataField="data" required="true" requiredErrorText="不能为空"/>		                    
+								url="com.cms.basics.LxmdService.queryLxmdName.biz.ext" dataField="data" required="true" requiredErrorText="不能为空" emptyText="请选择"/>		                    
 		                </td>		                
 		            </tr>
 		            <tr class="odd">
