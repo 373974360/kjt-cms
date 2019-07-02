@@ -5,6 +5,7 @@
 <%
 	String catId = request.getParameter("catId");
 	UserObject userObject = (UserObject)request.getSession().getAttribute("userObject");
+	String group = request.getParameter("group");
  %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -32,6 +33,16 @@
             	<input name="info.catId" class="nui-hidden"/>
            		<script type="text/plain" id="upload_ue"></script>
 		        <input id="info.infoStatus" name="info.infoStatus" class="nui-hidden"/>
+            	<%
+            		if(!group.equals("manager")){
+            	%>
+            		<input name="info.weight" value="60" class="nui-hidden"/>
+            		<input name="info.hits" value="0" class="nui-hidden"/>
+            		<input name="info.isTuijian" value="2" class="nui-hidden"/>
+            		<input name="info.isTop" value="2" class="nui-hidden"/>
+            	<%
+            		}
+	            %>
 		        <table style="width:100%;table-layout:fixed;float:left;" class="nui-form-table" >
 		            <tr>
 		                <th class="nui-form-label" style="width:120px;">所属栏目：</th>
@@ -118,32 +129,38 @@
 		                   <input name="info.thumbUrl" class="nui-textbox nui-form-input"/>
 		                </td>
 		            </tr>
-		            <tr>
-		                <th class="nui-form-label">权重：</th>
-		                <td>    
-		                	<input name="info.weight" value="60" class="nui-spinner"  minValue="0" maxValue="99"/>
-		                </td>
-		                <th class="nui-form-label">点击数：</th>
-		                <td>    
-		                	<input name="info.hits" value="0" class="nui-spinner"  minValue="0" maxValue="99"/>
-		                </td>
-		            </tr>
-		            <tr>
-		                <th class="nui-form-label">是否推荐：</th>
-		                <td>    
-		                	<div name="info.isTuijian" class="nui-radiobuttonlist"
-							    textField="text" dataField="yesNo" valueField="id" value="2"
-							    url="<%=request.getContextPath()%>/content/info/yesNo.txt" >
-							</div>
-		                </td>
-		                <th class="nui-form-label">是否置顶：</th>
-		                <td>    
-		                	<div name="info.isTop" class="nui-radiobuttonlist"
-							    textField="text" dataField="yesNo" valueField="id" value="2"
-							    url="<%=request.getContextPath()%>/content/info/yesNo.txt" >
-							</div>
-		                </td>
-		            </tr>
+		            <%
+		            	if(group.equals("manager")){
+		            %>
+			            <tr>
+			                <th class="nui-form-label">权重：</th>
+			                <td>    
+			                	<input name="info.weight" value="60" class="nui-spinner"  minValue="0" maxValue="99"/>
+			                </td>
+			                <th class="nui-form-label">点击数：</th>
+			                <td>    
+			                	<input name="info.hits" value="0" class="nui-spinner" minValue="0"/>
+			                </td>
+			            </tr>
+			            <tr>
+			                <th class="nui-form-label">是否推荐：</th>
+			                <td>    
+			                	<div name="info.isTuijian" class="nui-radiobuttonlist"
+								    textField="text" dataField="yesNo" valueField="id" value="2"
+								    url="<%=request.getContextPath()%>/content/info/yesNo.txt" >
+								</div>
+			                </td>
+			                <th class="nui-form-label">是否置顶：</th>
+			                <td>    
+			                	<div name="info.isTop" class="nui-radiobuttonlist"
+								    textField="text" dataField="yesNo" valueField="id" value="2"
+								    url="<%=request.getContextPath()%>/content/info/yesNo.txt" >
+								</div>
+			                </td>
+			            </tr>
+		            <%
+		            	}
+		            %>
 		            <tr>
 		                <th class="nui-form-label">组图内容：</th>
 		                <td colspan="5" id="picArray"></td>

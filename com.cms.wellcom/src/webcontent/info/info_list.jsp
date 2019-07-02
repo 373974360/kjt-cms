@@ -90,9 +90,11 @@
 					<div field="id" headerAlign="center" allowSort="true" visible="false">内容ID</div>
 					<div field="title" width="auto" headerAlign="left" allowSort="true">标题</div>
 					<div field="isTop" width="50" headerAlign="center" align="center" allowSort="true">置顶</div>
+					<div field="isTuijian" width="50" headerAlign="center" align="center" allowSort="true">推荐</div>
+					<div field="weight" width="50" headerAlign="center" align="center" allowSort="true">权重</div>
 					<div field="editor" width="100" headerAlign="center" align="center" allowSort="true">编辑</div>
-					<div field="inputDtime" width="170" headerAlign="center" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm">录入时间</div>
-					<div field="releasedDtime" width="170" headerAlign="center" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm">发布时间</div>
+					<div field="inputDtime" width="130" headerAlign="center" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm">录入时间</div>
+					<div field="releasedDtime" width="130" headerAlign="center" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm">发布时间</div>
 				</div>
 			</div>
 		</div>
@@ -107,6 +109,13 @@
 			        value = e.value,
 			        row = e.row;
 			    if (field == "isTop") {
+			        if (value == 1){
+			        	e.cellHtml = "是";
+			        }else{
+			        	e.cellHtml = "否";
+			        }
+			    }
+			    if (field == "isTuijian") {
 			        if (value == 1){
 			        	e.cellHtml = "是";
 			        }else{
@@ -169,7 +178,7 @@
 			
 			//新增
 			function add(model) {
-				var url = "<%=request.getContextPath()%>/content/info/info_"+model+"_add.jsp?catId=<%=catId %>&modelId="+model;
+				var url = "<%=request.getContextPath()%>/content/info/info_"+model+"_add.jsp?catId=<%=catId %>&modelId="+model+"&group=guest";
 				nui.open({
 					url : url,
 					title : "新增记录",
@@ -191,7 +200,7 @@
 				var row = grid.getSelected();
 				if (row) {
 					nui.open({
-						url : "<%=request.getContextPath()%>/content/info/info_"+row.modelId+"_edit.jsp?catId="+row.catId,
+						url : "<%=request.getContextPath()%>/content/info/info_"+row.modelId+"_edit.jsp?catId="+row.catId+"&group=guest",
 						title : "编辑数据",
 						width : '90%',
 						height : '100%',
@@ -312,7 +321,6 @@
 			function selectionChanged() {
 				var rows = grid.getSelecteds();
 				if (rows.length > 1) {
-					if (rows.length > 1) {
 					<%
 						if(infoStatus.equals("1")||infoStatus.equals("6")){
 					%>
