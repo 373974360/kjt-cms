@@ -21,7 +21,7 @@
 					<tr>
 						<td class="form_label">申请编码:</td>
 						<td colspan="1">
-							<input name="params/ysqCode" class="nui-textbox" />							
+							<input name="params/ysqCode" width="160" class="nui-textbox" onblur="this.value=this.value.replace(/^\s+|\s+$/g,'')"/>							
 						</td>						
 						<td class="nui-form-label">回复：</td>
 		                <td colspan="1"> 

@@ -317,6 +317,11 @@
 			        	e.cellHtml = "回复";
 			        }
 			    }
+			    if (field == "toOrgName") {
+			        if (value == null){
+			        	e.cellHtml = "——";
+			        }
+			    }
 			});
 			
 	        var form = new nui.Form("form1");

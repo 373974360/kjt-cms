@@ -18,7 +18,7 @@
 					<tr>
 						<td class="form_label">分类名称:</td>
 						<td colspan="1">
-							<input class="nui-textbox" name="criteria/_expr[2]/typeName" />
+							<input class="nui-textbox" name="criteria/_expr[2]/typeName" onblur="this.value=this.value.replace(/^\s+|\s+$/g,'')"/>
 							<input class="nui-hidden" name="criteria/_expr[2]/_op" value="like">
 							<input class="nui-hidden" name="criteria/_expr[2]/_likeRule" value="all">
 						</td>

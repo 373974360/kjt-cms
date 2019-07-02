@@ -18,7 +18,7 @@
 					<tr>
 						<td class="form_label">页面名称:</td>
 						<td colspan="1">
-							<input class="nui-textbox" name="criteria/_expr[2]/pageChname" />
+							<input class="nui-textbox" name="criteria/_expr[2]/pageChname" onblur="this.value=this.value.replace(/^\s+|\s+$/g,'')"/>
 							<input class="nui-hidden" name="criteria/_expr[2]/_op" value="like">
 							<input class="nui-hidden" name="criteria/_expr[2]/_likeRule" value="all">
 						</td>

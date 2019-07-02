@@ -21,7 +21,7 @@
 					<tr>
 						<td class="form_label">来信标题:</td>
 						<td colspan="1">
-							<input name="params/title" class="nui-textbox" />							
+							<input name="params/title" class="nui-textbox" onblur="this.value=this.value.replace(/^\s+|\s+$/g,'')"/>							
 						</td>
 						<td class="nui-form-label">回复：</td>
 		                <td colspan="1">    

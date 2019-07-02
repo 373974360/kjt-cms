@@ -13,7 +13,7 @@
 					<tr>
 						<td class="form_label">工作流名称:</td>
 						<td colspan="1">
-							<input class="nui-textbox" name="params/workName" />
+							<input class="nui-textbox" name="params/workName" onblur="this.value=this.value.replace(/^\s+|\s+$/g,'')"/>
 						</td>
 						<td>
 							<div property="footer" align="center">
