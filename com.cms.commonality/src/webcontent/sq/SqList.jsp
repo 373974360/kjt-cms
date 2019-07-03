@@ -315,16 +315,40 @@
 			function selectionChanged() {
 				var rows = grid.getSelecteds();
 				if (rows.length > 1) {
-					nui.get("update").disable();					
+					nui.get("update").disable();										
 				} else {
-					nui.get("update").enable();				
+					nui.get("update").enable();	
+					nui.get("isPublish").enable();
+					nui.get("noPublish").enable();
+					nui.get("isOpen").enable();
+					nui.get("noOpen").enable();			
 				}
+				//发布和公开按钮依据选中记录的状态显示
+				for(var i=0;i<rows.length;i++){
+					if (rows[i].isPublish =="2"||rows[i].isPublish==null){
+						nui.get("isPublish").enable();
+						nui.get("noPublish").disable();							
+					}else{
+						nui.get("isPublish").disable();
+						nui.get("noPublish").enable();	
+					}
+					if(rows[i].isOpen =="2"|| rows[i].isOpen==null){
+						nui.get("isOpen").enable();
+						nui.get("noOpen").disable();						
+					}else{
+						nui.get("isOpen").disable();
+						nui.get("noOpen").enable();					
+					}									
+				}
+				
 			}
 			//单击详情按钮时发生
 			function detailsRow(row_uid) {
 				var row = grid.getRowByUID(row_uid);
+				var isPublish = row.isPublish ? row.isPublish : '';
+				var isOpen = row.isOpen ? row.isOpen : '';
 					nui.open({
-						url : "<%=request.getContextPath()%>/commonality/sq/SqDetail.jsp?sqId="+row.id +"&isPublish=" + row.isPublish+"&isOpen=" + row.isOpen,
+						url : "<%=request.getContextPath()%>/commonality/sq/SqDetail.jsp?sqId="+row.id +"&isPublish=" +isPublish+"&isOpen=" +isOpen,
 						title : "来信详情&处理",
 						width : '80%',
 						height : '100%',

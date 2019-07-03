@@ -29,6 +29,7 @@
 	String isOpen = request.getParameter("isOpen");
 	Integer reType1 = 1;//处理类型-转办
 	Integer reType2 = 2;//处理类型-回复
+	System.out.print("isOpen="+isOpen);
 	
 	Integer isReply = 1;//是否回复-是
 	
@@ -184,7 +185,7 @@
 	         	%>
 	         		
 	         	<%
-		    	if(isPublish.equals("2")){
+		    	if(isPublish.equals("2")||isPublish==""){
 		     	%>		        
 		        <span style="display:inline-block;width:20px;"></span>
 		        <a class="nui-button" style="width:85px;" iconCls="icon-ok" onclick="onSetPublish(1,'发布')">一键发布</a>
@@ -202,7 +203,7 @@
 	         	%>
 	         		
 	         	<%
-		    	if(isOpen.equals("2")){
+		    	if(isOpen.equals("2")||isOpen==""){
 		     	%>		        
 		        <span style="display:inline-block;width:20px;"></span>
 		        <a class="nui-button" style="width:85px;" iconCls="icon-ok" onclick="onSetOpen(1,'发布')">一键公开</a>
