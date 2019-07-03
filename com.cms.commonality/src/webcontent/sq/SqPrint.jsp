@@ -8,11 +8,8 @@
   - Description:
 -->
 <style type="text/css">
-  @media print {
-    .nui-button{
-      display: none;
-    }
-  }
+  	#table1{font-size:14;text-algn:left;}
+	#table2{font-size:14;text-algn:left;}
 </style>
 <head>
 	<link id="css_skin" rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/coframe/tools/skins/skin1/css/style.css"/>
@@ -53,7 +50,7 @@
 	            	<tr>
 	            		<th >来信内容</th>
 		                <td colspan="5">    
-		                	<span id="toContent"></span>
+		                	<span id="toContent" style="font-size: 12;font-family: 微软雅黑;"></span>
 	                	</td>
 	            	</tr>           	
 		        </table>
@@ -80,7 +77,7 @@
 	            	<tr>
 	            		<th >回复内容</th>
 		                <td colspan="5">    
-		                	<span id="reContent"></span>
+		                	<span id="reContent" style="font-size: 12;font-family: 微软雅黑;"></span>
 	                	</td>
 	            	</tr>             	   	
 		        </table>

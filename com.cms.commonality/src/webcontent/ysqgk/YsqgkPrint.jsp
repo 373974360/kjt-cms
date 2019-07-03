@@ -8,11 +8,11 @@
   - Description:
 -->
 <style type="text/css">
-  @media print {
-    .nui-button{
-      display: none;
-    }
-  }
+	 #table1{font-size:14;text-algn:left;}
+	 #table2{font-size:14;text-algn:left;}
+	 #table3{font-size:14;text-algn:left;}
+	 #table4{font-size:14;text-algn:left;}
+	 #table5{font-size:14;text-algn:left;}
 </style>
 <head>
 	<link id="css_skin" rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/coframe/tools/skins/skin1/css/style.css"/>
@@ -55,34 +55,37 @@
 					<tr>
 						<th >是否申请减免费用</th>
     					<td colspan="5">
-    						<input name="ysqgk.isDerate" class="nui-radiobuttonlist" textField="text" 
-		    					dataField="isOrNot" valueField="id" value="1"
-		    					url="<%=request.getContextPath()%>/commonality/ysqgk/isOrNot.txt"
+    						<input name="ysqgk.isDerate" class="nui-combobox nui-form-input" textField="text" 
+		    					dataField="isOrNot" valueField="id" 
+		    					url="<%=request.getContextPath()%>/commonality/ysqgk/isOrNot.txt" borderStyle="border:0"
 		    					showButton="false" readonly="readonly" />
     					</td>
 					</tr>  
 					<tr>
 						<th >信息指定提供方式</th>
     					<td colspan="5">
-    						<input name="ysqgk.offerType" class="nui-checkboxlist" textField="text" 
-		    					dataField="offerType" valueField="id" value="1"
-		    					url="<%=request.getContextPath()%>/commonality/ysqgk/offerType.txt" readonly="readonly"/>							
+    						<input name="ysqgk.offerType" class="nui-combobox nui-form-input" textField="text" 
+		    					dataField="offerType" valueField="id" 
+		    					url="<%=request.getContextPath()%>/commonality/ysqgk/offerType.txt" readonly="readonly" 
+		    					showButton="false" borderStyle="border:0"/>							
     					</td>
 					</tr> 
 					<tr>
 						<th >获取信息方式</th>
     					<td colspan="5">
-    						<input name="ysqgk.getMethod" class="nui-checkboxlist" textField="text" 
-		    					dataField="getMethod" valueField="id" value="1"
-		    					url="<%=request.getContextPath()%>/commonality/ysqgk/getMethod.txt" readonly="readonly"/>						
+    						<input name="ysqgk.getMethod" class="nui-combobox nui-form-input" textField="text" 
+		    					dataField="getMethod" valueField="id" 
+		    					url="<%=request.getContextPath()%>/commonality/ysqgk/getMethod.txt" readonly="readonly" 
+		    					showButton="false" borderStyle="border:0"/>						
     					</td>
 					</tr> 
 					<tr>
 						<th >是否接受其他方式</th>
     					<td colspan="5">
-    						<input name="ysqgk.isOther" class="nui-radiobuttonlist" textField="text" 
-		    					dataField="isOrNot" valueField="id" value="1" 
-		    					url="<%=request.getContextPath()%>/commonality/ysqgk/isOrNot.txt" readonly="readonly"/>					
+    						<input name="ysqgk.isOther" class="nui-combobox nui-form-input" textField="text" 
+		    					dataField="isOrNot" valueField="id" 
+		    					url="<%=request.getContextPath()%>/commonality/ysqgk/isOrNot.txt" borderStyle="border:0" 
+		    					showButton="false" readonly="readonly"/>					
     					</td>
 					</tr> 			        	
 	            	<tr>
@@ -95,20 +98,20 @@
 	            	<tr>
 	            		<th >所需内容</th>
 		                <td colspan="5">    
-		                	<span id="Content"></span>
+		                	<span id="Content" style="font-size: 12;font-family: 微软雅黑;"></span>
 	                	</td>
 	            	</tr>  
 	            	<tr>
 	            		<th >用途描述</th>
 		                <td colspan="5">    
-		                	<span id="description"></span>
+		                	<span id="description" style="font-size: 12;font-family: 微软雅黑;"></span>
 	                	</td>
 	            	</tr>          	
 		        </table>
 	        </div>
 	        <br />
 	        <div>
-		        <table id="table2" border="1" style="width:98%; table-layout:fixed;" align="center" class="nui-form-table">        	
+		        <table id="table5" border="1" style="width:98%; table-layout:fixed;" align="center" class="nui-form-table">        	
 	            	<tr>
 	            		<th colspan="6" style="float:center;font-size: 23">回复内容</th>	               
 	            	</tr>	            	
@@ -122,7 +125,7 @@
 	            	<tr>
 	            		<th >回复内容</th>
 		                <td colspan="5">    
-		                	<span id="reContent"></span>
+		                	<span id="reContent" style="font-size: 12;font-family: 微软雅黑;"></span>
 	                	</td>
 	            	</tr>             	   	
 		        </table>

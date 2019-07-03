@@ -15,6 +15,10 @@
 	String curTime = df.format(new Date());
 
  %>
+ <style>
+ 	#tab{font-size:12;text-algn:left;}
+ 
+ </style>
 <head>
 	<link id="css_skin" rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/coframe/tools/skins/skin1/css/style.css"/>
 	<link id="css_icon" rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/coframe/tools/icons/icon.css"/>
@@ -25,7 +29,7 @@
 		<div id="form1" method="post">
 			<input id="ysqgk.id" name="ysqgk.id" class="nui-hidden">
 			<input id="ysqgk.isReply" name="ysqgk.isReply" class="nui-hidden" value="1">
-	        <table style="width:100%; table-layout:fixed;" class="nui-form-table">
+	        <table id="tab" style="width:100%; table-layout:fixed;" class="nui-form-table">
 	        	<tr>			            	
 		            <th class="nui-form-label">是否公开：</th>
 	                <td > 
