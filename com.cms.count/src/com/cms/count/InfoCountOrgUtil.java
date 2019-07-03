@@ -49,8 +49,8 @@ public class InfoCountOrgUtil {
 			while (rs.next()) {
 				CmsInfoOrg infoOrg = new CmsInfoOrg();
 				infoOrg.setOrgName(rs.getString("orgname"));
-				int count = infoCountByOrgId(rs.getString("orgid"),startTime,endTime);
-				int publishCount = infoPublishCountByOrgId(rs.getString("orgid"),startTime,endTime);
+				int count = infoCountByOrgId(catId,rs.getString("orgid"),startTime,endTime);
+				int publishCount = infoPublishCountByOrgId(catId,rs.getString("orgid"),startTime,endTime);
 				infoOrg.setCount(count);
 				infoOrg.setPublisCount(publishCount);
 				String proportion = numberFormat.format((float)publishCount/(float)count*100)+"%";
@@ -68,9 +68,10 @@ public class InfoCountOrgUtil {
 	}
 	
 
-	public static int infoPublishCountByOrgId(String orgId,String startTime,String endTime){
+	public static int infoPublishCountByOrgId(String catId,String orgId,String startTime,String endTime){
 		int count = 0;
-		String sql = "select  count(*) as totle from cms_info where org_id = "+orgId+" and info_status = 3 and released_dtime >= '"+startTime+"' and released_dtime<='"+endTime+"'";
+		String catIds = InfoCountCategoryUtil.getInfoCatIds(catId,catId);
+		String sql = "select  count(*) as totle from cms_info where org_id = "+orgId+" and cat_id in ("+catIds+") and info_status = 3 and released_dtime >= '"+startTime+"' and released_dtime<='"+endTime+"'";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -90,9 +91,10 @@ public class InfoCountOrgUtil {
 		}
 	}
 	
-	public static int infoCountByOrgId(String orgId,String startTime,String endTime){
+	public static int infoCountByOrgId(String catId,String orgId,String startTime,String endTime){
 		int count = 0;
-		String sql = "select  count(*) as totle from cms_info where org_id = "+orgId+" and released_dtime >= '"+startTime+"' and released_dtime<='"+endTime+"'";
+		String catIds = InfoCountCategoryUtil.getInfoCatIds(catId,catId);
+		String sql = "select  count(*) as totle from cms_info where org_id = "+orgId+" and cat_id in ("+catIds+") and released_dtime >= '"+startTime+"' and released_dtime<='"+endTime+"'";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		Statement stmt = null;
 		ResultSet rs = null;

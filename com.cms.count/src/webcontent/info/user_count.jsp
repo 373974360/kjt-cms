@@ -14,7 +14,7 @@
 		<script src="<%=request.getContextPath()%>/common/nui/nui.js" type="text/javascript"></script>
 	</head>
 	<body style="width: 98%; height: 95%;">
-		<div id="datagrid1" dataField="data" ajaxData="setRoleId" class="nui-datagrid" style="width: 100%; height: 100%;"
+		<div id="datagrid1" dataField="data" ajaxData="setRoleId" class="nui-datagrid" style="width: 100%; height: 100%;" showPager = "false"
 			url="com.cms.count.vo.InfoCountService.infoCountByUser.biz.ext" multiSelect="true" allowSortColumn="false" allowAlternating="true">
 			<div property="columns">
 				<div type="checkcolumn" width="40"></div>

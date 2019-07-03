@@ -20,6 +20,13 @@
 			<div id="queryform" class="nui-form" align="center" style="height: 100%">
 				<table id="table1" class="table" style="height: 100%;float:left;">
 					<tr>
+						<td class="form_label">统计范围：</td>
+						<td colspan="1">
+							<input name="catId" class="nui-treeselect" url="com.cms.content.CategoryService.queryPublishPageCategoryTreeNode.biz.ext"
+							    textField="text" dataField="data" valueField="id" parentField="pid" showNullItem="true"
+							/>
+						</td>
+						<td></td>
 						<td class="form_label">统计方式：</td>
 						<td colspan="1">
 							<input id="countType" class="nui-combobox" style="width:150px;" textField="text" valueField="id"
@@ -31,13 +38,6 @@
 							<input name="startTime" class="nui-datepicker" style="width:120px;" format="yyyy-MM-dd" value="<%=startTime %>"/>
 							至
 							<input name="endTime" class="nui-datepicker" style="width:120px;" format="yyyy-MM-dd" value="<%=currTime %>"/>
-						</td>
-						<td></td>
-						<td class="form_label">统计范围：</td>
-						<td colspan="1">
-							<input name="catId" class="nui-treeselect" url="com.cms.content.CategoryService.queryPublishPageCategoryTreeNode.biz.ext"
-							    textField="text" dataField="data" valueField="id" parentField="pid" showNullItem="true"
-							/>
 						</td>
 						<td>
 							<div property="footer" align="center">
@@ -68,6 +68,10 @@
 				var startTime = $("input[name='startTime']").val();
 				var endTime = $("input[name='endTime']").val();
 				var catId = $("input[name='catId']").val();
+				if(catId==""){
+					alert("请选择统计范围");
+					return false;
+				}
 				var url = "";
 				if(countType==1){
 					url = "category_count.jsp?startTime="+startTime+"&endTime="+endTime+"&catId="+catId;

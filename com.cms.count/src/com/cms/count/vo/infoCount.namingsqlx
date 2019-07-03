@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- author:chaoweima -->
+<sqlMap>
+    <select id="queryCountInfoList" parameterClass="commonj.sdo.DataObject" resultClass="com.cms.count.cmsinfo.CmsInfo">
+    	SELECT
+    		i.id,
+			substr( i.released_dtime, 0, 10 ) AS releasedDtime,
+			i.info_title as infoTitle,
+			c.ch_name as chName,
+			i.editor,
+			i.source 
+		FROM
+			cms_info i,
+			cms_info_category c 
+		WHERE
+			i.cat_id = c.id 
+			AND i.cat_id in ($catIds$)
+			<isNotNull property="infoStatus">
+    			<isEqual prepend="and" property="infoStatus" compareValue="3">
+    				i.info_status = 3 
+    			</isEqual>
+    		</isNotNull>
+			<isNotNull prepend="and" property="inputUser">
+    			i.input_user = $inputUser$ 
+    		</isNotNull>
+			<isNotNull prepend="and" property="orgId">
+    			i.org_id = $orgId$ 
+    		</isNotNull>
+			<![CDATA[AND i.released_dtime >= '$startTime$ 00:00:00' ]]>
+			<![CDATA[AND i.released_dtime <= '$endTime$ 23:59:59' ]]>
+		ORDER BY
+			i.released_dtime ASC
+    </select>
+</sqlMap>

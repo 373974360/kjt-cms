@@ -49,8 +49,8 @@ public class InfoCountUserUtil {
 			while (rs.next()) {
 				CmsInfoUser infoUser = new CmsInfoUser();
 				infoUser.setUserName(rs.getString("empname"));
-				int count = infoCountByUserId(rs.getString("empid"),startTime,endTime);
-				int publishCount = infoPublishCountByUserId(rs.getString("empid"),startTime,endTime);
+				int count = infoCountByUserId(catId,rs.getString("empid"),startTime,endTime);
+				int publishCount = infoPublishCountByUserId(catId,rs.getString("empid"),startTime,endTime);
 				infoUser.setCount(count);
 				infoUser.setPublisCount(publishCount);
 				String proportion = numberFormat.format((float)publishCount/(float)count*100)+"%";
@@ -68,9 +68,10 @@ public class InfoCountUserUtil {
 	}
 	
 
-	public static int infoPublishCountByUserId(String inputUser,String startTime,String endTime){
+	public static int infoPublishCountByUserId(String catId,String inputUser,String startTime,String endTime){
 		int count = 0;
-		String sql = "select  count(*) as totle from cms_info where input_user = "+inputUser+" and info_status = 3 and released_dtime >= '"+startTime+"' and released_dtime<='"+endTime+"'";
+		String catIds = InfoCountCategoryUtil.getInfoCatIds(catId,catId);
+		String sql = "select  count(*) as totle from cms_info where input_user = "+inputUser+" and cat_id in ("+catIds+") and info_status = 3 and released_dtime >= '"+startTime+"' and released_dtime<='"+endTime+"'";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -90,9 +91,10 @@ public class InfoCountUserUtil {
 		}
 	}
 	
-	public static int infoCountByUserId(String inputUser,String startTime,String endTime){
-		int count = 0;
-		String sql = "select  count(*) as totle from cms_info where input_user = "+inputUser+" and released_dtime >= '"+startTime+"' and released_dtime<='"+endTime+"'";
+	public static int infoCountByUserId(String catId,String inputUser,String startTime,String endTime){
+		int count = 0; 
+		String catIds = InfoCountCategoryUtil.getInfoCatIds(catId,catId);
+		String sql = "select  count(*) as totle from cms_info where input_user = "+inputUser+" and cat_id in ("+catIds+") and released_dtime >= '"+startTime+"' and released_dtime<='"+endTime+"'";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		Statement stmt = null;
 		ResultSet rs = null;
