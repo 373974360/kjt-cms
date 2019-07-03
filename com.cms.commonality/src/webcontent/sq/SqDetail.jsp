@@ -29,7 +29,6 @@
 	String isOpen = request.getParameter("isOpen");
 	Integer reType1 = 1;//处理类型-转办
 	Integer reType2 = 2;//处理类型-回复
-	System.out.print("isOpen="+isOpen);
 	
 	Integer isReply = 1;//是否回复-是
 	
@@ -241,7 +240,7 @@
 			                <td>    
 			                    <input id="reTime" name="sqPro.reTime" class="nui-datepicker nui-input" style="width:15%;" 
 			                    format="yyyy-MM-dd HH:mm:ss" showTime="true" allowinput="false" emptyText="请选择"
-			                    required="true" requiredErrorText="请选择时间"/>
+			                    required="true" requiredErrorText="请选择时间" onDrawDate="onReDrawDate"/>
 			                </td>		                
 			            </tr>		           
 					</table>
@@ -288,7 +287,7 @@
 			                <td colspan="1">    
 			                    <input id="sqPro.reTime" name="sqPro.reTime" class="nui-datepicker" style="width:15%;" 
 			                    format="yyyy-MM-dd HH:mm:ss" showTime="true" allowinput="false" 
-			                    emptyText="请选择" required="true" requiredErrorText="请选择时间"/>
+			                    emptyText="请选择" required="true" requiredErrorText="请选择时间" onDrawDate="onReDrawDate"/>
 			                </td>		                
 			            </tr>		           
 					</table>
@@ -682,6 +681,15 @@
 	        	});
 	        
 	        } 
+	        //时间选择控件只能选择当前之后的时间
+	       function onReDrawDate(e){
+				var date = e.date;
+		        var d = new Date();
+
+		        if (date.getTime() < (d.getTime()-1000*60*60*24)) {
+         			e.allowSelect = false;
+				}			
+			}
 		</script>
 	</body>
 </html>

@@ -111,12 +111,12 @@
 		                <th class="nui-form-label">提交时间：</th>
 		                <td colspan="3">    
 		                    <input name="sq.createTime" class="nui-datepicker nui-form-input" format="yyyy-MM-dd HH:mm:ss" 
-		                     allowinput="false" value="<%=curTime %>" showTime="true"/>
+		                     allowinput="false" value="<%=curTime %>" showTime="true" ondrawdate="onDrawDate"/>
 		                </td>	
 		                <th class="nui-form-label">回复时间：</th>
 		                <td colspan="3">    
 		                    <input name="sq.replyTime" class="nui-datepicker nui-form-input" format="yyyy-MM-dd HH:mm:ss"
-		                     allowinput="false" value="<%=curTime %>" showTime="true"/>
+		                     allowinput="false" value="<%=curTime %>" showTime="true" ondrawdate="onReDrawDate"/>
 		                </td>                
 		            </tr>
 		            <tr>
@@ -229,6 +229,23 @@
 		            }
 		        });            
 		    }
+		    //提交日期和回复日期选择范围控制
+		    function onDrawDate(e) {
+		        var date = e.date;
+		        var d = new Date();
+		
+		        if (date.getTime() > d.getTime()) {
+         			e.allowSelect = false;
+				}
+		    }
+			function onReDrawDate(e){
+				var date = e.date;
+		        var d = new Date();
+
+		        if (date.getTime() < (d.getTime()-1000*60*60*24)) {
+         			e.allowSelect = false;
+				}			
+			}
 	    </script>
 	</body>
 </html>

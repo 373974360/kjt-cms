@@ -60,7 +60,7 @@
 	                <td colspan="1">    
 	                    <input id="ysqgk.replyDtime" name="ysqgk.replyDtime" class="nui-datepicker " style="width:26%;" 
 	                    format="yyyy-MM-dd HH:mm:ss" showTime="true" allowinput="false" 
-	                    value="<%=curTime %>" required="true" requiredErrorText="请选择时间"/>
+	                    value="<%=curTime %>" required="true" requiredErrorText="请选择时间" onDrawDate="onReDrawDate"/>
 	                </td>		                
 	            </tr>		     	
 	        </table>
@@ -115,6 +115,15 @@
 		function onCancel(e) {
 			CloseWindow("cancel");
 		}
+		
+		//时间选择控件只能选择当前之后的时间
+       function onReDrawDate(e){
+			var date = e.date;
+	        var d = new Date();
 
+	        if (date.getTime() < (d.getTime()-1000*60*60*24)) {
+         			e.allowSelect = false;
+			}			
+		}
 </script>
 </html>

@@ -102,11 +102,11 @@
 		            <tr class="odd">
 		                <th class="nui-form-label">提交时间：</th>
 		                <td colspan="3">    
-		                    <input name="sq.createTime" class="nui-datepicker nui-form-input" allowinput="false" format="yyyy-MM-dd HH:mm:ss" showTime="true"/>
+		                    <input name="sq.createTime" class="nui-datepicker nui-form-input" allowinput="false" format="yyyy-MM-dd HH:mm:ss" showTime="true" onDrawDate="onDrawDate"/>
 		                </td>	
 		                <th class="nui-form-label">回复时间：</th>
 		                <td colspan="3">    
-		                    <input name="sq.replyTime" class="nui-datepicker nui-form-input" allowinput="false" format="yyyy-MM-dd HH:mm:ss" showTime="true"/>
+		                    <input name="sq.replyTime" class="nui-datepicker nui-form-input" allowinput="false" format="yyyy-MM-dd HH:mm:ss" showTime="true" onDrawDate="onReDrawDate"/>
 		                </td>                
 		            </tr>
 		            <tr>
@@ -259,6 +259,24 @@
 		            }
 		        });            
 		    }
+		    
+		     //提交日期和回复日期选择范围控制
+		    function onDrawDate(e) {
+		        var date = e.date;
+		        var d = new Date();
+		
+		        if (date.getTime() > d.getTime()) {
+         			e.allowSelect = false;
+				}
+		    }
+			function onReDrawDate(e){
+				var date = e.date;
+		        var d = new Date();
+
+		        if (date.getTime() < (d.getTime()-1000*60*60*24)) {
+         			e.allowSelect = false;
+				}			
+			}
 		</script>
 	</body>
 </html>
