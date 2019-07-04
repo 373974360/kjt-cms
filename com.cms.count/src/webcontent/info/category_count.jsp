@@ -18,11 +18,10 @@
 		<div id="datagrid1" dataField="data" ajaxData="setRoleId" class="nui-datagrid" style="width: 100%;" showPager = "false"
 			url="com.cms.count.vo.InfoCountService.infoCountByCategory.biz.ext" multiSelect="true" allowSortColumn="false" allowAlternating="true">
 			<div property="columns">
-				<div type="checkcolumn" width="40"></div>
 				<div field="text" width="auto" headerAlign="center" allowSort="true">栏目名称</div>
 				<div field="count" width="100" headerAlign="center" allowSort="true">信息总数</div>
-				<div field="publisCount" width="100" headerAlign="center" allowSort="true">已发信息</div>
-				<div field="proportion" width="100" headerAlign="center" allowSort="true">发稿率</div>
+				<div field="publisCount" width="100" headerAlign="center" allowSort="true">采用总数</div>
+				<div field="proportion" width="100" headerAlign="center" allowSort="true">采用率</div>
 			</div>
 		</div>
 		<div id="main" style="width:100%;height:400px;"></div>
@@ -30,25 +29,9 @@
 			nui.parse();
 	   		var grid = nui.get("datagrid1");
 	   		grid.load();
-	   		
-	   		grid.on("drawcell", function (e) {
-			    var field = e.field,
-			    	row = e.row,
-			        value = e.value;
-			    if (field == "count") {
-			    	if(value!=0){
-			    		e.cellHtml = value+"<a href='javascript:void(0)' onclick='openCountList("+row.id+",0)' style='padding-left:10px;'>详情>></a>";
-			    	}
-			    }
-			    if (field == "publisCount") {
-			    	if(value!=0){
-			    		e.cellHtml = value+"<a href='javascript:void(0)' onclick='openCountList("+row.id+",3)' style='padding-left:10px;'>详情>></a>";
-			    	}
-			    }
-			});
 			
 			function openCountList(catId,infoStatus) {
-				var url = "<%=request.getContextPath()%>/count/info/countInfoList.jsp?catId="+catId+"&infoStatus="+infoStatus+"&startTime=<%=startTime %>&endTime=<%=endTime %>";
+				var url = "<%=request.getContextPath()%>/count/info/countInfoList.jsp?catId="+catId+"&inputUser=&orgId=&infoStatus="+infoStatus+"&startTime=<%=startTime %>&endTime=<%=endTime %>";
 				nui.open({
 					url : url,
 					title : "内容详情",
@@ -64,7 +47,7 @@
 			}
 		
 			var myChart = echarts.init(document.getElementById('main'));
-			var charText = [['product', '总数', '已发布']];
+			var charText = [['product', '总数', '已采用']];
 			loadData();
 			function loadData(){
 				var json =  nui.encode(setRoleId());

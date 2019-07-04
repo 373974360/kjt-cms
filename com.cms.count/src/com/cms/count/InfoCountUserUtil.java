@@ -9,7 +9,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.cms.count.vo.CmsInfoUser;
 import com.eos.common.connection.ConnectionHelper;
@@ -38,6 +40,8 @@ public class InfoCountUserUtil {
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		Statement stmt = null;
 		ResultSet rs = null;
+		Map<String, String> countMap = infoCountByUserId(catId,startTime,endTime);
+		Map<String, String> publishCountMap = infoPublishCountByUserId(catId,startTime,endTime);
 		try {
 			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = stmt.executeQuery(sql);
@@ -48,12 +52,24 @@ public class InfoCountUserUtil {
 			numberFormat.setMaximumFractionDigits(2);
 			while (rs.next()) {
 				CmsInfoUser infoUser = new CmsInfoUser();
+				infoUser.setEmpId(rs.getInt("empid"));
 				infoUser.setUserName(rs.getString("empname"));
-				int count = infoCountByUserId(catId,rs.getString("empid"),startTime,endTime);
-				int publishCount = infoPublishCountByUserId(catId,rs.getString("empid"),startTime,endTime);
+				int count = 0;
+				int publishCount = 0;
+				if(countMap.containsKey(rs.getString("empid"))){
+					count = Integer.parseInt(countMap.get(rs.getString("empid")));
+				}
+				if(publishCountMap.containsKey(rs.getString("empid"))){
+					publishCount = Integer.parseInt(publishCountMap.get(rs.getString("empid")));
+				}
 				infoUser.setCount(count);
 				infoUser.setPublisCount(publishCount);
-				String proportion = numberFormat.format((float)publishCount/(float)count*100)+"%";
+				String proportion = "";
+				if(count==0&&publishCount==0){
+					proportion = "-";
+				}else{
+					proportion = numberFormat.format((float)publishCount/(float)count*100)+"%";
+				}
 				infoUser.setProportion(proportion);
 				list.add(infoUser);
 			}
@@ -68,10 +84,9 @@ public class InfoCountUserUtil {
 	}
 	
 
-	public static int infoPublishCountByUserId(String catId,String inputUser,String startTime,String endTime){
-		int count = 0;
-		String catIds = InfoCountCategoryUtil.getInfoCatIds(catId,catId);
-		String sql = "select  count(*) as totle from cms_info where input_user = "+inputUser+" and cat_id in ("+catIds+") and info_status = 3 and released_dtime >= '"+startTime+"' and released_dtime<='"+endTime+"'";
+	public static  Map<String, String> infoPublishCountByUserId(String catId,String startTime,String endTime){
+		Map<String, String> map = new HashMap<String, String>();
+		String sql = "select input_user,count(*) as totle from cms_info where cat_id in ("+catId+") and info_status = 3 and released_dtime >= '"+startTime+"' and released_dtime<='"+endTime+"' group by input_user";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -79,9 +94,9 @@ public class InfoCountUserUtil {
 			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = stmt.executeQuery(sql);
 			while (rs.next()) {
-				count = rs.getInt("totle");
+				map.put(rs.getString("input_user"),  rs.getString("totle"));
 			}
-			return count;
+			return map;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		} finally {
@@ -91,10 +106,9 @@ public class InfoCountUserUtil {
 		}
 	}
 	
-	public static int infoCountByUserId(String catId,String inputUser,String startTime,String endTime){
-		int count = 0; 
-		String catIds = InfoCountCategoryUtil.getInfoCatIds(catId,catId);
-		String sql = "select  count(*) as totle from cms_info where input_user = "+inputUser+" and cat_id in ("+catIds+") and released_dtime >= '"+startTime+"' and released_dtime<='"+endTime+"'";
+	public static Map<String, String> infoCountByUserId(String catId,String startTime,String endTime){
+		Map<String, String> map = new HashMap<String, String>();
+		String sql = "select input_user,count(*) as totle from cms_info where cat_id in ("+catId+") and released_dtime >= '"+startTime+"' and released_dtime<='"+endTime+"' group by input_user";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -102,9 +116,9 @@ public class InfoCountUserUtil {
 			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = stmt.executeQuery(sql);
 			while (rs.next()) {
-				count = rs.getInt("totle");
+				map.put(rs.getString("input_user"),  rs.getString("totle"));
 			}
-			return count;
+			return map;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		} finally {

@@ -40,15 +40,7 @@ public class InfoCountCategoryUtil {
 		if(!StringUtil.isBlank(endTime)&&endTime.length()>=10){
 			endTime = endTime.substring(0,10)+" 23:59:59";
 		}
-		DataObject[] child = getInfoCategory(catId);
-		
-		String sql = "select id,ch_name,parent_id from cms_info_category";
-		if(child.length>0){
-			sql += " where parent_id="+catId+"";
-		}else{
-			sql += " where id="+catId+"";
-		}
-		sql+=" order by cat_sort asc";
+		String sql = "select * from (select c.*,NVL(i.totle,0) as totle from cms_info_category c left join (select cat_id,count(*) as totle from cms_info group by cat_id) i on c.id = i.cat_id) t where t.id in ("+catId+") order by t.totle desc ";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -78,7 +70,12 @@ public class InfoCountCategoryUtil {
 				}
 				category.setCount(count);
 				category.setPublisCount(publishCount);
-				String proportion = numberFormat.format((float)publishCount/(float)count*100)+"%";
+				String proportion = "";
+				if(count==0&&publishCount==0){
+					proportion = "-";
+				}else{
+					proportion = numberFormat.format((float)publishCount/(float)count*100)+"%";
+				}
 				category.setProportion(proportion);
 				list.add(category);
 			}

@@ -7,7 +7,7 @@
 		<script src="<%=request.getContextPath()%>/common/nui/nui.js" type="text/javascript"></script>
 	</head>
 	<body style="width: 98%; height: 95%;">
-		<div class="nui-panel" title="作者查询" iconCls="icon-add" style="width: 100%; height: 15%;" showToolbar="false" showFooter="true">
+		<div class="nui-panel" title="模板查询" iconCls="icon-add" style="width: 100%; height: 15%;" showToolbar="false" showFooter="true">
 			<div id="queryform" class="nui-form" align="center" style="height: 100%">
 				<!-- 数据实体的名称 -->
 				<input class="nui-hidden" name="criteria/_entity" value="com.cms.siteconfig.templet.CmsTemplet">

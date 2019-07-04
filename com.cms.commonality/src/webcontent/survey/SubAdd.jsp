@@ -26,10 +26,10 @@
 		            <tr class="odd">
 		                <th class="nui-form-label">题目类型：</th>
 		                <td>  
-		                  	<input name="sub.subType" class="mini-radiobuttonlist" 
+		                  	<input id="subType" name="sub.subType" class="mini-radiobuttonlist" 
 		                    dataField="subType" textField="text" valueField="id" 
 							url="<%=request.getContextPath()%>/commonality/survey/subType.txt"  
-							repeatItems="1" repeatLayout="li" repeatDirection="vertical" value="1"/> 
+							repeatItems="1" repeatLayout="li" repeatDirection="vertical" value="1" onvaluechanged="subTypeClick"/> 
 		                </td>
 		                <td></td>
 		            </tr>
@@ -53,7 +53,7 @@
 		            <tr>
 		                <th class="nui-form-label">题目选项：</th>
 		                <td>    
-		                    <a class="nui-button" iconCls="icon-add" onclick="addItem()">增加选项 </a>
+		                    <a id="itemAdd" class="nui-button" iconCls="icon-add" onclick="addItem()">增加选项 </a>
 		                </td>
 		                <td></td>
 		            </tr>
@@ -128,6 +128,14 @@
 	            });
 	        }
 	        
+	        function subTypeClick(){
+	        	if(nui.get("subType").getValue()==3){
+	        		nui.get("itemAdd").disable();
+	        		$("#itemHtml").empty();
+	        	}else{
+	        		nui.get("itemAdd").enable();
+	        	}
+	        }
 	        
 			function CloseWindow(action){
 				if(action=="close"){

@@ -23,10 +23,10 @@
 		            <tr class="odd">
 		                <th class="nui-form-label">题目类型：</th>
 		                <td>  
-		                  	<input name="sub.subType" class="mini-radiobuttonlist" 
+		                  	<input id="subType" name="sub.subType" class="mini-radiobuttonlist" 
 		                    dataField="subType" textField="text" valueField="id" 
 							url="<%=request.getContextPath()%>/commonality/survey/subType.txt"  
-							repeatItems="1" repeatLayout="li" repeatDirection="vertical" value="1"/> 
+							repeatItems="1" repeatLayout="li" repeatDirection="vertical" value="1" onvaluechanged="subTypeClick"/> 
 		                </td>
 		                <td></td>
 		            </tr>
@@ -50,7 +50,7 @@
 		            <tr>
 		                <th class="nui-form-label">题目选项：</th>
 		                <td>    
-		                    <a class="nui-button" iconCls="icon-add" onclick="addItem()">增加选项 </a>
+		                    <a id="itemAdd" class="nui-button" iconCls="icon-add" onclick="addItem()">增加选项 </a>
 		                </td>
 		                <td></td>
 		            </tr>
@@ -116,16 +116,21 @@
 			         contentType:'text/json',
 			         success:function(text){
 						obj = nui.decode(text);
-						if(text.items.length>0){
-							itemNum = text.items.length+1;
-							for(var i=0;i<text.items.length;i++){
-								var _html = "<tr id='item_"+text.items[i].sort+"'>"+ 
-					        	"<td name='itemIndex' width='45' style='padding-right:0px;'>选项"+text.items[i].sort+"：<input type='hidden' name='itemId' value='"+text.items[i].id+"'/></td>"+
-					        	"<td><input name='itemName' class='nui-textbox nui-form-input' value='"+text.items[i].itemName+"'/></td>"+
-					        	"<td width='60'><a class='nui-button icon-remove' onclick='removeItem("+text.items[i].sort+","+text.items[i].id+")' style='padding-left:20px;'>删除</a></td>"+
-						        "</tr>";
-						        $("#itemHtml").append(_html);
+						if(text.sub.subType!=3){
+							if(text.items.length>0){
+								itemNum = text.items.length+1;
+								for(var i=0;i<text.items.length;i++){
+									var _html = "<tr id='item_"+text.items[i].sort+"'>"+ 
+						        	"<td name='itemIndex' width='45' style='padding-right:0px;'>选项"+text.items[i].sort+"：<input type='hidden' name='itemId' value='"+text.items[i].id+"'/></td>"+
+						        	"<td><input name='itemName' class='nui-textbox nui-form-input' value='"+text.items[i].itemName+"'/></td>"+
+						        	"<td width='60'><a class='nui-button icon-remove' onclick='removeItem("+text.items[i].sort+","+text.items[i].id+")' style='padding-left:20px;'>删除</a></td>"+
+							        "</tr>";
+							        $("#itemHtml").append(_html);
+								}
 							}
+						}else{
+							nui.get("itemAdd").disable();
+	        				$("#itemHtml").empty();
 						}
 			            form1.setData(obj);
 			            form1.setChanged(false);
@@ -172,6 +177,14 @@
 	            });
 	        }
 	        
+	        function subTypeClick(){
+	        	if(nui.get("subType").getValue()==3){
+	        		nui.get("itemAdd").disable();
+	        		$("#itemHtml").empty();
+	        	}else{
+	        		nui.get("itemAdd").enable();
+	        	}
+	        }
 	        
 			function CloseWindow(action){
 				if(action=="close"){

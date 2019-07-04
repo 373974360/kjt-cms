@@ -38,14 +38,15 @@
     <location x="240" y="150"/>
     <size height="28" width="22"/>
     <nodeLabel>invokePojo0label</nodeLabel>
-    <process:pojo methodType="instance" synchronization="true" transactionType="join">
+    <process:pojo methodType="static" synchronization="true" transactionType="join">
       <process:partner type="literal">com.cms.count.InfoCountOrgUtil.infoCountByOrg</process:partner>
       <process:instance instanceName=""/>
     </process:pojo>
     <process:inputVariables>
-      <process:inputVariable id="0" name="catId" type="query" value="java.lang.String" valueType="Java" pattern="reference">catId</process:inputVariable>
-      <process:inputVariable id="1" name="startTime" type="query" value="java.lang.String" valueType="Java" pattern="reference">startTime</process:inputVariable>
-      <process:inputVariable id="2" name="endTime" type="query" value="java.lang.String" valueType="Java" pattern="reference">endTime</process:inputVariable>
+      <process:inputVariable id="0" name="orgPid" type="query" value="java.lang.String" valueType="Java" pattern="reference">orgPid</process:inputVariable>
+      <process:inputVariable id="1" name="catId" type="query" value="java.lang.String" valueType="Java" pattern="reference">catId</process:inputVariable>
+      <process:inputVariable id="2" name="startTime" type="query" value="java.lang.String" valueType="Java" pattern="reference">startTime</process:inputVariable>
+      <process:inputVariable id="3" name="endTime" type="query" value="java.lang.String" valueType="Java" pattern="reference">endTime</process:inputVariable>
     </process:inputVariables>
     <process:outputVariables>
       <process:outputVariable id="0" name="out0" type="query" value="java.util.List&lt;com.cms.count.vo.CmsInfoOrg>" valueType="Java">data</process:outputVariable>
@@ -64,6 +65,7 @@
     <process:input description="" isArray="false" name="catId" primitiveType="String"/>
     <process:input description="" isArray="false" name="startTime" primitiveType="String"/>
     <process:input description="" isArray="false" name="endTime" primitiveType="String"/>
+    <process:input description="" isArray="false" name="orgPid" primitiveType="String"/>
   </process:inputs>
   <process:outputs>
     <process:output anyType="com.cms.count.vo.CmsInfoOrg" description="" isArray="true" name="data"/>

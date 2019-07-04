@@ -8,13 +8,14 @@
 			i.info_title as infoTitle,
 			c.ch_name as chName,
 			i.editor,
-			i.source 
+			i.source,
+			i.org_name as orgName
 		FROM
 			cms_info i,
 			cms_info_category c 
 		WHERE
 			i.cat_id = c.id 
-			AND i.cat_id in ($catIds$)
+			AND i.cat_id in ($catId$)
 			<isNotNull property="infoStatus">
     			<isEqual prepend="and" property="infoStatus" compareValue="3">
     				i.info_status = 3 

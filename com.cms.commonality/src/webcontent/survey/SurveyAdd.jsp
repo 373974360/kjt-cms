@@ -1,4 +1,8 @@
+<%@page import="com.cms.view.velocity.DateUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%>
+<%
+	String currTime = DateUtil.getCurrentDate();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -73,7 +77,6 @@
 		        if(form1.isValid()==false) return;
 		        var data1 = form1.getData(false,true);
 		        data1.survey.content = ue.getContent();
-		        var json1 = nui.encode(data1);
 		        
 	        	var startTime = new Date(data1.survey.startTime).getTime();
 	        	var endTime = new Date(data1.survey.endTime).getTime();
@@ -81,6 +84,13 @@
 	        		nui.alert("截止日期不能小于开始日期", "提示");
 	        		return;
 	        	}
+	        	var currTime = new Date('<%=currTime %>').getTime();
+	        	if(endTime>currTime){
+	        		data1.survey.isEnd = 1;
+	        	}else{
+	        		data1.survey.isEnd = 0;
+	        	}
+		        var json1 = nui.encode(data1);
 	           	$.ajax({
 	                url: "com.cms.commonality.SurveyService.addSurvey.biz.ext",
 	                type: 'POST',

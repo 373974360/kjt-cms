@@ -13,10 +13,19 @@ import com.eos.system.annotation.Bizlet;
 @Bizlet("")
 public class CmsInfoUser {
 
+	private int empId;
 	private String userName;
 	private int count;//信息总数
 	private int publisCount;//已发布总数
 	private String proportion;//发稿率
+	
+	
+	public int getEmpId() {
+		return empId;
+	}
+	public void setEmpId(int empId) {
+		this.empId = empId;
+	}
 	public String getUserName() {
 		return userName;
 	}

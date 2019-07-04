@@ -3,7 +3,9 @@
 	String startTime = request.getParameter("startTime");
 	String endTime = request.getParameter("endTime");
 	String infoStatus = request.getParameter("infoStatus");
-	String catId = request.getParameter("catId");
+	String inputUser = request.getParameter("inputUser");
+	String catId = request.getParameter("catId");;
+	String orgId = request.getParameter("orgId");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -25,6 +27,7 @@
 					<div field="infoTitle" width="auto" headerAlign="center" allowSort="true">标题</div>
 					<div field="CHNAME" width="100" headerAlign="center" align="center" allowSort="true">栏目名称</div>
 					<div field="editor" width="100" headerAlign="center" align="center" allowSort="true">编辑</div>
+					<div field="orgName" width="100" headerAlign="center" align="center" allowSort="true">单位</div>
 					<div field="source" width="100" headerAlign="center" align="center" allowSort="true">来源</div>
 					<div field="releasedDtime" width="100" headerAlign="center" align="center" allowSort="true">发布日期</div>
 				</div>
@@ -35,7 +38,7 @@
 	   		var grid = nui.get("datagrid1");
 	   		grid.load();
 		    function setRoleId(){
-				return {"params/catId":"<%=catId %>","params/startTime":"<%=startTime %>","params/endTime":"<%=endTime %>","params/infoStatus":"<%=infoStatus %>"};
+				return {"params/catId":"<%=catId %>","params/startTime":"<%=startTime %>","params/endTime":"<%=endTime %>","params/infoStatus":"<%=infoStatus %>","params/inputUser":"<%=inputUser %>","params/orgId":"<%=orgId %>"};
 			}
 		</script>
 	</body>

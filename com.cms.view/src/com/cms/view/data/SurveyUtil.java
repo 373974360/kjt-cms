@@ -69,7 +69,12 @@ public class SurveyUtil {
 				int itemNum = getItemNum(subId,rs.getString("id"));
 				int subNum = getSubNum(subId);
 				item.setNum(itemNum);
-				String proportion = numberFormat.format((float)itemNum/(float)subNum*100)+"%";
+				String proportion = "";
+				if(itemNum==0&&subNum==0){
+					proportion = "-";
+				}else{
+					proportion = numberFormat.format((float)itemNum/(float)subNum*100)+"%";
+				}
 				item.setProportion(proportion);
 				itemList.add(item);
 			}

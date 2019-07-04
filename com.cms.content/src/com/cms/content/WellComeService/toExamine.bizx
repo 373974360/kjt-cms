@@ -228,7 +228,7 @@
       <sourceNode>assign2</sourceNode>
       <targetNode>invokePojo7</targetNode>
     </sourceConnections>
-    <targetConnections>link8</targetConnections>
+    <targetConnections>link2</targetConnections>
     <location x="389" y="148"/>
     <size height="28" width="28"/>
     <nodeLabel>assign2label</nodeLabel>
@@ -256,6 +256,14 @@
       <process:from type="query" pattern="reference">m:userObject/userName</process:from>
       <process:to type="query">wflogs/wfOptUser</process:to>
     </process:copy>
+    <process:copy>
+      <process:from type="query" pattern="reference">releasedDtime</process:from>
+      <process:to type="query">info/releasedDtime</process:to>
+    </process:copy>
+    <process:copy>
+      <process:from type="query" pattern="reference">inputDtime</process:from>
+      <process:to type="query">info/inputDtime</process:to>
+    </process:copy>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="assign2label" name="label" nodeType="label">
     <location x="387" y="184"/>
@@ -263,9 +271,9 @@
     <node>assign2</node>
   </nodes>
   <nodes xsi:type="process:tInvoke" description="" id="invokePojo8" name="expandEntityInfoCat1" displayName="expandEntityInfoCat" collapsed="false" type="invoke" index="0" invokeType="invoke_pojo" varArgs="false">
-    <sourceConnections xsi:type="process:tLink" id="link8" name="link8" displayName="link3" isDefault="true" type="transition">
+    <sourceConnections xsi:type="process:tLink" id="link1" name="link1" displayName="连接线" isDefault="true" type="transition">
       <sourceNode>invokePojo8</sourceNode>
-      <targetNode>assign2</targetNode>
+      <targetNode>invokePojo0</targetNode>
     </sourceConnections>
     <targetConnections>link14</targetConnections>
     <location x="314" y="222"/>
@@ -306,6 +314,56 @@
     <location x="200" y="199"/>
     <figSize height="17" width="77"/>
     <node>assign7</node>
+  </nodes>
+  <nodes xsi:type="process:tInvoke" description="" id="invokePojo0" name="dateFormat" displayName="dateFormat" collapsed="false" type="invoke" index="1" invokeType="invoke_pojo" varArgs="false">
+    <sourceConnections xsi:type="process:tLink" id="link0" name="link0" displayName="link12" isDefault="true" type="transition">
+      <sourceNode>invokePojo0</sourceNode>
+      <targetNode>invokePojo1</targetNode>
+    </sourceConnections>
+    <targetConnections>link1</targetConnections>
+    <location x="354" y="336"/>
+    <size height="28" width="22"/>
+    <nodeLabel>invokePojo0label</nodeLabel>
+    <process:pojo methodType="instance" synchronization="true" transactionType="join">
+      <process:partner type="literal">com.cms.content.DateUtils.dateFormat</process:partner>
+      <process:instance instanceName=""/>
+    </process:pojo>
+    <process:inputVariables>
+      <process:inputVariable id="0" name="date" type="query" value="java.lang.String" valueType="Java" pattern="reference">info/releasedDtime</process:inputVariable>
+    </process:inputVariables>
+    <process:outputVariables>
+      <process:outputVariable id="0" name="out0" type="query" value="java.lang.String" valueType="Java">releasedDtime</process:outputVariable>
+    </process:outputVariables>
+  </nodes>
+  <nodes xsi:type="model:NodeElementLabel" id="invokePojo0label" name="label" nodeType="label">
+    <location x="331" y="372"/>
+    <figSize height="17" width="68"/>
+    <node>invokePojo0</node>
+  </nodes>
+  <nodes xsi:type="process:tInvoke" description="" id="invokePojo1" name="dateFormat1" displayName="dateFormat" collapsed="false" type="invoke" index="1" invokeType="invoke_pojo" varArgs="false">
+    <sourceConnections xsi:type="process:tLink" id="link2" name="link2" displayName="连接线" isDefault="true" type="transition">
+      <sourceNode>invokePojo1</sourceNode>
+      <targetNode>assign2</targetNode>
+    </sourceConnections>
+    <targetConnections>link0</targetConnections>
+    <location x="435" y="345"/>
+    <size height="28" width="22"/>
+    <nodeLabel>invokePojo1label</nodeLabel>
+    <process:pojo methodType="instance" synchronization="true" transactionType="join">
+      <process:partner type="literal">com.cms.content.DateUtils.dateFormat</process:partner>
+      <process:instance instanceName=""/>
+    </process:pojo>
+    <process:inputVariables>
+      <process:inputVariable id="0" name="date" type="query" value="java.lang.String" valueType="Java" pattern="reference">info/inputDtime</process:inputVariable>
+    </process:inputVariables>
+    <process:outputVariables>
+      <process:outputVariable id="0" name="out0" type="query" value="java.lang.String" valueType="Java">inputDtime</process:outputVariable>
+    </process:outputVariables>
+  </nodes>
+  <nodes xsi:type="model:NodeElementLabel" id="invokePojo1label" name="label" nodeType="label">
+    <location x="409" y="381"/>
+    <figSize height="17" width="75"/>
+    <node>invokePojo1</node>
   </nodes>
   <topRuler/>
   <leftRuler/>
