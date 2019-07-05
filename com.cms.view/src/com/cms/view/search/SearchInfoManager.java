@@ -56,12 +56,9 @@ public class SearchInfoManager {
 			if(scope.equals("")){
 				fieldsList.add("infoTitle");
 				fieldsList.add("infoContent");
-				fieldsList.add("gkNo");
-				keysList.add(q);
 				keysList.add(q);
 				keysList.add(q);
 				occurList.add(BooleanClause.Occur.SHOULD);
-				occurList.add(BooleanClause.Occur.SHOULD);;
 				occurList.add(BooleanClause.Occur.SHOULD);
 			} else if(scope.equals("title")){
 				fieldsList.add("infoTitle");
@@ -69,10 +66,6 @@ public class SearchInfoManager {
 				occurList.add(BooleanClause.Occur.SHOULD);
 			} else if(scope.equals("content")){
 				fieldsList.add("infoContent");
-				keysList.add(q);
-				occurList.add(BooleanClause.Occur.SHOULD);
-			} else if(scope.equals("gkNo")){
-				fieldsList.add("gkNo");
 				keysList.add(q);
 				occurList.add(BooleanClause.Occur.SHOULD);
 			}
@@ -151,28 +144,26 @@ public class SearchInfoManager {
 	    	i++;
 		    String key = (String)it.next();
 		    String object = (String)map.get(key);
-		    if(key.equals("type")){
+		    if(key.equals("gkNo")){
 		    	if(!sb.toString().trim().equals("") && sb.toString().trim().endsWith(")")){
 		    		sb.append(" && ");
 		    	}
 		    	sb.append(getTypeQuery(key,object));
-		    } else if(key.equals("retype")){
-		    	if(!object.equals("all")){
-		    		if(!sb.toString().trim().equals("") && sb.toString().trim().endsWith(")")){
-			    		sb.append(" && ");
-			    	} 
-			    	sb.append(getRetypeQuery(key,object));
-		    	}
-		    }  else if(key.equals("categoryId")){
+		    } else if(key.equals("gkDept")){
 		    	if(!sb.toString().trim().equals("") && sb.toString().trim().endsWith(")")){
 		    		sb.append(" && ");
 		    	} 
 		    	sb.append(getCategoryIdQuery(key,object));
-		    }else if(key.equals("site_id")){
-		    	String typef = (String)map.get("type");
-		    	if(typef==null){ 
-		    		typef = "";
-		    	}
+		    } else if(key.equals("gkCwrq")){
+		    	if(!sb.toString().trim().equals("") && sb.toString().trim().endsWith(")")){
+		    		sb.append(" && ");
+		    	} 
+		    	sb.append(getCategoryIdQuery(key,object));
+		    } else if(key.equals("gkFwrq")){
+		    	if(!sb.toString().trim().equals("") && sb.toString().trim().endsWith(")")){
+		    		sb.append(" && ");
+		    	} 
+		    	sb.append(getCategoryIdQuery(key,object));
 		    }else{
 		    	if(!sb.toString().trim().equals("")){
 		    		sb.append(" && ");

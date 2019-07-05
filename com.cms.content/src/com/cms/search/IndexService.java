@@ -51,6 +51,10 @@ public class IndexService {
 			 Field contentField = new Field("infoContent", "",Field.Store.YES, Field.Index.ANALYZED);
 			 Field gkNoField = new Field("gkNo", "",Field.Store.YES, Field.Index.ANALYZED);
 			 Field siteIdField = new Field("siteId", "",Field.Store.YES, Field.Index.ANALYZED);
+			 Field gkDeptField = new Field("gkDept", "",Field.Store.YES, Field.Index.ANALYZED);
+			 Field gkCwrqField = new Field("gkCwrq", "",Field.Store.YES, Field.Index.ANALYZED);
+			 Field gkFwrqField = new Field("gkFwrq", "",Field.Store.YES, Field.Index.ANALYZED);
+			 Field gkWjyxxField = new Field("gkWjyxx", "",Field.Store.YES, Field.Index.ANALYZED);
 			 
 			 
 			 //得到indexWriter
@@ -94,6 +98,18 @@ public class IndexService {
 	    			  String modelId = infoObj.getString("modelId");
 	    			  model_idField.setValue(modelId);
 	    			  doc.add(model_idField);
+	    			  
+	    			  gkDeptField.setValue(infoObj.getString("gkDept")==null?"":infoObj.getString("gkDept"));
+	    			  doc.add(gkDeptField);
+	    			  
+	    			  gkCwrqField.setValue(infoObj.getString("gkCwrq")==null?"":infoObj.getString("gkCwrq"));
+	    			  doc.add(gkCwrqField);
+	    			  
+	    			  gkFwrqField.setValue(infoObj.getString("gkFwrq")==null?"":infoObj.getString("gkFwrq"));
+	    			  doc.add(gkFwrqField);
+	    			  
+	    			  gkWjyxxField.setValue(infoObj.getString("gkWjyxx")==null?"":infoObj.getString("gkWjyxx"));
+	    			  doc.add(gkWjyxxField);
 	    			  
 	    			  String content = "";
 	    			  if(modelId.equals("article")||modelId.equals("pic")||modelId.equals("video")||modelId.equals("doc")){
@@ -140,6 +156,10 @@ public class IndexService {
 			Field contentField = new Field("infoContent", "", Field.Store.YES, Field.Index.ANALYZED);
 			Field gkNoField = new Field("gkNo", "", Field.Store.YES, Field.Index.ANALYZED);
 			Field siteIdField = new Field("siteId", "", Field.Store.YES, Field.Index.ANALYZED);
+			 Field gkDeptField = new Field("gkDept", "",Field.Store.YES, Field.Index.ANALYZED);
+			 Field gkCwrqField = new Field("gkCwrq", "",Field.Store.YES, Field.Index.ANALYZED);
+			 Field gkFwrqField = new Field("gkFwrq", "",Field.Store.YES, Field.Index.ANALYZED);
+			 Field gkWjyxxField = new Field("gkWjyxx", "",Field.Store.YES, Field.Index.ANALYZED);
 
 			// Document对象不要重用，Field对象可以重用 以加快速度
 			Document doc = new Document();
@@ -170,6 +190,18 @@ public class IndexService {
 			String modelId = infoObj.getString("modelId");
 			model_idField.setValue(modelId);
 			doc.add(model_idField);
+			
+			 gkDeptField.setValue(infoObj.getString("gkDept")==null?"":infoObj.getString("gkDept"));
+			  doc.add(gkDeptField);
+			  
+			  gkCwrqField.setValue(infoObj.getString("gkCwrq")==null?"":infoObj.getString("gkCwrq"));
+			  doc.add(gkCwrqField);
+			  
+			  gkFwrqField.setValue(infoObj.getString("gkFwrq")==null?"":infoObj.getString("gkFwrq"));
+			  doc.add(gkFwrqField);
+			  
+			  gkWjyxxField.setValue(infoObj.getString("gkWjyxx")==null?"":infoObj.getString("gkWjyxx"));
+			  doc.add(gkWjyxxField);
 
 			String content = "";
 			if (modelId.equals("article") || modelId.equals("pic") || modelId.equals("video") || modelId.equals("doc")) {

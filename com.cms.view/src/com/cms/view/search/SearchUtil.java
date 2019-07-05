@@ -112,6 +112,22 @@ public class SearchUtil {
 			if (catId != null && !catId.equals("")) {
 				sb.append("<param><key>catId</key><value><![CDATA[" + catId + "]]></value></param>");
 			}
+			String gkNo = (String) request.getParameter("gkNo");
+			if (gkNo != null && !gkNo.equals("")) {
+				sb.append("<param><key>gkNo</key><value><![CDATA[" + gkNo + "]]></value></param>");
+			}
+			String gkDept = (String) request.getParameter("gkDept");
+			if (gkDept != null && !gkDept.equals("")) {
+				sb.append("<param><key>gkDept</key><value><![CDATA[" + gkDept + "]]></value></param>");
+			}
+			String gkCwrq = (String) request.getParameter("gkCwrq");
+			if (gkCwrq != null && !gkCwrq.equals("")) {
+				sb.append("<param><key>gkCwrq</key><value><![CDATA[" + gkCwrq + "]]></value></param>");
+			}
+			String gkFwrq = (String) request.getParameter("gkFwrq");
+			if (gkFwrq != null && !gkFwrq.equals("")) {
+				sb.append("<param><key>gkFwrq</key><value><![CDATA[" + gkFwrq + "]]></value></param>");
+			}
 	        String scope = (String)request.getParameter("scope");
 	        if(scope!=null && !scope.equals("")){  
 	        	sb.append("<param><key>scope</key><value><![CDATA["+scope+"]]></value></param>");
