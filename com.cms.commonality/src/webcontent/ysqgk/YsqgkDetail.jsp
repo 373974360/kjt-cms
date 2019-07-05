@@ -128,49 +128,48 @@
 				<table id="table5" align="center" style="width:90%; table-layout:fixed;">
 					<tr>
 						<th class="nui-form-label">所需内容描述：</th>
-						<td>
+						<td colspan="4">
 						<span id="content"></span>							
     					</td>
 					</tr>   
 					<tr>
 						<th class="nui-form-label">用途描述：</th>
-						<td>
+						<td colspan="4">
 						<span id="DesContent"></span>
     					</td>
 					</tr>
 					<tr>
 						<th class="nui-form-label">是否申请减免费用：</th>
-    					<td>
-    						<input name="ysqgk.isDerate" class="nui-radiobuttonlist" textField="text" 
-		    					dataField="isOrNot" valueField="id" value="1"
-		    					url="<%=request.getContextPath()%>/commonality/ysqgk/isOrNot.txt"
+    					<td colspan="2">
+    						<input name="ysqgk.isDerate" class="nui-combobox nui-form-input" textField="text" 
+		    					dataField="isOrNot" valueField="id" 
+		    					url="<%=request.getContextPath()%>/commonality/ysqgk/isOrNot.txt" borderStyle="border:0"
 		    					showButton="false" readonly="readonly" />
+    					</td>
+    					<th class="nui-form-label">信息指定提供方式：</th>
+    					<td colspan="2">
+    						<input name="ysqgk.offerType" class="nui-combobox nui-form-input" textField="text" 
+		    					dataField="offerType" valueField="id" 
+		    					url="<%=request.getContextPath()%>/commonality/ysqgk/offerType.txt" readonly="readonly" 
+		    					showButton="false" borderStyle="border:0"/>							
     					</td>
 					</tr>  
 					<tr>
-						<th class="nui-form-label">信息指定提供方式：</th>
-    					<td>
-    						<input name="ysqgk.offerType" class="nui-checkboxlist" textField="text" 
-		    					dataField="offerType" valueField="id" value="1"
-		    					url="<%=request.getContextPath()%>/commonality/ysqgk/offerType.txt" readonly="readonly"/>							
-    					</td>
-					</tr> 
-					<tr>
-						<th class="nui-form-label">获取信息方式：</th>
-    					<td>
-    						<input name="ysqgk.getMethod" class="nui-checkboxlist" textField="text" 
-		    					dataField="getMethod" valueField="id" value="1"
-		    					url="<%=request.getContextPath()%>/commonality/ysqgk/getMethod.txt" readonly="readonly"/>						
-    					</td>
-					</tr> 
-					<tr>
 						<th class="nui-form-label">是否接受其他方式：</th>
-    					<td>
-    						<input name="ysqgk.isOther" class="nui-radiobuttonlist" textField="text" 
-		    					dataField="isOrNot" valueField="id" value="1"
-		    					url="<%=request.getContextPath()%>/commonality/ysqgk/isOrNot.txt" readonly="readonly"/>					
+    					<td colspan="2">
+    						<input name="ysqgk.isOther" class="nui-combobox nui-form-input" textField="text" 
+		    					dataField="isOrNot" valueField="id" 
+		    					url="<%=request.getContextPath()%>/commonality/ysqgk/isOrNot.txt" borderStyle="border:0" 
+		    					showButton="false" readonly="readonly"/>				
     					</td>
-					</tr> 					    				
+						<th class="nui-form-label">获取信息方式：</th>
+    					<td colspan="2">
+    						<input name="ysqgk.getMethod" class="nui-combobox nui-form-input" textField="text" 
+		    					dataField="getMethod" valueField="id" 
+		    					url="<%=request.getContextPath()%>/commonality/ysqgk/getMethod.txt" readonly="readonly" 
+		    					showButton="false" borderStyle="border:0"/>						
+    					</td>						
+					</tr> 										    				
 				</table>
 			</div>
 			<div id="panel3" class="nui-panel" title="回复内容" iconCls="icon-add" style="display:none;width:100%;height:350;" 	
