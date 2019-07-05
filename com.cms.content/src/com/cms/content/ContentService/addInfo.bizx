@@ -394,7 +394,6 @@
     <sourceConnections xsi:type="process:tLink" id="link15" name="link15" displayName="连接线" isDefault="true" type="transition">
       <sourceNode>invokePojo9</sourceNode>
       <targetNode>invokePojo15</targetNode>
-      <process:transitionCondition/>
     </sourceConnections>
     <targetConnections>link20</targetConnections>
     <location x="930" y="226"/>
@@ -423,7 +422,7 @@
     </sourceConnections>
     <targetConnections>link19</targetConnections>
     <targetConnections>link26</targetConnections>
-    <targetConnections>link22</targetConnections>
+    <targetConnections>link28</targetConnections>
     <location x="814" y="377"/>
     <size height="28" width="28"/>
     <nodeLabel>assign3label</nodeLabel>
@@ -591,30 +590,6 @@
     <figSize height="17" width="53"/>
     <node>invokePojo12</node>
   </nodes>
-  <nodes xsi:type="process:tInvoke" description="" id="invokePojo15" name="infoSetAdd" displayName="infoSetAdd" type="invoke" index="1" invokeType="invoke_pojo" varArgs="false">
-    <sourceConnections xsi:type="process:tLink" id="link22" name="link22" displayName="连接线" isDefault="true" type="transition">
-      <sourceNode>invokePojo15</sourceNode>
-      <targetNode>assign3</targetNode>
-      <process:transitionCondition/>
-    </sourceConnections>
-    <targetConnections>link15</targetConnections>
-    <location x="873" y="303"/>
-    <size height="28" width="22"/>
-    <nodeLabel>invokePojo15label</nodeLabel>
-    <process:pojo methodType="instance" synchronization="true" transactionType="join">
-      <process:partner type="literal">com.cms.search.SearchInnerManager.infoSetAdd</process:partner>
-      <process:instance instanceName=""/>
-    </process:pojo>
-    <process:inputVariables>
-      <process:inputVariable id="0" name="id" type="query" value="java.lang.String" valueType="Java" pattern="reference">info/id</process:inputVariable>
-    </process:inputVariables>
-    <process:outputVariables/>
-  </nodes>
-  <nodes xsi:type="model:NodeElementLabel" id="invokePojo15label" name="label" nodeType="label">
-    <location x="852" y="339"/>
-    <figSize height="17" width="65"/>
-    <node>invokePojo15</node>
-  </nodes>
   <nodes xsi:type="process:tInvoke" description="" id="invokePojo16" name="dateFormatgkCwrq" displayName="日期格式化" collapsed="false" type="invoke" index="0" invokeType="invoke_pojo" varArgs="false">
     <sourceConnections xsi:type="process:tLink" id="link16" name="link16" displayName="连接线" isDefault="true" type="transition">
       <sourceNode>invokePojo16</sourceNode>
@@ -664,6 +639,52 @@
     <location x="471" y="102"/>
     <figSize height="17" width="111"/>
     <node>invokePojo17</node>
+  </nodes>
+  <nodes xsi:type="process:tInvoke" description="" id="invokePojo15" name="infoSetAdd" displayName="infoSetAdd" type="invoke" index="1" invokeType="invoke_pojo" varArgs="false">
+    <sourceConnections xsi:type="process:tLink" id="link22" name="link22" displayName="连接线" isDefault="true" type="transition">
+      <sourceNode>invokePojo15</sourceNode>
+      <targetNode>assign5</targetNode>
+    </sourceConnections>
+    <targetConnections>link15</targetConnections>
+    <location x="1022" y="249"/>
+    <size height="28" width="22"/>
+    <nodeLabel>invokePojo15label</nodeLabel>
+    <process:pojo methodType="instance" synchronization="true" transactionType="join">
+      <process:partner type="literal">com.cms.search.SearchInnerManager.infoSetAdd</process:partner>
+      <process:instance instanceName=""/>
+    </process:pojo>
+    <process:inputVariables>
+      <process:inputVariable id="0" name="id" type="query" value="java.lang.String" valueType="Java" pattern="reference">info/id</process:inputVariable>
+    </process:inputVariables>
+    <process:outputVariables/>
+  </nodes>
+  <nodes xsi:type="model:NodeElementLabel" id="invokePojo15label" name="label" nodeType="label">
+    <location x="1001" y="285"/>
+    <figSize height="17" width="65"/>
+    <node>invokePojo15</node>
+  </nodes>
+  <nodes xsi:type="process:tAssign" description="" id="assign5" name="赋值wfLogs" displayName="赋值" type="assign">
+    <sourceConnections xsi:type="process:tLink" id="link28" name="link28" displayName="连接线" isDefault="true" type="transition">
+      <sourceNode>assign5</sourceNode>
+      <targetNode>assign3</targetNode>
+    </sourceConnections>
+    <targetConnections>link22</targetConnections>
+    <location x="902" y="323"/>
+    <size height="28" width="28"/>
+    <nodeLabel>assign5label</nodeLabel>
+    <process:copy>
+      <process:from type="literal" pattern="reference">3</process:from>
+      <process:to type="query">wflogs/wfOptType</process:to>
+    </process:copy>
+    <process:copy>
+      <process:from type="literal" pattern="reference">信息发布</process:from>
+      <process:to type="query">wflogs/wfOptDesc</process:to>
+    </process:copy>
+  </nodes>
+  <nodes xsi:type="model:NodeElementLabel" id="assign5label" name="label" nodeType="label">
+    <location x="883" y="359"/>
+    <figSize height="17" width="66"/>
+    <node>assign5</node>
   </nodes>
   <topRuler/>
   <leftRuler/>

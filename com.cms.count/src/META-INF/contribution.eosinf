@@ -30,4 +30,13 @@
 			<configValue key="default">default</configValue>
 		</group>
 	</module>
+	<module name="example-config">
+        <!-- Excel相关配置 -->
+        <group name="excel-config">
+        	<!-- EXCEL模板路径 -->
+            <configValue key="excel_template_path">/WEB-INF/excel-config/</configValue>
+            <!-- 导出EXCEL最大行数 -->
+            <configValue key="excel_export_maxnum">10000</configValue>
+        </group>
+    </module>
 </contribution>

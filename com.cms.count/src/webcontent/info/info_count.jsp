@@ -95,15 +95,31 @@
 			}
 			function viewExcel(){
 				var countType = nui.get("countType").getValue();
+				var startTime = $("input[name='startTime']").val();
+				var endTime = $("input[name='endTime']").val();
+				var catId = getCheckedNodes();
+				if(catId==""){
+					alert("请选择栏目");
+					return false;
+				}
+				var url = "";
 				if(countType==1){
-					url = "category_count.jsp?startTime="+startTime+"&endTime="+endTime+"&catId="+catId;
+					url = "<%=request.getContextPath()%>/count/info/category_view.jsp?startTime="+startTime+"&endTime="+endTime+"&catId="+catId;
 				}
 				if(countType==2){
-					url = "user_count.jsp?startTime="+startTime+"&endTime="+endTime+"&catId="+catId;
+					url = "<%=request.getContextPath()%>/count/info/user_view.jsp?startTime="+startTime+"&endTime="+endTime+"&catId="+catId;
 				}
 				if(countType==3){
-					url = "org_count.jsp?startTime="+startTime+"&endTime="+endTime+"&catId="+catId;
+					url = "<%=request.getContextPath()%>/count/info/org_view.jsp?startTime="+startTime+"&endTime="+endTime+"&catId="+catId;
 				}
+				nui.open({
+					url : url,
+					title : "报表预览",
+					width : "90%",
+					height : "100%",
+					onload : function() {
+					}
+				});
 			}
 		</script>
 	</body>
