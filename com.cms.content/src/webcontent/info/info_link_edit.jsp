@@ -180,6 +180,27 @@
 	        nui.parse();
 		    var tree = nui.get("select1");
 		    
+		    
+		   	function setInfoSource(){
+		   		var source = nui.get("infoSourceCombobox").getValue();
+		   		var infoSource = nui.get("infoSource");
+		   		if(infoSource.getValue()==""||infoSource.getValue().length==0){
+		   			infoSource.setValue(source);
+		   		}else{
+		   			infoSource.setValue(infoSource.getValue()+","+source);
+		   		}
+		   	}
+		    
+		   	function setInfoAuthor(){
+		   		var author = nui.get("infoAuthorCombobox").getValue();
+		   		var infoAuthor = nui.get("infoAuthor");
+		   		if(infoAuthor.getValue()==""||infoAuthor.getValue().length==0){
+		   			infoAuthor.setValue(author);
+		   		}else{
+		   			infoAuthor.setValue(infoAuthor.getValue()+","+author);
+		   		}
+		   	}
+		    
 		    function setRoleId(){
 				return {"userId":"<%=userObject.getUserId() %>","nodeId":0};
 			}
