@@ -87,7 +87,7 @@
 						<div field="content" headerAlign="center" allowSort="true" visible="false">内容描述</div>
 						<div field="isPublish" width="30" align="center" headerAlign="center" allowSort="true">发布</div>
 						<div field="isOpen" width="30" align="center" headerAlign="center" allowSort="true">公开</div>
-						<div name="action" width="40" headerAlign="center" align="center" renderer="onActionRenderer" cellStyle="padding:0;">申请详情</div>
+						<div name="action" width="40" headerAlign="center" align="center" renderer="onActionRenderer" cellStyle="padding:0;">具体内容</div>
 					</div>
 				</div>
 			</div>

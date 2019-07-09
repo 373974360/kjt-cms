@@ -93,7 +93,7 @@
 						<div field="isReply" width="30" align="center" headerAlign="center" allowSort="true" >回复</div>
 						<div field="isPublish" width="30" align="center" headerAlign="center" allowSort="true" >发布</div>
 						<div field="isOpen" width="30" align="center" headerAlign="center" allowSort="true">公开</div>
-						<div name="action" width="40" headerAlign="center" align="center" renderer="onActionRenderer" cellStyle="padding:0;">来信内容</div>
+						<div name="action" width="40" headerAlign="center" align="center" renderer="onActionRenderer" cellStyle="padding:0;">具体内容</div>
 					</div>
 				</div>
 			</div>
