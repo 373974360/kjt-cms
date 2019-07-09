@@ -182,50 +182,27 @@
     				</tr>
     			</table>
     		</div>
-			<div property="footer" style="text-align:center;padding-top:5px;padding-bottom:5px;" borderStyle="border:0;">	
+			<div id="footerbutton" property="footer" style="text-align:center;padding-top:5px;padding-bottom:5px;" borderStyle="border:0;">	
 				 
-					<a id="button" class="nui-button" style="width:85px;" iconCls="icon-edit" onclick="onReply()">
+					<a class="nui-button" style="width:85px;" iconCls="icon-edit" onclick="onReply()">
+						<span id="button" >
 						<% if(isReply.equals("2")){ %>
 								回复申请
 						<% }else{ %>
 								重新回复
 						<% } %>
+						</span>
 					</a>  
 					<span style="display:inline-block;width:20px;"></span>     			       
-			        <a class="nui-button" style="width:85px;" iconCls="icon-print" onclick="onPrint()">打印申请</a>
-			    <%
-					if(isPublish.equals("1") ){
-				%>	
+			        <a class="nui-button" style="width:85px;" iconCls="icon-print" onclick="onPrint()">打印申请</a>			   
 			        <span style="display:inline-block;width:20px;"></span>
-			        <a class="nui-button" style="width:85px;" iconCls="icon-redo" onclick="onSetPublish(2,'撤销发布')">撤销发布</a>	
-		        <% 
-		        	} 
-		        %>	
-		        <%
-					if(isPublish.equals("2") ){
-				%>	        
+			        <a id="button1" class="nui-button" style="display:none;width:85px;" iconCls="icon-redo" onclick="onSetPublish(2,'撤销发布')">撤销发布</a>			        		                
+			        
+			        <a id="button2" class="nui-button" style="display:none;width:85px;" iconCls="icon-ok" onclick="onSetPublish(1,'发布')">一键发布</a>			       	
 			        <span style="display:inline-block;width:20px;"></span>
-			        <a class="nui-button" style="width:85px;" iconCls="icon-ok" onclick="onSetPublish(1,'发布')">一键发布</a>	
-		        <% 
-		        	} 
-		        %>	
-		        
-		        <%
-					if(isOpen.equals("1") ){
-				%>	
-			        <span style="display:inline-block;width:20px;"></span>
-			        <a class="nui-button" style="width:85px;" iconCls="icon-redo" onclick="onSetOpen(2,'撤销公开')">撤销公开</a>	
-		        <% 
-		        	} 
-		        %>	
-		        <%
-					if(isOpen.equals("2") ){
-				%>	        
-			        <span style="display:inline-block;width:20px;"></span>
-			        <a class="nui-button" style="width:85px;" iconCls="icon-ok" onclick="onSetOpen(1,'公开')">一键公开</a>	
-		        <% 
-		        	} 
-		        %>         
+			        <a id="button3" class="nui-button" style="display:none;width:85px;" iconCls="icon-redo" onclick="onSetOpen(2,'撤销公开')">撤销公开</a>			       		        	        
+			       
+			        <a id="button4" class="nui-button" style="display:none;width:85px;" iconCls="icon-ok" onclick="onSetOpen(1,'公开')">一键公开</a>			                
 			</div>
 		</div> 
 	</div>
@@ -265,6 +242,18 @@
 							if(obj.ysqgk.isReply == 1){
 								$("#panel3").show();
 							}
+							if(<%=isPublish.equals("1") %>){
+								$("#button1").show();							
+							}else{
+								$("#button2").show();
+							}
+							
+							if(<%=isOpen.equals("1") %>){
+								$("#button3").show();
+							}else{
+								$("#button4").show();
+							}
+							
 						}
 					});
 			}
@@ -292,7 +281,7 @@
 								//实时显示回复内容在详情页
 								setData();
 								$("#panel3").show();
-								$("#button").text("重新回复");
+								$("#button").html("重新回复");
 							}
 						}
 					});		
@@ -331,7 +320,14 @@
 									if (returnJson.exception == null) {										
 										nui.alert(msg+"成功","系统提示",function(action) {
 										});
-										CloseWindow("saveSuccess");
+										//CloseWindow("saveSuccess");
+										if(msg == "发布"){
+											$("#button1").show();
+											$("#button2").hide();
+										}else{
+											$("#button1").hide();
+											$("#button2").show();
+										}								
 									} else {
 										grid.unmask();
 										nui.alert(msg+"失败","系统提示");
@@ -361,7 +357,15 @@
 									if (returnJson.exception == null) {										
 										nui.alert(msg+"成功","系统提示",function(action) {
 										});
-										CloseWindow("saveSuccess");
+										//CloseWindow("saveSuccess");
+										if(msg == "公开"){
+											$("#button3").show();
+											$("#button4").hide();
+										}else{
+											$("#button3").hide();
+											$("#button4").show();
+										}
+																				
 									} else {
 										grid.unmask();
 										nui.alert(msg+"失败","系统提示");

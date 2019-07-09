@@ -173,42 +173,16 @@
 		        <a class="nui-button" style="width:85px;" iconCls="icon-edit" onclick="onReply()">信件回复</a>
 		        <span style="display:inline-block;width:20px;"></span>
 		        <a class="nui-button" style="width:85px;" iconCls="icon-print" onclick="onPrint()">信件打印</a>
+	
+		        <span style="display:inline-block;width:20px;"></span>
+		        <a id="button1" class="nui-button" style="display:none; width:85px;" iconCls="icon-redo" onclick="onSetPublish(2,'撤销发布')">撤销发布</a>	        			        		        
+		        <a id="button2" class="nui-button" style="display:none; width:85px;" iconCls="icon-ok" onclick="onSetPublish(1,'发布')">一键发布</a>	        				
 		        
-		    	<%
-		    	if(isPublish.equals("1")){
-		    	%>		
 		        <span style="display:inline-block;width:20px;"></span>
-		        <a class="nui-button" style="width:85px;" iconCls="icon-redo" onclick="onSetPublish(2,'撤销发布')">撤销发布</a>
-	        	<%
-	        	}
-	         	%>
-	         		
-	         	<%
-		    	if(isPublish.equals("2")||isPublish==""){
-		     	%>		        
-		        <span style="display:inline-block;width:20px;"></span>
-		        <a class="nui-button" style="width:85px;" iconCls="icon-ok" onclick="onSetPublish(1,'发布')">一键发布</a>
-	        	<%
-	        	}
-	         	%>
-	         	
-	         	<%
-		    	if(isOpen.equals("1")){
-		    	%>		
-		        <span style="display:inline-block;width:20px;"></span>
-		        <a class="nui-button" style="width:85px;" iconCls="icon-redo" onclick="onSetOpen(2,'撤销公开')">撤销公开</a>
-	        	<%
-	        	}
-	         	%>
-	         		
-	         	<%
-		    	if(isOpen.equals("2")||isOpen==""){
-		     	%>		        
-		        <span style="display:inline-block;width:20px;"></span>
-		        <a class="nui-button" style="width:85px;" iconCls="icon-ok" onclick="onSetOpen(1,'发布')">一键公开</a>
-	        	<%
-	        	}
-	         	%>	        
+		        
+		        <a id="button3" class="nui-button" style="display:none; width:85px;" iconCls="icon-redo" onclick="onSetOpen(2,'撤销公开')">撤销公开</a>		        		       
+		        <a id="button4" class="nui-button" style="display:none; width:85px;" iconCls="icon-ok" onclick="onSetOpen(1,'公开')">一键公开</a>	        		        
+		        
 			</div>
 			<div id="panel4" style="display:none;width: 100%; height: 100%" class="nui-panel" title="转办信件" iconCls="icon-add"  
 	    			showCloseButton="true" showToolbar="false" showFooter="false">
@@ -354,7 +328,20 @@
 							}
 							if(obj.sq.isOpen == null){
 								obj.sq.isOpen = 2;
-							}					
+							}
+							
+							if(<%=isPublish.equals("1") %>){
+								$("#button1").show();							
+							}else{
+								$("#button2").show();
+							}
+							
+							if(<%=isOpen.equals("1") %>){
+								$("#button3").show();
+							}else{
+								$("#button4").show();
+							}
+																			
 							form.setData(obj);
 							form.setChanged(false);
 						}
@@ -638,7 +625,14 @@
 									if (returnJson.exception == null) {										
 										nui.alert(msg+"成功","系统提示",function(action) {
 										});
-										CloseWindow("saveSuccess");
+										//CloseWindow("saveSuccess");
+										if(msg == "发布"){
+											$("#button1").show();
+											$("#button2").hide();
+										}else{
+											$("#button1").hide();
+											$("#button2").show();
+										}
 									} else {
 										grid.unmask();
 										nui.alert(msg+"失败","系统提示");
@@ -669,7 +663,14 @@
 									if (returnJson.exception == null) {										
 										nui.alert(msg+"成功","系统提示",function(action) {
 										});
-										CloseWindow("saveSuccess");
+										//CloseWindow("saveSuccess");
+										if(msg == "公开"){
+											$("#button3").show();
+											$("#button4").hide();
+										}else{
+											$("#button3").hide();
+											$("#button4").show();
+										}
 									} else {
 										grid.unmask();
 										nui.alert(msg+"失败","系统提示");
