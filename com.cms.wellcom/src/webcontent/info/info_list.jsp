@@ -38,7 +38,7 @@
 				                <li id="article" iconCls="icon-article" onclick="add('article')" style="display:none;">文章</li>
 				                <li id="video" iconCls="icon-video" onclick="add('video')" style="display:none;">视频</li>
 				                <li id="pic" iconCls="icon-pic" onclick="add('pic')" style="display:none;">组图</li>
-				                <li id="link" iconCls="icon-link" onclick="add('link')" style="display:none;">连接</li>
+				                <li id="link" iconCls="icon-link" onclick="add('link')" style="display:none;">链接</li>
 				                <li id="leader" iconCls="icon-leader" onclick="add('leader')" style="display:none;">领导</li>
 				                <li id="doc" iconCls="icon-doc" onclick="add('doc')" style="display:none;">文件</li>
 				                <li id="expert" iconCls="icon-expert" onclick="add('expert')" style="display:none;">专家</li>

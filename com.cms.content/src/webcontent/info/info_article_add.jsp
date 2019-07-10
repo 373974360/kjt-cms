@@ -66,8 +66,7 @@
 		                </td>
 		                <th class="nui-form-label" style="width:70px;">同时发布：</th>
 		                <td style="width:150px;">    
-		                    <input name="infoCat.catId" id="select1" class="nui-treeselect" style="width:150px;" url="com.cms.content.ContentService.queryInfoCategoryTreeNode.biz.ext"
-							    textField="text" ajaxData="setRoleId" dataField="data" valueField="realId" parentField="pid" onbeforeload="onBeforeTreeLoad" multiSelect="true"/>
+		                    <input name="infoCat.catId" class="nui-buttonedit nui-form-input" onbuttonclick="onButtonEdit" allowInput="false"/>
 		                </td>
 		                <td></td>
 		            </tr>       
@@ -199,7 +198,33 @@
 		</div>
 	    <script type="text/javascript">
 	        nui.parse();
-		    var tree = nui.get("select1");
+		    function onButtonEdit(){
+	   			var btnEdit = this;
+		    	nui.open({
+	                url: "<%=request.getContextPath() %>/content/info/category_select.jsp",
+	                title: "选择同时发布栏目",
+					width: 300, 
+	                height: 500,
+	                allowResize:false,
+	                onload : function() {
+						var iframe = this.getIFrameEl();
+	                   	iframe.contentWindow.setCheckedNodes(btnEdit.getValue(),<%=catId %>);
+					},
+	                ondestroy: function (action) {
+	                   if (action == "ok") {
+                            btnEdit.setValue("");
+                            btnEdit.setText("");
+	                        var iframe = this.getIFrameEl();
+	                        var data = iframe.contentWindow.getCheckedNodes();
+	                        data = nui.clone(data);//必须
+	                        if (data) {
+	                            btnEdit.setValue(data.id);
+	                            btnEdit.setText(data.name);
+	                        }
+	                    } 
+	                }
+	            });
+		    }
 		    
 		   	function setInfoSource(){
 		   		var source = nui.get("infoSourceCombobox").getValue();
@@ -220,15 +245,6 @@
 		   			infoAuthor.setValue(infoAuthor.getValue()+","+author);
 		   		}
 		   	}
-		    
-		    function setRoleId(){
-				return {"userId":"<%=userObject.getUserId() %>","nodeId":0};
-			}
-			
-		    function onBeforeTreeLoad(e) {
-				e.params.nodeType = e.node.type;
-				e.params.nodeId = e.node.realId;
-		    }
 	        var form = new nui.Form("form1");
 	        var ue = UE.getEditor('content');
 	        var upload_ue = UE.getEditor('upload_ue');
