@@ -43,7 +43,7 @@
             	<input name="wflogs.wfStepId" class="nui-hidden" value="1"/>
             	<input name="wflogs.wfOptTime" class="nui-hidden"/>
             	<input name="wflogs.wfId" class="nui-hidden"/>
-            	<input name="wflogs.wfOptType" class="nui-hidden" value="1"/>
+            	<input name="wflogs.wfOptType" class="nui-hidden" value="4"/>
             	<input name="wflogs.wfOptDesc" class="nui-hidden" value="信息报送"/>
             	<%
             		if(!group.equals("manager")){

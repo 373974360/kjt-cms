@@ -37,7 +37,7 @@
 		$("#viewRight").css("height",document.documentElement.clientHeight);
 		loadInfoLogs();
 		function loadInfoLogs() {
-			var typeCode = ["通过","驳回","发布"];
+			var typeCode = ["通过","驳回","发布","报送/新增","编辑/整改"];
 			var json = nui.encode({params : {infoId :<%=info_id%>}});
 			$.ajax({
 				url : "com.cms.content.ContentService.queryWfInfoLogs.biz.ext",
