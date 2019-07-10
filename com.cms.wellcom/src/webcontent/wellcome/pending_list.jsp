@@ -132,7 +132,7 @@
 				var row = grid.getSelected();
 				if (row) {
 					nui.open({
-						url : "<%=request.getContextPath()%>/content/info/info_"+row.modelId+"_edit.jsp?catId="+row.catId,
+						url : "<%=request.getContextPath()%>/content/info/info_"+row.modelId+"_edit.jsp?catId="+row.catId+"&group=manager",
 						title : "编辑数据",
 						width : '80%',
 						height : '100%',
