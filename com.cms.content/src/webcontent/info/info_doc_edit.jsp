@@ -209,8 +209,8 @@
 		    	nui.open({
 	                url: "<%=request.getContextPath() %>/content/info/category_select.jsp",
 	                title: "选择同时发布栏目",
-					width: 300, 
-	                height: 500,
+					width: 500, 
+	                height: 700,
 	                allowResize:false,
 	                onload : function() {
 						var iframe = this.getIFrameEl();
