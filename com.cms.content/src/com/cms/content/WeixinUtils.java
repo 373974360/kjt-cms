@@ -74,6 +74,7 @@ public class WeixinUtils {
             HttpEntity entity = response.getEntity();
             if (entity != null) {
                 String result = EntityUtils.toString(entity, "UTF-8");
+                System.out.println(result);
                 jsonObject = JSONObject.fromObject(result);
                 boolean isExit = jsonObject.containsKey("access_token");
                 tokenStr = isExit ? jsonObject.getString("access_token") : "";
@@ -405,7 +406,7 @@ public class WeixinUtils {
     }
     public static String getRootPath(){
     	String path = TempletUtils.class.getClassLoader().getResource("/").getPath();
-    	return path.substring(0,path.indexOf("default")).substring(1);
+    	return path.substring(0,path.indexOf("default"));
     }
 
     public static List<String> getImgSrc(String htmlStr) {
