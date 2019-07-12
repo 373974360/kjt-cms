@@ -55,7 +55,7 @@
 							<a id="publish_update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑 </a>
 							<a id="remove" class="nui-button" iconCls="icon-remove" onclick="setInfoStatus(5,'删除')">删除</a>
 	            			<span class="separator"></span>
-							<a id="pushWeChat" class="nui-button" iconCls="icon-upload">微信推送</a>
+							<a id="pushWeChat" class="nui-button" iconCls="icon-upload" onclick="doPubsWeChat()">微信推送</a>
 							<a id="publishHtml" class="nui-button" iconCls="icon-ok" onclick="publishHtml()">发布静态页</a>
 						<%
 							}
@@ -280,6 +280,41 @@
 					});
 				} else {
 					nui.alert("请选中一条记录", "提示");
+				}
+			}
+			
+			//微信推送
+			function doPubsWeChat() {
+				var rows = grid.getSelecteds();
+				if (rows.length > 0) {
+					var json = nui.encode({
+						infos : rows
+					});
+					nui.confirm("确定将选中的信息推送至微信公众号？","系统提示",function(action) {
+						if (action == "ok") {
+							grid.loading("正在推送中,请稍等...");
+							$.ajax({
+								url : "com.cms.content.ContentService.doPushWeChat.biz.ext",
+								type : 'POST',
+								data : json,
+								cache : false,
+								contentType : 'text/json',
+								success : function(text) {
+									var returnJson = nui.decode(text);
+									if (returnJson.exception == null) {
+										grid.reload();
+										nui.alert("推送成功","系统提示",function(action) {
+										});
+									} else {
+										grid.unmask();
+										nui.alert("推送失败","系统提示");
+									}
+								}
+							});
+						}
+					});
+				} else {
+					nui.alert("请选中一条记录！");
 				}
 			}
 			
