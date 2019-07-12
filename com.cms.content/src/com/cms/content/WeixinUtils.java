@@ -373,11 +373,11 @@ public class WeixinUtils {
         String upUrl = uploadUrl.replace("##tocken##", tocken);
         String temp_id = upload(upUrl, articleList);
         boolean flag = false;
-        if (sendtype.equals("0")) {
-            flag = sendGroupMessage(temp_id);//正式群发
-        } else {
-            flag = previewMessage(temp_id);//测试预览
-        }
+        //if (sendtype.equals("0")) {
+        //    flag = sendGroupMessage(temp_id);//正式群发
+        //} else {
+        //    flag = previewMessage(temp_id);//测试预览
+        //}
         return flag;
     }
     
