@@ -44,7 +44,7 @@ public class DoPushWeChat {
 	public static DataObject[] getInfo(String ids){
 		int counts = 0;
 		int it = 0;
-		String sql = "select i.id,i.site_id,i.info_title,i.author,i.editor,i.content_url,i.description,i.thumb_url,c.info_content from cms_info i,cms_info_content c where i.id=c.info_id and i.id in ("+ids+") and c.info_content is not null";
+		String sql = "select i.id,i.site_id,i.info_title,i.author,i.editor,i.content_url,i.description,i.thumb_url,c.info_content from cms_info i,cms_info_content c where i.id=c.info_id and i.id in ("+ids+") and c.info_content is not null order by i.released_dtime desc";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		Statement stmt = null;
 		ResultSet rs = null;

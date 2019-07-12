@@ -338,6 +338,14 @@
 		        data.content.picContent = getPicContent();
 		        data.info.infoStatus = $("input[name='infoStatus']:checked").val();
 		        data.wflogs.wfId = $("input[name='wflogs.wfId']").val();
+		        if(data.info.description==null||data.info.description==''){
+		        	var info_content = stripHTML(ue.getContent());
+		            if(info_content.length>=200){
+		                data.info.description = info_content.substring(0,200)+"...";
+		            }else{
+		                data.info.description = info_content;
+		            }
+		        }
 		        var json = nui.encode(data);
 		        json = json.substring(0,json.indexOf("infoCat")-2);
 		        var catId = data.infoCat.catId;
@@ -393,9 +401,12 @@
 		        return picArray;
 	        }
 	        function setThumbUrl(picUrl){
-	        	console.log(picUrl);
 	        	$("input[name='info.thumbUrl']").val(picUrl);
 	        }
+	        function stripHTML(str) {
+			    var reTag = /<(?:.|\s)*?>/g;
+			    return str.replace(reTag,"");
+			}
 			function CloseWindow(action){
 				if(action=="close"){
 

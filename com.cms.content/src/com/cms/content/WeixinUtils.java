@@ -328,7 +328,16 @@ public class WeixinUtils {
                 imgpath = rootpath + ab.getString("thumbUrl");
             }
             String temp_media_id = uploadImage(tempUrl, imgpath);
-            articleStr = articleStr + ",{\"thumb_media_id\":\"" + temp_media_id + "\",\"author\":\"" + ab.getString("editor") + "\",\"title\":\"" + ab.getString("infoTitle") + "\",\"content_source_url\":\"" + domain + ab.getString("contentUrl") + "\",\"content\":\"" + content + "\",\"digest\":\"" + description + "\",\"show_cover_pic\":\"" + show_cover_pic + "\"}";
+            if(description=="null"||description==null){
+            	description="";
+            }else{
+            	description = description.replaceAll("&nbsp;","");
+            }
+            String author = ab.getString("author");
+            if(author==null||author==""||author=="null"){
+            	author = ab.getString("editor");
+            }
+            articleStr = articleStr + ",{\"thumb_media_id\":\"" + temp_media_id + "\",\"author\":\"" + author + "\",\"title\":\"" + ab.getString("infoTitle") + "\",\"content\":\"" + content + "\",\"digest\":\"" + description + "\",\"show_cover_pic\":\"" + show_cover_pic + "\"}";
         }
         data = data + articleStr.substring(1) + "]}";
         JSONObject jsonObject = CommUtil.httpRequest(url, "POST", data);
