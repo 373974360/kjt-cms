@@ -68,7 +68,7 @@ public class QueryCommonalityAll {
 		int it = 0;
 		if (dsName == null || dsName.length() == 0)
 			dsName = "default";
-		String sql = "select ORGCODE,ORGNAME FROM ORG_ORGANIZATION ORDER BY ORGID ASC";
+		String sql = "select ORGID,ORGNAME FROM ORG_ORGANIZATION WHERE PARENTORGID = 163 ORDER BY ORGID ASC";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection(dsName);
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -84,7 +84,7 @@ public class QueryCommonalityAll {
 			DataObject[] dobj = new DataObject[counts];
 			while (rs.next()) {
 				DataObject dtr = DataObjectUtil.createDataObject("com.cms.commonality.org.OrgOrganization");				
-				dtr.setString("orgCode", rs.getString("orgCode"));
+				dtr.setString("orgId", rs.getString("ORGID"));
 				dtr.setString("orgName", rs.getString("orgName"));
 				dobj[it] = dtr;
 				it++;

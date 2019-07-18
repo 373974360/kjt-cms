@@ -84,13 +84,13 @@
 		            <tr class="odd">
 		            	<th class="nui-form-label">受理部门：</th>
 		                <td colspan="3" class="tit">
-							<input name="sq.subOrgName" textName="orgname"  class="nui-buttonedit nui-form-input" 
-							onbuttonclick="selectOrg" style="width:80%" allowinput="false" emptyText="请选择"/>	  		                 
+							<input name="sq.subOrgName" textName="sq.subOrgName" class="nui-combobox nui-form-input" style="width:150px;" textField="orgName" valueField="orgId"
+								url="com.cms.commonality.OrganizationService.queryOrgName.biz.ext" dataField="data" emptyText="请选择"/>		  		                 
 		                </td>
 		            	<th class="nui-form-label">回复部门：</th>
 		                <td colspan="3" class="tit">
-							<input name="sq.replyOrgName" textName="orgname" class="nui-buttonedit nui-form-input" 
-							onbuttonclick="selectOrg" style="width:80%" allowinput="false" emptyText="请选择"/>				    		                 							
+							<input name="sq.replyOrgName" textName="sq.replyOrgName" class="nui-combobox nui-form-input" style="width:150px;" textField="orgName" valueField="orgId"
+								url="com.cms.commonality.OrganizationService.queryOrgName.biz.ext" dataField="data" emptyText="请选择"/>					    		                 							
 		                </td>
 		            </tr>
 		            <tr>

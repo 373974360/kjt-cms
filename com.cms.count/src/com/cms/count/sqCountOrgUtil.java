@@ -31,7 +31,7 @@ public class sqCountOrgUtil {
 		if(!StringUtil.isBlank(endTime)&&endTime.length()>=10){
 			endTime = endTime.substring(0,10)+" 23:59:59";
 		}
-		String sql = "SELECT * FROM	(SELECT	u.*,NVL( i.totle, 0 ) AS totle FROM	org_organization u	LEFT JOIN (SELECT count( * ) AS totle,	SUB_ORG_ID FROM	CMS_SQ GROUP BY	SUB_ORG_ID) i ON u.orgid = i.SUB_ORG_ID ) t ORDER BY	t.totle DESC";
+		String sql = "select * from (select u.*,NVL(i.totle,0) as totle from org_organization u left join (SELECT count( * ) AS totle,	SUB_ORG_ID FROM	CMS_SQ GROUP BY	SUB_ORG_ID) i ON u.orgid = i.SUB_ORG_ID where u.parentorgid = "+163+") t order by t.totle desc";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		Statement stmt = null;
 		ResultSet rs = null;

@@ -197,9 +197,11 @@
 						<tr>			                
 			                <th class="nui-form-label">移交部门：</th>
 			                <td >
-								<input id="toOrgName" name="sqPro.toOrgName" textName="orgname" class="nui-buttonedit " 
-								onbuttonclick="selectOrg" allowinput="false" style="width:15%;" 
-								required="true" requiredErrorText="请选择部门"emptyText="请选择"/>	  		                 
+								<input id="toOrgName" name="sqPro.toOrgName" textName="orgname" class="nui-combobox" 
+								allowinput="false" style="width:15%;" 
+								required="true" requiredErrorText="请选择部门"
+								textField="orgName" valueField="orgName" value="orgId" onitemclick="selectOrgId()"
+								url="com.cms.commonality.OrganizationService.queryOrgName.biz.ext" dataField="data" emptyText="请选择"/>		  		                 
 		                	</td>			                		                
 			            </tr>
 			            <tr class="odd">
@@ -428,6 +430,7 @@
 					});
 	        }
 			function onOkTo(e) {
+			
 				var toOrgId = $("#toOrgId").val();				
 	            SaveData(toOrgId);
 	            updateSqData(toOrgId);   
@@ -538,31 +541,13 @@
 			}
 			
 			//选择机构
-		    function selectOrg(e) {
-		        var btnEdit = this;
-		        nui.open({
-		            url:  "<%=request.getContextPath() %>/coframe/org/employee/select_org_tree.jsp",
-		            showMaxButton: false,
-		            title: "选择部门",
-		            width: 350,
-		            height: 350,
-		            ondestroy: function(action){
-		                if (action == "ok") {
-		                    var iframe = this.getIFrameEl();
-		                    var data = iframe.contentWindow.GetData();
-		                    data = nui.clone(data);
-		                    if (data) {
-		                        btnEdit.setValue(data.orgname);
-		                        btnEdit.setText(data.orgname);
-		                        //设置转办部门Id	
-		                         $("#toOrgId").val(data.orgid);
-		                             
-		                    }
-		                    
-		                    
-		                }
-		            }
-		        });            
+		    function selectOrgId(e) {
+		       
+		       var orgId = $("#toOrgName").attr("dataField");
+                //设置转办部门Id	
+                alert(orgId);
+                 $("#toOrgId").val(orgId);                     
+		                   
 		    }
 		    
 		    //单击展开详情按钮时发生
