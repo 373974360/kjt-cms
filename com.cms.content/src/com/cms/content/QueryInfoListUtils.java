@@ -4,6 +4,7 @@
 package com.cms.content;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -99,6 +100,44 @@ public class QueryInfoListUtils {
 			close(stmt);
 			close(conn);
 		}
+	}
+	
+	@Bizlet("检查该信息是否为共享信息")
+	public static int checkInfoCat(String infoId,String catId){
+		int totle = 0;
+		String sql = "select count(*) as totle from cms_info_cat where cat_id="+catId+" and info_id="+infoId+"";
+		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				totle = rs.getInt("totle");
+			}
+			return totle;
+		} catch (Throwable e) {
+			throw new RuntimeException(e);
+		} finally {
+			close(rs);
+			close(stmt);
+			close(conn);
+		}
+	}
+	
+	@Bizlet("删除信息共享记录")
+	public static void deleteInfoCat(String infoId,String catId){
+		String sql = "delete from cms_info_cat where cat_id="+catId+" and info_id="+infoId+"";
+		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
+		PreparedStatement pstmt;
+		try {
+	        pstmt = (PreparedStatement) conn.prepareStatement(sql);
+	        pstmt.executeUpdate();
+	        pstmt.close();
+	        conn.close();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
 	}
 	
 	public static DataObject[] getInfoCategory(String catId,String userId) {

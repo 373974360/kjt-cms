@@ -93,11 +93,14 @@
 					<div field="isTuijian" width="50" headerAlign="center" align="center" allowSort="true">推荐</div>
 					<div field="weight" width="50" headerAlign="center" align="center" allowSort="true">权重</div>
 					<div field="editor" width="100" headerAlign="center" align="center" allowSort="true">编辑</div>
-					<div field="inputDtime" width="130" headerAlign="center" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm">报送时间</div>
 					<%
 						if(infoStatus.equals("3")){
 					%>
 						<div field="releasedDtime" width="130" headerAlign="center" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm">发布时间</div>
+					<%
+						}else{
+					%>
+						<div field="releasedDtime" width="130" headerAlign="center" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm">报送时间</div>
 					<%
 						}
 					%>

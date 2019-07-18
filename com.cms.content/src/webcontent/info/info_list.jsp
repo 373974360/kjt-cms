@@ -57,6 +57,8 @@
 	            			<span class="separator"></span>
 							<a id="pushWeChat" class="nui-button" iconCls="icon-upload" onclick="doPubsWeChat()">微信推送</a>
 							<a id="publishHtml" class="nui-button" iconCls="icon-ok" onclick="publishHtml()">发布静态页</a>
+	            			<span class="separator"></span>
+							<a id="getInfo" class="nui-button" iconCls="icon-filter" onclick="getInfo()">获取信息</a>
 						<%
 							}
 						%>
@@ -108,7 +110,6 @@
 						<input property="editor" class="nui-spinner"  minValue="0" maxValue="99" style="width:80%;"/>
 					</div>
 					<div field="editor" width="100" headerAlign="center" align="center" allowSort="true">编辑</div>
-					<div field="inputDtime" width="130" headerAlign="center" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm">录入时间</div>
 					<div field="releasedDtime" width="130" headerAlign="center" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm">发布时间</div>
 				</div>
 			</div>
@@ -191,7 +192,7 @@
          	
          	setAuthBtn();
          	function setAuthBtn(){
-         		var btn = ["add","revoke","update","remove","publish","reduction","del","pushWeChat"];
+         		var btn = ["add","revoke","update","remove","publish","reduction","del","pushWeChat","getInfo"];
          		var json = nui.encode({params:{userId:<%=userObject.getUserId() %>,funId:1021}});
 				$.ajax({
 					url:"com.cms.content.ContentService.queryBtnAuth.biz.ext",
@@ -287,7 +288,7 @@
 			function doPubsWeChat() {
 				var rows = grid.getSelecteds();
 				if (rows.length > 0) {
-					if(rows.length<=7){
+					if(rows.length<=8){
 						var json = nui.encode({
 							infos : rows
 						});
@@ -315,7 +316,7 @@
 							}
 						});
 					}else{
-						nui.alert("最多选择7条信息！");
+						nui.alert("最多选择8条信息！");
 					}
 				} else {
 					nui.alert("请选中一条记录！");
@@ -329,9 +330,7 @@
 					for(var i=0;i<rows.length;i++){
 						rows[i].infoStatus = infoStatus;
 					}
-					var json = nui.encode({
-						infos : rows
-					});
+					var json = nui.encode({catId:<%=catId %>,infos : rows});
 					nui.confirm("确定"+msg+"选中记录？","系统提示",function(action) {
 						if (action == "ok") {
 							grid.loading("正在"+msg+"中,请稍等...");
@@ -459,6 +458,37 @@
 				} else {
 					nui.alert("请选中一条记录！");
 				}
+			}
+			
+			//信息获取
+			function getInfo() {
+				var json = nui.encode({catId:<%=catId %>});
+				$.ajax({
+					url:"com.cms.content.ContentService.checkChildrenCategory.biz.ext",
+					type:'POST',
+			         data:json,
+			         cache:false,
+			         contentType:'text/json',
+			         success:function(text){
+						if(text.data.length==0){
+							nui.open({
+								url : "<%=request.getContextPath()%>/content/info/getInfo.jsp?catId=<%=catId %>",
+								title : "信息获取",
+								width : '80%',
+								height : '80%',
+								onload : function() {
+								},
+								ondestroy : function(action) {
+									if (action == "saveSuccess") {
+										grid.reload();
+									}
+								}
+							});
+						}else{
+							nui.alert("请选择最末级栏目","系统提示");
+						}
+			         }
+	          	});
 			}
 			//重新刷新页面
 			function refresh() {
