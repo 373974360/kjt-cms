@@ -168,20 +168,20 @@
     		</div>		    		   
 		    <div property="footer" style="text-align:center;padding-top:5px;padding-bottom:5px;" borderStyle="border:0;">
 		    	        
-		        <a class="nui-button" style="width:85px;" iconCls="icon-goto" onclick="onTo()">信件转办</a>
+		        <a id="zb" class="nui-button" style="display:none; width:85px;" iconCls="icon-goto" onclick="onTo()">信件转办</a>
 		        <span style="display:inline-block;width:20px;"></span>
-		        <a class="nui-button" style="width:85px;" iconCls="icon-edit" onclick="onReply()">信件回复</a>
+		        <a id="reply" class="nui-button" style="display:none; width:85px;" iconCls="icon-edit" onclick="onReply()">信件回复</a>
 		        <span style="display:inline-block;width:20px;"></span>
-		        <a class="nui-button" style="width:85px;" iconCls="icon-print" onclick="onPrint()">信件打印</a>
+		        <a id="print" class="nui-button" style="display:none; width:85px;" iconCls="icon-print" onclick="onPrint()">信件打印</a>
 	
 		        <span style="display:inline-block;width:20px;"></span>
-		        <a id="button1" class="nui-button" style="display:none; width:85px;" iconCls="icon-redo" onclick="onSetPublish(2,'撤销发布')">撤销发布</a>	        			        		        
-		        <a id="button2" class="nui-button" style="display:none; width:85px;" iconCls="icon-ok" onclick="onSetPublish(1,'发布')">一键发布</a>	        				
+		        <a id="noPublish" class="nui-button" style="display:none; width:85px;" iconCls="icon-redo" onclick="onSetPublish(2,'撤销发布')">撤销发布</a>	        			        		        
+		        <a id="isPublish" class="nui-button" style="display:none; width:85px;" iconCls="icon-ok" onclick="onSetPublish(1,'发布')">一键发布</a>	        				
 		        
 		        <span style="display:inline-block;width:20px;"></span>
 		        
-		        <a id="button3" class="nui-button" style="display:none; width:85px;" iconCls="icon-redo" onclick="onSetOpen(2,'撤销公开')">撤销公开</a>		        		       
-		        <a id="button4" class="nui-button" style="display:none; width:85px;" iconCls="icon-ok" onclick="onSetOpen(1,'公开')">一键公开</a>	        		        
+		        <a id="noOpen" class="nui-button" style="display:none; width:85px;" iconCls="icon-redo" onclick="onSetOpen(2,'撤销公开')">撤销公开</a>		        		       
+		        <a id="isOpen" class="nui-button" style="display:none; width:85px;" iconCls="icon-ok" onclick="onSetOpen(1,'公开')">一键公开</a>	        		        
 		        
 			</div>
 			<div id="panel4" style="display:none;width: 100%; height: 100%" class="nui-panel" title="转办信件" iconCls="icon-add"  
@@ -331,17 +331,21 @@
 							}
 							
 							if(<%=isPublish.equals("1") %>){
-								$("#button1").show();							
+								$("#noPublish").show();															
 							}else{
-								$("#button2").show();
+								$("#isPublish").show();									
 							}
 							
 							if(<%=isOpen.equals("1") %>){
-								$("#button3").show();
+								$("#noOpen").show();
 							}else{
-								$("#button4").show();
+								$("#isOpen").show();
 							}
-																			
+							
+							$("#zb").show();	
+							$("#reply").show();	
+							$("#print").show();	
+																	
 							form.setData(obj);
 							form.setChanged(false);
 						}
@@ -627,11 +631,11 @@
 										});
 										//CloseWindow("saveSuccess");
 										if(msg == "发布"){
-											$("#button1").show();
-											$("#button2").hide();
+											$("#noPublish").show();
+											$("#isPublish").hide();
 										}else{
-											$("#button1").hide();
-											$("#button2").show();
+											$("#noPublish").hide();
+											$("#isPublish").show();
 										}
 									} else {
 										grid.unmask();
@@ -665,11 +669,11 @@
 										});
 										//CloseWindow("saveSuccess");
 										if(msg == "公开"){
-											$("#button3").show();
-											$("#button4").hide();
+											$("#noOpen").show();
+											$("#isOpen").hide();
 										}else{
-											$("#button3").hide();
-											$("#button4").show();
+											$("#noOpen").hide();
+											$("#isOpen").show();
 										}
 									} else {
 										grid.unmask();
@@ -691,6 +695,37 @@
          			e.allowSelect = false;
 				}			
 			}
+			
+	        //依据用户权限设置按钮操作
+			setAuthBtn();
+         	function setAuthBtn(){
+         		var btn = ["zb","reply","isPublish","noPublish","isOpen","noOpen"];
+         		var json = nui.encode({params:{userId:<%=userObject.getUserId() %>,funId:1181}});
+				$.ajax({
+					url:"com.cms.content.ContentService.queryBtnAuth.biz.ext",
+					type:'POST',
+			         data:json,
+			         cache:false,
+			         contentType:'text/json',
+			         success:function(text){
+						for(var i=0;i<btn.length;i++){
+							if(text.data.length>0){
+								var b = false;
+								for(var j=0;j<text.data.length;j++){
+									if(btn[i] == text.data[j].RESID.replace("sq_","")){
+										b = true;
+									}
+								}
+								if(!b){
+									$("#"+btn[i]).remove();
+								}
+							}else{
+								$("#"+btn[i]).remove();
+							}
+						}
+			         }
+	          	});
+         	}
 		</script>
 	</body>
 </html>

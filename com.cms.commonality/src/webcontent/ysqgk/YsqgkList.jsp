@@ -56,9 +56,9 @@
 				<table style="width: 100%;">
 					<tr>
 						<td style="width: 100%;">
-							<a class="nui-button" iconCls="icon-add" onclick="add()">新增 </a>
-							<a id="update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑 </a>
-							<a class="nui-button" iconCls="icon-remove" onclick="remove()">删除</a>
+							<a id="add" class="nui-button" iconCls="icon-add" onclick="add()">录入</a>
+							<a id="update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑</a>
+							<a id="remove" class="nui-button" iconCls="icon-remove" onclick="remove()">删除</a>
 							<span class="separator"></span>
 							<a id="isPublish" class="nui-button" iconCls="icon-ok" onclick="isPublishOrNot(1,'发布')">发布</a>
 							<a id="noPublish" class="nui-button" iconCls="icon-redo" onclick="isPublishOrNot(2,'撤销发布')">撤销发布</a>
@@ -148,8 +148,8 @@
 				nui.open({
 					url : "<%=request.getContextPath()%>/commonality/ysqgk/YsqgkAdd.jsp",
 					title : "新增记录",
-					width : '60%',
-					height : '80%',
+					width : '80%',
+					height : '100%',
 					onload : function() {
 					},
 					ondestroy : function(action) {//弹出页面关闭前
@@ -167,8 +167,8 @@
 					nui.open({
 						url : "<%=request.getContextPath()%>/commonality/ysqgk/YsqgkUpdate.jsp",
 						title : "编辑数据",
-						width : '60%',
-						height : '80%',
+						width : '80%',
+						height : '100%',
 						onload : function() {
 							var iframe = this.getIFrameEl();
 							var data = row;
@@ -364,8 +364,8 @@
 					nui.open({
 						url : "<%=request.getContextPath()%>/commonality/ysqgk/YsqgkDetail.jsp?ysqgkId="+row.id +"&isPublish=" + row.isPublish +"&isOpen=" + row.isOpen +"&isReply=" + row.isReply,
 						title : "依申请公开详情&处理",
-						width : '60%',
-						height : '80%',
+						width : '80%',
+						height : '100%',
 						onload : function() {
 							var iframe = this.getIFrameEl();
 							var data = row;
@@ -389,6 +389,36 @@
 	            return s;
 	        }
 	        
+	        //依据用户权限设置按钮操作
+			setAuthBtn();
+         	function setAuthBtn(){
+         		var btn = ["add","update","remove","isPublish","noPublish","isOpen","noOpen"];
+         		var json = nui.encode({params:{userId:<%=userObject.getUserId() %>,funId:1181}});
+				$.ajax({
+					url:"com.cms.content.ContentService.queryBtnAuth.biz.ext",
+					type:'POST',
+			         data:json,
+			         cache:false,
+			         contentType:'text/json',
+			         success:function(text){
+						for(var i=0;i<btn.length;i++){
+							if(text.data.length>0){
+								var b = false;
+								for(var j=0;j<text.data.length;j++){
+									if(btn[i] == text.data[j].RESID.replace("sq_","")){
+										b = true;
+									}
+								}
+								if(!b){
+									$("#"+btn[i]).remove();
+								}
+							}else{
+								$("#"+btn[i]).remove();
+							}
+						}
+			         }
+	          	});
+         	}
 	        
 		</script>
 	</body>
