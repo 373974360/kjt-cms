@@ -197,10 +197,10 @@
 						<tr>			                
 			                <th class="nui-form-label">移交部门：</th>
 			                <td >
-								<input id="toOrgName" name="sqPro.toOrgName" textName="orgname" class="nui-combobox" 
+								<input id="toOrgName" name="sqPro.toOrgName" textName="sqPro.toOrgName" class="nui-combobox" 
 								allowinput="false" style="width:15%;" 
 								required="true" requiredErrorText="请选择部门"
-								textField="orgName" valueField="orgName" value="orgId" onitemclick="selectOrgId()"
+								textField="orgName" valueField="orgId" onitemclick="selectOrgId()"
 								url="com.cms.commonality.OrganizationService.queryOrgName.biz.ext" dataField="data" emptyText="请选择"/>		  		                 
 		                	</td>			                		                
 			            </tr>
@@ -541,12 +541,12 @@
 			}
 			
 			//选择机构
-		    function selectOrgId(e) {
+		    function selectOrgId() {
 		       
-		       var orgId = $("#toOrgName").attr("dataField");
+		       	var toOrgId = nui.get("toOrgName").getValue();  
+		       			      
                 //设置转办部门Id	
-                alert(orgId);
-                 $("#toOrgId").val(orgId);                     
+                $("#toOrgId").val(toOrgId);                     
 		                   
 		    }
 		    
