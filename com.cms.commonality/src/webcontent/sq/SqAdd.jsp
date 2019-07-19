@@ -207,7 +207,7 @@
 	            CloseWindow("cancel");
 	        }
 	       
-	        //选择机构
+	        <%-- //选择机构
 		    function selectOrg(e) {
 		        var btnEdit = this;
 		        nui.open({
@@ -228,7 +228,8 @@
 		                }
 		            }
 		        });            
-		    }
+		    } --%>
+		    
 		    //提交日期和回复日期选择范围控制
 		    function onDrawDate(e) {
 		        var date = e.date;

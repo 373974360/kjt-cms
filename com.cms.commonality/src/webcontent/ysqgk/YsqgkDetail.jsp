@@ -325,8 +325,8 @@
 	        	nui.open({
 						url : "<%=request.getContextPath()%>/commonality/ysqgk/YsqgkPrint.jsp",
 						title : "打印预览",
-						width : '60%',
-						height : '80%',
+						width : '80%',
+						height : '100%',
 						onload : function() {
 							var iframe = this.getIFrameEl();						
 							//直接从页面获取，不用去后台获取
