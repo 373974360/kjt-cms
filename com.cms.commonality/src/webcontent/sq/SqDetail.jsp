@@ -295,7 +295,7 @@
 			    }
 			    if (field == "toOrgName") {
 			        if (value == null){
-			        	e.cellHtml = "——";
+			        	e.cellHtml = "-";
 			        }
 			    }
 			});

@@ -132,12 +132,12 @@
 			    }
 			    if (field == "name") {
 			        if (value == null){
-			        	e.cellHtml = "——";
+			        	e.cellHtml = "-";
 			        }
 			    }
 			    if (field == "orgCode") {
 			        if (value == null){
-			        	e.cellHtml = "——";
+			        	e.cellHtml = "-";
 			        }
 			    }
 			});
