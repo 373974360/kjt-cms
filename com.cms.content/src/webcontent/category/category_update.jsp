@@ -1,11 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%>
+<%
+	String skin="skin1";
+	String contextPath=request.getContextPath();
+ %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
 		<link id="css_skin" rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/coframe/tools/skins/skin1/css/style.css"/>
 		<link id="css_icon" rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/coframe/tools/icons/icon.css"/>
-		<script type="text/javascript" src="<%=request.getContextPath()%>/common/nui/nui.js">
-		</script><style type="text/css">
+		<script type="text/javascript" src="<%=request.getContextPath()%>/common/nui/nui.js"></script>
+		<script>
+			(function(){
+				nui.context='<%=contextPath %>'
+			})();
+			
+			var data={};
+			nui.DataTree.prototype.dataField='data';//兼容改造
+		</script>
+		<style type="text/css">
 			#selectModel table{width:100%;}
 			.mini-checkboxlist-td{width:20px;}
 		</style>
@@ -48,8 +60,24 @@
 		            </tr>
 		            <tr>
 		                <th class="nui-form-label">流程绑定：</th>
-		                <td colspan="3">    
+		                <td>    
 		                	<input name="category.workflowId" class="nui-combobox" style="width:100%" textField="workName" valueField="id" url="com.cms.workflow.WorkFlowService.queryWorkFlowAll.biz.ext" dataField="data" showNullItem="true"/>
+		                </td>
+		                <th class="nui-form-label">栏目类型：</th>
+		                <td>    
+		                	<input name="category.catClass" data="data" emptyText="请选择" valueField="dictName" textField="dictName" class="nui-dictcombobox" dictTypeId="CATEGORY_TYPE" style="width:100%"/>
+		                </td>
+		            </tr>
+		            <tr>
+		                <th class="nui-form-label">关键字：</th>
+		                <td colspan="3">    
+		                    <input name="category.keywords" class="nui-textbox nui-form-input"/>
+		                </td>
+		            </tr>
+		            <tr>
+		                <th class="nui-form-label">栏目描述：</th>
+		                <td colspan="3">    
+		                    <textarea name="category.description" class="mini-textarea" style="width:100%"></textarea>
 		                </td>
 		            </tr>
 		            <tr>

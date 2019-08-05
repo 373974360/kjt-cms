@@ -69,6 +69,9 @@ public class CategoryUtil {
 				dtr.setString("indexTemplet", rs.getString("index_templet"));
 				dtr.setString("listTemplet", rs.getString("list_templet"));
 				dtr.setString("linkUrl", rs.getString("link_url"));
+				dtr.setString("catClass", rs.getString("cat_class"));
+				dtr.setString("description", rs.getString("description"));
+				dtr.setString("keywords", rs.getString("keywords"));
 				dtr.setString("remark", rs.getString("remark"));
 				dobj[0] = dtr;
 			}
@@ -112,6 +115,9 @@ public class CategoryUtil {
 				dtr.setString("indexTemplet", rs.getString("index_templet"));
 				dtr.setString("listTemplet", rs.getString("list_templet"));
 				dtr.setString("linkUrl", rs.getString("link_url"));
+				dtr.setString("catClass", rs.getString("cat_class"));
+				dtr.setString("description", rs.getString("description"));
+				dtr.setString("keywords", rs.getString("keywords"));
 				dtr.setString("remark", rs.getString("remark"));
 				dobj[it] = dtr;
 				it++;
