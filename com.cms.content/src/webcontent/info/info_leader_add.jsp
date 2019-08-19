@@ -88,6 +88,12 @@
 							</div>
 		                </td>
 		            </tr>
+		            <tr>
+		                <th class="nui-form-label">来源地址：</th>
+		                <td colspan="4">    
+		                    <input name="info.sourceUrl" class="nui-textbox nui-form-input"/>
+		                </td>
+		            </tr>
 		           	<tr>
 		                <th class="nui-form-label">作者：</th>
 		                <td colspan = 3>    
