@@ -1,0 +1,7 @@
+{charSet:
+    [
+        { id: "utf-8", text: "utf-8" },
+        { id: "gb2312", text: "gb2312" },
+        { id: "GBK", text: "GBK" }
+    ]
+}
