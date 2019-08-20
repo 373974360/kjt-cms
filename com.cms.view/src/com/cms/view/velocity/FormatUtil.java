@@ -204,4 +204,10 @@ public class FormatUtil {
         return ip;
 	}
     
+    
+    public static String filterHtmlTag(String content){
+        String result= HtmlRegexpUtil.filterHtml(content);
+        result = HtmlRegexpUtil.filterSpace(result);
+        return result.replaceAll("　","").replaceAll("&nbsp;"," ").replaceAll(" ","");
+    }
 }

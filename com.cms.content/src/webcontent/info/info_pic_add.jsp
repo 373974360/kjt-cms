@@ -411,7 +411,9 @@
 	        }
 	        function stripHTML(str) {
 			    var reTag = /<(?:.|\s)*?>/g;
-			    return str.replace(reTag,"");
+			    str = str.replace(reTag,"");
+			    str = str.replace("&nbps;","");
+			    return str;
 			}
 			function CloseWindow(action){
 				if(action=="close"){

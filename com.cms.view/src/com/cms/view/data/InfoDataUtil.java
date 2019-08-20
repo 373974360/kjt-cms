@@ -515,7 +515,7 @@ public class InfoDataUtil {
 				sql += " and i.weight = "+con_map.get(key);
 			}
 			if(key.equals("thumb_url") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
-				sql += " and i.thumb_url != null and i.thumb_url != ''";
+				sql += " and i.thumb_url is not null";
 			}
 		}
 		sql += " and i.info_status = 3";
@@ -550,7 +550,7 @@ public class InfoDataUtil {
 					sql += " and i.weight = "+con_map.get(key);
 				}
 				if(key.equals("thumb_url") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
-					sql += " and i.thumb_url != null and i.thumb_url != ''";
+					sql += " and i.thumb_url is not null";
 				}
 			}
 			sql += " and i.info_status = 3";
