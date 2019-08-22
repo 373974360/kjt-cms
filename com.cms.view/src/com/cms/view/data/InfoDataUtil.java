@@ -474,6 +474,18 @@ public class InfoDataUtil {
             if (!"".equals(cat_id) && !"0".equals(cat_id) && !cat_id.startsWith("$cat_id")) {
             	con_map.put("cat_id", getInfoCatIds(cat_id, cat_id));
             }
+            if (tempA[i].toLowerCase().startsWith("start_time=")){
+                String start_time = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
+                if ((!"".equals(start_time)) && (!start_time.startsWith("$start_time")) && (FormatUtil.isNumeric(start_time))) {
+                    con_map.put("start_time", start_time);
+                }
+            }
+            if (tempA[i].toLowerCase().startsWith("end_time=")){
+                String end_time = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
+                if ((!"".equals(end_time)) && (!end_time.startsWith("$end_time")) && (FormatUtil.isNumeric(end_time))) {
+                    con_map.put("end_time", end_time);
+                }
+            }
         }
         con_map.put("page_size", page_size + "");
         con_map.put("current_page", cur_page + "");
@@ -517,6 +529,12 @@ public class InfoDataUtil {
 			if(key.equals("thumb_url") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
 				sql += " and i.thumb_url is not null";
 			}
+			if(key.equals("start_time") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+				sql += " and i.gk_fwrq >=" + con_map.get(key);
+			}
+			if(key.equals("end_time") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+				sql += " and i.gk_fwrq <= " + con_map.get(key);
+			}
 		}
 		sql += " and i.info_status = 3";
 		if(type.equals("list")){
@@ -552,8 +570,56 @@ public class InfoDataUtil {
 				if(key.equals("thumb_url") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
 					sql += " and i.thumb_url is not null";
 				}
+				if(key.equals("start_time") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.gk_fwrq >=" + con_map.get(key);
+				}
+				if(key.equals("end_time") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.gk_fwrq <= " + con_map.get(key);
+				}
 			}
 			sql += " and i.info_status = 3";
+		}else{
+			sql += " or (i.id in ("+QueryInfoListUtils.getInfoCats(con_map.get("cat_id"))+")";
+			for(String key : keys){
+				if(key.equals("model_id") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.model_id = '"+con_map.get(key)+"'";
+				}
+				if(key.equals("title") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.info_title like '%"+con_map.get(key)+"%'";
+				}
+				if(key.equals("info_type") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.info_type = "+con_map.get(key);
+				}
+				if(key.equals("keywords") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and (i.info_title like '%"+con_map.get(key)+"%' or i.keywords like '%"+con_map.get(key)+"%')";
+				}
+				if(key.equals("gk_no") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.gk_no = '"+con_map.get(key)+"'";
+				}
+				if(key.equals("gk_index") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.gk_index = '"+con_map.get(key)+"'";
+				}
+				if(key.equals("is_top") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.is_top = "+con_map.get(key);
+				}
+				if(key.equals("is_tuijian") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.is_tuijian = "+con_map.get(key);
+				}
+				if(key.equals("weight") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.weight = "+con_map.get(key);
+				}
+				if(key.equals("thumb_url") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.thumb_url is not null";
+				}
+				if(key.equals("start_time") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.gk_fwrq >=" + con_map.get(key);
+				}
+				if(key.equals("end_time") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.gk_fwrq <= " + con_map.get(key);
+				}
+			}
+			sql += " and i.info_status = 3";
+			sql += ")";
 		}
 		return sql;
 	}

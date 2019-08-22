@@ -56,8 +56,11 @@ public class SearchInfoManager {
 			if(scope.equals("")){
 				fieldsList.add("infoTitle");
 				fieldsList.add("infoContent");
+				fieldsList.add("gkNo");
 				keysList.add(q);
 				keysList.add(q);
+				keysList.add(q);
+				occurList.add(BooleanClause.Occur.SHOULD);
 				occurList.add(BooleanClause.Occur.SHOULD);
 				occurList.add(BooleanClause.Occur.SHOULD);
 			} else if(scope.equals("title")){
@@ -66,6 +69,10 @@ public class SearchInfoManager {
 				occurList.add(BooleanClause.Occur.SHOULD);
 			} else if(scope.equals("content")){
 				fieldsList.add("infoContent");
+				keysList.add(q);
+				occurList.add(BooleanClause.Occur.SHOULD);
+			} else if(scope.equals("gkNo")){
+				fieldsList.add("gkNo");
 				keysList.add(q);
 				occurList.add(BooleanClause.Occur.SHOULD);
 			}
@@ -219,6 +226,11 @@ public class SearchInfoManager {
 			//过滤条件
 			QueryParser parser = new MultiFieldQueryParser(Version.LUCENE_30, new String[]{""}, new IKAnalyzer());
 			
+			if(map.containsKey("gkNo")){
+				Query queryGkNo = getQuery("gkNo",map.get("gkNo").toString());
+				booleanQuery.add(queryGkNo, BooleanClause.Occur.MUST);
+			}
+			
 			//去除不要过滤的字段
 			int p = (String)map.get("p")==null?1:Integer.valueOf((String)map.get("p"));//当前是第几页
 			int pz = (String)map.get("pz")==null?0:Integer.valueOf((String)map.get("pz"));//页面显示条数
@@ -230,6 +242,7 @@ public class SearchInfoManager {
 			map.remove("length");
 			map.remove("color"); 
 			map.remove("scope");
+			map.remove("gkNo");
 			
 			String tempQuery = getAllQuery(map);
 			QueryWrapperFilter filter = tempQuery.equals("")?null:new QueryWrapperFilter(parser.parse(tempQuery.toString()));
