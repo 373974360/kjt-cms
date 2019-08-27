@@ -73,6 +73,11 @@ public class CategoryUtil {
 				dtr.setString("description", rs.getString("description"));
 				dtr.setString("keywords", rs.getString("keywords"));
 				dtr.setString("remark", rs.getString("remark"));
+				if(getChildrenCount(catId)>0){
+					dtr.setBoolean("isChildren", true);
+				}else{
+					dtr.setBoolean("isChildren", false);
+				}
 				dobj[0] = dtr;
 			}
 			return dobj[0];
@@ -119,6 +124,11 @@ public class CategoryUtil {
 				dtr.setString("description", rs.getString("description"));
 				dtr.setString("keywords", rs.getString("keywords"));
 				dtr.setString("remark", rs.getString("remark"));
+				if(getChildrenCount(rs.getString("id"))>0){
+					dtr.setBoolean("isChildren", true);
+				}else{
+					dtr.setBoolean("isChildren", false);
+				}
 				dobj[it] = dtr;
 				it++;
 			}
@@ -150,9 +160,40 @@ public class CategoryUtil {
 				dtr.setString("chName", rs.getString("ch_name"));
 				dtr.setString("enName", rs.getString("en_name"));
 				dtr.setString("indexTemplet", rs.getString("index_templet"));
+				if(getChildrenCount(rs.getString("id"))>0){
+					dtr.setBoolean("isChildren", true);
+				}else{
+					dtr.setBoolean("isChildren", false);
+				}
 				dobj[0] = dtr;
 			}
 			return dobj[0];
+		} catch (Throwable e) {
+			throw new RuntimeException(e);
+		} finally {
+			close(rs);
+			close(stmt);
+			close(conn);
+		}
+	}
+	
+	
+	/**
+	 * 根据栏目ID查询子栏目
+	 * */
+	public static int getChildrenCount(String catId){
+		int result = 0;
+		String sql = "select count(*) as totle from cms_info_category where parent_id = "+catId+" order by cat_sort asc";
+		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				result = rs.getInt("totle");
+			}
+			return result;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		} finally {

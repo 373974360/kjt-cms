@@ -100,6 +100,11 @@ public class InfoDataUtil {
 				dtr.setString("gkNo", rs.getString("gk_no"));
 				dtr.setString("gkIndex", rs.getString("gk_index"));
 				dtr.setString("chName", rs.getString("ch_name"));
+				dtr.setString("gkDept", rs.getString("gk_dept"));
+				dtr.setString("gkCwrq", rs.getString("gk_cwrq"));
+				dtr.setString("gkFwrq", rs.getString("gk_fwrq"));
+				dtr.setString("gkWjyxx", rs.getString("gk_wjyxx"));
+				dtr.setString("sourceUrl", rs.getString("source_url"));
 				if(!rs.getString("model_id").equals("link") && !rs.getString("model_id").equals("download")){
 					DataObject obj;
 					if(rs.getString("model_id").equals("expert") || rs.getString("model_id").equals("leader")){
@@ -162,6 +167,11 @@ public class InfoDataUtil {
 				dtr.setString("gkNo", rs.getString("gk_no"));
 				dtr.setString("gkIndex", rs.getString("gk_index"));
 				dtr.setString("chName", rs.getString("ch_name"));
+				dtr.setString("gkDept", rs.getString("gk_dept"));
+				dtr.setString("gkCwrq", rs.getString("gk_cwrq"));
+				dtr.setString("gkFwrq", rs.getString("gk_fwrq"));
+				dtr.setString("gkWjyxx", rs.getString("gk_wjyxx"));
+				dtr.setString("sourceUrl", rs.getString("source_url"));
 				if(!rs.getString("model_id").equals("link") && !rs.getString("model_id").equals("download")){
 					DataObject obj;
 					if(rs.getString("model_id").equals("expert") || rs.getString("model_id").equals("leader")){
@@ -311,6 +321,11 @@ public class InfoDataUtil {
 				dtr.setString("gkNo", rs.getString("gk_no"));
 				dtr.setString("gkIndex", rs.getString("gk_index"));
 				dtr.setString("chName", rs.getString("ch_name"));
+				dtr.setString("gkDept", rs.getString("gk_dept"));
+				dtr.setString("gkCwrq", rs.getString("gk_cwrq"));
+				dtr.setString("gkFwrq", rs.getString("gk_fwrq"));
+				dtr.setString("gkWjyxx", rs.getString("gk_wjyxx"));
+				dtr.setString("sourceUrl", rs.getString("source_url"));
 				dobj[it] = dtr;
 				it++;
 			}
