@@ -292,7 +292,9 @@ public class IndexService {
 				dtr.setString("modelId", rs.getString("model_id"));
 				dtr.setString("infoType", rs.getString("info_type"));
 				dtr.setString("contentUrl", rs.getString("content_url"));
-				dtr.setString("releasedDtime", rs.getString("released_dtime"));
+				String time = rs.getString("released_dtime");
+				time = time == null ? "" : time.replaceAll("-","").replaceAll(" ", "").replaceAll(":","");
+				dtr.setString("releasedDtime", time);
 				dtr.setString("gkNo", rs.getString("gk_no"));
 				dtr.setString("siteId", rs.getString("site_id"));
 				dobj[it] = dtr;
@@ -325,7 +327,9 @@ public class IndexService {
 				dtr.setString("modelId", rs.getString("model_id"));
 				dtr.setString("infoType", rs.getString("info_type"));
 				dtr.setString("contentUrl", rs.getString("content_url"));
-				dtr.setString("releasedDtime", rs.getString("released_dtime"));
+				String time = rs.getString("released_dtime");
+				time = time == null ? "" : time.replaceAll("-","").replaceAll(" ", "").replaceAll(":","");
+				dtr.setString("releasedDtime", time);
 				dtr.setString("gkNo", rs.getString("gk_no"));
 				dtr.setString("siteId", rs.getString("site_id"));
 				dobj[0] = dtr;

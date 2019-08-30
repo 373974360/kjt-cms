@@ -33,6 +33,7 @@ import org.wltea.analyzer.lucene.IKAnalyzer;
 
 import com.cms.view.data.CategoryUtil;
 import com.eos.system.annotation.Bizlet;
+import com.cms.view.velocity.DateUtil;
 
 /**
  * @author chaoweima
@@ -226,6 +227,31 @@ public class SearchInfoManager {
 			//过滤条件
 			QueryParser parser = new MultiFieldQueryParser(Version.LUCENE_30, new String[]{""}, new IKAnalyzer());
 			
+			//过滤时间
+			String ts = (String)map.get("ts")==null?"":(String)map.get("ts");//搜索时间范围：开始时间
+			String te = (String)map.get("te")==null?"":(String)map.get("te");//搜索时间范围：结束时间
+			if(!ts.equals("") || !te.equals("")){
+				if(ts.equals("")){
+					ts = "2000-01-01 00:00:01"; 
+					te = te + " 59:59:59";
+				}
+				if(te.equals("")){
+					ts = ts + " 00:00:01";
+					te = DateUtil.getCurrentDateTime();
+				}
+				if(!te.contains(":")){
+					ts = ts + " 00:00:01";
+				}
+				if(!te.contains(":")){
+					te = te + " 59:59:59";
+				}
+				ts = ts.replaceAll("-","").replaceAll(" ","").replaceAll(":", "");
+				te = te.replaceAll("-","").replaceAll(" ","").replaceAll(":", "");
+		        Query queryTime = parser.parse("publishTime:["+ts+" TO "+te+"]");
+		        System.out.println(queryTime.toString());
+				booleanQuery.add(queryTime, BooleanClause.Occur.MUST);
+			}
+			
 			if(map.containsKey("gkNo")){
 				Query queryGkNo = getQuery("gkNo",map.get("gkNo").toString());
 				booleanQuery.add(queryGkNo, BooleanClause.Occur.MUST);
@@ -239,6 +265,8 @@ public class SearchInfoManager {
 			map.remove("q");
 			map.remove("p");
 			map.remove("pz");
+			map.remove("ts");//搜索时间范围：开始时间
+			map.remove("te");//搜索时间范围：结束时间
 			map.remove("length");
 			map.remove("color"); 
 			map.remove("scope");
@@ -298,7 +326,7 @@ public class SearchInfoManager {
 				resultBean.setUrl(url);
 				resultBean.setTitle(title);
 				resultBean.setType(type);
-				resultBean.setTime(time);
+				resultBean.setTime(SearchUtil.formatTimeYYYYMMDDHHMMSS(time));
 				resultBean.setId(id);
 				resultBean.setCategory_id(categoryId);
 				resultBean.setCategory_name(CategoryUtil.getCategoryById(categoryId).getString("chName"));

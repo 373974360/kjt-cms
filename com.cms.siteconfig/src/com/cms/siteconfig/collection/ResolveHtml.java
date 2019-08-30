@@ -23,6 +23,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.cms.content.DateUtils;
+import com.cms.content.GkIndexUtils;
+import com.cms.content.GkIndexVo;
 import com.eos.common.connection.ConnectionHelper;
 import com.eos.foundation.data.DataObjectUtil;
 import com.eos.foundation.database.DatabaseExt;
@@ -73,57 +75,66 @@ public class ResolveHtml {
 		if ((waitgetArtInfoSet != null) && (waitgetArtInfoSet.size() > 0)) {
 			for (int i = waitgetArtInfoSet.size(); i > 0; i--) {
 				String url = (String) waitgetArtInfoSet.iterator().next();
-				if(queryCollInfoByUrl(url)==0){
-					String contentHtml = DownHtmlUtil.downLoadHtml(url, obj.getString("pageCharset"));
-					waitgetArtInfoSet.remove(url);
-					if (StringUtils.isNotBlank(contentHtml)) {
-						DataObject dataObj = getArticleInfo(obj, contentHtml, url);
-						DataObject infoObj = DataObjectUtil.createDataObject("com.cms.content.category.CmsInfo");
-						DatabaseExt.getPrimaryKey(infoObj);
-						String infoId = infoObj.getString("id");
-						infoObj.setString("siteId", "21");
-						infoObj.setString("catId", obj.getString("catId"));
-						infoObj.setString("infoTitle",dataObj.getString("title"));
-						infoObj.setString("author",dataObj.getString("author"));
-						infoObj.setString("source",dataObj.getString("source"));
-						infoObj.setString("editor","数据采集");
-						infoObj.setString("weight", "60");
-						infoObj.setString("hits", "0");
-						infoObj.setString("isTop", "2");
-						infoObj.setString("isTuijian", "2");
-						infoObj.setString("releasedDtime", StringUtils.isNotBlank(dataObj.getString("dtime"))?dataObj.getString("dtime"):DateUtils.getCurrTime());
-						infoObj.setString("inputUser", "1");
-						infoObj.setString("inputDtime", DateUtils.getCurrTime());
-						infoObj.setString("gkNo",dataObj.getString("docno"));
-						infoObj.setString("keywords",dataObj.getString("keywords"));
-						infoObj.setString("sourceUrl",url);
-						if(obj.getString("isStatus").equals("1")){
-							infoObj.setString("infoStatus","3");
-						}else{
-							infoObj.setString("infoStatus","1");
-						}
-						if(obj.getString("modelType").equals("1")){
-							infoObj.setString("modelId","article");
-							DataObject infoContentObj = DataObjectUtil.createDataObject("com.cms.content.category.CmsInfoContent");
-							infoContentObj.setString("infoId",infoId);
-							infoContentObj.setString("infoContent",dataObj.getString("content"));
-							DatabaseExt.getPrimaryKey(infoContentObj);
-							DatabaseUtil.insertEntity("default", infoObj);
-							DatabaseUtil.insertEntity("default", infoContentObj);
-						}else{
-							infoObj.setString("modelId","link");
-							infoObj.setString("contentUrl",url);
-							DatabaseUtil.insertEntity("default", infoObj);
-						}
-						System.out.println("地址："+url+"；采集成功");
+				String contentHtml = DownHtmlUtil.downLoadHtml(url, obj.getString("pageCharset"));
+				waitgetArtInfoSet.remove(url);
+				if (StringUtils.isNotBlank(contentHtml)) {
+					DataObject dataObj = getArticleInfo(obj, contentHtml, url);
+					DataObject infoObj = DataObjectUtil.createDataObject("com.cms.content.category.CmsInfo");
+					DatabaseExt.getPrimaryKey(infoObj);
+					String infoId = infoObj.getString("id");
+					infoObj.setString("siteId", "21");
+					infoObj.setString("catId", obj.getString("catId"));
+					infoObj.setString("infoTitle",dataObj.getString("title"));
+					infoObj.setString("author",dataObj.getString("author"));
+					infoObj.setString("source",dataObj.getString("source"));
+					infoObj.setString("editor","数据采集");
+					infoObj.setString("weight", "60");
+					infoObj.setString("hits", "0");
+					infoObj.setString("isTop", "2");
+					infoObj.setString("isTuijian", "2");
+					infoObj.setString("releasedDtime", StringUtils.isNotBlank(dataObj.getString("dtime"))?dataObj.getString("dtime"):DateUtils.getCurrTime());
+					infoObj.setString("inputUser", "1");
+					infoObj.setString("inputDtime", DateUtils.getCurrTime());
+					infoObj.setString("gkNo",dataObj.getString("docno"));
+					infoObj.setString("keywords",dataObj.getString("keywords"));
+					infoObj.setString("sourceUrl",url);
+					if(obj.getString("isStatus").equals("1")){
+						infoObj.setString("infoStatus","3");
+					}else{
+						infoObj.setString("infoStatus","1");
 					}
-					try {
-						Thread.sleep(1000L);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
+					GkIndexVo indexVo = GkIndexUtils.getGkIndex();
+					infoObj.setString("gkIndex", indexVo.getIndex());
+					infoObj.setString("gkYear", indexVo.getYear());
+					infoObj.setString("gkNum", indexVo.getNum());
+					if(queryCollInfoByUrl(url)==0){
+						if(StringUtils.isNotBlank(infoObj.getString("infoTitle"))){
+							if(obj.getString("modelType").equals("1")){
+								infoObj.setString("modelId","article");
+								DataObject infoContentObj = DataObjectUtil.createDataObject("com.cms.content.category.CmsInfoContent");
+								infoContentObj.setString("infoId",infoId);
+								infoContentObj.setString("infoContent",dataObj.getString("content"));
+								DatabaseExt.getPrimaryKey(infoContentObj);
+								DatabaseUtil.insertEntity("default", infoObj);
+								DatabaseUtil.insertEntity("default", infoContentObj);
+								
+							}else{
+								infoObj.setString("modelId","link");
+								infoObj.setString("contentUrl",url);
+								DatabaseUtil.insertEntity("default", infoObj);
+							}
+							System.out.println("地址："+url+"；采集成功");
+						}else{
+							System.out.println("地址："+url+"；采集失败，标题为空");
+						}
+					}else{
+						System.out.println("地址："+url+"；已采集");
 					}
-				}else{
-					System.out.println("地址："+url+"；已采集");
+				}
+				try {
+					Thread.sleep(1000L);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
 			}
 		}
@@ -197,6 +208,15 @@ public class ResolveHtml {
 				Element select = parse.select(obj.getString("dtimeTagsStart")).first();
 				if (select != null) {
 					artDtime = select.text();
+					if(StringUtils.isNotBlank(artDtime)){
+						artDtime = artDtime.replaceAll("日期：", "");
+						artDtime = artDtime.replaceAll("年", "-");
+						artDtime = artDtime.replaceAll("月", "-");
+						artDtime = artDtime.replaceAll("日", "");
+	                    if (artDtime.length() > 16) {
+	                    	artDtime = artDtime.substring(0, 16);
+	                    }
+					}
 					dtr.setString("dtime", artDtime);
 				}
 			}
