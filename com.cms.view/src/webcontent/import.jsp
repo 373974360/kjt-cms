@@ -362,33 +362,4 @@
 			throw new RuntimeException(e);
 		}
 	}
-	private static void close(Connection conn) {
-		if (conn == null)
-			return;
-		try {
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private static void close(Statement stmt) {
-		if (stmt == null)
-			return;
-		try {
-			stmt.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	private static void close(ResultSet rs) {
-		if (rs == null)
-			return;
-		try {
-			rs.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
  %>
