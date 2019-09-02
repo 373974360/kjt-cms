@@ -487,7 +487,11 @@ public class InfoDataUtil {
                 cat_id = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
             }
             if (!"".equals(cat_id) && !"0".equals(cat_id) && !cat_id.startsWith("$cat_id")) {
-            	con_map.put("cat_id", getInfoCatIds(cat_id, cat_id));
+            	if(cat_id.contains(",")){
+            		con_map.put("cat_id",  cat_id);
+            	}else{
+                	con_map.put("cat_id", getInfoCatIds(cat_id, cat_id));
+            	}
             }
             if (tempA[i].toLowerCase().startsWith("start_time=")){
                 String start_time = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
@@ -545,10 +549,10 @@ public class InfoDataUtil {
 				sql += " and i.thumb_url is not null";
 			}
 			if(key.equals("start_time") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
-				sql += " and i.gk_fwrq >=" + con_map.get(key);
+				sql += " and i.released_dtime >=" + con_map.get(key);
 			}
 			if(key.equals("end_time") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
-				sql += " and i.gk_fwrq <= " + con_map.get(key);
+				sql += " and i.released_dtime <= " + con_map.get(key);
 			}
 		}
 		sql += " and i.info_status = 3";
@@ -586,10 +590,10 @@ public class InfoDataUtil {
 					sql += " and i.thumb_url is not null";
 				}
 				if(key.equals("start_time") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
-					sql += " and i.gk_fwrq >=" + con_map.get(key);
+					sql += " and i.released_dtime >=" + con_map.get(key);
 				}
 				if(key.equals("end_time") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
-					sql += " and i.gk_fwrq <= " + con_map.get(key);
+					sql += " and i.released_dtime <= " + con_map.get(key);
 				}
 			}
 			sql += " and i.info_status = 3";
@@ -627,10 +631,10 @@ public class InfoDataUtil {
 					sql += " and i.thumb_url is not null";
 				}
 				if(key.equals("start_time") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
-					sql += " and i.gk_fwrq >=" + con_map.get(key);
+					sql += " and i.released_dtime >=" + con_map.get(key);
 				}
 				if(key.equals("end_time") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
-					sql += " and i.gk_fwrq <= " + con_map.get(key);
+					sql += " and i.released_dtime <= " + con_map.get(key);
 				}
 			}
 			sql += " and i.info_status = 3";

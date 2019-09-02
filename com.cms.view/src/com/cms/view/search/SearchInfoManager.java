@@ -32,6 +32,7 @@ import org.apache.lucene.util.Version;
 import org.wltea.analyzer.lucene.IKAnalyzer;
 
 import com.cms.view.data.CategoryUtil;
+import com.cms.view.data.InfoDataUtil;
 import com.eos.system.annotation.Bizlet;
 import com.cms.view.velocity.DateUtil;
 
@@ -167,6 +168,11 @@ public class SearchInfoManager {
 		    		sb.append(" && ");
 		    	} 
 		    	sb.append(getCategoryIdQuery(key,object));
+		    }else if(key.equals("catId")){
+		    	if(!sb.toString().trim().equals("") && sb.toString().trim().endsWith(")")){
+		    		sb.append(" && ");
+		    	} 
+		    	sb.append(getCategoryIdQuery(key,object));
 		    } else if(key.equals("gkFwrq")){
 		    	if(!sb.toString().trim().equals("") && sb.toString().trim().endsWith(")")){
 		    		sb.append(" && ");
@@ -272,6 +278,15 @@ public class SearchInfoManager {
 			map.remove("scope");
 			map.remove("gkNo");
 			
+			//如有信息栏目参数 就得到该栏目下面的所有子栏目
+			if(map.get("catId")!=null && !"".equals(map.get("catId"))){//有栏目参数
+				String categoryId = map.get("catId").toString();
+				String cat_ids = InfoDataUtil.getInfoCatIds(categoryId, categoryId);
+				if(cat_ids==null || "".equals(cat_ids)){
+					cat_ids = (String)map.get("categoryId");
+				}
+				map.put("catId",cat_ids);
+			}
 			String tempQuery = getAllQuery(map);
 			QueryWrapperFilter filter = tempQuery.equals("")?null:new QueryWrapperFilter(parser.parse(tempQuery.toString()));
 					
