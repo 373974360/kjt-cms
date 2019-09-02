@@ -45,6 +45,8 @@
 							<a class="nui-button" iconCls="icon-add" onclick="add()">增加 </a>
 							<a id="update" class="nui-button" iconCls="icon-edit" onclick="edit()">编辑 </a>
 							<a id="remove" class="nui-button" iconCls="icon-remove" onclick="remove()">删除</a>
+	            			<span class="separator"></span>
+							<a id="move" class="nui-button" iconCls="icon-open" onclick="moveCategory()">移动</a>
 						</td>
 					</tr>
 				</table>
@@ -175,6 +177,32 @@
 		      });
 		      return bool;
 		    }
+		    
+		    //移动信息
+			function moveCategory() {
+				var rows = grid.getSelecteds();
+				if (rows.length > 0) {
+					nui.open({
+						url : "<%=request.getContextPath()%>/content/category/moveCategory.jsp",
+						title : "信息获取",
+						width : 500,
+						height : 700,
+						onload : function() {
+							var iframe = this.getIFrameEl();
+							//直接从页面获取，不用去后台获取
+							iframe.contentWindow.setData(rows);
+						},
+						ondestroy : function(action) {
+							if (action == "saveSuccess") {
+								grid.reload();
+								parent.refresh();
+							}
+						}
+					});
+				}else{
+					nui.alert("请选择一条记录","系统提示");
+				}
+			}
 			//重新刷新页面
 			function refresh() {
 				var form = new nui.Form("#queryform");

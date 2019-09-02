@@ -420,9 +420,6 @@ public class InfoDataUtil {
                     page_size = Integer.parseInt(ps);
                 }
             }
-            if (tempA[i].toLowerCase().startsWith("cat_id=")) {
-                cat_id = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
-            }
             if (tempA[i].toLowerCase().startsWith("model_id=")){
                 String model_id = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
                 if ((!"".equals(model_id)) && (!model_id.startsWith("$model_id"))) {
@@ -495,13 +492,13 @@ public class InfoDataUtil {
             }
             if (tempA[i].toLowerCase().startsWith("start_time=")){
                 String start_time = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
-                if ((!"".equals(start_time)) && (!start_time.startsWith("$start_time")) && (FormatUtil.isNumeric(start_time))) {
+                if ((!"".equals(start_time)) && (!start_time.startsWith("$start_time"))) {
                     con_map.put("start_time", start_time);
                 }
             }
             if (tempA[i].toLowerCase().startsWith("end_time=")){
                 String end_time = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
-                if ((!"".equals(end_time)) && (!end_time.startsWith("$end_time")) && (FormatUtil.isNumeric(end_time))) {
+                if ((!"".equals(end_time)) && (!end_time.startsWith("$end_time"))) {
                     con_map.put("end_time", end_time);
                 }
             }
@@ -549,10 +546,10 @@ public class InfoDataUtil {
 				sql += " and i.thumb_url is not null";
 			}
 			if(key.equals("start_time") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
-				sql += " and i.released_dtime >=" + con_map.get(key);
+				sql += " and i.released_dtime >='" + con_map.get(key)+"'";
 			}
 			if(key.equals("end_time") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
-				sql += " and i.released_dtime <= " + con_map.get(key);
+				sql += " and i.released_dtime <='" + con_map.get(key)+"'";
 			}
 		}
 		sql += " and i.info_status = 3";
@@ -590,10 +587,10 @@ public class InfoDataUtil {
 					sql += " and i.thumb_url is not null";
 				}
 				if(key.equals("start_time") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
-					sql += " and i.released_dtime >=" + con_map.get(key);
+					sql += " and i.released_dtime >='" + con_map.get(key)+"'";
 				}
 				if(key.equals("end_time") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
-					sql += " and i.released_dtime <= " + con_map.get(key);
+					sql += " and i.released_dtime <='" + con_map.get(key)+"'";
 				}
 			}
 			sql += " and i.info_status = 3";
@@ -631,10 +628,10 @@ public class InfoDataUtil {
 					sql += " and i.thumb_url is not null";
 				}
 				if(key.equals("start_time") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
-					sql += " and i.released_dtime >=" + con_map.get(key);
+					sql += " and i.released_dtime >='" + con_map.get(key)+"'";
 				}
 				if(key.equals("end_time") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
-					sql += " and i.released_dtime <= " + con_map.get(key);
+					sql += " and i.released_dtime <='" + con_map.get(key)+"'";
 				}
 			}
 			sql += " and i.info_status = 3";

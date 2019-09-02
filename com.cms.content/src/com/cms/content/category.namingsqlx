@@ -250,4 +250,23 @@
     		cms_info
     	where input_dtime like '$currTime$%' and info_status = 3
 	</select>
+	
+	
+	<select id="queryResetGkIndexInfoList" parameterClass="commonj.sdo.DataObject" resultClass="com.cms.content.category.CmsInfo">
+    	select 
+    		id,
+    		released_dtime as releasedDtime
+    	from 
+    		cms_info
+    	where 1=1
+    	<dynamic>
+    		<isNotNull prepend="and" property="startTime">
+    			<![CDATA[released_dtime > '$startTime$']]>
+    		</isNotNull>
+    		<isNotNull prepend="and" property="endTime">
+    			<![CDATA[released_dtime < '$endTime$']]>
+    		</isNotNull>
+    	</dynamic>
+    	 order by released_dtime
+	</select>
 </sqlMap>

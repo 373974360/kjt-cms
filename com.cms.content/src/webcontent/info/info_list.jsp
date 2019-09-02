@@ -92,6 +92,7 @@
 							}
 						%>
 						<a id="reload" class="nui-button" iconCls="icon-reload" onclick="refresh()">刷新</a>
+						<a id="move" class="nui-button" iconCls="icon-open" onclick="moveInfo()">移动</a>
 					</td>
 				</tr>
 			</table>
@@ -192,7 +193,7 @@
          	
          	setAuthBtn();
          	function setAuthBtn(){
-         		var btn = ["add","revoke","update","remove","publish","reduction","del","pushWeChat","getInfo"];
+         		var btn = ["add","revoke","update","remove","publish","reduction","del","pushWeChat","getInfo","move"];
          		var json = nui.encode({params:{userId:<%=userObject.getUserId() %>,funId:1021}});
 				$.ajax({
 					url:"com.cms.content.ContentService.queryBtnAuth.biz.ext",
@@ -489,6 +490,32 @@
 						}
 			         }
 	          	});
+			}
+			
+			
+			//移动信息
+			function moveInfo() {
+				var rows = grid.getSelecteds();
+				if (rows.length > 0) {
+					nui.open({
+						url : "<%=request.getContextPath()%>/content/info/moveInfo.jsp",
+						title : "信息获取",
+						width : 500,
+						height : 700,
+						onload : function() {
+							var iframe = this.getIFrameEl();
+							//直接从页面获取，不用去后台获取
+							iframe.contentWindow.setData(rows);
+						},
+						ondestroy : function(action) {
+							if (action == "saveSuccess") {
+								grid.reload();
+							}
+						}
+					});
+				}else{
+					nui.alert("请选择一条记录","系统提示");
+				}
 			}
 			//重新刷新页面
 			function refresh() {
