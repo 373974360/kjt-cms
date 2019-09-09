@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.index.IndexWriter;
@@ -55,6 +56,8 @@ public class IndexService {
 			 Field gkCwrqField = new Field("gkCwrq", "",Field.Store.YES, Field.Index.ANALYZED);
 			 Field gkFwrqField = new Field("gkFwrq", "",Field.Store.YES, Field.Index.ANALYZED);
 			 Field gkWjyxxField = new Field("gkWjyxx", "",Field.Store.YES, Field.Index.ANALYZED);
+			 Field isPicField = new Field("isPic", "",Field.Store.YES, Field.Index.ANALYZED);
+			 Field thumbUrlField = new Field("thumbUrl", "",Field.Store.YES, Field.Index.ANALYZED);
 			 
 			 
 			 //得到indexWriter
@@ -98,6 +101,18 @@ public class IndexService {
 	    			  String modelId = infoObj.getString("modelId");
 	    			  model_idField.setValue(modelId);
 	    			  doc.add(model_idField);
+
+	    			  
+	    			  String thumbUrl = infoObj.getString("thumbUrl");
+	    			  if(StringUtils.isNotBlank(thumbUrl)){
+	    				  isPicField.setValue("true");
+	    				  thumbUrlField.setValue(thumbUrl);
+	    			  }else{
+	    				  isPicField.setValue("false");
+	    				  thumbUrlField.setValue("");
+	    			  }
+	    			  doc.add(isPicField);
+	    			  doc.add(thumbUrlField);
 	    			  
 	    			  gkDeptField.setValue(infoObj.getString("gkDept")==null?"":infoObj.getString("gkDept"));
 	    			  doc.add(gkDeptField);
@@ -160,6 +175,8 @@ public class IndexService {
 			 Field gkCwrqField = new Field("gkCwrq", "",Field.Store.YES, Field.Index.ANALYZED);
 			 Field gkFwrqField = new Field("gkFwrq", "",Field.Store.YES, Field.Index.ANALYZED);
 			 Field gkWjyxxField = new Field("gkWjyxx", "",Field.Store.YES, Field.Index.ANALYZED);
+			 Field isPicField = new Field("isPic", "",Field.Store.YES, Field.Index.ANALYZED);
+			 Field thumbUrlField = new Field("thumbUrl", "",Field.Store.YES, Field.Index.ANALYZED);
 
 			// Document对象不要重用，Field对象可以重用 以加快速度
 			Document doc = new Document();
@@ -190,6 +207,17 @@ public class IndexService {
 			String modelId = infoObj.getString("modelId");
 			model_idField.setValue(modelId);
 			doc.add(model_idField);
+			  
+			  String thumbUrl = infoObj.getString("thumbUrl");
+			  if(StringUtils.isNotBlank(thumbUrl)){
+				  isPicField.setValue("true");
+				  thumbUrlField.setValue(thumbUrl);
+			  }else{
+				  isPicField.setValue("false");
+				  thumbUrlField.setValue("");
+			  }
+			  doc.add(isPicField);
+			  doc.add(thumbUrlField);
 			
 			 gkDeptField.setValue(infoObj.getString("gkDept")==null?"":infoObj.getString("gkDept"));
 			  doc.add(gkDeptField);
@@ -297,6 +325,7 @@ public class IndexService {
 				dtr.setString("releasedDtime", time);
 				dtr.setString("gkNo", rs.getString("gk_no"));
 				dtr.setString("siteId", rs.getString("site_id"));
+				dtr.setString("thumbUrl", rs.getString("thumb_url"));
 				dobj[it] = dtr;
 				it++;
 			}
@@ -332,6 +361,7 @@ public class IndexService {
 				dtr.setString("releasedDtime", time);
 				dtr.setString("gkNo", rs.getString("gk_no"));
 				dtr.setString("siteId", rs.getString("site_id"));
+				dtr.setString("thumbUrl", rs.getString("thumb_url"));
 				dobj[0] = dtr;
 			}
 			return dobj[0];

@@ -5,10 +5,7 @@ package com.cms.view.search;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
@@ -30,6 +27,7 @@ import org.apache.lucene.search.highlight.SimpleFragmenter;
 import org.apache.lucene.search.highlight.SimpleHTMLFormatter;
 import org.apache.lucene.util.Version;
 import org.wltea.analyzer.lucene.IKAnalyzer;
+import org.apache.commons.lang3.StringUtils;
 
 import com.cms.view.data.CategoryUtil;
 import com.cms.view.data.InfoDataUtil;
@@ -211,7 +209,7 @@ public class SearchInfoManager {
 	public static SearchResult search(Map map){ 
 		SearchResult searchResult = new SearchResult();
 		long timeS = System.currentTimeMillis();
-	    List listResult = new ArrayList();//存放搜索结果
+	    List<ResultBean> listResult = new ArrayList<ResultBean>();//存放搜索结果
 	    IndexSearcher indexSearcher = null;
 		try{
 			String q = (String)map.get("q");
@@ -337,6 +335,7 @@ public class SearchInfoManager {
 				String categoryId = doc.get("catId");
 				String site_id = doc.get("siteId");
 				String model_id = doc.get("modelId");
+				String thumbUrl = doc.get("thumbUrl");
 				ResultBean resultBean = new ResultBean();
 				resultBean.setUrl(url);
 				resultBean.setTitle(title);
@@ -348,13 +347,14 @@ public class SearchInfoManager {
 				resultBean.setSite_id(site_id);
 				resultBean.setContent(content);
 				resultBean.setModel_id(model_id);
+				resultBean.setThumb_url(thumbUrl);
 				listResult.add(resultBean);
-				
 			}
+			List<ResultBean> itemList = distinctByTitle(listResult);
 			//得到搜索所用时间
 			timeS = System.currentTimeMillis() - timeS;
 			Double timeQ = Arith.div(Double.valueOf(timeS), Double.valueOf(2000), 2);
-			searchResult.setItems(listResult);
+			searchResult.setItems(itemList);
 			searchResult.setPageControl(pageControl);
 			searchResult.setTime(String.valueOf(timeQ));
 			searchResult.setKey(q);
@@ -372,5 +372,19 @@ public class SearchInfoManager {
 			}
 			return searchResult;
 		}
+	}
+	
+	public static List<ResultBean> distinctByTitle(List<ResultBean> listResult){
+		Set<ResultBean> set = new TreeSet<ResultBean>(new Comparator<ResultBean>() {
+            public int compare(ResultBean o1, ResultBean o2) {
+                int compareToResult = 1;//==0表示重复
+                if(StringUtils.equals(o1.getTitle(), o2.getTitle())) {
+                    compareToResult = 0;
+                }
+                return compareToResult;
+            }
+        });
+        set.addAll(listResult);
+        return new ArrayList<ResultBean>(set);
 	}
 }

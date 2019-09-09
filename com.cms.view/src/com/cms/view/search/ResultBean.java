@@ -23,6 +23,7 @@ public class ResultBean {
 	private String category_name;
 	private String model_id;
 	private String retype = "news";//资源的类型参数    默认是新闻
+	private String thumb_url;
 	
 	public String getUrl() {
 		return url;
@@ -90,4 +91,11 @@ public class ResultBean {
 	public void setRetype(String retype) {
 		this.retype = retype;
 	}
+	public String getThumb_url() {
+		return thumb_url;
+	}
+	public void setThumb_url(String thumb_url) {
+		this.thumb_url = thumb_url;
+	}
+	
 }

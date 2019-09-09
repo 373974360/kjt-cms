@@ -95,6 +95,10 @@ public class SearchUtil {
 			if (length != null && !length.equals("")) {
 				sb.append("<param><key>length</key><value><![CDATA[" + length + "]]></value></param>");
 			}
+			String isPic = (String) request.getParameter("isPic");
+			if (isPic != null && !isPic.equals("")) {
+				sb.append("<param><key>isPic</key><value><![CDATA[" + isPic + "]]></value></param>");
+			}
 			String site_id = (String) request.getParameter("siteId") == null ? "" : (String) request.getParameter("siteId");
 			if (site_id.equals("")) {
 				site_id = (String) request.getAttribute("siteId") == null ? "" : (String) request.getAttribute("siteId");
