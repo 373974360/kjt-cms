@@ -274,7 +274,7 @@ public class IndexService {
 	
 	public static int getInfoCount(String catId){
 		int count = 0;
-		String sql = "select count(id) as totle from cms_info where site_id='"+catId+"' and info_status = 3";
+		String sql = "select count(i.id) as totle from cms_info i,cms_info_category c where i.cat_id=c.id and site_id='"+catId+"' and c.is_view = 1 and info_status = 3";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -297,7 +297,7 @@ public class IndexService {
 	public static DataObject[] getInfoList(String siteId,int startNum,int pageSize){
 		int counts = 0;
 		int it = 0;
-		String sql = "select * from (select row_.*, rownum rownum_ from (select i.* from cms_info i where i.site_id='"+siteId+"' and i.info_status=3";
+		String sql = "select * from (select row_.*, rownum rownum_ from (select i.* from cms_info i,cms_info_category c where i.cat_id=c.id and i.site_id='"+siteId+"' and c.is_view = 1 and i.info_status=3";
 		sql += " order by i.id desc) row_ where rownum <="+pageSize+"+"+startNum+") where rownum_ >="+startNum+" + 1";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		Statement stmt = null;

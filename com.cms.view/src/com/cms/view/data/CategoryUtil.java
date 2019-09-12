@@ -52,7 +52,7 @@ public class CategoryUtil {
 	 * 根据栏目ID查询栏目
 	 * */
 	public static DataObject getCategoryById(String catId){
-		String sql = "select * from cms_info_category where id = "+catId+" order by cat_sort asc";
+		String sql = "select * from cms_info_category where id = "+catId+" and is_view = 1 order by cat_sort asc";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -97,7 +97,7 @@ public class CategoryUtil {
 	public static DataObject[] getCategoryChildById(String catId){
 		int counts = 0;
 		int it = 0;
-		String sql = "select * from cms_info_category where parent_id = "+catId+" order by cat_sort asc";
+		String sql = "select * from cms_info_category where parent_id = "+catId+" and is_view = 1 order by cat_sort asc";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -183,7 +183,7 @@ public class CategoryUtil {
 	 * */
 	public static int getChildrenCount(String catId){
 		int result = 0;
-		String sql = "select count(*) as totle from cms_info_category where parent_id = "+catId+" order by cat_sort asc";
+		String sql = "select count(*) as totle from cms_info_category where parent_id = "+catId+" and is_view = 1 order by cat_sort asc";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		Statement stmt = null;
 		ResultSet rs = null;

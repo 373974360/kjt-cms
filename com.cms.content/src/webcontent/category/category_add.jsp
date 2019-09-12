@@ -73,8 +73,15 @@
 		            </tr>
 		            <tr>
 		                <th class="nui-form-label">关键字：</th>
-		                <td colspan="3">    
+		                <td>    
 		                    <input name="category.keywords" class="nui-textbox nui-form-input"/>
+		                </td>
+		                <th class="nui-form-label">前台显示：</th>
+		                <td>    
+		                	<div name="category.isView" class="nui-radiobuttonlist"
+							    textField="text" dataField="data" valueField="id" value="1"
+							    url="<%=request.getContextPath()%>/content/category/yesNo.txt" >
+							</div>
 		                </td>
 		            </tr>
 		            <tr>
