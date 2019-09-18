@@ -75,9 +75,21 @@
 		                </td>
 		            </tr>
 		            <tr>
-		                <th class="nui-form-label">年度：</th>
+		                <th class="nui-form-label">开始年度：</th>
 		                <td colspan="5">    
-		                    <input name="info.itemYear" class="nui-textbox nui-form-input"/>
+		                    <input name="info.itemBegintime" class="nui-textbox nui-form-input"/>
+		                </td>
+		            </tr>
+		            <tr>
+		                <th class="nui-form-label">结束年度：</th>
+		                <td colspan="5">    
+		                    <input name="info.itemEndtime" class="nui-textbox nui-form-input"/>
+		                </td>
+		            </tr>
+		            <tr>
+		                <th class="nui-form-label">计划领域：</th>
+		                <td colspan="5">    
+		                    <input name="info.itemJhly" class="nui-textbox nui-form-input"/>
 		                </td>
 		            </tr>
 		        </table>    

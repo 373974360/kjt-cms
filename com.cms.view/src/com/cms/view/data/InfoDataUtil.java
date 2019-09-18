@@ -108,7 +108,9 @@ public class InfoDataUtil {
 				dtr.setString("itemNo", rs.getString("item_no"));
 				dtr.setString("itemDept", rs.getString("item_dept"));
 				dtr.setString("itemFzr", rs.getString("item_fzr"));
-				dtr.setString("itemYear", rs.getString("item_year"));
+				dtr.setString("itemBegintime", rs.getString("item_begintime"));
+				dtr.setString("itemEndtime", rs.getString("item_endtime"));
+				dtr.setString("itemJhly", rs.getString("item_jhly"));
 				if(!rs.getString("model_id").equals("link") && !rs.getString("model_id").equals("download") && !rs.getString("model_id").equals("item")){
 					DataObject obj;
 					if(rs.getString("model_id").equals("expert") || rs.getString("model_id").equals("leader")){
@@ -179,7 +181,9 @@ public class InfoDataUtil {
 				dtr.setString("itemNo", rs.getString("item_no"));
 				dtr.setString("itemDept", rs.getString("item_dept"));
 				dtr.setString("itemFzr", rs.getString("item_fzr"));
-				dtr.setString("itemYear", rs.getString("item_year"));
+				dtr.setString("itemBegintime", rs.getString("item_begintime"));
+				dtr.setString("itemEndtime", rs.getString("item_endtime"));
+				dtr.setString("itemJhly", rs.getString("item_jhly"));
 				if(!rs.getString("model_id").equals("link") && !rs.getString("model_id").equals("download") && !rs.getString("model_id").equals("item")){
 					DataObject obj;
 					if(rs.getString("model_id").equals("expert") || rs.getString("model_id").equals("leader")){
@@ -360,6 +364,12 @@ public class InfoDataUtil {
 				dtr.setString("gkFwrq", rs.getString("gk_fwrq"));
 				dtr.setString("gkWjyxx", rs.getString("gk_wjyxx"));
 				dtr.setString("sourceUrl", rs.getString("source_url"));
+				dtr.setString("itemNo", rs.getString("item_no"));
+				dtr.setString("itemDept", rs.getString("item_dept"));
+				dtr.setString("itemFzr", rs.getString("item_fzr"));
+				dtr.setString("itemBegintime", rs.getString("item_begintime"));
+				dtr.setString("itemEndtime", rs.getString("item_endtime"));
+				dtr.setString("itemJhly", rs.getString("item_jhly"));
 				dobj[it] = dtr;
 				it++;
 			}
@@ -536,6 +546,36 @@ public class InfoDataUtil {
                     con_map.put("end_time", end_time);
                 }
             }
+            if (tempA[i].toLowerCase().startsWith("item_no=")){
+                String item_no = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
+                if ((!"".equals(item_no)) && (!item_no.startsWith("$item_no"))) {
+                    con_map.put("item_no", item_no);
+                }
+            }
+            if (tempA[i].toLowerCase().startsWith("item_jhly=")){
+                String item_jhly = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
+                if ((!"".equals(item_jhly)) && (!item_jhly.startsWith("$item_jhly"))) {
+                    con_map.put("item_jhly", item_jhly);
+                }
+            }
+            if (tempA[i].toLowerCase().startsWith("item_dept=")){
+                String item_dept = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
+                if ((!"".equals(item_dept)) && (!item_dept.startsWith("$item_dept"))) {
+                    con_map.put("item_dept", item_dept);
+                }
+            }
+            if (tempA[i].toLowerCase().startsWith("item_fzr=")){
+                String item_fzr = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
+                if ((!"".equals(item_fzr)) && (!item_fzr.startsWith("$item_fzr"))) {
+                    con_map.put("item_fzr", item_fzr);
+                }
+            }
+            if (tempA[i].toLowerCase().startsWith("item_year=")){
+                String item_year = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
+                if ((!"".equals(item_year)) && (!item_year.startsWith("$item_year"))) {
+                    con_map.put("item_year", item_year);
+                }
+            }
         }
         con_map.put("page_size", page_size + "");
         con_map.put("current_page", cur_page + "");
@@ -585,6 +625,21 @@ public class InfoDataUtil {
 			if(key.equals("end_time") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
 				sql += " and i.released_dtime <='" + con_map.get(key)+"'";
 			}
+			if(key.equals("item_no") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+				sql += " and i.item_no = '" + con_map.get(key)+"'";
+			}
+			if(key.equals("item_jhly") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+				sql += " and i.item_jhly like '%" + con_map.get(key)+"%'";
+			}
+			if(key.equals("item_dept") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+				sql += " and i.item_dept = '" + con_map.get(key)+"'";
+			}
+			if(key.equals("item_fzr") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+				sql += " and i.item_fzr = '" + con_map.get(key)+"'";
+			}
+			if(key.equals("item_year") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+				sql += " and i.item_begintime = '" + con_map.get(key)+"'";
+			}
 		}
 		sql += " and i.info_status = 3";
 		if(type.equals("list")){
@@ -626,6 +681,21 @@ public class InfoDataUtil {
 				if(key.equals("end_time") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
 					sql += " and i.released_dtime <='" + con_map.get(key)+"'";
 				}
+				if(key.equals("item_no") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.item_no = '" + con_map.get(key)+"'";
+				}
+				if(key.equals("item_jhly") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.item_jhly like '%" + con_map.get(key)+"%'";
+				}
+				if(key.equals("item_dept") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.item_dept = '" + con_map.get(key)+"'";
+				}
+				if(key.equals("item_fzr") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.item_fzr = '" + con_map.get(key)+"'";
+				}
+				if(key.equals("item_year") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.item_begintime = '" + con_map.get(key)+"'";
+				}
 			}
 			sql += " and i.info_status = 3";
 		}else{
@@ -666,6 +736,21 @@ public class InfoDataUtil {
 				}
 				if(key.equals("end_time") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
 					sql += " and i.released_dtime <='" + con_map.get(key)+"'";
+				}
+				if(key.equals("item_no") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.item_no = '" + con_map.get(key)+"'";
+				}
+				if(key.equals("item_jhly") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.item_jhly like '%" + con_map.get(key)+"%'";
+				}
+				if(key.equals("item_dept") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.item_dept = '" + con_map.get(key)+"'";
+				}
+				if(key.equals("item_fzr") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.item_fzr = '" + con_map.get(key)+"'";
+				}
+				if(key.equals("item_year") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.item_begintime = '" + con_map.get(key)+"'";
 				}
 			}
 			sql += " and i.info_status = 3";
