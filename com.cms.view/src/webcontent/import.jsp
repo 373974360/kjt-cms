@@ -114,7 +114,7 @@
 	importCms("1143","391");
 	importCms("1144","394");
 	importCms("1145","395");
-	importCms("1146","742");*/
+	importCms("1146","742");
 	importCms("1224","485");
 	importCms("1164","363");
 	importCms("1163","364");
@@ -192,7 +192,67 @@
 	importCms("688","828");
 	importCms("807","829");
 	importCms("808","455");
-	importCms("809","456");
+	importCms("809","456");*/
+	importCms("1196","858");
+	importCms("1197","859");
+	importCms("1198","860");
+	importCms("1199","861");
+	importCms("1200","862");
+	importCms("1201","863");
+	importCms("1202","864");
+	importCms("1203","865");
+	importCms("1204","866");
+	importCms("1205","867");
+	importCms("1206","868");
+	importCms("1207","869");
+	importCms("1208","870");
+	importCms("1209","871");
+	importCms("1210","872");
+	importCms("1181","849");
+	importCms("1182","850");
+	importCms("1184","851");
+	importCms("1188","852");
+	importCms("1190","853");
+	importCms("1191","854");
+	importCms("1192","855");
+	importCms("1194","856");
+	importCms("1195","857");
+	importCms("962","876");
+	importCms("1071","877");
+	importCms("1072","878");
+	importCms("963","879");
+	importCms("964","880");
+	importCms("965","881");
+	importCms("966","882");
+	importCms("967","883");
+	importCms("661","884");
+	importCms("662","885");
+	importCms("663","886");
+	importCms("664","887");
+	importCms("960","874");
+	importCms("961","875");
+	importCms("369","842");
+	importCms("666","888");
+	importCms("667","889");
+	importCms("668","890");
+	importCms("669","891");
+	importCms("670","892");
+	importCms("671","893");
+	importCms("672","894");
+	importCms("673","895");
+	importCms("675","896");
+	importCms("676","897");
+	importCms("918","898");
+	importCms("920","899");
+	importCms("1067","900");
+	importCms("1068","901");
+	importCms("1069","902");
+	importCms("1070","903");
+	importCms("371","904");
+	importCms("655","905");
+	importCms("656","906");
+	importCms("657","907");
+	importCms("658","908");
  %>
 <%!
 	private void importCms(String oldCat,String newCat){

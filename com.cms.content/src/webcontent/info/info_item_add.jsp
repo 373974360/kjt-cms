@@ -42,6 +42,7 @@
             	<input name="wflogs.wfOptType" class="nui-hidden" value="4"/>
             	<input name="wflogs.wfOptDesc" class="nui-hidden" value="信息报送"/>
             	<input name="info.releasedDtime" class="nui-hidden" value="<%=curTime %>"/>
+            	<input name="info.editor" class="nui-hidden" value="<%=userObject.getUserName() %>"/>
 		        <table style="width:100%;table-layout:fixed;float:left;" class="nui-form-table" >
 		            <tr>
 		                <th class="nui-form-label" style="width:120px;">所属栏目：</th>
@@ -53,12 +54,6 @@
 		                <th class="nui-form-label">项目名称：</th>
 		                <td colspan="5">    
 		                    <input name="info.infoTitle" class="nui-textbox nui-form-input" required="true"/>
-		                </td>
-		            </tr>
-		           	<tr>
-		                <th class="nui-form-label">网络编辑：</th>
-		                <td colspan = "2">    
-		                    <input name="info.editor" class="nui-textbox nui-form-input" value="<%=userObject.getUserName() %>"/>
 		                </td>
 		            </tr>
 		            <tr>

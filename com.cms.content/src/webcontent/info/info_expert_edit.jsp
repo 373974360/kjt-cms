@@ -137,7 +137,7 @@
 			                </td>
 			                <th class="nui-form-label">点击数：</th>
 			                <td>    
-			                	<input name="info.hits" value="0" class="nui-spinner" minValue="0"/>
+			                	<input name="info.hits" value="0" class="nui-spinner" minValue="0" maxValue="99999"/>
 			                </td>
 			            </tr>
 			            <tr>
