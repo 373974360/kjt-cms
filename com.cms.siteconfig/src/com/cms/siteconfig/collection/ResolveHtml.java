@@ -103,7 +103,7 @@ public class ResolveHtml {
 					}else{
 						infoObj.setString("infoStatus","1");
 					}
-					GkIndexVo indexVo = GkIndexUtils.getGkIndex();
+					GkIndexVo indexVo = GkIndexUtils.getGkIndex(DateUtils.getCurrTime().substring(0,4));
 					infoObj.setString("gkIndex", indexVo.getIndex());
 					infoObj.setString("gkYear", indexVo.getYear());
 					infoObj.setString("gkNum", indexVo.getNum());

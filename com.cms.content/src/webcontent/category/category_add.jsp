@@ -126,6 +126,10 @@
 		                    		<td style="width:100px;"><input type="checkbox" name="modelId" value="download"/> 下载</td>
 		                    		<td><input style="width:100%" name="templetId_download" class="nui-combobox" textField="templetName" valueField="id" url="com.cms.siteconfig.TempletService.queryTempletAll.biz.ext" dataField="data" showNullItem="true" /></td>
 		                    	</tr>
+		                    	<tr>
+		                    		<td style="width:100px;"><input type="checkbox" name="modelId" value="item"/> 项目</td>
+		                    		<td><input style="width:100%" name="templetId_item" class="nui-combobox" textField="templetName" valueField="id" url="com.cms.siteconfig.TempletService.queryTempletAll.biz.ext" dataField="data" showNullItem="true" /></td>
+		                    	</tr>
 		                    </table>
 		                </td>
 		            </tr>

@@ -43,6 +43,7 @@
 				                <li id="doc" iconCls="icon-doc" onclick="add('doc')" style="display:none;">文件</li>
 				                <li id="expert" iconCls="icon-expert" onclick="add('expert')" style="display:none;">专家</li>
 				                <li id="download" iconCls="icon-download" onclick="add('download')" style="display:none;">下载</li>
+				                <li id="item" iconCls="icon-article" onclick="add('item')" style="display:none;">项目</li>
 						    </ul>
 						<%
 							}

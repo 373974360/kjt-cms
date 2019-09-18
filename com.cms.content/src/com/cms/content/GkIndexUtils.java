@@ -20,9 +20,9 @@ import com.eos.system.annotation.Bizlet;
 public class GkIndexUtils {
 
 	@Bizlet("索引号生成相关")
-	public static GkIndexVo getGkIndex(){
+	public static GkIndexVo getGkIndex(String year){
+		year = year.substring(0,4);
 		GkIndexVo indexvo = new GkIndexVo();
-		String year = DateUtils.getYear();
 		String num = getInfoContent(year)+"";
 		String index = "000000";
 		index = index.substring(0,6-num.length())+num;

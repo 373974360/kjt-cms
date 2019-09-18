@@ -277,7 +277,7 @@
       <sourceNode>assign2</sourceNode>
       <targetNode>invokePojo0</targetNode>
     </sourceConnections>
-    <targetConnections>link14</targetConnections>
+    <targetConnections>link30</targetConnections>
     <location x="240" y="150"/>
     <size height="28" width="28"/>
     <nodeLabel>assign2label</nodeLabel>
@@ -366,29 +366,6 @@
     <location x="300" y="102"/>
     <figSize height="17" width="68"/>
     <node>invokePojo7</node>
-  </nodes>
-  <nodes xsi:type="process:tInvoke" description="" id="invokePojo8" name="getGkIndex" displayName="getGkIndex" type="invoke" index="0" invokeType="invoke_pojo" varArgs="false">
-    <sourceConnections xsi:type="process:tLink" id="link14" name="link14" displayName="连接线" isDefault="true" type="transition">
-      <sourceNode>invokePojo8</sourceNode>
-      <targetNode>assign2</targetNode>
-    </sourceConnections>
-    <targetConnections>link16</targetConnections>
-    <location x="171" y="150"/>
-    <size height="28" width="22"/>
-    <nodeLabel>invokePojo8label</nodeLabel>
-    <process:pojo methodType="instance" synchronization="true" transactionType="join">
-      <process:partner type="literal">com.cms.content.GkIndexUtils.getGkIndex</process:partner>
-      <process:instance instanceName=""/>
-    </process:pojo>
-    <process:inputVariables/>
-    <process:outputVariables>
-      <process:outputVariable id="0" name="out0" type="query" value="com.cms.content.GkIndexVo" valueType="Java">gkIndex</process:outputVariable>
-    </process:outputVariables>
-  </nodes>
-  <nodes xsi:type="model:NodeElementLabel" id="invokePojo8label" name="label" nodeType="label">
-    <location x="148" y="186"/>
-    <figSize height="17" width="68"/>
-    <node>invokePojo8</node>
   </nodes>
   <nodes xsi:type="process:tInvoke" description="" id="invokePojo9" name="createContentHTML" displayName="createContentHTML" type="invoke" index="1" invokeType="invoke_pojo" varArgs="false">
     <sourceConnections xsi:type="process:tLink" id="link15" name="link15" displayName="连接线" isDefault="true" type="transition">
@@ -591,9 +568,10 @@
     <node>invokePojo12</node>
   </nodes>
   <nodes xsi:type="process:tInvoke" description="" id="invokePojo16" name="dateFormatgkCwrq" displayName="日期格式化" collapsed="false" type="invoke" index="0" invokeType="invoke_pojo" varArgs="false">
-    <sourceConnections xsi:type="process:tLink" id="link16" name="link16" displayName="连接线" isDefault="true" type="transition">
+    <sourceConnections xsi:type="process:tLink" id="link29" name="link29" displayName="连接线" isDefault="true" type="transition">
       <sourceNode>invokePojo16</sourceNode>
       <targetNode>invokePojo8</targetNode>
+      <process:transitionCondition/>
     </sourceConnections>
     <targetConnections>link24</targetConnections>
     <location x="633" y="66"/>
@@ -685,6 +663,31 @@
     <location x="883" y="359"/>
     <figSize height="17" width="66"/>
     <node>assign5</node>
+  </nodes>
+  <nodes xsi:type="process:tInvoke" description="" id="invokePojo8" name="getGkIndex" displayName="getGkIndex" type="invoke" index="1" invokeType="invoke_pojo" varArgs="false">
+    <sourceConnections xsi:type="process:tLink" id="link30" name="link30" displayName="连接线" isDefault="true" type="transition">
+      <sourceNode>invokePojo8</sourceNode>
+      <targetNode>assign2</targetNode>
+    </sourceConnections>
+    <targetConnections>link29</targetConnections>
+    <location x="122" y="150"/>
+    <size height="28" width="22"/>
+    <nodeLabel>invokePojo8label</nodeLabel>
+    <process:pojo methodType="instance" synchronization="true" transactionType="join">
+      <process:partner type="literal">com.cms.content.GkIndexUtils.getGkIndex</process:partner>
+      <process:instance instanceName=""/>
+    </process:pojo>
+    <process:inputVariables>
+      <process:inputVariable id="0" name="year" type="query" value="java.lang.String" valueType="Java" pattern="reference">currTime</process:inputVariable>
+    </process:inputVariables>
+    <process:outputVariables>
+      <process:outputVariable id="0" name="out0" type="query" value="com.cms.content.GkIndexVo" valueType="Java">gkIndex</process:outputVariable>
+    </process:outputVariables>
+  </nodes>
+  <nodes xsi:type="model:NodeElementLabel" id="invokePojo8label" name="label" nodeType="label">
+    <location x="99" y="186"/>
+    <figSize height="17" width="68"/>
+    <node>invokePojo8</node>
   </nodes>
   <topRuler/>
   <leftRuler/>

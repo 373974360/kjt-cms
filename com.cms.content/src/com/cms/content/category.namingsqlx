@@ -85,6 +85,9 @@
     <delete id="deleteInfoLeaderById" parameterClass="commonj.sdo.DataObject">
     	delete from cms_info_leader where info_id = $id$
     </delete>
+    <delete id="deleteInfoItemById" parameterClass="commonj.sdo.DataObject">
+    	delete from cms_info_item where info_id = $id$
+    </delete>
     
     
     <select id="queryInfoCatList" parameterClass="commonj.sdo.DataObject" resultClass="com.cms.content.category.CmsInfoCat">
@@ -92,6 +95,9 @@
     </select>
     <select id="queryInfoContent" parameterClass="commonj.sdo.DataObject" resultClass="com.cms.content.category.CmsInfoContent">
     	select id,info_id as infoId,pic_content as picContent,video_path as videoPath,info_content as infoContent from cms_info_content where info_id=$id$
+    </select>
+    <select id="queryInfoItem" parameterClass="commonj.sdo.DataObject" resultClass="com.cms.content.category.CmsInfoItem">
+    	select id,info_id as infoId,item_no as itemNo,item_dept as itemDept,item_fzr as itemFzr,item_year as itemYear from cms_info_item where info_id=$id$
     </select>
     <select id="queryInfoLeader" parameterClass="commonj.sdo.DataObject" resultClass="com.cms.content.category.CmsInfoLeader">
     	select id,info_id as infoId,ldzw,grjl,zrfg,kycg from cms_info_leader where info_id=$id$

@@ -105,7 +105,11 @@ public class InfoDataUtil {
 				dtr.setString("gkFwrq", rs.getString("gk_fwrq"));
 				dtr.setString("gkWjyxx", rs.getString("gk_wjyxx"));
 				dtr.setString("sourceUrl", rs.getString("source_url"));
-				if(!rs.getString("model_id").equals("link") && !rs.getString("model_id").equals("download")){
+				dtr.setString("itemNo", rs.getString("item_no"));
+				dtr.setString("itemDept", rs.getString("item_dept"));
+				dtr.setString("itemFzr", rs.getString("item_fzr"));
+				dtr.setString("itemYear", rs.getString("item_year"));
+				if(!rs.getString("model_id").equals("link") && !rs.getString("model_id").equals("download") && !rs.getString("model_id").equals("item")){
 					DataObject obj;
 					if(rs.getString("model_id").equals("expert") || rs.getString("model_id").equals("leader")){
 						obj = getInfoLeader(rs.getString("id"));
@@ -172,7 +176,11 @@ public class InfoDataUtil {
 				dtr.setString("gkFwrq", rs.getString("gk_fwrq"));
 				dtr.setString("gkWjyxx", rs.getString("gk_wjyxx"));
 				dtr.setString("sourceUrl", rs.getString("source_url"));
-				if(!rs.getString("model_id").equals("link") && !rs.getString("model_id").equals("download")){
+				dtr.setString("itemNo", rs.getString("item_no"));
+				dtr.setString("itemDept", rs.getString("item_dept"));
+				dtr.setString("itemFzr", rs.getString("item_fzr"));
+				dtr.setString("itemYear", rs.getString("item_year"));
+				if(!rs.getString("model_id").equals("link") && !rs.getString("model_id").equals("download") && !rs.getString("model_id").equals("item")){
 					DataObject obj;
 					if(rs.getString("model_id").equals("expert") || rs.getString("model_id").equals("leader")){
 						obj = getInfoLeader(rs.getString("id"));
@@ -199,6 +207,32 @@ public class InfoDataUtil {
 		}
 	}
 	
+	public static DataObject getInfoItem(String infoId){
+		String sql = "select * from cms_info_item where info_id="+infoId+"";
+		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			rs = stmt.executeQuery(sql);
+			DataObject[] dobj = new DataObject[1];
+			while (rs.next()) {
+				DataObject dtr = DataObjectUtil.createDataObject("com.cms.content.category.CmsInfoItem");
+				dtr.setString("itemNo", rs.getString("item_no"));
+				dtr.setString("itemDept", rs.getString("item_dept"));
+				dtr.setString("itemFzr", rs.getString("item_fzr"));
+				dtr.setString("itemYear", rs.getString("item_year"));
+				dobj[0] = dtr;
+			}
+			return dobj[0];
+		} catch (Throwable e) {
+			throw new RuntimeException(e);
+		} finally {
+			close(rs);
+			close(stmt);
+			close(conn);
+		}
+	}
 	
 	public static DataObject getInfoContent(String infoId){
 		String sql = "select * from cms_info_content where info_id="+infoId+"";
