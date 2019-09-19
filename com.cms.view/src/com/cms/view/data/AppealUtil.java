@@ -29,7 +29,7 @@ import commonj.sdo.DataObject;
 public class AppealUtil {
 	
 	public static DataObject getAppealContent(String sqId){
-		String sql = "select * from cms_sq where id="+sqId+"";
+		String sql = "select s.*,m.sq_myd from cms_sq s left join cms_sq_myd m on s.id = m.sq_id where s.id="+sqId+"";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -59,6 +59,7 @@ public class AppealUtil {
 				dtr.setString("isPublish", rs.getString("is_publish"));
 				dtr.setString("searchCode", rs.getString("search_code"));
 				dtr.setString("searchPwd", rs.getString("search_pwd"));
+				dtr.setString("sqMyd", rs.getString("sq_myd"));
 				dobj[0] = dtr;
 			}
 			return dobj[0];
