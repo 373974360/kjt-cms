@@ -28,8 +28,31 @@ import commonj.sdo.DataObject;
 @Bizlet("")
 public class AppealUtil {
 	
+	
+	public static int getAppealMydResult(String sqId,String myd){
+		int counts = 0;
+		String sql = "select count(*) as totle from cms_sq_myd where sq_id = "+sqId+" and sq_myd = "+myd+"";
+		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				counts = rs.getInt("totle");
+			}
+			return counts;
+		} catch (Throwable e) {
+			throw new RuntimeException(e);
+		} finally {
+			close(rs);
+			close(stmt);
+			close(conn);
+		}
+	}
+	
 	public static DataObject getAppealContent(String sqId){
-		String sql = "select s.*,m.sq_myd from cms_sq s left join cms_sq_myd m on s.id = m.sq_id where s.id="+sqId+"";
+		String sql = "select * from cms_sq where id="+sqId+"";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -59,7 +82,6 @@ public class AppealUtil {
 				dtr.setString("isPublish", rs.getString("is_publish"));
 				dtr.setString("searchCode", rs.getString("search_code"));
 				dtr.setString("searchPwd", rs.getString("search_pwd"));
-				dtr.setString("sqMyd", rs.getString("sq_myd"));
 				dobj[0] = dtr;
 			}
 			return dobj[0];

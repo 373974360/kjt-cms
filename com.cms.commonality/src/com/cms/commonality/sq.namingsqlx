@@ -3,40 +3,38 @@
 <sqlMap>
 		<select id="querySqList" parameterClass="commonj.sdo.DataObject" resultClass="com.cms.commonality.sq.CmsSq">
 	    	SELECT
-				s.id,
-				s.title,
-				s.IS_OPEN AS isOpen,
-				s.IS_REPLY AS isReply,
-				s.IS_PUBLISH AS isPublish,
-				s.SUB_ORG_NAME AS subOrgName,
-				s.REPLY_ORG_NAME AS replyOrgName,
-				s.CREATE_TIME AS createTime,
-				s.REPLY_TIME AS replyTime,
-				m.sq_myd as sqMyd 
+				id,
+				title,
+				IS_OPEN AS isOpen,
+				IS_REPLY AS isReply,
+				IS_PUBLISH AS isPublish,
+				SUB_ORG_NAME AS subOrgName,
+				REPLY_ORG_NAME AS replyOrgName,
+				CREATE_TIME AS createTime,
+				REPLY_TIME AS replyTime
 			FROM
-				CMS_SQ s left join CMS_SQ_MYD m
-			on
-				s.id = m.sq_id where 1=1 			     	
+				CMS_SQ
+			where 1=1 			     	
 	    	<dynamic>
 	    		<isNotNull prepend="and" property="isReply">
-	    			s.IS_REPLY = $isReply$
+	    			IS_REPLY = $isReply$
 	    		</isNotNull>
 	    		<isNotNull prepend="and" property="isOpen">
-	    			s.IS_OPEN = $isOpen$
+	    			IS_OPEN = $isOpen$
 	    		</isNotNull>
 	    		<isNotNull prepend="and" property="isPublish">
-	    			s.IS_PUBLISH = $isPublish$
+	    			IS_PUBLISH = $isPublish$
 	    		</isNotNull>
 	    		<isNotNull prepend="and" property="title">
-	    			s.title like '%$title$%'
+	    			title like '%$title$%'
 	    		</isNotNull>   		
 	    		<isNotNull>
 	    			<isEqual prepend="and" property="sqData" compareValue="1">
-				 		s.SUB_ORG_ID = $userOrgId$
+				 		SUB_ORG_ID = $userOrgId$
 				   	</isEqual>
 	    		</isNotNull>
 	    	</dynamic>	    	
-	    	ORDER BY s.create_time DESC
+	    	ORDER BY create_time DESC
 	    </select>
 	    
 	    <select id="querySqNoReplayCount" parameterClass="commonj.sdo.DataObject" resultClass="commonj.sdo.DataObject">

@@ -93,7 +93,6 @@
 						<div field="isReply" width="30" align="center" headerAlign="center" allowSort="true" >回复</div>
 						<div field="isPublish" width="30" align="center" headerAlign="center" allowSort="true" >发布</div>
 						<div field="isOpen" width="30" align="center" headerAlign="center" allowSort="true">公开</div>
-						<div field="sqMyd" width="30" align="center" headerAlign="center" allowSort="true">满意度</div>
 						<div name="action" width="40" headerAlign="center" align="center" renderer="onActionRenderer" cellStyle="padding:0;">具体内容</div>
 					</div>
 				</div>
@@ -127,15 +126,6 @@
 			        	e.cellHtml = "是";
 			        }else{
 			        	e.cellHtml = "否";
-			        }
-			    }
-			    if (field == "sqMyd") {
-			        if (value == 1){
-			        	e.cellHtml = "不满意";
-			        }else if (value == 2){
-			        	e.cellHtml = "满意";
-			        }else if (value == 3){
-			        	e.cellHtml = "非常满意";
 			        }
 			    }
 			});
