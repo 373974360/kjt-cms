@@ -49,10 +49,12 @@
 					url="com.cms.siteconfig.TempletService.queryTemplet.biz.ext"
 					pageSize="20" showPageInfo="true" multiSelect="true" onselectionchanged="selectionChanged" allowSortColumn="false" allowAlternating="true">
 					<div property="columns">
-						<div type="checkcolumn" width="10"></div>
-						<div field="id" headerAlign="center" align="center" allowSort="true" width="10">ID</div>
-						<div field="templetName" headerAlign="center" allowSort="true">模板名称</div>
-						<div field="createTime" headerAlign="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm">创建时间</div>
+						<div type="checkcolumn" width="50"></div>
+						<div field="id" headerAlign="center" align="center" allowSort="true" width="50">ID</div>
+						<div field="templetName" headerAlign="center" allowSort="true" width="auto">模板名称</div>
+						<div field="verAction" headerAlign="center" align="center" allowSort="true" width="70">历史版本</div>
+						<div field="version" headerAlign="center" align="center" allowSort="true" width="50">版本号</div>
+						<div field="createTime" headerAlign="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm" width="150">创建时间</div>
 					</div>
 				</div>
 			</div>
@@ -63,6 +65,32 @@
 	
 			var formData = new nui.Form("#queryform").getData(false, false);
 			grid.load(formData);
+			
+			grid.on("drawcell", function (e) {
+			    var field = e.field,
+			        row = e.row;
+			    if (field == "verAction") {
+		      		e.cellHtml = "<a style='cursor:pointer;' href='javascript:templetVerList("+row.id+")'>历史版本</a>";
+			    }
+			});
+	
+	
+			//新增
+			function templetVerList(id) {
+				nui.open({
+					url : "<%=request.getContextPath()%>/siteconfig/templet/TempletVerList.jsp?id="+id,
+					title : "新增记录",
+					width : '80%',
+					height : '80%',
+					onload : function() {
+					},
+					ondestroy : function(action) {//弹出页面关闭前
+						if (action == "saveSuccess") {
+							grid.reload();
+						}
+					}
+				});
+			}
 	
 			//新增
 			function add() {

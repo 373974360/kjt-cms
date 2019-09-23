@@ -21,6 +21,7 @@
 			<div id="form1" method="post">
 				<input id="templet.id" name="templet.id" class="nui-hidden" />
 				<input id="templet.templetContent" name="templet.templetContent" class="nui-hidden" />
+				<input id="templet.version" name="templet.version" class="nui-hidden" value="1"/>
 		        <table style="width:100%;table-layout:fixed;" class="nui-form-table" >
 		            <tr>
 		                <th class="nui-form-label">模板名称：</th>

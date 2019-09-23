@@ -40,7 +40,6 @@
 		    </div>    
 		</div>
 		<div class="nui-toolbar" style="text-align:center;padding-top:5px;padding-bottom:5px;" borderStyle="border:0;">
-			 <a class="nui-button" style="width:60px;" iconCls="icon-save" onclick="onOk()">保存</a>
 			 <span style="display:inline-block;width:25px;"></span>
 			 <a class="nui-button" style="width:60px;" iconCls="icon-cancel" onclick="onCancel()">取消</a>
 		</div>
@@ -56,11 +55,10 @@
 		        lineNumbers : true,  // 是否显示行号
 		        lineWrapping : true
 		  	});
-	        function setData(data){
-	        	data = nui.clone(data);
-	        	var json = nui.encode({templet:data});
+	        function setData(id){
+	        	var json = nui.encode({templet:{id:id}});
 				$.ajax({
-					url:"com.cms.siteconfig.TempletService.getTemplet.biz.ext",
+					url:"com.cms.siteconfig.TempletService.getTempletVer.biz.ext",
 					type:'POST',
 			         data:json,
 			         cache:false,
@@ -75,30 +73,6 @@
 			         }
 	          	});
 	        }
-	        
-	        function SaveData() {
-	           	form.validate();
-		        if(form.isValid()==false) return;
-		        var data = form.getData(false,true);
-		        data.templet.templetContent = editorHtml.getValue();
-		        var json = nui.encode(data);
-	            $.ajax({
-	                url: "com.cms.siteconfig.TempletService.updateTemplet.biz.ext",
-	                type: 'POST',
-	                data: json,
-	                cache: false,
-	                contentType:'text/json',
-	                success: function (text) {
-	                    CloseWindow("saveSuccess");
-	                },
-	                error: function (jqXHR, textStatus, errorThrown) {
-	                    alert(jqXHR.responseText);
-	                    CloseWindow();
-	                }
-	            });
-	        }
-	        
-	        
 			function CloseWindow(action){
 				if(action=="close"){
 
@@ -107,9 +81,6 @@
 				else
               	return window.close();
             }
-	        function onOk(e) {
-	            SaveData();
-	        }
 	        function onCancel(e) {
 	            CloseWindow("cancel");
 	        }
