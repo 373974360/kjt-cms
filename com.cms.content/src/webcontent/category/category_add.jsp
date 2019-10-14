@@ -124,7 +124,7 @@
 		                    	</tr>
 		                    	<tr>
 		                    		<td style="width:100px;"><input type="checkbox" name="modelId" value="download"/> 下载</td>
-		                    		<td><input style="width:100%" name="templetId_download" class="nui-combobox" textField="templetName" valueField="id" url="com.cms.siteconfig.TempletService.queryTempletAll.biz.ext" dataField="data" showNullItem="true" /></td>
+		                    		<td><input name="templetId_download" id="templetId_download" class="nui-hidden" value="0"/></td>
 		                    	</tr>
 		                    	<tr>
 		                    		<td style="width:100px;"><input type="checkbox" name="modelId" value="item"/> 项目</td>

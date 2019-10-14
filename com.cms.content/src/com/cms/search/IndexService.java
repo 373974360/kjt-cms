@@ -20,6 +20,8 @@ import com.eos.foundation.data.DataObjectUtil;
 import com.eos.system.annotation.Bizlet;
 
 import commonj.sdo.DataObject;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author chaoweima
@@ -387,6 +389,9 @@ public class IndexService {
 			while (rs.next()) {
 				result = FormatUtil.clobToStr(rs.getClob("info_content"));
 			}
+			if(StringUtils.isNotBlank(result)){
+				result = filterHtml(result);
+			}
 			return result;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -397,6 +402,32 @@ public class IndexService {
 		}
 	}
 	
+	
+
+    /**
+     *
+     * 基本功能：过滤所有以"<"开头以">"结尾的标签
+     * <p>
+     *
+     * @param String
+     * @return String
+     */
+    public static String filterHtml(String str) {
+        if(str==null||(str=str.trim()).length()==0){
+            return "";
+        }
+        Pattern pattern = Pattern.compile("<[^>]+>");
+        Matcher matcher = pattern.matcher(str);
+        StringBuffer sb = new StringBuffer();
+        boolean result1 = matcher.find();
+        while (result1) {
+            matcher.appendReplacement(sb, "");
+            result1 = matcher.find();
+        }
+        matcher.appendTail(sb);
+        return sb.toString();
+    }
+
 	private static void close(Connection conn) {
 		if (conn == null)
 			return;
