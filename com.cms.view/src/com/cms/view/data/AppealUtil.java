@@ -194,6 +194,9 @@ public class AppealUtil {
 			if(key.equals("search_pwd") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
 				sql += " and search_pwd = '"+con_map.get(key)+"'";
 			}
+			if(key.equals("model_id") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+				sql += " and model_id in ("+con_map.get(key)+")";
+			}
 		}
 		if(!con_map.containsKey("search_code")&&!con_map.containsKey("search_pwd")){
 			sql += " and is_publish = 1 and is_open = 1";
@@ -291,6 +294,12 @@ public class AppealUtil {
                 String search_pwd = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
                 if ((!"".equals(search_pwd)) && (!search_pwd.startsWith("$search_pwd"))) {
                     con_map.put("search_pwd", search_pwd);
+                }
+            }
+            if (tempA[i].toLowerCase().startsWith("model_id=")){
+                String model_id = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
+                if ((!"".equals(model_id)) && (!model_id.startsWith("$model_id"))) {
+                    con_map.put("model_id", model_id);
                 }
             }
         }

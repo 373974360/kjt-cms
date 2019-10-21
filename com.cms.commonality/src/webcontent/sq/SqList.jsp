@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%>
 <%
 	UserObject userObject = (UserObject)request.getSession().getAttribute("userObject");
-
+	String modelId = request.getParameter("model_id");
  %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -17,6 +17,7 @@
 				<!-- 排序字段 -->
 				<input name="params/userOrgId" class="nui-hidden" value="<%=userObject.getUserOrgId() %>"> 
 				<input name="params/userId" class="nui-hidden" value="<%=userObject.getUserId() %>"> 
+				<input name="params/modelId" class="nui-hidden" value="<%=modelId %>"> 
 				<table id="table1" class="table" style="height: 100%;float:left;">
 					<tr>
 						<td class="form_label">来信标题:</td>

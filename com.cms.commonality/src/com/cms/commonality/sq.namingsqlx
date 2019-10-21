@@ -25,6 +25,9 @@
 	    		<isNotNull prepend="and" property="isPublish">
 	    			IS_PUBLISH = $isPublish$
 	    		</isNotNull>
+	    		<isNotNull prepend="and" property="modelId">
+	    			MODEL_ID = $modelId$
+	    		</isNotNull>
 	    		<isNotNull prepend="and" property="title">
 	    			title like '%$title$%'
 	    		</isNotNull>   		
