@@ -46,7 +46,16 @@
 			FROM
 				CMS_SQ 
 			WHERE
-				IS_REPLY = 2
+				IS_REPLY = 2 and model_id=1
+	    </select>
+	    
+	    <select id="querySqNoReplayCount_2" parameterClass="commonj.sdo.DataObject" resultClass="commonj.sdo.DataObject">
+	    	SELECT
+				count(id) as totle
+			FROM
+				CMS_SQ 
+			WHERE
+				IS_REPLY = 2 and model_id=2
 	    </select>
 	    
 	    <select id="querySqInputCount" parameterClass="commonj.sdo.DataObject" resultClass="commonj.sdo.DataObject">

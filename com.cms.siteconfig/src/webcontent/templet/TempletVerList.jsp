@@ -16,7 +16,8 @@
 				<!-- 排序字段 -->
 				<input class="nui-hidden" name="criteria/_orderby[1]/_property" value="version">
 				<input class="nui-hidden" name="criteria/_orderby[1]/_sort" value="asc">
-				<input class="nui-hidden" name="templet/templetId" value="<%=id %>"/>
+				<input class="nui-hidden" name="criteria/_expr[2]/templetId" value="<%=id %>"/>
+				<input class="nui-hidden" name="criteria/_expr[2]/_op" value="=">
 			</div>
 		<div class="nui-panel" title="模板列表" iconCls="icon-add" style="width: 100%; height: 100%;" showToolbar="false" showFooter="false">
 			<div class="nui-fit">

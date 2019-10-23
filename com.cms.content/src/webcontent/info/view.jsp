@@ -1,10 +1,16 @@
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.eos.data.datacontext.UserObject"%>
+<%@page import="com.eos.data.datacontext.UserObject,commonj.sdo.DataObject,com.cms.view.data.InfoDataUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" session="false"%>
 <%
 	String info_id = request.getParameter("info_id");
+	DataObject infoData = InfoDataUtil.getInfoData(info_id);
+	String url = request.getContextPath()+"/content/info/view_content.jsp?info_id="+info_id;
+	if(infoData.getString("modelId").equals("link")||infoData.getString("modelId").equals("download")){
+		url = infoData.getString("contentUrl");
+	}
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -30,7 +36,7 @@
 		<ul class="layui-timeline"></ul>
 	</div>
 	<div id="viewRight">
-		<iframe src="<%=request.getContextPath()%>/content/info/view_content.jsp?info_id=<%=info_id%>" frameborder="0" width="100%" height="100%"></iframe>
+		<iframe src="<%=url%>" frameborder="0" width="100%" height="100%"></iframe>
 	</div>
 	<script type="text/javascript">
 		var _ul = $(".layui-timeline");

@@ -22,6 +22,7 @@
       <process:return id="4" language="commonj.sdo.DataObject[]" name="sqNoReplyData" type="query" valueType="Java">sqNoReplyData</process:return>
       <process:return id="5" language="commonj.sdo.DataObject[]" name="infoInputData" type="query" valueType="Java">infoInputData</process:return>
       <process:return id="6" language="commonj.sdo.DataObject[]" name="infoPublishData" type="query" valueType="Java">infoPublishData</process:return>
+      <process:return id="7" language="commonj.sdo.DataObject[]" name="sqNoReplyData_2" type="query" valueType="Java">sqNoReplyData_2</process:return>
     </process:returns>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="start0label" name="label" displayName="label" nodeType="label">
@@ -39,8 +40,8 @@
       <sourceNode>subprocess1</sourceNode>
       <targetNode>subprocess4</targetNode>
     </sourceConnections>
-    <targetConnections>link2</targetConnections>
-    <location x="450" y="75"/>
+    <targetConnections>link7</targetConnections>
+    <location x="540" y="126"/>
     <size height="27" width="27"/>
     <nodeLabel>subprocess1label</nodeLabel>
     <process:flow index="1" synchronization="true" transactionType="join" varArgs="false">
@@ -54,14 +55,14 @@
     </process:flow>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="subprocess1label" name="label" nodeType="label">
-    <location x="414" y="110"/>
+    <location x="504" y="161"/>
     <figSize height="17" width="99"/>
     <node>subprocess1</node>
   </nodes>
   <nodes xsi:type="process:tSubprocess" description="" id="subprocess0" name="noSqReplyCount" displayName="noSqReplyCount" type="subprocess">
     <sourceConnections xsi:type="process:tLink" id="link2" name="link2" displayName="连接线" isDefault="true" type="transition">
       <sourceNode>subprocess0</sourceNode>
-      <targetNode>subprocess1</targetNode>
+      <targetNode>subprocess7</targetNode>
     </sourceConnections>
     <targetConnections>link1</targetConnections>
     <location x="296" y="75"/>
@@ -202,6 +203,30 @@
     <figSize height="17" width="118"/>
     <node>subprocess6</node>
   </nodes>
+  <nodes xsi:type="process:tSubprocess" description="" id="subprocess7" name="noSqReplyCount1" displayName="noSqReplyCount_2" collapsed="false" type="subprocess">
+    <sourceConnections xsi:type="process:tLink" id="link7" name="link7" displayName="连接线" isDefault="true" type="transition">
+      <sourceNode>subprocess7</sourceNode>
+      <targetNode>subprocess1</targetNode>
+    </sourceConnections>
+    <targetConnections>link2</targetConnections>
+    <location x="405" y="81"/>
+    <size height="27" width="27"/>
+    <nodeLabel>subprocess7label</nodeLabel>
+    <process:flow index="0" synchronization="true" transactionType="join" varArgs="false">
+      <process:partner type="literal">com.cms.commonality.SqService.noSqReplyCount_2</process:partner>
+      <process:inputVariables>
+        <process:inputVariable id="0" name="params" type="query" value="commonj.sdo.DataObject" valueType="Java" pattern="reference">params</process:inputVariable>
+      </process:inputVariables>
+      <process:outputVariables>
+        <process:outputVariable id="0" name="data" type="query" value="commonj.sdo.DataObject[]" valueType="Java">sqNoReplyData_2</process:outputVariable>
+      </process:outputVariables>
+    </process:flow>
+  </nodes>
+  <nodes xsi:type="model:NodeElementLabel" id="subprocess7label" name="label" nodeType="label">
+    <location x="366" y="116"/>
+    <figSize height="17" width="104"/>
+    <node>subprocess7</node>
+  </nodes>
   <topRuler/>
   <leftRuler/>
   <process:info author="chaoweima" createTime="2019-06-18 11:38:19" date="2019-06-18Z" description="" name="getCount" version="7.0.0.0"/>
@@ -217,6 +242,7 @@
     <process:output anyType="commonj.sdo.DataObject" description="" isArray="true" name="sqNoReplyData"/>
     <process:output anyType="commonj.sdo.DataObject" description="" isArray="true" name="infoInputData"/>
     <process:output anyType="commonj.sdo.DataObject" description="" isArray="true" name="infoPublishData"/>
+    <process:output anyType="commonj.sdo.DataObject" description="" isArray="true" name="sqNoReplyData_2"/>
   </process:outputs>
   <process:extAttribute1>public</process:extAttribute1>
   <process:transactionType>true</process:transactionType>

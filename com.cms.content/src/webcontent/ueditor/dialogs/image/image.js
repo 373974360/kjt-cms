@@ -872,7 +872,11 @@
                         try {
                             var json = isJsonp ? r:eval('(' + r.responseText + ')');
                             if (json.state == 'SUCCESS') {
-                                _this.pushData(json.list);
+                                var newarr= new Array();
+                                for (var i = json.list.length-1; i >= 0; i--) {
+                                  newarr.push(json.list[i]);
+                                }
+                                _this.pushData(newarr);
                                 _this.listIndex = parseInt(json.start) + parseInt(json.list.length);
                                 if(_this.listIndex >= json.total) {
                                     _this.listEnd = true;
