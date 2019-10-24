@@ -18,7 +18,7 @@
 		<link id="css_icon" rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/coframe/tools/icons/icon.css"/>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/common/nui/nui.js"></script>
 		<script src="<%=request.getContextPath()%>/content/ueditor/ueditor.config.js" type="text/javascript"></script>
-    	<script src="<%=request.getContextPath()%>/content/ueditor/ueditor.all.min.js" type="text/javascript"></script>
+    	<script src="<%=request.getContextPath()%>/content/ueditor/ueditor.all.js" type="text/javascript"></script>
 		<style type="text/css">
 			.mini-radiobuttonlist-table{width:300px;}
 		</style>
