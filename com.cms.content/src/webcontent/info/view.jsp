@@ -6,7 +6,7 @@
 	pageEncoding="UTF-8" session="false"%>
 <%
 	String info_id = request.getParameter("info_id");
-	DataObject infoData = InfoDataUtil.getInfoData(info_id);
+	DataObject infoData = InfoDataUtil.getInfoData(info_id,"");
 	String url = request.getContextPath()+"/content/info/view_content.jsp?info_id="+info_id;
 	if(infoData.getString("modelId").equals("link")||infoData.getString("modelId").equals("download")){
 		url = infoData.getString("contentUrl");

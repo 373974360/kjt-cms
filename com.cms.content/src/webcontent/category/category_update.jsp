@@ -68,7 +68,7 @@
 		                	<input name="category.catClass" data="data" emptyText="请选择" valueField="dictName" textField="dictName" class="nui-dictcombobox" dictTypeId="CATEGORY_TYPE" style="width:100%"/>
 		                </td>
 		            </tr>
-		            <tr>>
+		            <tr>
 		                <th class="nui-form-label">关键字：</th>
 		                <td>    
 		                    <input name="category.keywords" class="nui-textbox nui-form-input"/>
