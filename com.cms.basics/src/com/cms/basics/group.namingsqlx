@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- author:chaoweima -->
+<sqlMap>    
+    <select id="getAuthorizedRoleList" parameterClass="commonj.sdo.DataObject" resultClass="commonj.sdo.DataObject">
+    	select r.role_id as id,r.role_name as name from cap_role r,cms_user_group_role gr where r.role_id=gr.role_id and gr.group_id=$groupId$
+    </select>
+    <select id="getUnauthorizedRoleList" parameterClass="commonj.sdo.DataObject" resultClass="commonj.sdo.DataObject">
+    	select r.role_id as id,r.role_name as name from cap_role r left join (select * from cms_user_group_role where group_id=$groupId$) gr on r.role_id=gr.role_id where gr.role_id is null
+    </select>
+    
+    
+    <delete id="deleteGroupRole" parameterClass="commonj.sdo.DataObject">
+    	delete from cms_user_group_role where group_id = $groupId$ and role_id=$roleId$
+    </delete>
+    
+    
+    <select id="getUserAuthorizedRoleList" parameterClass="commonj.sdo.DataObject" resultClass="commonj.sdo.DataObject">
+    	select emp.empid as id,emp.empname as name from org_employee emp,cms_user_group_user gu where emp.empid=gu.user_id and gu.group_id=$groupId$
+    </select>
+    <select id="getUserUnauthorizedRoleList" parameterClass="commonj.sdo.DataObject" resultClass="commonj.sdo.DataObject">
+    	select emp.empid as id,emp.empname as name from org_employee emp left join cms_user_group_user gu on emp.empid=gu.user_id where gu.user_id is null
+    </select>
+    
+    <delete id="deleteGroupUser" parameterClass="commonj.sdo.DataObject">
+    	delete from cms_user_group_user where group_id = $groupId$ and user_id=$userId$
+    </delete>
+    
+    
+    <select id="getGroupCategoryList" parameterClass="com.cms.basics.group.CmsUserGroup" resultClass="com.cms.basics.group.CmsUserGroupCategory">
+    	select * from cms_user_group_category where group_id=$id$
+    </select>
+    <select id="getGroupUserList" parameterClass="com.cms.basics.group.CmsUserGroup" resultClass="com.cms.basics.group.CmsUserGroupUser">
+    	select * from cms_user_group_user where group_id=$id$
+    </select>
+    <select id="getGroupRoleList" parameterClass="com.cms.basics.group.CmsUserGroup" resultClass="com.cms.basics.group.CmsUserGroupRole">
+    	select * from cms_user_group_role where group_id=$id$
+    </select>
+</sqlMap>

@@ -41,90 +41,7 @@
             		}
 	            %>
 		        <table style="width:100%;table-layout:fixed;float:left;" class="nui-form-table" >
-		            <tr>
-		                <th class="nui-form-label" style="width:120px;">所属栏目：</th>
-		                <td style="width:100px;">    
-		                    <span name="categoryName"><span>
-		                </td>
-		                <th class="nui-form-label" style="width:70px;">文章分类：</th>
-		                <td style="width:100px;">    
-		                    <input name="info.infoType" class="nui-combobox" textField="typeName" valueField="id"  style="width:100px;"
-						    url="com.cms.basics.InfoTypeService.queryInfoTypeAll.biz.ext" dataField="data" showNullItem="true" />
-		                </td>
-		                <th class="nui-form-label" style="width:70px;">同时发布：</th>
-		                <td style="width:150px;">    
-		                    <input id="infoCatId" name="infoCat.catId" class="nui-buttonedit nui-form-input" onbuttonclick="onButtonEdit" allowInput="false"/>
-		                </td>
-		                <td></td>
-		            </tr>       
-		            <tr>
-		                <th class="nui-form-label">列表标题：</th>
-		                <td colspan="5">    
-		                    <input name="info.topTitle" class="nui-textbox nui-form-input"/>
-		                </td>
-		            </tr>       
-		            <tr>
-		                <th class="nui-form-label">信息标题：</th>
-		                <td colspan="5">    
-		                    <input name="info.infoTitle" class="nui-textbox nui-form-input" required="true"/>
-		                </td>
-		            </tr>
-		            <tr>
-		                <th class="nui-form-label">简短标题：</th>
-		                <td colspan="5">    
-		                    <input name="info.subTitle" class="nui-textbox nui-form-input"/>
-		                </td>
-		            </tr>  
-		            <tr>
-		                <th class="nui-form-label">来源：</th>
-		                <td colspan = 3>    
-		                	<input id="infoSource" name="info.source" class="nui-textbox nui-form-input"/>
-		                </td>
-		                <td>
-		                	<div id="infoSourceCombobox" class="nui-combobox" style="width:100px;" popupWidth="400" textField="sourceName" valueField="sourceName"
-							    url="com.cms.basics.SourceService.querySourceAll.biz.ext" dataField="data" onvaluechanged="setInfoSource()">
-							</div>
-		                </td>
-		            </tr>
-		            <tr>
-		                <th class="nui-form-label">来源地址：</th>
-		                <td colspan="4">    
-		                    <input name="info.sourceUrl" class="nui-textbox nui-form-input"/>
-		                </td>
-		            </tr>
-		           	<tr>
-		                <th class="nui-form-label">作者：</th>
-		                <td colspan = 3>    
-		                	<input id="infoAuthor" name="info.author" class="nui-textbox nui-form-input"/>
-		                </td>
-		                <td>
-		                	<div id="infoAuthorCombobox" class="nui-combobox" style="width:100px;" popupWidth="400" textField="authorName" valueField="authorName"
-							    url="com.cms.basics.AuthorService.queryAuthorAll.biz.ext" dataField="data" onvaluechanged="setInfoAuthor()">
-							</div>
-		                </td>
-		            </tr>
-		           	<tr>
-		                <th class="nui-form-label">网络编辑：</th>
-		                <td colspan = "2">    
-		                    <input name="info.editor" class="nui-textbox nui-form-input" value="<%=userObject.getUserName() %>"/>
-		                </td>
-		            </tr>
-		            <tr>
-		                <th class="nui-form-label">关键词：</th>
-		                <td colspan="3">    
-		                    <input name="info.keywords" class="nui-textbox nui-form-input"/>
-		                </td>
-		                <th class="nui-form-label">发布时间：</th>
-		                <td>    
-		                    <input name="info.releasedDtime" class="nui-datepicker nui-form-input" format="yyyy-MM-dd HH:mm:ss" dateFormat="yyyy-MM-dd HH:mm:ss" showTime="true"/>
-		                </td>
-		            </tr>
-		            <tr>
-		                <th class="nui-form-label">摘要：</th>
-		                <td colspan="5">    
-		                   <textarea name="info.description" class="nui-textarea" style="width:100%;"></textarea>
-		                </td>
-		            </tr>
+		            <jsp:include page="incloud_header.jsp"/>
 		            <tr>
 		                <th class="nui-form-label">标题图片：</th>
 		                <td colspan="4">    
@@ -135,6 +52,12 @@
 		                   <a id="update" class="nui-button" iconCls="icon-upload" onclick="upImage();">上传图片 </a>
 		                </td>
 		            </tr>
+					<tr>
+					    <th class="nui-form-label">图片说明：</th>
+					    <td colspan="5">    
+					       <textarea name="info.thumbRemark" class="nui-textarea" style="width:100%;"></textarea>
+					    </td>
+					</tr>
 		            <%
 		            	if(group.equals("manager")){
 		            %>
@@ -301,6 +224,10 @@
 	           	form.validate();
 		        if(form.isValid()==false) return;
 		        var data = form.getData(false,true);
+		        if(data.info.isShemi == 1){
+		        	alert("请检查内容是否涉密");
+		        	return false;
+		        }
 		        data.info.thumbUrl = $("input[name='info.thumbUrl']").val();
 		        var json = nui.encode(data);
 		        json = json.substring(0,json.indexOf("infoCat")-2);

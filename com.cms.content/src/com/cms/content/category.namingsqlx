@@ -102,6 +102,9 @@
     <delete id="deleteUserCategory" parameterClass="commonj.sdo.DataObject">
     	delete from cms_user_category where user_id = $userId$
     </delete>
+    <delete id="deleteGroupCategory" parameterClass="commonj.sdo.DataObject">
+    	delete from cms_user_group_category where group_id = $groupId$
+    </delete>
     <delete id="deleteUserData" parameterClass="commonj.sdo.DataObject">
     	delete from cms_user_data where user_id = $userId$
     </delete>

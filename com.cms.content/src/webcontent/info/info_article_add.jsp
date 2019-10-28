@@ -54,90 +54,7 @@
             		}
 	            %>
 		        <table style="width:100%;table-layout:fixed;float:left;" class="nui-form-table" >
-		            <tr>
-		                <th class="nui-form-label" style="width:120px;">所属栏目：</th>
-		                <td style="width:100px;">    
-		                    <span name="categoryName"><span>
-		                </td>
-		                <th class="nui-form-label" style="width:70px;">文章分类：</th>
-		                <td style="width:100px;">    
-		                    <input name="info.infoType" class="nui-combobox" textField="typeName" valueField="id"  style="width:100px;"
-						    url="com.cms.basics.InfoTypeService.queryInfoTypeAll.biz.ext" dataField="data" showNullItem="true" />
-		                </td>
-		                <th class="nui-form-label" style="width:70px;">同时发布：</th>
-		                <td style="width:150px;">    
-		                    <input name="infoCat.catId" class="nui-buttonedit nui-form-input" onbuttonclick="onButtonEdit" allowInput="false"/>
-		                </td>
-		                <td></td>
-		            </tr>       
-		            <tr>
-		                <th class="nui-form-label">列表标题：</th>
-		                <td colspan="5">    
-		                    <input name="info.topTitle" class="nui-textbox nui-form-input"/>
-		                </td>
-		            </tr>       
-		            <tr>
-		                <th class="nui-form-label">信息标题：</th>
-		                <td colspan="5">    
-		                    <input name="info.infoTitle" class="nui-textbox nui-form-input" required="true"/>
-		                </td>
-		            </tr>
-		            <tr>
-		                <th class="nui-form-label">简短标题：</th>
-		                <td colspan="5">    
-		                    <input name="info.subTitle" class="nui-textbox nui-form-input"/>
-		                </td>
-		            </tr>  
-		            <tr>
-		                <th class="nui-form-label">来源：</th>
-		                <td colspan = 3>    
-		                	<input id="infoSource" name="info.source" class="nui-textbox nui-form-input"/>
-		                </td>
-		                <td>
-		                	<div id="infoSourceCombobox" class="nui-combobox" style="width:100px;" popupWidth="400" textField="sourceName" valueField="sourceName"
-							    url="com.cms.basics.SourceService.querySourceAll.biz.ext" dataField="data" onvaluechanged="setInfoSource()">
-							</div>
-		                </td>
-		            </tr>
-		            <tr>
-		                <th class="nui-form-label">来源地址：</th>
-		                <td colspan="4">    
-		                    <input name="info.sourceUrl" class="nui-textbox nui-form-input"/>
-		                </td>
-		            </tr>  
-		           	<tr>
-		                <th class="nui-form-label">作者：</th>
-		                <td colspan = 3>    
-		                	<input id="infoAuthor" name="info.author" class="nui-textbox nui-form-input"/>
-		                </td>
-		                <td>
-		                	<div id="infoAuthorCombobox" class="nui-combobox" style="width:100px;" popupWidth="400" textField="authorName" valueField="authorName"
-							    url="com.cms.basics.AuthorService.queryAuthorAll.biz.ext" dataField="data" onvaluechanged="setInfoAuthor()">
-							</div>
-		                </td>
-		            </tr>
-		           	<tr>
-		                <th class="nui-form-label">网络编辑：</th>
-		                <td colspan = "2">    
-		                    <input name="info.editor" class="nui-textbox nui-form-input" value="<%=userObject.getUserName() %>"/>
-		                </td>
-		            </tr>
-		            <tr>
-		                <th class="nui-form-label">关键词：</th>
-		                <td colspan="3">    
-		                    <input name="info.keywords" class="nui-textbox nui-form-input"/>
-		                </td>
-		                <th class="nui-form-label">发布时间：</th>
-		                <td>    
-		                    <input name="info.releasedDtime" class="nui-datepicker nui-form-input" format="yyyy-MM-dd HH:mm:ss" dateFormat="yyyy-MM-dd HH:mm:ss" value="<%=curTime %>" showTime="true"/>
-		                </td>
-		            </tr>
-		            <tr>
-		                <th class="nui-form-label">摘要：</th>
-		                <td colspan="5">    
-		                   <textarea name="info.description" class="nui-textarea" style="width:100%;"></textarea>
-		                </td>
-		            </tr>
+		            <jsp:include page="incloud_header.jsp"/>
 		            <tr>
 		                <th class="nui-form-label">标题图片：</th>
 		                <td colspan="4">    
@@ -148,14 +65,12 @@
 		                   <a id="update" class="nui-button" iconCls="icon-upload" onclick="upImage();">上传图片 </a>
 		                </td>
 		            </tr>
-		            <tr>
-		                <th class="nui-form-label">发布状态：</th>
-		                <td colspan="5">    
-		                	<span id="draft"><input type="radio" name="infoStatus" value="1"/> 草稿</span>
-		                	<span id="pending"><input type="radio" name="infoStatus" value="2"/> 待审</span>
-		                	<span id="publish"><input type="radio" name="infoStatus" value="3"/> 发布</span>
-		                </td>
-		            </tr>
+					<tr>
+					    <th class="nui-form-label">图片说明：</th>
+					    <td colspan="5">    
+					       <textarea name="info.thumbRemark" class="nui-textarea" style="width:100%;"></textarea>
+					    </td>
+					</tr>
 		            <%
 		            	if(group.equals("manager")){
 		            %>
@@ -189,7 +104,7 @@
 		            	}
 		            %>
 		            <tr>
-		                <th class="nui-form-label">正文内容：</th>
+		                <th class="nui-form-label">正文内容<span style="color:red;"> *</span>：</th>
 		                <td colspan="6">
 		                   	<textarea id="content" style="height:300px;width:98%;"></textarea>
 		                </td>
@@ -198,7 +113,10 @@
 		    </div>    
 		</div>
 		<div class="nui-toolbar" style="text-align:center;padding-top:5px;padding-bottom:5px;" borderStyle="border:0;">
-			 <a class="nui-button" style="width:60px;" iconCls="icon-save" onclick="onOk()">保存</a>
+			 <a class="nui-button" style="width:90px;" iconCls="icon-search" onclick="onView()">格式预览</a>
+			 <a class="nui-button" style="width:100px;" iconCls="icon-edit" onclick="onOk(1)">保存为草稿</a>
+			 <a class="nui-button" id="btn_pending" style="width:100px;" iconCls="icon-upload" onclick="onOk(2)">保存并送审</a>
+			 <a class="nui-button" id="btn_publish" style="width:100px;" iconCls="icon-ok" onclick="onOk(3)">保存并发布</a>
 			 <span style="display:inline-block;width:25px;"></span>
 			 <a class="nui-button" style="width:60px;" iconCls="icon-cancel" onclick="onCancel()">取消</a>
 		</div>
@@ -300,18 +218,16 @@
 								}
 								if(obj.category.workflowId==null){
 									$("#pending").remove();
+									$("#btn_pending").remove();
 								}else{
-									$("#pending input[name='infoStatus']").attr("checked",true);
 									$("input[name='wflogs.wfId']").val(obj.category.workflowId);
 								}
 								if(!b){
 									$("#publish").remove();
+									$("#btn_publish").remove();
 								}else{
 									$("#pending").remove();
-									$("#publish input[name='infoStatus']").attr("checked",true);
-								}
-								if(!b && obj.category.workflowId==null){
-									$("#draft input[name='infoStatus']").attr("checked",true);
+									$("#btn_pending").remove();
 								}
 					         }
 			          	});
@@ -319,13 +235,17 @@
 	          	});
 	        }
 	        
-	        function SaveData() {
+	        function SaveData(e) {
 	           	form.validate();
 		        if(form.isValid()==false) return;
 		        var data = form.getData(false,true);
+		        if(data.info.isShemi == 1){
+		        	alert("请检查内容是否涉密");
+		        	return false;
+		        }
+	        	data.info.infoStatus = e;
 		        data.info.thumbUrl = $("input[name='info.thumbUrl']").val();
 		        data.content.infoContent = ue.getContent();
-		        data.info.infoStatus = $("input[name='infoStatus']:checked").val();
 		        data.wflogs.wfId = $("input[name='wflogs.wfId']").val();
 		        if(data.info.description==null||data.info.description==''){
 		        	var info_content = stripHTML(ue.getContent());
@@ -363,6 +283,29 @@
 	                }
 	            });
 	        }
+	        
+	        function onView() {
+	           	form.validate();
+		        if(form.isValid()==false) return;
+		        var data = form.getData(false,true);
+		        data.info.infoContent = ue.getContent();
+		        var json = nui.encode(data.info);
+		        $.ajax({
+	                url: "<%=request.getContextPath()%>/content/info/on_view.jsp",
+	                type: 'POST',
+	                data: json,
+	                cache: false,
+	                contentType:'text/json',
+	                success: function (text) {
+	               		window.open("<%=request.getContextPath()%>/content/info/on_view_1.jsp");
+	                },
+	                error: function (jqXHR, textStatus, errorThrown) {
+	                    alert(jqXHR.responseText);
+	                    CloseWindow();
+	                }
+	             });
+	        }
+	        
 	        function stripHTML(str) {
 			    var reTag = /<(?:.|\s)*?>/g;
 			    str = str.replace(reTag,"");
@@ -378,7 +321,7 @@
               	return window.close();
             }
 	        function onOk(e) {
-	            SaveData();
+	            SaveData(e);
 	        }
 	        function onCancel(e) {
 	            CloseWindow("cancel");

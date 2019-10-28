@@ -138,14 +138,6 @@
 		                   <a id="update" class="nui-button" iconCls="icon-upload" onclick="upImage();">上传图片 </a>
 		                </td>
 		            </tr>
-		            <tr>
-		                <th class="nui-form-label">发布状态：</th>
-		                <td colspan="5">    
-		                	<span id="draft"><input type="radio" name="infoStatus" value="1"/> 草稿</span>
-		                	<span id="pending"><input type="radio" name="infoStatus" value="2"/> 待审</span>
-		                	<span id="publish"><input type="radio" name="infoStatus" value="3"/> 发布</span>
-		                </td>
-		            </tr>
 		            <%
 		            	if(group.equals("manager")){
 		            %>
@@ -206,7 +198,10 @@
 		    </div>    
 		</div>
 		<div class="nui-toolbar" style="text-align:center;padding-top:5px;padding-bottom:5px;" borderStyle="border:0;">
-			 <a class="nui-button" style="width:60px;" iconCls="icon-save" onclick="onOk()">保存</a>
+			 <a class="nui-button" style="width:90px;" iconCls="icon-search" onclick="onView()">格式预览</a>
+			 <a class="nui-button" style="width:100px;" iconCls="icon-edit" onclick="onOk(1)">保存为草稿</a>
+			 <a class="nui-button" id="btn_pending" style="width:100px;" iconCls="icon-upload" onclick="onOk(2)">保存并送审</a>
+			 <a class="nui-button" id="btn_publish" style="width:100px;" iconCls="icon-ok" onclick="onOk(3)">保存并发布</a>
 			 <span style="display:inline-block;width:25px;"></span>
 			 <a class="nui-button" style="width:60px;" iconCls="icon-cancel" onclick="onCancel()">取消</a>
 		</div>
@@ -311,18 +306,16 @@
 								}
 								if(obj.category.workflowId==null){
 									$("#pending").remove();
+									$("#btn_pending").remove();
 								}else{
-									$("#pending input[name='infoStatus']").attr("checked",true);
 									$("input[name='wflogs.wfId']").val(obj.category.workflowId);
 								}
 								if(!b){
 									$("#publish").remove();
+									$("#btn_publish").remove();
 								}else{
 									$("#pending").remove();
-									$("#publish input[name='infoStatus']").attr("checked",true);
-								}
-								if(!b && obj.category.workflowId==null){
-									$("#draft input[name='infoStatus']").attr("checked",true);
+									$("#btn_pending").remove();
 								}
 					         }
 			          	});
@@ -330,7 +323,7 @@
 	          	});
 	        }
 	        
-	        function SaveData() {
+	        function SaveData(e) {
 	           	form.validate();
 		        if(form.isValid()==false) return;
 		        var data = form.getData(false,true);
@@ -339,7 +332,7 @@
 		        data.leader.grjl = grjl.getContent();
 		        data.leader.zrfg = zrfg.getContent();
 		        data.leader.kycg = kycg.getContent();
-		        data.info.infoStatus = $("input[name='infoStatus']:checked").val();
+	        	data.info.infoStatus = e;
 		        data.wflogs.wfId = $("input[name='wflogs.wfId']").val();
 		        var json = nui.encode(data);
 		        json = json.substring(0,json.indexOf("infoCat")-2);
@@ -369,6 +362,30 @@
 	                }
 	            });
 	        }
+	        function onView() {
+	           	form.validate();
+		        if(form.isValid()==false) return;
+		        var data = form.getData(false,true);
+		        data.info.ldzw = ldzw.getContent();
+		        data.info.grjl = grjl.getContent();
+		        data.info.zrfg = zrfg.getContent();
+		        data.info.kycg = kycg.getContent();
+		        var json = nui.encode(data.info);
+		        $.ajax({
+	                url: "<%=request.getContextPath()%>/content/info/on_view.jsp",
+	                type: 'POST',
+	                data: json,
+	                cache: false,
+	                contentType:'text/json',
+	                success: function (text) {
+	               		window.open("<%=request.getContextPath()%>/content/info/on_view_1.jsp");
+	                },
+	                error: function (jqXHR, textStatus, errorThrown) {
+	                    alert(jqXHR.responseText);
+	                    CloseWindow();
+	                }
+	             });
+	        }
 			function CloseWindow(action){
 				if(action=="close"){
 
@@ -378,7 +395,7 @@
               	return window.close();
             }
 	        function onOk(e) {
-	            SaveData();
+	            SaveData(e);
 	        }
 	        function onCancel(e) {
 	            CloseWindow("cancel");

@@ -83,6 +83,7 @@
 		    </div>    
 		</div>
 		<div class="nui-toolbar" style="text-align:center;padding-top:5px;padding-bottom:5px;" borderStyle="border:0;">
+			 <a class="nui-button" style="width:90px;" iconCls="icon-search" onclick="onView()">格式预览</a>
 			 <a class="nui-button" style="width:60px;" iconCls="icon-save" onclick="onOk()">保存</a>
 			 <span style="display:inline-block;width:25px;"></span>
 			 <a class="nui-button" style="width:60px;" iconCls="icon-cancel" onclick="onCancel()">取消</a>
@@ -147,6 +148,26 @@
 	                    CloseWindow();
 	                }
 	            });
+	        }
+	        function onView() {
+	           	form.validate();
+		        if(form.isValid()==false) return;
+		        var data = form.getData(false,true);
+		        var json = nui.encode(data.info);
+		        $.ajax({
+	                url: "<%=request.getContextPath()%>/content/info/on_view.jsp",
+	                type: 'POST',
+	                data: json,
+	                cache: false,
+	                contentType:'text/json',
+	                success: function (text) {
+	               		window.open("<%=request.getContextPath()%>/content/info/on_view_1.jsp");
+	                },
+	                error: function (jqXHR, textStatus, errorThrown) {
+	                    alert(jqXHR.responseText);
+	                    CloseWindow();
+	                }
+	             });
 	        }
 			function CloseWindow(action){
 				if(action=="close"){

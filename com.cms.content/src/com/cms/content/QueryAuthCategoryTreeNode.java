@@ -35,6 +35,19 @@ public class QueryAuthCategoryTreeNode {
 		return treeNode;
 	}
 	
+	@Bizlet("用户组栏目授权")
+	public static DataObject[] queryGroupAuthCategoryTreeNode(String groupId){
+		DataObject[] treeNode = getCategoryTreeNode();
+		for(DataObject node:treeNode){
+			if(checkTreeByGroupId(node.getString("id"),groupId)>0){
+				node.setBoolean("checked", true);
+			}else{
+				node.setBoolean("checked", false);
+			}
+		}
+		return treeNode;
+	}
+	
 	
 	public static DataObject[] getCategoryTreeNode() {
 		int counts = 0;
@@ -80,6 +93,32 @@ public class QueryAuthCategoryTreeNode {
 	public static int checkTreeByUserId(String catId,String userId) {
 		int counts = 0;
 		String sql = "select id from cms_user_category where cat_id = "+catId+" and user_id= "+ userId;
+		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+			rs = stmt.executeQuery(sql);
+			if (null != rs) {
+				rs.last();
+				counts = rs.getRow();
+				rs.beforeFirst();
+			}
+			return counts;
+		} catch (Throwable e) {
+			throw new RuntimeException(e);
+		} finally {
+			close(rs);
+			close(stmt);
+			close(conn);
+		}
+	}
+	
+
+	
+	public static int checkTreeByGroupId(String catId,String groupId) {
+		int counts = 0;
+		String sql = "select id from cms_user_group_category where category_id = "+catId+" and group_id= "+ groupId;
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		Statement stmt = null;
 		ResultSet rs = null;

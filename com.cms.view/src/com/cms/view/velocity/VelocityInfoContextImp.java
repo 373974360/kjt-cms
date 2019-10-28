@@ -65,4 +65,14 @@ public class VelocityInfoContextImp extends VelocityContextAbstract {
 			template_id = catObj.getString(tempType);
 		}
 	}
+
+	public void setTemplateID(DataObject infoData){
+		if(infoData!=null){
+			vcontext.put("cat_id", infoData.getString("catId"));
+			vcontext.put("infoData", infoData);
+			template_id = InfoDataUtil.getTempletId(infoData.getString("modelId"),infoData.getString("catId"));
+		}else{
+			template_id = "";
+		}
+	}
 }
