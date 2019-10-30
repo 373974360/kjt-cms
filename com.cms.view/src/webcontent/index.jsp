@@ -20,7 +20,6 @@
 		}
 	}else{
 		out.println("<script>");
-		out.println("top.alert('请勿输入非法字符！')");
 		out.println("location.href='/'");
 		out.println("</script>");
 		return;

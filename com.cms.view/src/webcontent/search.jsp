@@ -10,6 +10,16 @@
 <%
 	if(!JspFilterHandl.isTure(request)){
 		String t_id = request.getParameter("tm_id");
+		try{
+			if(t_id!=null){
+				int i = Integer.parseInt(t_id);
+			}
+		}catch(Exception e){
+			out.println("<script>");
+			out.println("top.location.href='/'");
+			out.println("</script>");
+			return;
+		}
 		URL url = new URL(request.getRequestURL().toString());
 		String domain = url.getHost();
 	    DataObject siteObj = CategoryUtil.getSiteByDomain(domain);
@@ -23,7 +33,6 @@
 		out.println(vc.parseTemplate()); 
 	}else{
 		out.println("<script>");
-		out.println("top.alert('请勿输入非法字符！')");
 		out.println("location.href='/'");
 		out.println("</script>");
 		return;

@@ -5,7 +5,19 @@
 	if(!JspFilterHandl.isTure(request)){
 		String catId = request.getParameter("cat_id");
 		String t_id = request.getParameter("tm_id");
-		
+		try{
+			if(catId!=null){
+				int i = Integer.parseInt(catId);
+			}
+			if(t_id!=null){
+				int i = Integer.parseInt(t_id);
+			}
+		}catch(Exception e){
+			out.println("<script>");
+			out.println("top.location.href='/'");
+			out.println("</script>");
+			return;
+		}
 		VelocityInfoContextImp vc = new VelocityInfoContextImp(request);
 		if(t_id!=null&&t_id!=""){
 			vc.setTemplateID(t_id);
@@ -21,7 +33,6 @@
 		}
 	}else{
 		out.println("<script>");
-		out.println("top.alert('请勿输入非法字符！')");
 		out.println("location.href='/'");
 		out.println("</script>");
 		return;

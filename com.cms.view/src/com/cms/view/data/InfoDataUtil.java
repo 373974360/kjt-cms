@@ -81,6 +81,11 @@ public class InfoDataUtil {
 				dtr.setString("infoTitle", rs.getString("info_title"));
 				dtr.setString("topTitle", rs.getString("top_title"));
 				dtr.setString("subTitle", rs.getString("sub_title"));
+				dtr.setString("listTitle", rs.getString("list_title"));
+				dtr.setString("titleColor", rs.getString("title_color"));
+				dtr.setString("titleWeight", rs.getString("title_weight"));
+				dtr.setString("titleBrIndex", rs.getString("title_br_index"));
+				dtr.setString("thumbRemark", rs.getString("thumb_remark"));
 				dtr.setString("modelId", rs.getString("model_id"));
 				dtr.setString("infoType", rs.getString("info_type"));
 				dtr.setString("thumbUrl", rs.getString("thumb_url"));
@@ -154,6 +159,11 @@ public class InfoDataUtil {
 				dtr.setString("infoTitle", rs.getString("info_title"));
 				dtr.setString("topTitle", rs.getString("top_title"));
 				dtr.setString("subTitle", rs.getString("sub_title"));
+				dtr.setString("listTitle", rs.getString("list_title"));
+				dtr.setString("titleColor", rs.getString("title_color"));
+				dtr.setString("titleWeight", rs.getString("title_weight"));
+				dtr.setString("titleBrIndex", rs.getString("title_br_index"));
+				dtr.setString("thumbRemark", rs.getString("thumb_remark"));
 				dtr.setString("modelId", rs.getString("model_id"));
 				dtr.setString("infoType", rs.getString("info_type"));
 				dtr.setString("thumbUrl", rs.getString("thumb_url"));
@@ -340,6 +350,11 @@ public class InfoDataUtil {
 				dtr.setString("infoTitle", rs.getString("info_title"));
 				dtr.setString("topTitle", rs.getString("top_title"));
 				dtr.setString("subTitle", rs.getString("sub_title"));
+				dtr.setString("listTitle", rs.getString("list_title"));
+				dtr.setString("titleColor", rs.getString("title_color"));
+				dtr.setString("titleWeight", rs.getString("title_weight"));
+				dtr.setString("titleBrIndex", rs.getString("title_br_index"));
+				dtr.setString("thumbRemark", rs.getString("thumb_remark"));
 				dtr.setString("modelId", rs.getString("model_id"));
 				dtr.setString("infoType", rs.getString("info_type"));
 				dtr.setString("thumbUrl", rs.getString("thumb_url"));
