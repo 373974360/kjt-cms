@@ -1,16 +1,29 @@
 <%@page import="com.cms.view.filter.JspFilterHandl"%>
 <%@page import="com.cms.view.velocity.VelocityInfoContextImp"%>
+<%@page import="com.eos.foundation.common.utils.StringUtil"%>
 <%@page pageEncoding="UTF-8"%>
 <%
-	if(!JspFilterHandl.isTure(request)){
-		String catId = request.getParameter("cat_id");
-		String t_id = request.getParameter("tm_id");
+	String catId = request.getParameter("cat_id");
+	String t_id = request.getParameter("tm_id");
+	String sq_id = request.getParameter("sq_id");
+	String hv_id = request.getParameter("hv_id");
+	String zixun = request.getParameter("zixun");
+	if(!JspFilterHandl.isTure(request) && (!StringUtil.isBlank(catId) || !StringUtil.isBlank(t_id))){
 		try{
-			if(catId!=null){
+			if(!StringUtil.isBlank(catId)){
 				int i = Integer.parseInt(catId);
 			}
-			if(t_id!=null){
+			if(!StringUtil.isBlank(t_id)){
 				int i = Integer.parseInt(t_id);
+			}
+			if(!StringUtil.isBlank(sq_id)){
+				int i = Integer.parseInt(sq_id);
+			}
+			if(!StringUtil.isBlank(hv_id)){
+				int i = Integer.parseInt(hv_id);
+			}
+			if(!StringUtil.isBlank(zixun)){
+				int i = Integer.parseInt(zixun);
 			}
 		}catch(Exception e){
 			out.println("<script>");

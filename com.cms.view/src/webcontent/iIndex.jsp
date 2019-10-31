@@ -1,11 +1,12 @@
 <%@page import="com.cms.view.filter.JspFilterHandl"%>
 <%@page import="com.cms.view.velocity.VelocityInfoContextImp"%>
+<%@page import="com.eos.foundation.common.utils.StringUtil"%>
 <%@page pageEncoding="UTF-8"%>
 <%
-	if(!JspFilterHandl.isTure(request)){
-		String catId = request.getParameter("cat_id");
+	String catId = request.getParameter("cat_id");
+	if(!JspFilterHandl.isTure(request) && !StringUtil.isBlank(catId)){
 		try{
-			if(catId!=null){
+			if(!StringUtil.isBlank(catId)){
 				int i = Integer.parseInt(catId);
 			}
 		}catch(Exception e){

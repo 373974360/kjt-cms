@@ -1,11 +1,12 @@
 <%@page import="com.cms.view.data.InfoDataUtil"%>
-<%@page import="java.util.*"%>
+<%@page import="java.util.*"%>>
+<%@page import="com.eos.foundation.common.utils.StringUtil"%>
 <%@page pageEncoding="UTF-8"%>
 <%
 	String id = request.getParameter("id");
 	int hits = 0;
 	try{
-		if(id!=null){
+		if(!StringUtil.isBlank(id)){
 			int i = Integer.parseInt(id);
 		}
 	}catch(Exception e){

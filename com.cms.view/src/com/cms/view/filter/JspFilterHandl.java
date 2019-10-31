@@ -21,7 +21,7 @@ import com.eos.system.annotation.Bizlet;
 public class JspFilterHandl {
 	private static String[] filter_str = {"%df", "%5c", "%27","%22", "%27", "%28", "%29", "%3E", "%3e", "%3C", "%3c", "\\", "union", "--", "1=1", "and ", "concat", "acustart", "application", "script", "location", "limit ", "alert", "iframe", "set-cookie", "or ", "drop table", "asc\\(", "mid\\(", "char\\(", "net user", "exists", "alter",
         "+acu+", "onmouseover", "header", "exec ", "insert ", "select ", "select+1", "delete ", "trancate", "update ", "updatexml", "extractvalue", "href=", "data:text", "declare", "master", "execute", "xp_cmdshell", "netlocalgroup", "count\\(", "restore", "floor", "ExtractValue", "UpdateXml",
-        "injected", "ACUstart", "ACUend", "():;", "acu:Expre", "window.location.href", "document", "parameter: ", "<OBJECT", "javascript", "confirm", "<script>", "</script>", "..", "cat ", "click", "function", "prompt(", "<", ">", "'", "‘", "’", "�", "ndhlmt:expre", "ssion", "ndhlmt"};
+        "injected", "ACUstart", "ACUend", "():;", "acu:Expre", "window.location.href", "document", "parameter: ", "<OBJECT", "javascript", "confirm", "<script>", "</script>", "..", "cat ", "click", "function", "prompt(", "<", ">", "'", "‘", "’", "�", "ndhlmt:expre", "ssion", "ndhlmt","}","{",";","[","]"};
 
 	//李苏培加
     public static boolean isTureKey(String content, String[] filterStr) {

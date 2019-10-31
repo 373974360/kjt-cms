@@ -6,13 +6,26 @@
 <%@page import="commonj.sdo.DataObject"%>
 <%@page import="java.net.URL"%>
 <%@page contentType="text/html; charset=utf-8"%>
+<%@page import="com.eos.foundation.common.utils.StringUtil"%>
 <%@page language="java" import="java.util.*" pageEncoding="utf-8" %>
 <%
-	if(!JspFilterHandl.isTure(request)){
-		String t_id = request.getParameter("tm_id");
+	String t_id = request.getParameter("tm_id");
+	String catId = request.getParameter("catId");
+	String hvid = request.getParameter("hvid");
+	String pz = request.getParameter("pz");
+	if(!JspFilterHandl.isTure(request) && !StringUtil.isBlank(t_id)){
 		try{
-			if(t_id!=null){
+			if(!StringUtil.isBlank(t_id)){
 				int i = Integer.parseInt(t_id);
+			}
+			if(!StringUtil.isBlank(catId)){
+				int i = Integer.parseInt(catId);
+			}
+			if(!StringUtil.isBlank(hvid)){
+				int i = Integer.parseInt(hvid);
+			}
+			if(!StringUtil.isBlank(pz)){
+				int i = Integer.parseInt(pz);
 			}
 		}catch(Exception e){
 			out.println("<script>");
