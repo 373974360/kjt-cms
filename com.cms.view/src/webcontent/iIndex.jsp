@@ -5,16 +5,6 @@
 <%
 	String catId = request.getParameter("cat_id");
 	if(!JspFilterHandl.isTure(request) && !StringUtil.isBlank(catId)){
-		try{
-			if(!StringUtil.isBlank(catId)){
-				int i = Integer.parseInt(catId);
-			}
-		}catch(Exception e){
-			out.println("<script>");
-			out.println("top.location.href='/'");
-			out.println("</script>");
-			return;
-		}
 		VelocityInfoContextImp vc = new VelocityInfoContextImp(request);
 		vc.setTemplateID(catId,"indexTemplet");
 		String content = vc.parseTemplate();

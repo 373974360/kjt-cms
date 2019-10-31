@@ -11,6 +11,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 import com.eos.system.annotation.Bizlet;
+import com.eos.system.utility.StringUtil;
 
 /**
  * @author chaoweima
@@ -21,8 +22,10 @@ import com.eos.system.annotation.Bizlet;
 public class JspFilterHandl {
 	private static String[] filter_str = {"%df", "%5c", "%27","%22", "%27", "%28", "%29", "%3E", "%3e", "%3C", "%3c", "\\", "union", "--", "1=1", "and ", "concat", "acustart", "application", "script", "location", "limit ", "alert", "iframe", "set-cookie", "or ", "drop table", "asc\\(", "mid\\(", "char\\(", "net user", "exists", "alter",
         "+acu+", "onmouseover", "header", "exec ", "insert ", "select ", "select+1", "delete ", "trancate", "update ", "updatexml", "extractvalue", "href=", "data:text", "declare", "master", "execute", "xp_cmdshell", "netlocalgroup", "count\\(", "restore", "floor", "ExtractValue", "UpdateXml",
-        "injected", "ACUstart", "ACUend", "():;", "acu:Expre", "window.location.href", "document", "parameter: ", "<OBJECT", "javascript", "confirm", "<script>", "</script>", "..", "cat ", "click", "function", "prompt(", "<", ">", "'", "‘", "’", "�", "ndhlmt:expre", "ssion", "ndhlmt","}","{",";","[","]"};
+        "injected", "ACUstart", "ACUend", "():;", "acu:Expre", "window.location.href", "document", "parameter: ", "<OBJECT", "javascript", "confirm", "<script>", "</script>", "..", "cat ", "click", "function", "prompt(", "<", ">", "'", "‘", "’", "�", "ndhlmt:expre", "ssion", "ndhlmt","}","{",";","[","]","="};
 
+	private static String[] integerParams_str = {"hv_id","zixun","catId","hvid","pz","modelId","cur_page"};
+	private static String[] integerParamsNotNull_str = {"id","cat_id","tm_id","sq_id","info_id","survey_id"};
 	//李苏培加
     public static boolean isTureKey(String content, String[] filterStr) {
         String contentold = content;
@@ -66,10 +69,15 @@ public class JspFilterHandl {
                     if (isTureKey(value, filter_str)) {
                         return true;  //包含要过滤的关键字
                     }
-                }
-                if ((queryString != null) && (!("".equals(queryString)))) {
-                    if (isTureKey(queryString, filter_str)) {
-                        return true;  //包含要过滤的关键字
+                    for(String key:integerParamsNotNull_str){
+                    	if(arr.equals(key)){
+                    		int i = Integer.parseInt(value);
+                    	}
+                    }
+                    for(String key:integerParams_str){
+                    	if(arr.equals(key) && StringUtil.isNotNull(value)){
+                    		int i = Integer.parseInt(value);
+                    	}
                     }
                 }
             }
