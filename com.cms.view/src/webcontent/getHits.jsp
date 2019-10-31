@@ -1,6 +1,6 @@
 <%@page import="com.cms.view.data.InfoDataUtil"%>
 <%@page import="com.cms.view.filter.JspFilterHandl"%>
-<%@page import="java.util.*"%>>
+<%@page import="java.util.*"%>
 <%@page import="com.eos.foundation.common.utils.StringUtil"%>
 <%@page pageEncoding="UTF-8"%>
 <%
