@@ -357,10 +357,25 @@ public class InfoDataUtil {
 				DataObject dtr = DataObjectUtil.createDataObject("com.cms.content.category.CmsInfo");
 				dtr.setString("id", rs.getString("id"));
 				dtr.setString("catId", rs.getString("cat_id"));
-				dtr.setString("infoTitle", rs.getString("info_title"));
+				String titleColor = rs.getString("title_color");
+				String titleWeight = rs.getString("title_weight");
+				String color = "";
+				String weight = "";
+				if(!StringUtil.isBlank(titleColor) && titleColor.equals("true")){
+					color = "color:red;";
+				}
+				if(!StringUtil.isBlank(titleWeight) && titleWeight.equals("true")){
+					weight = "font-weight:bold;";
+				}
+				if(StringUtil.isBlank(color) && StringUtil.isBlank(weight)){
+					dtr.setString("infoTitle", rs.getString("info_title"));
+					dtr.setString("listTitle", rs.getString("list_title"));
+				}else{
+					dtr.setString("infoTitle", "<p style=\""+color+weight+"\">"+rs.getString("info_title")+"</p>");
+					dtr.setString("listTitle", "<p style=\""+color+weight+"\">"+rs.getString("list_title")+"</p>");
+				}
 				dtr.setString("topTitle", rs.getString("top_title"));
 				dtr.setString("subTitle", rs.getString("sub_title"));
-				dtr.setString("listTitle", rs.getString("list_title"));
 				dtr.setString("titleColor", rs.getString("title_color"));
 				dtr.setString("titleWeight", rs.getString("title_weight"));
 				dtr.setString("titleBrIndex", rs.getString("title_br_index"));

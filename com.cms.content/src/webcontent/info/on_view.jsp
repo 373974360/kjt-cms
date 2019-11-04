@@ -1,5 +1,5 @@
 <%@page import="java.io.IOException"%>
-<%@page import="java.util.*"%>
+<%@page import="java.util.*,com.eos.foundation.common.utils.StringUtil"%>
 <%@page import="net.sf.json.JSONObject"%>
 <%@page import="commonj.sdo.DataObject"%>
 <%@page import="com.eos.foundation.data.DataObjectUtil"%>
@@ -11,6 +11,21 @@
 	Set keySet = obj.keySet();
 	for (Object o : keySet) {
 		if(obj.get(o)!=null){
+			if(o.toString().equals("titleBrIndex")){
+				String brIndex = obj.getString("titleBrIndex");
+				String infoTitle = obj.getString("infoTitle");
+				if(!StringUtil.isBlank(brIndex) && Integer.parseInt(brIndex)<infoTitle.length()){
+					dtr.setString("infoTitle", "<p>"+infoTitle.substring(0,Integer.parseInt(brIndex))+"<p/><p>"+infoTitle.substring(Integer.parseInt(brIndex),infoTitle.length())+"<p/>");
+				}else{
+					dtr.setString("infoTitle", infoTitle);
+				}
+				continue;
+			}
+			if(o.toString().equals("releasedDtime")){
+				String releasedDtime = obj.getString("releasedDtime");
+				dtr.setString("releasedDtime", releasedDtime.replace("T"," "));
+				continue;
+			}
 			dtr.setString(o.toString(),obj.getString(o.toString()));
 		}
 	}
