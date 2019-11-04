@@ -78,13 +78,18 @@ public class InfoDataUtil {
 				DataObject dtr = DataObjectUtil.createDataObject("com.cms.content.category.CmsInfo");
 				dtr.setString("id", rs.getString("id"));
 				dtr.setString("catId", rs.getString("cat_id"));
-				dtr.setString("infoTitle", rs.getString("info_title"));
+				String brIndex = rs.getString("title_br_index");
+				String infoTitle = rs.getString("info_title");
+				if(!StringUtil.isBlank(brIndex) && Integer.parseInt(brIndex)<infoTitle.length()){
+					dtr.setString("infoTitle", "<p>"+infoTitle.substring(0,Integer.parseInt(brIndex))+"<p/><p>"+infoTitle.substring(Integer.parseInt(brIndex),infoTitle.length())+"<p/>");
+				}else{
+					dtr.setString("infoTitle", infoTitle);
+				}
 				dtr.setString("topTitle", rs.getString("top_title"));
 				dtr.setString("subTitle", rs.getString("sub_title"));
 				dtr.setString("listTitle", rs.getString("list_title"));
 				dtr.setString("titleColor", rs.getString("title_color"));
 				dtr.setString("titleWeight", rs.getString("title_weight"));
-				dtr.setString("titleBrIndex", rs.getString("title_br_index"));
 				dtr.setString("thumbRemark", rs.getString("thumb_remark"));
 				dtr.setString("modelId", rs.getString("model_id"));
 				dtr.setString("infoType", rs.getString("info_type"));
@@ -156,13 +161,18 @@ public class InfoDataUtil {
 				DataObject dtr = DataObjectUtil.createDataObject("com.cms.content.category.CmsInfo");
 				dtr.setString("id", rs.getString("id"));
 				dtr.setString("catId", rs.getString("cat_id"));
-				dtr.setString("infoTitle", rs.getString("info_title"));
+				String brIndex = rs.getString("title_br_index");
+				String infoTitle = rs.getString("info_title");
+				if(!StringUtil.isBlank(brIndex) && Integer.parseInt(brIndex)<infoTitle.length()){
+					dtr.setString("infoTitle", "<p>"+infoTitle.substring(0,Integer.parseInt(brIndex))+"<p/><p>"+infoTitle.substring(Integer.parseInt(brIndex),infoTitle.length())+"<p/>");
+				}else{
+					dtr.setString("infoTitle", infoTitle);
+				}
 				dtr.setString("topTitle", rs.getString("top_title"));
 				dtr.setString("subTitle", rs.getString("sub_title"));
 				dtr.setString("listTitle", rs.getString("list_title"));
 				dtr.setString("titleColor", rs.getString("title_color"));
 				dtr.setString("titleWeight", rs.getString("title_weight"));
-				dtr.setString("titleBrIndex", rs.getString("title_br_index"));
 				dtr.setString("thumbRemark", rs.getString("thumb_remark"));
 				dtr.setString("modelId", rs.getString("model_id"));
 				dtr.setString("infoType", rs.getString("info_type"));

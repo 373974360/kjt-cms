@@ -192,7 +192,7 @@
 	importCms("688","828");
 	importCms("807","829");
 	importCms("808","455");
-	importCms("809","456");*/
+	importCms("809","456");
 	importCms("1196","858");
 	importCms("1197","859");
 	importCms("1198","860");
@@ -252,17 +252,20 @@
 	importCms("655","905");
 	importCms("656","906");
 	importCms("657","907");
-	importCms("658","908");
+	importCms("658","908");*/
+	
+	importCms("1093","681");
+	importCms("1094","682");
  %>
 <%!
 	private void importCms(String oldCat,String newCat){
 		int counts = 0;
 		int it = 0;
 		String driverClassName = "com.microsoft.sqlserver.jdbc.SQLServerDriver"; 
-		String userName = "sa"; //登录用户名
-		String userPasswd = "123456"; //登录密码
+		String userName = "scl_info"; //登录用户名
+		String userPasswd = "scl_sninfo090812"; //登录密码
 		String dbName="scl_info";	//数据库名	
-		String url = "jdbc:sqlserver://10.211.55.6:1433;databaseName=" + dbName; 
+		String url = "jdbc:sqlserver://10.0.252.51:1433;databaseName=" + dbName; 
 		try {
 			Class.forName(driverClassName);
 			Connection conn = DriverManager.getConnection(url, userName, userPasswd);
