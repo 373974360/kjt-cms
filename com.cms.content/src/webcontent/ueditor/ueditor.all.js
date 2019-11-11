@@ -11164,10 +11164,10 @@ UE.commands['insertimage'] = {
             if (opt.length == 1) {
                 unhtmlData(ci);
 
-                str = '<img style="max-width:700px;" src="' + ci.src + '" ' + (ci._src ? ' _src="' + ci._src + '" ' : '') +
+                str = '<img style="" src="' + ci.src + '" ' + (ci._src ? ' _src="' + ci._src + '" ' : '') +
                     (ci.width ? 'width="' + ci.width + '" ' : '') +
                     (ci.height ? ' height="' + ci.height + '" ' : '') +
-                    (ci['floatStyle'] == 'left' || ci['floatStyle'] == 'right' ? ' style="float:' + ci['floatStyle'] + ';"' : '') +
+                    (ci['floatStyle'] == 'left' || ci['floatStyle'] == 'right' ? ' style="max-width:700px;float:' + ci['floatStyle'] + ';"' : ' style="max-width:700px;"') +
                     (ci.title && ci.title != "" ? ' title="' + ci.title + '"' : '') +
                     (ci.border && ci.border != "0" ? ' border="' + ci.border + '"' : '') +
                     (ci.alt && ci.alt != "" ? ' alt="' + ci.alt + '"' : '') +
@@ -11181,10 +11181,10 @@ UE.commands['insertimage'] = {
             } else {
                 for (var i = 0; ci = opt[i++];) {
                     unhtmlData(ci);
-                    str = '<p ' + (ci['floatStyle'] == 'center' ? 'style="text-align: center" ' : '') + '><img style="max-width:700px;" src="' + ci.src + '" ' +
+                    str = '<p ' + (ci['floatStyle'] == 'center' ? 'style="text-align: center" ' : '') + '><img src="' + ci.src + '" ' +
                         (ci.width ? 'width="' + ci.width + '" ' : '') + (ci._src ? ' _src="' + ci._src + '" ' : '') +
                         (ci.height ? ' height="' + ci.height + '" ' : '') +
-                        ' style="' + (ci['floatStyle'] && ci['floatStyle'] != 'center' ? 'float:' + ci['floatStyle'] + ';' : '') +
+                        ' style="' + (ci['floatStyle'] && ci['floatStyle'] != 'center' ? 'float:' + ci['floatStyle'] + ';' : 'max-width:700px;') +
                         (ci.border || '') + '" ' +
                         (ci.title ? ' title="' + ci.title + '"' : '') + ' /></p>';
                     html.push(str);

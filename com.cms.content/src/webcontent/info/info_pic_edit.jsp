@@ -90,7 +90,7 @@
 		            	}
 		            %>
 		            <tr>
-		                <th class="nui-form-label">组图内容：</th>
+		                <th class="nui-form-label">组图内容<span style="color:red;"> *</span>：</th>
 		                <td colspan="5" id="picArray"></td>
 		                <td valign="top">
 		                   <a id="update" class="nui-button" iconCls="icon-upload" onclick="upImage();">上传图片 </a>
@@ -259,7 +259,13 @@
 		        }
 		        data.info.thumbUrl = $("input[name='info.thumbUrl']").val();
 		        data.content.infoContent = ue.getContent();
-		        data.content.picContent = getPicContent();
+		        var picCon = getPicContent();
+		        if(picCon=='{"picArray": []}'){
+		        	alert("请上传组图");
+		        	return false;
+		        }else{
+		        	data.content.picContent = picCon;
+		        }
 		        if(data.info.description==null||data.info.description==''){
 		        	var info_content = stripHTML(ue.getContent());
 		            if(info_content.length>=200){

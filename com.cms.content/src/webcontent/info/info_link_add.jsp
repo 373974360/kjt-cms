@@ -102,7 +102,7 @@
 		            	}
 		            %>
 		            <tr>
-		                <th class="nui-form-label">链接地址：</th>
+		                <th class="nui-form-label">链接地址<span style="color:red;"> *</span>：</th>
 		                <td colspan="5">    
 		                   <input name="info.contentUrl" class="nui-textbox nui-form-input" required="true"/>
 		                </td>

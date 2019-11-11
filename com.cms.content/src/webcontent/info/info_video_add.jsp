@@ -103,9 +103,9 @@
 		            	}
 		            %>
 		            <tr>
-		                <th class="nui-form-label">视频地址：</th>
+		                <th class="nui-form-label">视频地址<span style="color:red;"> *</span>：</th>
 		                <td colspan="4">
-		                   <input name="content.videoPath" class="nui-textbox nui-form-input"/>
+		                   <input name="content.videoPath" class="nui-textbox nui-form-input" required="true"/>
 		                </td>
 		                <td>
 		                   <a id="update" class="nui-button" iconCls="icon-upload" onclick="upVideo();">上传视频 </a>
