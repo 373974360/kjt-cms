@@ -20,7 +20,7 @@
     </td>
     <th class="nui-form-label" style="width:80px;">同时发布：</th>
     <td style="width:150px;">    
-        <input name="infoCat.catId" class="nui-buttonedit nui-form-input" onbuttonclick="onButtonEdit" allowInput="false"/>
+        <input id="infoCatId" name="infoCat.catId" class="nui-buttonedit nui-form-input" onbuttonclick="onButtonEdit" allowInput="false"/>
     </td>
     <td></td>
 </tr>
