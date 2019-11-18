@@ -27,7 +27,6 @@
 		<div class="nui-fit" style="padding-top:5px">
 			<div id="form1" method="post">
 				<input id="info.id" name="info.id" class="nui-hidden" />
-				<input id="info.catId" name="info.catId" class="nui-hidden" value="<%=catId %>" />
 				<input id="info.modelId" name="info.modelId" class="nui-hidden" value="<%=modelId %>" />
 				<input id="info.inputUser" name="info.inputUser" class="nui-hidden" value="<%=userObject.getUserId() %>" />
 				<input id="info.orgId" name="info.orgId" class="nui-hidden" value="<%=userObject.getUserOrgId() %>" />
@@ -36,9 +35,9 @@
             	<input name="wflogs.busId" class="nui-hidden"/>
             	<input name="wflogs.busUrl" class="nui-hidden"/>
             	<input name="wflogs.wfOptUser" class="nui-hidden" value="<%=userObject.getUserName() %>"/>
-            	<input name="wflogs.wfStepId" class="nui-hidden" value="1"/>
+            	<input id="wfStepId" name="wflogs.wfStepId" class="nui-hidden" value="1"/>
             	<input name="wflogs.wfOptTime" class="nui-hidden"/>
-            	<input name="wflogs.wfId" class="nui-hidden"/>
+            	<input id="wfId" name="wflogs.wfId" class="nui-hidden"/>
             	<input name="wflogs.wfOptType" class="nui-hidden" value="4"/>
             	<input name="wflogs.wfOptDesc" class="nui-hidden" value="信息报送"/>
             	<input name="info.releasedDtime" class="nui-hidden" value="<%=curTime %>"/>
@@ -47,7 +46,11 @@
 		            <tr>
 		                <th class="nui-form-label" style="width:120px;">所属栏目：</th>
 		                <td colspan="5">    
-		                    <span name="categoryName"><span>
+		                    <input id="catId" name="info.catId" style="width:555px;" class="mini-treeselect" url="com.cms.content.ContentService.queryInfoEditorCategoryTreeNode.biz.ext"
+					    		ajaxData="{'userId':'<%=userObject.getUserId() %>'}" 
+					    		multiSelect="false"  valueFromSelect="false"
+					    		idField="id" textField="text" parentField="pid" onbeforenodeselect="beforenodeselect" allowInput="true"
+						        showRadioButton="true" showFolderCheckBox="false" dataField="data"/>
 		                </td>
 		            </tr>        
 		            <tr>
@@ -106,6 +109,11 @@
 	    <script type="text/javascript">
 	        nui.parse();
 		    
+	        nui.get("catId").setValue("<%=catId %>");
+	        function beforenodeselect(e) {
+	            //禁止选中父节点
+	            if (e.isLeaf == false) e.cancel = true;
+	        }
 	        var form = new nui.Form("form1");
 	        
 	        function setCatgory(){
@@ -118,7 +126,6 @@
 			         contentType:'text/json',
 			         success:function(text){
 						obj = nui.decode(text);
-						$("span[name=categoryName]").html(obj.category.chName);
 						var json_auth = nui.encode({params:{userId:<%=userObject.getUserId() %>,funId:1021}});
 						$.ajax({
 							url:"com.cms.content.ContentService.queryBtnAuth.biz.ext",
@@ -139,7 +146,21 @@
 									$("#pending").remove();
 									$("#btn_pending").remove();
 								}else{
-									$("input[name='wflogs.wfId']").val(obj.category.workflowId);
+									nui.get("wfId").setValue(obj.category.workflowId);
+									var json_step = nui.encode({params:{userId:<%=userObject.getUserId() %>,workId:obj.category.workflowId}});
+									$.ajax({
+						                url: "com.cms.content.ContentService.queryStepIdByUser.biz.ext",
+						                type: 'POST',
+						                data: json_step,
+						                cache: false,
+						                contentType:'text/json',
+						                success: function (text) {
+						               		if(text!=null){
+						               			console.log(text.data[0].STEP_SORT+1);
+						               			nui.get("wfStepId").setValue(text.data[0].STEP_SORT+1);
+						               		}
+						                }
+						             });
 								}
 								if(!b){
 									$("#publish").remove();

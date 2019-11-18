@@ -10,8 +10,21 @@
  %>
 <tr>
     <th class="nui-form-label" style="width:120px;">所属栏目：</th>
+    <td colspan="6">   
+    	<input id="catId" name="info.catId" style="width:555px;" class="mini-treeselect" url="com.cms.content.ContentService.queryInfoEditorCategoryTreeNode.biz.ext"
+    		ajaxData="{'userId':'<%=userObject.getUserId() %>'}" 
+    		multiSelect="false"  valueFromSelect="false"
+    		idField="id" textField="text" parentField="pid" onbeforenodeselect="beforenodeselect" allowInput="true"
+	        showRadioButton="true" showFolderCheckBox="false" dataField="data"/>
+    </td>
+</tr>
+<tr>
+    <th class="nui-form-label" style="width:120px;">是否涉密<span style="color:red;"> *</span>：</th>
     <td style="width:100px;">    
-        <span name="categoryName"><span>
+    	<div style="width:100px;" name="info.isShemi" class="nui-radiobuttonlist"
+		    textField="text" dataField="yesNo" valueField="id" value="1"
+		    url="<%=request.getContextPath()%>/content/info/yesNo.txt" >
+		</div>
     </td>
     <th class="nui-form-label" style="width:70px;">文章分类：</th>
     <td style="width:100px;">    
@@ -23,16 +36,7 @@
         <input id="infoCatId" name="infoCat.catId" class="nui-buttonedit nui-form-input" onbuttonclick="onButtonEdit" allowInput="false"/>
     </td>
     <td></td>
-</tr>
-<tr>
-    <th class="nui-form-label">是否涉密<span style="color:red;"> *</span>：</th>
-    <td colspan="5">    
-    	<div name="info.isShemi" class="nui-radiobuttonlist"
-		    textField="text" dataField="yesNo" valueField="id" value="1"
-		    url="<%=request.getContextPath()%>/content/info/yesNo.txt" >
-		</div>
-    </td>
-</tr>       
+</tr>     
 <tr>
     <th class="nui-form-label">列表标题：</th>
     <td colspan="5">    
@@ -48,7 +52,7 @@
 <tr>
     <th class="nui-form-label">文章标题<span style="color:red;"> *</span>：</th>
     <td colspan="5">    
-        <input name="info.infoTitle" class="nui-textbox nui-form-input" required="true"/>
+        <input id="infoTitle" name="info.infoTitle" class="nui-textbox nui-form-input" required="true" onblur="getTitleTags()"/>
         <input name="info.editor" class="nui-hidden" value="<%=userObject.getUserName() %>"/>
     </td>
 </tr>
@@ -91,6 +95,9 @@
 		%>
     </td>
     <td>
+		<a href="javascript:void(0)" onclick="removeSource()">[移除]</a>
+	</td>
+    <td>
     	<div id="infoSourceCombobox" class="nui-combobox" style="width:100px;" popupWidth="400" textField="sourceName" valueField="sourceName"
 		    url="com.cms.basics.SourceService.querySourceAll.biz.ext" dataField="data" onvaluechanged="setInfoSource()">
 		</div>
@@ -116,7 +123,7 @@
 <tr>
     <th class="nui-form-label">关键词：</th>
     <td colspan="3">    
-        <input name="info.keywords" class="nui-textbox nui-form-input"/>
+        <input id="keywords" name="info.keywords" class="nui-textbox nui-form-input"/>
     </td>
     <th class="nui-form-label">发布时间<span style="color:red;"> *</span>：</th>
     <td>    

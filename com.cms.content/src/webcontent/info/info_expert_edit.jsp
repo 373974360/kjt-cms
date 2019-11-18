@@ -46,21 +46,27 @@
 	            %>
 		        <table style="width:100%;table-layout:fixed;float:left;" class="nui-form-table" >
 		            <tr>
-		                <th class="nui-form-label" style="width:120px;">所属栏目：</th>
-		                <td style="width:100px;">    
-		                    <span name="categoryName"><span>
-		                </td>
-		                <th class="nui-form-label" style="width:70px;">文章分类：</th>
-		                <td style="width:100px;">    
-		                    <input name="info.infoType" class="nui-combobox" textField="typeName" valueField="id"  style="width:100px;"
+					    <th class="nui-form-label" style="width:120px;">所属栏目：</th>
+					    <td colspan="6">   
+					    	<input id="catId" name="info.catId" style="width:555px;" class="mini-treeselect" url="com.cms.content.ContentService.queryInfoEditorCategoryTreeNode.biz.ext"
+					    		ajaxData="{'userId':'<%=userObject.getUserId() %>'}" 
+					    		multiSelect="false"  valueFromSelect="false"
+					    		idField="id" textField="text" parentField="pid" onbeforenodeselect="beforenodeselect" allowInput="true"
+						        showRadioButton="true" showFolderCheckBox="false" dataField="data"/>
+					    </td>
+					</tr>
+					<tr>
+					    <th class="nui-form-label" style="width:70px;">文章分类：</th>
+					    <td style="width:100px;">    
+					        <input name="info.infoType" class="nui-combobox" textField="typeName" valueField="id"  style="width:100px;"
 						    url="com.cms.basics.InfoTypeService.queryInfoTypeAll.biz.ext" dataField="data" showNullItem="true" />
-		                </td>
-		                <th class="nui-form-label" style="width:70px;">同时发布：</th>
-		                <td style="width:150px;">    
-		                   <input id="infoCatId" name="infoCat.catId" class="nui-buttonedit nui-form-input" onbuttonclick="onButtonEdit" allowInput="false"/>
-		                </td>
-		                <td></td>
-		            </tr>         
+					    </td>
+					    <th class="nui-form-label" style="width:80px;">同时发布：</th>
+					    <td style="width:150px;">    
+					        <input id="infoCatId" name="infoCat.catId" class="nui-buttonedit nui-form-input" onbuttonclick="onButtonEdit" allowInput="false"/>
+					    </td>
+					    <td></td>
+					</tr>    
 		            <tr>
 		                <th class="nui-form-label">专家姓名：</th>
 		                <td colspan="5">    
@@ -71,6 +77,9 @@
 		                <th class="nui-form-label">来源：</th>
 		                <td colspan = 3>    
 		                	<input id="infoSource" name="info.source" class="nui-textbox nui-form-input"/>
+		                </td>
+		                <td>
+		                	<a href="javascript:void(0)" onclick="removeSource()">[移除]</a>
 		                </td>
 		                <td>
 		                	<div id="infoSourceCombobox" class="nui-combobox" style="width:100px;" popupWidth="400" textField="sourceName" valueField="sourceName"
@@ -121,7 +130,7 @@
 		                <th class="nui-form-label">专家照片：</th>
 		                <td colspan="4">    
 		                   <script type="text/plain" id="upload_ue"></script>
-		                   <input name="info.thumbUrl" class="nui-textbox nui-form-input"/>
+		                   <input id="thumbUrl" name="info.thumbUrl" class="nui-textbox nui-form-input"/>
 		                </td>
 		                <td>
 		                   <a id="update" class="nui-button" iconCls="icon-upload" onclick="upImage();">上传图片 </a>
@@ -195,6 +204,10 @@
 	    <script type="text/javascript">
 	        nui.parse();
 		    var btnEdit = nui.get("infoCatId");
+	        function beforenodeselect(e) {
+	            //禁止选中父节点
+	            if (e.isLeaf == false) e.cancel = true;
+	        }
 		    function onButtonEdit(){
 	   			var btnEdit = this;
 		    	nui.open({
@@ -221,6 +234,10 @@
 	                    } 
 	                }
 	            });
+		    }
+		    function removeSource(){
+		    	var infoSource = nui.get("infoSource");
+		    	infoSource.setValue(infoSource.getValue().split(",")[0]);
 		    }
 		   	function setInfoSource(){
 		   		var source = nui.get("infoSourceCombobox").getValue();
@@ -255,7 +272,7 @@
 				upload_ue.hide();
 				//侦听图片上传
 				upload_ue.addListener('beforeInsertImage', function (t, arg) {
-					$("input[name='info.thumbUrl']").val(arg[0].src);
+		        	nui.get("thumbUrl").setValue(arg[0].src);
 				});
 			});
 			//弹出图片上传的对话框

@@ -46,7 +46,7 @@
 		                <th class="nui-form-label">标题图片：</th>
 		                <td colspan="4">    
 		                   <script type="text/plain" id="upload_ue"></script>
-		                   <input name="info.thumbUrl" class="nui-textbox nui-form-input"/>
+		                   <input id="thumbUrl" name="info.thumbUrl" class="nui-textbox nui-form-input"/>
 		                </td>
 		                <td>
 		                   <a id="update" class="nui-button" iconCls="icon-upload" onclick="upImage();">上传图片 </a>
@@ -93,7 +93,7 @@
 		            <tr>
 		                <th class="nui-form-label">附件：</th>
 		                <td colspan="4">    
-		                   <input name="info.contentUrl" class="nui-textbox nui-form-input"/>
+		                   <input id="contentUrl" name="info.contentUrl" class="nui-textbox nui-form-input"/>
 		                </td>
 		                <td>
 		                   <a id="update" class="nui-button" iconCls="icon-upload" onclick="upFiles();">上传附件 </a>
@@ -110,6 +110,10 @@
 	    <script type="text/javascript">
 	        nui.parse();
 		    var btnEdit = nui.get("infoCatId");
+	        function beforenodeselect(e) {
+	            //禁止选中父节点
+	            if (e.isLeaf == false) e.cancel = true;
+	        }
 		    function onButtonEdit(){
 	   			var btnEdit = this;
 		    	nui.open({
@@ -136,6 +140,32 @@
 	                    } 
 	                }
 	            });
+		    }
+		    
+		    function getTitleTags() {
+		    	var title = nui.get("infoTitle").getValue();
+		    	if(title!=null&&title!=""){
+		            $.ajax({
+		                url: "<%=request.getContextPath() %>/content/info/getTitleTags.jsp?title="+title,
+		                type: 'GET',
+		                cache: false,
+		                contentType:'text/json',
+		                success: function (text) {
+		                	if(text!=""&&text!=null){
+			                	var json = JSON.parse(text);
+			                	var keyword = "";
+			                	for(var i=0;i<json.items.length;i++){
+			                		keyword+=","+json.items[i].item;
+			                	}
+			                	nui.get("keywords").setValue(keyword.substring(1));
+		                	}
+		                }
+		            });
+		    	}
+	        }
+		    function removeSource(){
+		    	var infoSource = nui.get("infoSource");
+		    	infoSource.setValue(infoSource.getValue().split(",")[0]);
 		    }
 		   	function setInfoSource(){
 		   		var source = nui.get("infoSourceCombobox").getValue();
@@ -166,11 +196,11 @@
 				upload_ue.hide();
 				//侦听图片上传
 				upload_ue.addListener('beforeInsertImage', function (t, arg) {
-					$("input[name='info.thumbUrl']").val(arg[0].src);
+		        	nui.get("thumbUrl").setValue(arg[0].src);
 				});
 		        //侦听文件上传，取上传文件列表中第一个上传的文件的路径
 		        upload_ue.addListener('afterUpfile', function (t, arg) {
-					$("input[name='info.contentUrl']").val(arg[0].url);
+		        	nui.get("contentUrl").setValue(arg[0].url);
 		        });
 			});
 			//弹出图片上传的对话框

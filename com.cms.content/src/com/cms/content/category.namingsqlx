@@ -22,6 +22,9 @@
     	<dynamic>
 			<isNotNull prepend="and" property="infoStatus">
 				info_status = $infoStatus$
+				<isEqual prepend="and" property="infoStatus" compareValue="6">
+			 		input_user = $userId$
+			   	</isEqual>
 			</isNotNull>
     		<isNotNull prepend="and" property="infoType">
     			info_type = $infoType$
@@ -55,6 +58,9 @@
 		    			<isNotEqual prepend="and" property="infoStatus" compareValue="2">
 		    				info_status = $infoStatus$
 		    			</isNotEqual>
+						<isEqual prepend="and" property="infoStatus" compareValue="6">
+					 		input_user = $userId$
+					   	</isEqual>
 		    		</isNotNull>
 		    		<isNotNull prepend="and" property="infoType">
 		    			info_type = $infoType$
@@ -279,4 +285,17 @@
     	</dynamic>
     	 order by released_dtime
 	</select>
+	
+	
+	
+	<select id="queryStepIdByUser" parameterClass="commonj.sdo.DataObject" resultClass="commonj.sdo.DataObject">
+    	SELECT
+			work_id,
+			step_sort 
+		FROM
+			cms_workflow_step 
+		WHERE
+			step_role IN ( SELECT role_id FROM cap_partyauth WHERE party_id = $userId$ ) 
+			AND work_id = $workId$
+    </select>
 </sqlMap>

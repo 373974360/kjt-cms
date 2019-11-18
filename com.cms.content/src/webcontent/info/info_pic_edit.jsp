@@ -48,7 +48,7 @@
 		            <tr>
 		                <th class="nui-form-label">标题图片：</th>
 		                <td colspan="5">    
-		                   <input name="info.thumbUrl" class="nui-textbox nui-form-input"/>
+		                   <input id="thumbUrl" name="info.thumbUrl" class="nui-textbox nui-form-input"/>
 		                </td>
 		            </tr>
 					<tr>
@@ -114,6 +114,10 @@
 	    <script type="text/javascript">
 	        nui.parse();
 		    var btnEdit = nui.get("infoCatId");
+	        function beforenodeselect(e) {
+	            //禁止选中父节点
+	            if (e.isLeaf == false) e.cancel = true;
+	        }
 		    function onButtonEdit(){
 	   			var btnEdit = this;
 		    	nui.open({
@@ -140,6 +144,32 @@
 	                    } 
 	                }
 	            });
+		    }
+		    
+		    function getTitleTags() {
+		    	var title = nui.get("infoTitle").getValue();
+		    	if(title!=null&&title!=""){
+		            $.ajax({
+		                url: "<%=request.getContextPath() %>/content/info/getTitleTags.jsp?title="+title,
+		                type: 'GET',
+		                cache: false,
+		                contentType:'text/json',
+		                success: function (text) {
+		                	if(text!=""&&text!=null){
+			                	var json = JSON.parse(text);
+			                	var keyword = "";
+			                	for(var i=0;i<json.items.length;i++){
+			                		keyword+=","+json.items[i].item;
+			                	}
+			                	nui.get("keywords").setValue(keyword.substring(1));
+		                	}
+		                }
+		            });
+		    	}
+	        }
+		    function removeSource(){
+		    	var infoSource = nui.get("infoSource");
+		    	infoSource.setValue(infoSource.getValue().split(",")[0]);
 		    }
 		   	function setInfoSource(){
 		   		var source = nui.get("infoSourceCombobox").getValue();
@@ -365,7 +395,7 @@
 	             });
 	        }
 	        function setThumbUrl(picUrl){
-	        	$("input[name='info.thumbUrl']").val(picUrl);
+	        	nui.get("thumbUrl").setValue(picUrl);
 	        }
 	        function stripHTML(str) {
 			    var reTag = /<(?:.|\s)*?>/g;

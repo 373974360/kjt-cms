@@ -56,12 +56,16 @@
 						for (var j = 0; j < text.data.length; j++) {
 							var type;
 							if(text.data[j].wfOptType)
+							var desc = text.data[j].wfOptDesc;
+							if(desc==undefined){
+								desc="";
+							}
 							_ul.append('<li class="layui-timeline-item"><i class="layui-icon layui-timeline-axis"></i>'
 									+ '<div class="layui-timeline-content layui-text">'
 									+ '<h3 class="layui-timeline-title">'+text.data[j].wfOptTime+'</h3>'
 									+ '<p>用户：' + text.data[j].wfOptUser+'</p>'
 									+ '<p>操作：' + typeCode[text.data[j].wfOptType-1]+'</p>'
-									+ '<p>意见：' + text.data[j].wfOptDesc+'</p>'
+									+ '<p>意见：' + desc+'</p>'
 									+ '</div></li>');
 						}
 					}

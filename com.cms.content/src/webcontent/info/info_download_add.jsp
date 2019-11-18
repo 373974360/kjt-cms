@@ -27,7 +27,6 @@
 		<div class="nui-fit" style="padding-top:5px">
 			<div id="form1" method="post">
 				<input id="info.id" name="info.id" class="nui-hidden" />
-				<input id="info.catId" name="info.catId" class="nui-hidden" value="<%=catId %>" />
 				<input id="info.modelId" name="info.modelId" class="nui-hidden" value="<%=modelId %>" />
 				<input id="info.inputUser" name="info.inputUser" class="nui-hidden" value="<%=userObject.getUserId() %>" />
 				<input id="info.orgId" name="info.orgId" class="nui-hidden" value="<%=userObject.getUserOrgId() %>" />
@@ -36,9 +35,9 @@
             	<input name="wflogs.busId" class="nui-hidden"/>
             	<input name="wflogs.busUrl" class="nui-hidden"/>
             	<input name="wflogs.wfOptUser" class="nui-hidden" value="<%=userObject.getUserName() %>"/>
-            	<input name="wflogs.wfStepId" class="nui-hidden" value="1"/>
+            	<input id="wfStepId" name="wflogs.wfStepId" class="nui-hidden" value="1"/>
             	<input name="wflogs.wfOptTime" class="nui-hidden"/>
-            	<input name="wflogs.wfId" class="nui-hidden"/>
+            	<input id="wfId" name="wflogs.wfId" class="nui-hidden"/>
             	<input name="wflogs.wfOptType" class="nui-hidden" value="4"/>
             	<input name="wflogs.wfOptDesc" class="nui-hidden" value="信息报送"/>
             	<%
@@ -57,7 +56,7 @@
 		                <th class="nui-form-label">标题图片：</th>
 		                <td colspan="4">    
 		                   <script type="text/plain" id="upload_ue"></script>
-		                   <input name="info.thumbUrl" class="nui-textbox nui-form-input"/>
+		                   <input id="thumbUrl" name="info.thumbUrl" class="nui-textbox nui-form-input"/>
 		                </td>
 		                <td>
 		                   <a id="update" class="nui-button" iconCls="icon-upload" onclick="upImage();">上传图片 </a>
@@ -104,7 +103,7 @@
 		            <tr>
 		                <th class="nui-form-label">附件：</th>
 		                <td colspan="4">    
-		                   <input name="info.contentUrl" class="nui-textbox nui-form-input"/>
+		                   <input id="contentUrl" name="info.contentUrl" class="nui-textbox nui-form-input"/>
 		                </td>
 		                <td>
 		                   <a id="update" class="nui-button" iconCls="icon-upload" onclick="upFiles();">上传附件 </a>
@@ -122,6 +121,11 @@
 		</div>
 	    <script type="text/javascript">
 	        nui.parse();
+	        nui.get("catId").setValue("<%=catId %>");
+	        function beforenodeselect(e) {
+	            //禁止选中父节点
+	            if (e.isLeaf == false) e.cancel = true;
+	        }
 		    function onButtonEdit(){
 	   			var btnEdit = this;
 		    	nui.open({
@@ -148,6 +152,32 @@
 	                    } 
 	                }
 	            });
+		    }
+		    
+		    function getTitleTags() {
+		    	var title = nui.get("infoTitle").getValue();
+		    	if(title!=null&&title!=""){
+		            $.ajax({
+		                url: "<%=request.getContextPath() %>/content/info/getTitleTags.jsp?title="+title,
+		                type: 'GET',
+		                cache: false,
+		                contentType:'text/json',
+		                success: function (text) {
+		                	if(text!=""&&text!=null){
+			                	var json = JSON.parse(text);
+			                	var keyword = "";
+			                	for(var i=0;i<json.items.length;i++){
+			                		keyword+=","+json.items[i].item;
+			                	}
+			                	nui.get("keywords").setValue(keyword.substring(1));
+		                	}
+		                }
+		            });
+		    	}
+	        }
+		    function removeSource(){
+		    	var infoSource = nui.get("infoSource");
+		    	infoSource.setValue(infoSource.getValue().split(",")[0]);
 		    }
 		   	function setInfoSource(){
 		   		var source = nui.get("infoSourceCombobox").getValue();
@@ -178,11 +208,11 @@
 				upload_ue.hide();
 				//侦听图片上传
 				upload_ue.addListener('beforeInsertImage', function (t, arg) {
-					$("input[name='info.thumbUrl']").val(arg[0].src);
+		        	nui.get("thumbUrl").setValue(arg[0].src);
 				});
 		        //侦听文件上传，取上传文件列表中第一个上传的文件的路径
 		        upload_ue.addListener('afterUpfile', function (t, arg) {
-					$("input[name='info.contentUrl']").val(arg[0].url);
+		        	nui.get("contentUrl").setValue(arg[0].url);
 		        });
 			});
 			//弹出图片上传的对话框
@@ -207,7 +237,6 @@
 			         contentType:'text/json',
 			         success:function(text){
 						obj = nui.decode(text);
-						$("span[name=categoryName]").html(obj.category.chName);
 						var json_auth = nui.encode({params:{userId:<%=userObject.getUserId() %>,funId:1021}});
 						$.ajax({
 							url:"com.cms.content.ContentService.queryBtnAuth.biz.ext",
@@ -228,7 +257,21 @@
 									$("#pending").remove();
 									$("#btn_pending").remove();
 								}else{
-									$("input[name='wflogs.wfId']").val(obj.category.workflowId);
+									nui.get("wfId").setValue(obj.category.workflowId);
+									var json_step = nui.encode({params:{userId:<%=userObject.getUserId() %>,workId:obj.category.workflowId}});
+									$.ajax({
+						                url: "com.cms.content.ContentService.queryStepIdByUser.biz.ext",
+						                type: 'POST',
+						                data: json_step,
+						                cache: false,
+						                contentType:'text/json',
+						                success: function (text) {
+						               		if(text!=null){
+						               			console.log(text.data[0].STEP_SORT+1);
+						               			nui.get("wfStepId").setValue(text.data[0].STEP_SORT+1);
+						               		}
+						                }
+						             });
 								}
 								if(!b){
 									$("#publish").remove();

@@ -27,7 +27,6 @@
 		<div class="nui-fit" style="padding-top:5px">
 			<div id="form1" method="post">
 				<input id="info.id" name="info.id" class="nui-hidden" />
-				<input id="info.catId" name="info.catId" class="nui-hidden" value="<%=catId %>" />
 				<input id="info.modelId" name="info.modelId" class="nui-hidden" value="<%=modelId %>" />
 				<input id="info.inputUser" name="info.inputUser" class="nui-hidden" value="<%=userObject.getUserId() %>" />
 				<input id="info.orgId" name="info.orgId" class="nui-hidden" value="<%=userObject.getUserOrgId() %>" />
@@ -39,9 +38,9 @@
             	<input name="wflogs.busId" class="nui-hidden"/>
             	<input name="wflogs.busUrl" class="nui-hidden"/>
             	<input name="wflogs.wfOptUser" class="nui-hidden" value="<%=userObject.getUserName() %>"/>
-            	<input name="wflogs.wfStepId" class="nui-hidden" value="1"/>
+            	<input id="wfStepId" name="wflogs.wfStepId" class="nui-hidden" value="1"/>
             	<input name="wflogs.wfOptTime" class="nui-hidden"/>
-            	<input name="wflogs.wfId" class="nui-hidden"/>
+            	<input id="wfId" name="wflogs.wfId" class="nui-hidden"/>
             	<input name="wflogs.wfOptType" class="nui-hidden" value="4"/>
             	<input name="wflogs.wfOptDesc" class="nui-hidden" value="信息报送"/>
             	<%
@@ -59,7 +58,7 @@
 		            <tr>
 		                <th class="nui-form-label">标题图片：</th>
 		                <td colspan="5">    
-		                   <input name="info.thumbUrl" class="nui-textbox nui-form-input"/>
+		                   <input id="thumbUrl" name="info.thumbUrl" class="nui-textbox nui-form-input"/>
 		                </td>
 		            </tr>
 					<tr>
@@ -126,6 +125,11 @@
 		</div>
 	    <script type="text/javascript">
 	        nui.parse();
+	        nui.get("catId").setValue("<%=catId %>");
+	        function beforenodeselect(e) {
+	            //禁止选中父节点
+	            if (e.isLeaf == false) e.cancel = true;
+	        }
 		    function onButtonEdit(){
 	   			var btnEdit = this;
 		    	nui.open({
@@ -152,6 +156,32 @@
 	                    } 
 	                }
 	            });
+		    }
+		    
+		    function getTitleTags() {
+		    	var title = nui.get("infoTitle").getValue();
+		    	if(title!=null&&title!=""){
+		            $.ajax({
+		                url: "<%=request.getContextPath() %>/content/info/getTitleTags.jsp?title="+title,
+		                type: 'GET',
+		                cache: false,
+		                contentType:'text/json',
+		                success: function (text) {
+		                	if(text!=""&&text!=null){
+			                	var json = JSON.parse(text);
+			                	var keyword = "";
+			                	for(var i=0;i<json.items.length;i++){
+			                		keyword+=","+json.items[i].item;
+			                	}
+			                	nui.get("keywords").setValue(keyword.substring(1));
+		                	}
+		                }
+		            });
+		    	}
+	        }
+		    function removeSource(){
+		    	var infoSource = nui.get("infoSource");
+		    	infoSource.setValue(infoSource.getValue().split(",")[0]);
 		    }
 		   	function setInfoSource(){
 		   		var source = nui.get("infoSourceCombobox").getValue();
@@ -215,7 +245,6 @@
 			         contentType:'text/json',
 			         success:function(text){
 						obj = nui.decode(text);
-						$("span[name=categoryName]").html(obj.category.chName);
 						var json_auth = nui.encode({params:{userId:<%=userObject.getUserId() %>,funId:1021}});
 						$.ajax({
 							url:"com.cms.content.ContentService.queryBtnAuth.biz.ext",
@@ -236,7 +265,21 @@
 									$("#pending").remove();
 									$("#btn_pending").remove();
 								}else{
-									$("input[name='wflogs.wfId']").val(obj.category.workflowId);
+									nui.get("wfId").setValue(obj.category.workflowId);
+									var json_step = nui.encode({params:{userId:<%=userObject.getUserId() %>,workId:obj.category.workflowId}});
+									$.ajax({
+						                url: "com.cms.content.ContentService.queryStepIdByUser.biz.ext",
+						                type: 'POST',
+						                data: json_step,
+						                cache: false,
+						                contentType:'text/json',
+						                success: function (text) {
+						               		if(text!=null){
+						               			console.log(text.data[0].STEP_SORT+1);
+						               			nui.get("wfStepId").setValue(text.data[0].STEP_SORT+1);
+						               		}
+						                }
+						             });
 								}
 								if(!b){
 									$("#publish").remove();
@@ -356,7 +399,7 @@
 	             });
 	        }
 	        function setThumbUrl(picUrl){
-	        	$("input[name='info.thumbUrl']").val(picUrl);
+	        	nui.get("thumbUrl").setValue(picUrl);
 	        }
 	        function stripHTML(str) {
 			    var reTag = /<(?:.|\s)*?>/g;

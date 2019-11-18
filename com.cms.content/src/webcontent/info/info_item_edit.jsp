@@ -34,9 +34,13 @@
 		            <tr>
 		                <th class="nui-form-label" style="width:120px;">所属栏目：</th>
 		                <td colspan="5">    
-		                    <span name="categoryName"><span>
+		                    <input id="catId" name="info.catId" style="width:555px;" class="mini-treeselect" url="com.cms.content.ContentService.queryInfoEditorCategoryTreeNode.biz.ext"
+					    		ajaxData="{'userId':'<%=userObject.getUserId() %>'}" 
+					    		multiSelect="false"  valueFromSelect="false"
+					    		idField="id" textField="text" parentField="pid" onbeforenodeselect="beforenodeselect" allowInput="true"
+						        showRadioButton="true" showFolderCheckBox="false" dataField="data"/>
 		                </td>
-		            </tr>        
+		            </tr>          
 		            <tr>
 		                <th class="nui-form-label">项目名称：</th>
 		                <td colspan="5">    
@@ -92,6 +96,10 @@
 	        nui.parse();
 		    
 		    
+	        function beforenodeselect(e) {
+	            //禁止选中父节点
+	            if (e.isLeaf == false) e.cancel = true;
+	        }
 	        var form = new nui.Form("form1");
 	        
 	        

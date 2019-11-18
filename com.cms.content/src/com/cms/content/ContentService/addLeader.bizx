@@ -431,7 +431,7 @@
       <process:to type="query">workitem/isHandle</process:to>
     </process:copy>
     <process:copy>
-      <process:from type="literal" pattern="reference">2</process:from>
+      <process:from type="query" pattern="reference">wflogs/wfStepId</process:from>
       <process:to type="query">workitem/stepId</process:to>
     </process:copy>
   </nodes>
