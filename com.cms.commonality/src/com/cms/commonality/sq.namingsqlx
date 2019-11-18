@@ -46,7 +46,7 @@
 			FROM
 				CMS_SQ 
 			WHERE
-				IS_REPLY = 2 and model_id=1
+				IS_REPLY = 2 and model_id=1 and sub_org_id=$orgId$
 	    </select>
 	    
 	    <select id="querySqNoReplayCount_2" parameterClass="commonj.sdo.DataObject" resultClass="commonj.sdo.DataObject">
@@ -55,7 +55,7 @@
 			FROM
 				CMS_SQ 
 			WHERE
-				IS_REPLY = 2 and model_id=2
+				IS_REPLY = 2 and model_id=2 and sub_org_id=$orgId$
 	    </select>
 	    
 	    <select id="querySqInputCount" parameterClass="commonj.sdo.DataObject" resultClass="commonj.sdo.DataObject">

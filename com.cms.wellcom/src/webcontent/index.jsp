@@ -46,7 +46,7 @@
 	<script type="text/javascript">
 		getCount();
 		function getCount() {
-	        var json = nui.encode({"params/userId":"<%=userObject.getUserId() %>"});
+	        var json = nui.encode({"params/userId":"<%=userObject.getUserId() %>","params/orgId":"<%=userObject.getUserOrgId() %>"});
             $.ajax({
                 url: "com.cms.wellcom.WellComeService.getCount.biz.ext",
                 type: 'POST',
