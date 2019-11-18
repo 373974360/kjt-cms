@@ -129,6 +129,14 @@
       <process:from type="query" pattern="reference">searchPwd</process:from>
       <process:to type="query">sq/searchPwd</process:to>
     </process:copy>
+    <process:copy>
+      <process:from type="query" pattern="reference">sq/subOrgId</process:from>
+      <process:to type="query">sq/doOrgId</process:to>
+    </process:copy>
+    <process:copy>
+      <process:from type="query" pattern="reference">sq/subOrgName</process:from>
+      <process:to type="query">sq/doOrgName</process:to>
+    </process:copy>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="assign0label" name="label" nodeType="label">
     <location x="1068" y="193"/>

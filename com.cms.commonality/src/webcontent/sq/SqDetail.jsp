@@ -29,6 +29,7 @@
 	String isOpen = request.getParameter("isOpen");
 	Integer reType1 = 1;//处理类型-转办
 	Integer reType2 = 2;//处理类型-回复
+	Integer reType3 = 3;//处理类型-转办
 	
 	Integer isReply = 1;//是否回复-是
 	
@@ -52,8 +53,10 @@
     				<input name="sq.replyContent" class="nui-hidden"/>
     				<input name="sq.replyOrgId" class="nui-hidden"/>
     				<input name="sq.replyOrgName" class="nui-hidden"/>
-    				<input name="sq.subOrgId" class="nui-hidden"/>
-    				<input name="sq.subOrgName" class="nui-hidden"/>    				
+    				<input id="oldSubOrgId" name="sq.subOrgId" class="nui-hidden"/>
+    				<input id="oldSubOrgName" name="sq.subOrgName" class="nui-hidden"/>   
+    				<input name="sq.doOrgId" class="nui-hidden"/>
+    				<input name="sq.doOrgName" class="nui-hidden"/>  				
 					<table id="table1" align="center" style="width:90%; table-layout:fixed;" border="0">
 						<tr>			                
 			                <th class="nui-form-label">来信人姓名：</th>
@@ -145,6 +148,8 @@
 					<!-- 数据实体的名称 -->
 					<input class="nui-hidden" name="criteria/_entity" value="com.cms.commonality.sqPro.CmsSqPro">
 					<!-- 排序字段 -->
+					<input class="nui-hidden" name="criteria/_orderby[1]/_property" value="reTime">
+					<input class="nui-hidden" name="criteria/_orderby[1]/_sort" value="desc">
 					<input class="nui-hidden" id="sqId" name="criteria/_expr[1]/sqId" value="<%=sqId %>">
 					<input class="nui-hidden" name="criteria/_expr[1]/_op" value="=">
 				</div>		
@@ -167,8 +172,9 @@
 				</div>
     		</div>		    		   
 		    <div property="footer" style="text-align:center;padding-top:5px;padding-bottom:5px;" borderStyle="border:0;">
-		    	        
 		        <a id="zb" class="nui-button" style="display:none; width:85px;" iconCls="icon-goto" onclick="onTo()">信件转办</a>
+		        <span style="display:inline-block;width:20px;"></span>
+		        <a id="back" class="nui-button" style=" width:85px;" iconCls="icon-goto" onclick="onBack()">信件退回</a>
 		        <span style="display:inline-block;width:20px;"></span>
 		        <a id="reply" class="nui-button" style="display:none; width:85px;" iconCls="icon-edit" onclick="onReply()">信件回复</a>
 		        <span style="display:inline-block;width:20px;"></span>
@@ -193,6 +199,7 @@
     				<input id="subOrgId" name="sqPro.subOrgId" class="nui-hidden"/>
     				<input id ="subOrgName" name="sqPro.subOrgName" class="nui-hidden"/>
     				<input id="toOrgId" name="sqPro.toOrgId" class="nui-hidden"/>
+    				<input id ="toOrgName" name="sqPro.toOrgName" class="nui-hidden"/>
 					<table style="width:100%; table-layout:fixed;" class="nui-form-table">
 						<tr>			                
 			                <th class="nui-form-label">移交部门：</th>
@@ -222,6 +229,38 @@
 					</table>
 					<div class="nui-toolbar" style="text-align:center;padding-top:5px;padding-bottom:5px;" borderStyle="border:0;">
 						 <a class="nui-button" style="width:60px;" iconCls="icon-ok" onclick="onOkTo()">转办</a>
+						 <span style="display:inline-block;width:25px;"></span>
+						 <a class="nui-button" style="width:60px;" iconCls="icon-cancel" onclick="onCancel()">取消</a>
+					</div>
+    			</div>	    		
+    		</div> 
+    		<div id="panel6" style="display:none;width: 100%; height: 100%" class="nui-panel" title="退回信件" iconCls="icon-add"  
+	    			showCloseButton="true" showToolbar="false" showFooter="false">
+		    	<div id="form6" class="nui-form" method="post">		    	
+    				<input id="id" name="sqPro.id" class="nui-hidden"/>
+    				<input id="sqId" name="sqPro.sqId" class="nui-hidden"/>
+    				<input id="reType" name="sqPro.reType" class="nui-hidden"/>
+    				<input id="subOrgId" name="sqPro.subOrgId" class="nui-hidden"/>
+    				<input id ="subOrgName" name="sqPro.subOrgName" class="nui-hidden"/>
+					<table style="width:100%; table-layout:fixed;" class="nui-form-table">
+			            <tr class="odd">
+			                <th class="nui-form-label">退回意见：</th>
+			                <td colspan="1">    
+			                   	<input id="remark" name="sqPro.remark" class="nui-hidden" />
+		                   		<textarea id="remark3" style="height:300px;width:98%;"></textarea>
+			                </td>			              		                
+			            </tr>
+			            <tr>
+			                <th class="nui-form-label">移交时间：</th>
+			                <td>    
+			                    <input name="sqPro.reTime" class="nui-datepicker nui-input" style="width:15%;" 
+			                    format="yyyy-MM-dd HH:mm:ss" showTime="true" allowinput="false" emptyText="请选择"
+			                    required="true" requiredErrorText="请选择时间" onDrawDate="onReDrawDate"/>
+			                </td>		                
+			            </tr>		           
+					</table>
+					<div class="nui-toolbar" style="text-align:center;padding-top:5px;padding-bottom:5px;" borderStyle="border:0;">
+						 <a class="nui-button" style="width:60px;" iconCls="icon-ok" onclick="onOkBack()">退回</a>
 						 <span style="display:inline-block;width:25px;"></span>
 						 <a class="nui-button" style="width:60px;" iconCls="icon-cancel" onclick="onCancel()">取消</a>
 					</div>
@@ -289,8 +328,12 @@
 			    if (field == "reType") {
 			        if (value == 1){
 			        	e.cellHtml = "转办";
-			        }else{
+			        }
+			        if (value == 2){
 			        	e.cellHtml = "回复";
+			        }
+			        if (value == 3){
+			        	e.cellHtml = "退回";
 			        }
 			    }
 			    if (field == "toOrgName") {
@@ -303,6 +346,7 @@
 	        var form = new nui.Form("form1");
 	        var form3 = new nui.Form("form3");
 	        var form4 = new nui.Form("form4");
+	        var form6 = new nui.Form("form6");
 	        
 			
 			var data_;
@@ -355,13 +399,15 @@
 			}	
 	    	  	
 	    	var ue1 = UE.getEditor('remark1');	
-	    	var ue2 = UE.getEditor('remark2');	    	    	
+	    	var ue2 = UE.getEditor('remark2');	    
+	    	var ue3 = UE.getEditor('remark3');		    	
 	    	//回复信件
 	    	function onReply(){	
 	    		form3.clear();  
 	    		ue1.execCommand('cleardoc');  	
 	    		$("#panel4").hide();
-	    		$("#panel5").show();	    	
+	    		$("#panel5").show();	
+	    		$("#panel6").hide();      	
 	    	}
 	    	
 			//转办信件
@@ -369,20 +415,44 @@
 	    		form4.clear();  
 	    		ue2.execCommand('cleardoc');  
 	    		$("#panel5").hide();
-	    		$("#panel4").show();    		 		
+	    		$("#panel4").show(); 
+	    		$("#panel6").hide();      		 		
+	    	}
+			//退回信件
+	    	function onBack(){
+	    		form6.clear();  
+	    		ue3.execCommand('cleardoc');  
+	    		$("#panel5").hide();
+	    		$("#panel4").hide();   
+	    		$("#panel6").show();   		 		
 	    	}
 	    	
 	    	//保存'转办记录'并刷新记录列表
-	    	function SaveData(toOrgId) {
-	           	form3.validate();
-		        if(form3.isValid()==false) return;
-		        var data = form3.getData(false,true);		     
-		        data.sqPro.reType = "<%=reType1 %>";
-		        data.sqPro.remark = ue1.getContent();
-		        data.sqPro.sqId = "<%=sqId %>";
-		        data.sqPro.subOrgId = "<%=userObject.getUserOrgId() %>";
-		        data.sqPro.subOrgName = "<%=userObject.getUserOrgName() %>";
-		        data.sqPro.toOrgId = toOrgId;
+	    	function SaveData(toOrgId,type) {
+	    		var data;
+	    		if(type==1){
+		           	form3.validate();
+			        if(form3.isValid()==false) return;
+			        data = form3.getData(false,true);		     
+			        data.sqPro.reType = type;
+			        data.sqPro.remark = ue1.getContent();
+			        data.sqPro.sqId = "<%=sqId %>";
+			        data.sqPro.subOrgId = "<%=userObject.getUserOrgId() %>";
+			        data.sqPro.subOrgName = "<%=userObject.getUserOrgName() %>";
+			        data.sqPro.toOrgId = toOrgId;
+	    		}
+		        if(type==3){
+		        	form6.validate();
+			        if(form6.isValid()==false) return;
+			        data = form6.getData(false,true);		     
+			        data.sqPro.reType = type;
+			        data.sqPro.remark = ue3.getContent();
+			        data.sqPro.sqId = "<%=sqId %>";
+			        data.sqPro.subOrgId = "<%=userObject.getUserOrgId() %>";
+			        data.sqPro.subOrgName = "<%=userObject.getUserOrgName() %>";
+		        	data.sqPro.toOrgId = nui.get("oldSubOrgId").getValue();
+		        	data.sqPro.toOrgName = nui.get("oldSubOrgName").getValue();
+		        }
 		        var json = nui.encode(data);
 	            $.ajax({
 	                url: "com.cms.commonality.SqProcess.addSqProcess.biz.ext",
@@ -401,17 +471,31 @@
 	            });
 	        }
 	        //更新sq
-	        function updateSqData(toOrgId){
-	        	form3.validate();
-		        if(form3.isValid()==false) return;
-		        var data3 = form3.getData(false,true);	        
-	        	form.validate();
-				if (form.isValid() == false)
-					return;
-				var data = form.getData(false, true);
-				data.sq.id = "<%=sqId %>";								
-				data.sq.subOrgId = toOrgId;
-				data.sq.subOrgName = data3.sqPro.toOrgName;															
+	        function updateSqData(toOrgId,type){
+	        	var data;
+	        	if(type==1){
+		        	form3.validate();
+			        if(form3.isValid()==false) return;
+			        var data3 = form3.getData(false,true);	        
+		        	form.validate();
+					if (form.isValid() == false)
+						return;
+					data = form.getData(false, true);
+					data.sq.id = "<%=sqId %>";								
+					data.sq.doOrgId = toOrgId;
+					data.sq.doOrgName = data3.sqPro.toOrgName;	
+	        	}		
+	        	if(type==3){
+		        	form6.validate();
+			        if(form6.isValid()==false) return;        
+		        	form.validate();
+					if (form.isValid() == false)
+						return;
+					data = form.getData(false, true);
+					data.sq.id = "<%=sqId %>";								
+					data.sq.doOrgId = nui.get("oldSubOrgId").getValue();
+					data.sq.doOrgName = nui.get("oldSubOrgName").getValue();
+	        	}													
 				var json = nui.encode(data);
 				$.ajax({
 						url : "com.cms.commonality.SqService.updateSq.biz.ext",
@@ -432,8 +516,14 @@
 			function onOkTo(e) {
 			
 				var toOrgId = $("#toOrgId").val();				
-	            SaveData(toOrgId);
-	            updateSqData(toOrgId);   
+	            SaveData(toOrgId,1);
+	            updateSqData(toOrgId,1);   
+	        }
+			function onOkBack(e) {
+			
+				var toOrgId = $("#subOrgId").val();				
+	            SaveData(toOrgId,3);
+	            updateSqData(toOrgId,3);   
 	        }
 	        
 	        
@@ -521,10 +611,13 @@
 				//表单清空
 				form3.clear();
 				form4.clear();
+				form6.clear();
 				ue1.execCommand('cleardoc');
 				ue2.execCommand('cleardoc');
+				ue3.execCommand('cleardoc');
 				$("#panel4").hide();				
 				$("#panel5").hide();				
+				$("#panel6").hide();				
 			}
 			
 			//处理类型字典
@@ -546,7 +639,7 @@
 		       	var toOrgId = nui.get("toOrgName").getValue();  
 		       			      
                 //设置转办部门Id	
-                $("#toOrgId").val(toOrgId);                     
+                nui.get("toOrgId").setValue(toOrgId);                     
 		                   
 		    }
 		    
@@ -684,7 +777,7 @@
 	        //依据用户权限设置按钮操作
 			setAuthBtn();
          	function setAuthBtn(){
-         		var btn = ["zb","reply","isPublish","noPublish","isOpen","noOpen"];
+         		var btn = ["zb","reply","isPublish","noPublish","isOpen","noOpen","back"];
          		var json = nui.encode({params:{userId:<%=userObject.getUserId() %>,funId:1181}});
 				$.ajax({
 					url:"com.cms.content.ContentService.queryBtnAuth.biz.ext",

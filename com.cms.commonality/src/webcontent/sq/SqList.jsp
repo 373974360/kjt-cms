@@ -85,9 +85,7 @@
 						<div field="email" headerAlign="center" allowSort="true">电子邮箱</div>						
 						<div field="content" headerAlign="center" allowSort="true" visible="false">来信内容</div>-->
 						<div field="createTime" headerAlign="center" width="60" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm:ss">提交时间</div>
-						<div field="subOrgId" headerAlign="center" allowSort="true" visible="false">受理部门ID</div>
-						<div field="subOrgName" align="center" width="60" headerAlign="center" allowSort="true" >受理部门</div>
-						<div field="replyOrgId" headerAlign="center" allowSort="true" visible="false">回复部门ID</div>
+						<div field="subOrgName" align="center" width="60" headerAlign="center" allowSort="true" >收件部门</div>
 						<div field="replyOrgName" align="center" width="60" headerAlign="center" allowSort="true" >回复部门</div>
 						<div field="replyTime" headerAlign="center" width="60" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm:ss">回复时间</div>
 						<div field="replyContent" headerAlign="center" allowSort="true" visible="false">回复内容</div>

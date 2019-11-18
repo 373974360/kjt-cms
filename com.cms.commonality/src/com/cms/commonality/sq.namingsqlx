@@ -9,6 +9,7 @@
 				IS_REPLY AS isReply,
 				IS_PUBLISH AS isPublish,
 				SUB_ORG_NAME AS subOrgName,
+				DO_ORG_NAME AS doOrgName,
 				REPLY_ORG_NAME AS replyOrgName,
 				CREATE_TIME AS createTime,
 				REPLY_TIME AS replyTime
@@ -33,7 +34,7 @@
 	    		</isNotNull>   		
 	    		<isNotNull>
 	    			<isEqual prepend="and" property="sqData" compareValue="1">
-				 		SUB_ORG_ID = $userOrgId$
+				 		DO_ORG_ID = $userOrgId$
 				   	</isEqual>
 	    		</isNotNull>
 	    	</dynamic>	    	
@@ -46,7 +47,7 @@
 			FROM
 				CMS_SQ 
 			WHERE
-				IS_REPLY = 2 and model_id=1 and sub_org_id=$orgId$
+				IS_REPLY = 2 and model_id=1 and DO_ORG_ID=$orgId$
 	    </select>
 	    
 	    <select id="querySqNoReplayCount_2" parameterClass="commonj.sdo.DataObject" resultClass="commonj.sdo.DataObject">
@@ -55,7 +56,7 @@
 			FROM
 				CMS_SQ 
 			WHERE
-				IS_REPLY = 2 and model_id=2 and sub_org_id=$orgId$
+				IS_REPLY = 2 and model_id=2 and DO_ORG_ID=$orgId$
 	    </select>
 	    
 	    <select id="querySqInputCount" parameterClass="commonj.sdo.DataObject" resultClass="commonj.sdo.DataObject">
