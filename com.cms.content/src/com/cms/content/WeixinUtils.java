@@ -156,6 +156,7 @@ public class WeixinUtils {
     
     public static String uploadImage(String url, String filePath) throws IOException {
         String result = null;
+        System.out.println(filePath);
         File file = new File(filePath);
         if (file.exists() && file.isFile()) {
             URL urlObj = new URL(url);
@@ -223,6 +224,7 @@ public class WeixinUtils {
     
     public static String uploadConImage(String url, String filePath) throws IOException {
         String result = null;
+        System.out.println(filePath);
         File file = new File(filePath);
         if (file.exists() && file.isFile()) {
             URL urlObj = new URL(url);
@@ -383,8 +385,8 @@ public class WeixinUtils {
     }
     
     public static void initParams() {
-    	appid = "wxbb39e0ee7f35791f";
-        secret = "ad8078d008a3215e18a24c1218713b40";
+    	appid = "wx22edd61c7e4a696f";
+        secret = "936c1fb5b5a7e92fca87004f546a6f9b";
         accessTockenUrl = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=";
         perUploadUrl = "https://api.weixin.qq.com/cgi-bin/material/add_material?access_token=##tocken##&type=image";
         uploadUrl = "https://api.weixin.qq.com/cgi-bin/material/add_news?access_token=##tocken##";

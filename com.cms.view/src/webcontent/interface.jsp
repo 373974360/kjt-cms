@@ -1,6 +1,7 @@
 <%@page pageEncoding="UTF-8"%>
 <%@page import="java.util.UUID,com.eos.foundation.common.utils.StringUtil"%>
 <%@page import="com.cms.view.data.InfoDataUtil,commonj.sdo.DataObject,com.cms.view.velocity.TurnPageBean"%>
+<%@page import="com.cms.view.data.CategoryUtil"%>
 <%
 	String actionType = request.getParameter("actionType");
 	String result = "";
@@ -12,6 +13,9 @@
 	}
 	if(actionType.equals("getInfoContent")){
 		result = getInfoContent(request);
+	}
+	if(actionType.equals("getTreeNode")){
+		result = getTreeNode(request);
 	}
 	String callback = request.getParameter("callback");
 	if(callback != null && !"".equals(callback)){
@@ -27,6 +31,31 @@
 		session.setAttribute("token",token);
 		return "{\"code\":200,\"tokenKey\":\"" + token + "\"}";
 	}
+	
+	public String getTreeNode(HttpServletRequest request){
+		String json = "";
+		String catId = request.getParameter("catId");
+		String token = request.getParameter("token");
+		HttpSession session = request.getSession();
+		if(StringUtil.isBlank(token) || !token.equals(session.getAttribute("token"))){
+			return "{\"code\":405,\"message\":\"token 验证失败\"}";
+		}
+		if(StringUtil.isBlank(catId)){
+			return "{\"code\":400,\"message\":\"catId 参数不能为空\"}";
+		}
+		DataObject[] infoList = CategoryUtil.getCategoryChildById(catId);
+		if(infoList != null && infoList.length > 0){
+			for(DataObject info : infoList){
+				String id = info.getString("id");
+				String parentId = info.getString("parentId");
+				String chName = info.getString("chName");
+				json += ",{\"id\":\""+id+"\",\"parentId\":\""+parentId+"\",\"chName\":\""+chName+"\"}";
+			}
+			json = json.substring(1);
+		}
+		return "{\"code\":200,\"data\": ["+json+"]}";
+	}
+	
 	public String getInfoList(HttpServletRequest request){
 		String json = "";
 		String catId = request.getParameter("catId");
@@ -60,6 +89,11 @@
 					}
 				}
 				String description = info.getString("description");
+				if(!StringUtil.isBlank(description)){
+					description = description.replaceAll("\r|\n", "");
+					description = description.replaceAll(" ", "");
+					description = description.replaceAll("&nbsp;", "");
+				}
 				String thumbUrl = info.getString("thumbUrl");
 				if(!StringUtil.isBlank(thumbUrl) && thumbUrl.length()>5){
 					if(!thumbUrl.substring(0,4).equals("http")){
@@ -98,6 +132,11 @@
 					}
 				}
 				String description = infoContent.getString("description");
+				if(!StringUtil.isBlank(description)){
+					description = description.replaceAll("\r|\n", "");
+					description = description.replaceAll(" ", "");
+					description = description.replaceAll("&nbsp;", "");
+				}
 				String source = infoContent.getString("source");
 				String author = infoContent.getString("author");
 				String releasedDtime = infoContent.getString("releasedDtime");
