@@ -519,6 +519,12 @@ public class InfoDataUtil {
                     con_map.put("keywords", keywords);
                 }
             }
+            if (tempA[i].toLowerCase().startsWith("source=")){
+                String source = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
+                if ((!"".equals(source)) && (!source.startsWith("$source"))) {
+                    con_map.put("source", source);
+                }
+            }
             if (tempA[i].toLowerCase().startsWith("gk_no=")){
                 String gk_no = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
                 if ((!"".equals(gk_no)) && (!gk_no.startsWith("$gk_no"))) {
@@ -671,6 +677,9 @@ public class InfoDataUtil {
 			if(key.equals("item_year") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
 				sql += " and i.item_begintime = '" + con_map.get(key)+"'";
 			}
+			if(key.equals("source") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+				sql += " and i.source like '%" + con_map.get(key)+"%'";
+			}
 		}
 		sql += " and i.info_status = 3";
 		if(type.equals("list")){
@@ -727,6 +736,9 @@ public class InfoDataUtil {
 				if(key.equals("item_year") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
 					sql += " and i.item_begintime = '" + con_map.get(key)+"'";
 				}
+				if(key.equals("source") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.source like '%" + con_map.get(key)+"%'";
+				}
 			}
 			sql += " and i.info_status = 3";
 		}else{
@@ -782,6 +794,9 @@ public class InfoDataUtil {
 				}
 				if(key.equals("item_year") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
 					sql += " and i.item_begintime = '" + con_map.get(key)+"'";
+				}
+				if(key.equals("source") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
+					sql += " and i.source like '%" + con_map.get(key)+"%'";
 				}
 			}
 			sql += " and i.info_status = 3";

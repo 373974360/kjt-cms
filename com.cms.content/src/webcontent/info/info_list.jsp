@@ -120,8 +120,7 @@
 			nui.parse();
 			var grid = nui.get("datagrid1");
          	var formData = new nui.Form("#queryform").getData(false, false);
-         	grid.load(formData);
-         	
+ 			grid.load(formData);
          	grid.on("cellendedit", function (e) {
 			    var field = e.field,
 			        value = e.value,

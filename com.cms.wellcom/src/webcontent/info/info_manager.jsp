@@ -113,7 +113,14 @@
 		var node = e.node;
 		refreshTab(node);
 	}
-	refresh();
+	refreshNode();
+	function refreshNode(){
+		var node = tree.getSelectedNode();
+		if(!node){
+			node = tree.getNode("root");
+		}
+		tree.loadNode(node);
+	}
 	function refresh(){
 		var node = tree.getSelectedNode();
 		if(!node){

@@ -22,7 +22,7 @@
     <th class="nui-form-label" style="width:120px;">是否涉密<span style="color:red;"> *</span>：</th>
     <td style="width:100px;">    
     	<div style="width:100px;" name="info.isShemi" class="nui-radiobuttonlist"
-		    textField="text" dataField="yesNo" valueField="id" value="1"
+		    textField="text" dataField="yesNo" valueField="id" value="2"
 		    url="<%=request.getContextPath()%>/content/info/yesNo.txt" >
 		</div>
     </td>

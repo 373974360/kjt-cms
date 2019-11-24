@@ -321,6 +321,9 @@ public class WeixinUtils {
                         }
                     }
                     if(StringUtils.isNotEmpty(img_path)){
+                    	if(img_path.indexOf("default") < 0){
+                    		img_path = "default" + img_path;
+                    	}
                         img_path = rootpath+img_path;
                         String u_url = uploadConImage(uploadConImgUrl,img_path);
                         content = content.replace(str,u_url);
@@ -328,7 +331,11 @@ public class WeixinUtils {
                 }
             }
             if (StringUtils.isNotEmpty(ab.getString("thumbUrl")) && !ab.getString("thumbUrl").substring(0, 4).equals("http")) {
-                imgpath = rootpath + ab.getString("thumbUrl");
+            	if(ab.getString("thumbUrl").indexOf("default") < 0){
+            		imgpath = rootpath+ "default" + ab.getString("thumbUrl");
+            	}else{
+                    imgpath = rootpath + ab.getString("thumbUrl");
+            	}
             }
             String temp_media_id = uploadImage(tempUrl, imgpath);
             if(description=="null"||description==null){
@@ -336,11 +343,8 @@ public class WeixinUtils {
             }else{
             	description = description.replaceAll("&nbsp;","");
             }
-            String author = ab.getString("author");
-            if(author==null||author==""||author=="null"){
-            	author = ab.getString("editor");
-            }
-            articleStr = articleStr + ",{\"thumb_media_id\":\"" + temp_media_id + "\",\"author\":\"" + author + "\",\"title\":\"" + ab.getString("infoTitle") + "\",\"content\":\"" + content + "\",\"digest\":\"" + description + "\",\"show_cover_pic\":\"" + show_cover_pic + "\"}";
+            String author = "秦科技";
+            articleStr = articleStr + ",{\"thumb_media_id\":\"" + temp_media_id + "\",\"author\":\""+author+"\",\"title\":\"" + ab.getString("infoTitle") + "\",\"content\":\"" + content + "\",\"digest\":\"" + description + "\",\"show_cover_pic\":\"" + show_cover_pic + "\"}";
         }
         data = data + articleStr.substring(1) + "]}";
         JSONObject jsonObject = CommUtil.httpRequest(url, "POST", data);

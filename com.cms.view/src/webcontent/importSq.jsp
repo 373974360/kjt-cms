@@ -11,17 +11,17 @@
 		int counts = 0;
 		int it = 0;
 		String driverClassName = "com.microsoft.sqlserver.jdbc.SQLServerDriver"; 
-		String userName = "sa"; //登录用户名
-		String userPasswd = "123456"; //登录密码
+		String userName = "scl_info"; //登录用户名
+		String userPasswd = "scl_sninfo090812"; //登录密码
 		String dbName="scl_info";	//数据库名	
-		String url = "jdbc:sqlserver://10.211.55.6:1433;databaseName=" + dbName; 
+		String url = "jdbc:sqlserver://10.0.252.51:1433;databaseName=" + dbName; 
 		try {
 			Class.forName(driverClassName);
 			Connection conn = DriverManager.getConnection(url, userName, userPasswd);
 			System.out.println("数据库连接成功");
 			Statement stmt = conn.createStatement();
-			String sql = "select l.id,l.title,l.content,l.archievedtime,l.email,l.address,l.uname,l.phone,l.ip,l.type,h.content as replay,h.archievedtime as replaytime from Leave l left join LeaveHf h on l.id=h.gbId";
-			String sqlCount = "select count(*) as totle from Leave l left join LeaveHf h on l.id=h.gbId";
+			String sql = "select l.id,l.title,l.content,l.archievedtime,l.email,l.address,l.uname,l.phone,l.ip,l.type,h.content as replay,h.archievedtime as replaytime from Leave l left join LeaveHf h on l.id=h.gbId where l.archievedtime>'2019-08-08 16:14:36.000'";
+			String sqlCount = "select count(*) as totle from Leave l left join LeaveHf h on l.id=h.gbId where l.archievedtime>'2019-08-08 16:14:36.000'";
 			
 			Statement stmtCount = conn.createStatement();
 			ResultSet rsCount = stmtCount.executeQuery(sqlCount);
@@ -44,7 +44,7 @@
 				sq.setString("isOpen", "1");
 				sq.setString("content", rs.getString("content"));
 				
-				String createTime = "2019-08-29 17:04:00";
+				String createTime = "2019-11-24 10:06:00";
 				String time1 = rs.getString("archievedtime");
 				if(StringUtils.isNotBlank(time1)&&time1.length()>19){
 					time1 = time1.substring(0,19);
@@ -52,7 +52,7 @@
 				}
 				sq.setString("createTime", createTime);
 				
-				String replyTime = "2019-08-29 17:04:00";
+				String replyTime = "2019-11-24 10:06:00";
 				String time2 = rs.getString("replaytime");
 				if(StringUtils.isNotBlank(time2)&&time2.length()>19){
 					time2 = time2.substring(0,19);

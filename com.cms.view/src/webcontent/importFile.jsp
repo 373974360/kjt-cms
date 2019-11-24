@@ -16,17 +16,17 @@
 		int counts = 0;
 		int it = 0;
 		String driverClassName = "com.microsoft.sqlserver.jdbc.SQLServerDriver"; 
-		String userName = "sa"; //登录用户名
-		String userPasswd = "123456"; //登录密码
+		String userName = "scl_info"; //登录用户名
+		String userPasswd = "scl_sninfo090812"; //登录密码
 		String dbName="scl_info";	//数据库名	
-		String url = "jdbc:sqlserver://10.211.55.6:1433;databaseName=" + dbName; 
+		String url = "jdbc:sqlserver://10.0.252.51:1433;databaseName=" + dbName; 
 		try {
 			Class.forName(driverClassName);
 			Connection conn = DriverManager.getConnection(url, userName, userPasswd);
 			System.out.println("数据库连接成功");
 			Statement stmt = conn.createStatement();
-			String sql = "select a.id, a.title, a.subname, a.archieved_time,a.picsummary, a.source_url, a.fulltext, a.origin, a.scan, a.updatetime, a.operator_id,a.original_url from Article_Catalog as c inner join Article as a on c.aid = a.id where a.State= 1 and c.cid='"+oldCat+"' order by a.archieved_time desc";
-			String sqlCount = "select count(*) as totle from Article_Catalog as c inner join Article as a on c.aid = a.id where a.State= 1 and c.cid='"+oldCat+"'";
+			String sql = "select a.id, a.title, a.subname, a.archieved_time,a.picsummary, a.source_url, a.fulltext, a.origin, a.scan, a.updatetime, a.operator_id,a.original_url from Article_Catalog as c inner join Article as a on c.aid = a.id where a.State= 1 and c.cid='"+oldCat+"' AND a.archieved_time > '2019-09-15 12:00:00:00' order by a.archieved_time desc";
+			String sqlCount = "select count(*) as totle from Article_Catalog as c inner join Article as a on c.aid = a.id where a.State= 1 and c.cid='"+oldCat+"' AND a.archieved_time > '2019-09-15 12:00:00:00'";
 			
 			Statement stmtCount = conn.createStatement();
 			ResultSet rsCount = stmtCount.executeQuery(sqlCount);
@@ -50,7 +50,7 @@
 				info.setString("hits", rs.getString("scan"));
 				info.setString("isTop", "2");
 				info.setString("isTuijian", "2");
-				String releasedDtime = "2019-08-29 17:04:00";
+				String releasedDtime = "2019-11-24 10:06:00";
 				String time1 = rs.getString("archieved_time");
 				if(StringUtils.isNotBlank(time1)&&time1.length()>20){
 					time1 = time1.substring(0,20);
@@ -60,7 +60,7 @@
 				info.setString("inputUser", rs.getString("operator_id"));
 				
 				
-				String inputDtime = "2019-08-29 17:04:00";
+				String inputDtime = "2019-11-24 10:06:00";
 				String time2 = rs.getString("updatetime");
 				if(StringUtils.isNotBlank(time2)&&time2.length()>20){
 					time2 = time2.substring(0,20);
