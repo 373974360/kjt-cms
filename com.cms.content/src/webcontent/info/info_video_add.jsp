@@ -276,8 +276,10 @@
 						                contentType:'text/json',
 						                success: function (text) {
 						               		if(text!=null){
-						               			console.log(text.data[0].STEP_SORT+1);
 						               			nui.get("wfStepId").setValue(text.data[0].STEP_SORT+1);
+						               			if(nui.get("wfStepId").getValue() == 1){
+						               				nui.get("wfStepId").setValue(2);
+						               			}
 						               		}
 						                }
 						             });

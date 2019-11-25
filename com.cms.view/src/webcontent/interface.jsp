@@ -37,7 +37,7 @@
 		String catId = request.getParameter("catId");
 		String token = request.getParameter("token");
 		HttpSession session = request.getSession();
-		if(StringUtil.isBlank(token) || !token.equals(session.getAttribute("token"))){
+		if(StringUtil.isBlank(token) || !token.equals("d7824dde1afa40c495fec50d50d1b969")){
 			return "{\"code\":405,\"message\":\"token 验证失败\"}";
 		}
 		if(StringUtil.isBlank(catId)){
@@ -63,7 +63,7 @@
 		String page = request.getParameter("page");
 		String token = request.getParameter("token");
 		HttpSession session = request.getSession();
-		if(StringUtil.isBlank(token) || !token.equals(session.getAttribute("token"))){
+		if(StringUtil.isBlank(token) || !token.equals("d7824dde1afa40c495fec50d50d1b969")){
 			return "{\"code\":405,\"message\":\"token 验证失败\"}";
 		}
 		if(StringUtil.isBlank(catId)){
@@ -85,7 +85,7 @@
 				String contentUrl = info.getString("contentUrl");
 				if(!StringUtil.isBlank(contentUrl) && contentUrl.length()>5){
 					if(!contentUrl.substring(0,4).equals("http")){
-						contentUrl = "http://10.0.252.39"+contentUrl;
+						contentUrl = "http://kjt.shaanxi.gov.cn"+contentUrl;
 					}
 				}
 				String description = info.getString("description");
@@ -97,7 +97,7 @@
 				String thumbUrl = info.getString("thumbUrl");
 				if(!StringUtil.isBlank(thumbUrl) && thumbUrl.length()>5){
 					if(!thumbUrl.substring(0,4).equals("http")){
-						thumbUrl = "http://10.0.252.39"+thumbUrl;
+						thumbUrl = "http://kjt.shaanxi.gov.cn"+thumbUrl;
 					}
 				}
 				String source = info.getString("source");
@@ -115,7 +115,7 @@
 		String infoId = request.getParameter("infoId");
 		String token = request.getParameter("token");
 		HttpSession session = request.getSession();
-		if(StringUtil.isBlank(token) || !token.equals(session.getAttribute("token"))){
+		if(StringUtil.isBlank(token) || !token.equals("d7824dde1afa40c495fec50d50d1b969")){
 			return "{\"code\":405,\"message\":\"token 验证失败\"}";
 		}
 		if(StringUtil.isBlank(infoId)){
@@ -128,7 +128,7 @@
 				String contentUrl = infoContent.getString("contentUrl");
 				if(!StringUtil.isBlank(contentUrl) && contentUrl.length()>5){
 					if(!contentUrl.substring(0,4).equals("http")){
-						contentUrl = "http://10.0.252.39"+contentUrl;
+						contentUrl = "http://kjt.shaanxi.gov.cn"+contentUrl;
 					}
 				}
 				String description = infoContent.getString("description");
@@ -145,17 +145,17 @@
 				String videoPath = infoContent.getString("videoPath");
 				String content = infoContent.getString("infoContent");
 				if(!StringUtil.isBlank(contentUrl)){
-					picContent = picContent.replace("/upload/", "http://10.0.252.39/upload/");
-					picContent = picContent.replace("/oldUpload/", "http://10.0.252.39/oldUpload/");
+					picContent = picContent.replace("/upload/", "http://kjt.shaanxi.gov.cn/upload/");
+					picContent = picContent.replace("/oldUpload/", "http://kjt.shaanxi.gov.cn/oldUpload/");
 				}
 				if(!StringUtil.isBlank(videoPath) && videoPath.length()>5){
 					if(!videoPath.substring(0,4).equals("http")){
-						videoPath = "http://10.0.252.39"+videoPath;
+						videoPath = "http://kjt.shaanxi.gov.cn"+videoPath;
 					}
 				}
 				if(!StringUtil.isBlank(content)){
-					content = content.replace("/upload/", "http://10.0.252.39/upload/");
-					content = content.replace("/oldUpload/", "http://10.0.252.39/oldUpload/");
+					content = content.replace("/upload/", "http://kjt.shaanxi.gov.cn/upload/");
+					content = content.replace("/oldUpload/", "http://kjt.shaanxi.gov.cn/oldUpload/");
 				}
 			json = "{\"infoId\":\""+id+"\",\"title\":\""+title+"\",\"contentUrl\":\""+contentUrl+"\",\"description\":\""+description+"\",\"source\":\""+source+"\",\"author\":\""+author+"\",\"releasedDtime\":\""+releasedDtime+"\",\"hits\":\""+hits+"\",\"picContent\":\""+picContent+"\",\"videoPath\":\""+videoPath+"\",\"content\":\""+replaceStr(content)+"\"}";
 		}

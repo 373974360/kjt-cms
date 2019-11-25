@@ -14,6 +14,7 @@
 	<body style="width: 98%; height: 95%;">
 		<div id="queryform" class="nui-form" align="center">
 			<input class="nui-hidden" name="params/userId" value="<%=userObject.getUserId() %>"/>
+			<input class="nui-hidden" name="params/orgId" value="<%=userObject.getUserOrgId() %>"/>
 		</div>
 		<div class="nui-toolbar" style="border-bottom: 0; padding: 0px;">
 			<table style="width: 100%;">

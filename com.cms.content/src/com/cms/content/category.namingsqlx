@@ -178,7 +178,21 @@
 				AND i.is_handle = 1 
 				) t1 
 			WHERE
-				info.id = t1.bus_id and info.info_status=2 order by info.released_dtime desc
+				info.id = t1.bus_id and info.info_status=2
+			<dynamic>
+	    		<isNotNull property="infoData">
+	    			<isEqual prepend="and" property="infoData" compareValue="1">
+				 		input_user = $userId$
+				   	</isEqual>
+	    			<isEqual prepend="and" property="infoData" compareValue="2">
+				 		org_id = $orgId$
+				   	</isEqual>
+	    		</isNotNull>
+	    		<isNull prepend="and" property="infoData">
+	    			org_id = 0
+	    		</isNull>
+    		</dynamic>
+		 	order by info.released_dtime desc
     </select>
     <select id="myAgencyInfoCount" parameterClass="commonj.sdo.DataObject" resultClass="commonj.sdo.DataObject">
 	    	SELECT
@@ -204,7 +218,21 @@
 				AND i.is_handle = 1 
 				) t1 
 			WHERE
-				info.id = t1.bus_id and info.info_status=2 order by info.released_dtime desc
+				info.id = t1.bus_id and info.info_status=2 
+			<dynamic>
+	    		<isNotNull property="infoData">
+	    			<isEqual prepend="and" property="infoData" compareValue="1">
+				 		input_user = $userId$
+				   	</isEqual>
+	    			<isEqual prepend="and" property="infoData" compareValue="2">
+				 		org_id = $orgId$
+				   	</isEqual>
+	    		</isNotNull>
+	    		<isNull prepend="and" property="infoData">
+	    			org_id = 0
+	    		</isNull>
+    		</dynamic>
+			order by info.released_dtime desc
     </select>
     
     <select id="queryWfInfoLogs" parameterClass="commonj.sdo.DataObject" resultClass="com.cms.content.category.CmsWorkflowLogs">

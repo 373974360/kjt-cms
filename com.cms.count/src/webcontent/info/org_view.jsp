@@ -61,17 +61,6 @@
 	        function setRoleId(){
 				return {"catId":"<%=catId %>","startTime":"<%=startTime %>","endTime":"<%=endTime %>"};
 			}
-			grid.on("drawcell", function (e) {
-			    var field = e.field,
-			        value = e.value;
-			    if (field == "infoStatus") {
-			        if (value == 3){
-			        	e.cellHtml = "已采用";
-			        }else{
-			        	e.cellHtml = "未采用";
-			        }
-			    }
-			});
 			function CloseWindow(action){
 				if(action=="close"){
 
