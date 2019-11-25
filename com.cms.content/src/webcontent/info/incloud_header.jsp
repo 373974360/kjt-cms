@@ -53,7 +53,7 @@
     <th class="nui-form-label">文章标题<span style="color:red;"> *</span>：</th>
     <td colspan="5">    
         <input id="infoTitle" name="info.infoTitle" class="nui-textbox nui-form-input" required="true" onblur="getTitleTags()"/>
-        <input name="info.editor" class="nui-hidden" value="<%=userObject.getUserName() %>"/>
+        <input name="info.editor" class="nui-hidden" value="<%=userObject.getUserRealName() %>"/>
     </td>
 </tr>
 <%

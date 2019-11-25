@@ -41,7 +41,7 @@
             	<input name="wflogs.wfOptType" class="nui-hidden" value="4"/>
             	<input name="wflogs.wfOptDesc" class="nui-hidden" value="信息报送"/>
             	<input name="info.releasedDtime" class="nui-hidden" value="<%=curTime %>"/>
-            	<input name="info.editor" class="nui-hidden" value="<%=userObject.getUserName() %>"/>
+            	<input name="info.editor" class="nui-hidden" value="<%=userObject.getUserRealName() %>"/>
 		        <table style="width:100%;table-layout:fixed;float:left;" class="nui-form-table" >
 		            <tr>
 		                <th class="nui-form-label" style="width:120px;">所属栏目：</th>

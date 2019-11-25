@@ -109,6 +109,7 @@
 	//树左键点击触发事件
 	function onNodeClick(e){
 		var node = e.node;
+		nui.get("searchKey").setValue("");
 		refreshTab(node);
 	}
 	refreshNode();

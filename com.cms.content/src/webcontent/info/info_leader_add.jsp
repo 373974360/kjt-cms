@@ -116,7 +116,7 @@
 		           	<tr>
 		                <th class="nui-form-label">网络编辑：</th>
 		                <td colspan = "2">    
-		                    <input name="info.editor" class="nui-textbox nui-form-input" value="<%=userObject.getUserName() %>"/>
+		                    <input name="info.editor" class="nui-textbox nui-form-input" value="<%=userObject.getUserRealName() %>"/>
 		                </td>
 		            </tr>
 		            <tr>
