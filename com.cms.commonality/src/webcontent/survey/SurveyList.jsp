@@ -12,7 +12,7 @@
 				<!-- 数据实体的名称 -->
 				<input class="nui-hidden" name="criteria/_entity" value="com.cms.commonality.survey.CmsSurvey">
 				<!-- 排序字段 -->
-				<input class="nui-hidden" name="criteria/_orderby[1]/_property" value="createTime">
+				<input class="nui-hidden" name="criteria/_orderby[1]/_property" value="id">
 				<input class="nui-hidden" name="criteria/_orderby[1]/_sort" value="desc">
 				<table id="table1" class="table" style="height: 100%;float:left;">
 					<tr>
