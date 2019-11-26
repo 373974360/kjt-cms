@@ -52,7 +52,7 @@ public class CategoryUtil {
 	 * 根据栏目ID查询栏目
 	 * */
 	public static DataObject getCategoryById(String catId){
-		String sql = "select * from cms_info_category where id = "+catId+" and is_view = 1 order by cat_sort asc";
+		String sql = "select * from cms_info_category where id = "+catId+" order by cat_sort asc";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -72,6 +72,7 @@ public class CategoryUtil {
 				dtr.setString("catClass", rs.getString("cat_class"));
 				dtr.setString("description", rs.getString("description"));
 				dtr.setString("keywords", rs.getString("keywords"));
+				dtr.setString("isView", rs.getString("is_view"));
 				dtr.setString("remark", rs.getString("remark"));
 				if(getChildrenCount(catId)>0){
 					dtr.setBoolean("isChildren", true);

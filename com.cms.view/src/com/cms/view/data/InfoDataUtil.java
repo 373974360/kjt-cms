@@ -66,7 +66,7 @@ public class InfoDataUtil {
 	}
 
 	public static DataObject getInfoData(String infoId,String infoStatus){
-		String sql = "select * from cms_info i,cms_info_category c where i.cat_id=c.id and i.id="+infoId+" and c.is_view = 1";
+		String sql = "select * from cms_info i,cms_info_category c where i.cat_id=c.id and i.id="+infoId+"";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -149,7 +149,7 @@ public class InfoDataUtil {
 	}
 	
 	public static DataObject getInfoData(String infoId){
-		String sql = "select * from cms_info i,cms_info_category c where i.cat_id=c.id and i.id="+infoId+" and i.info_status = 3 and c.is_view = 1";
+		String sql = "select * from cms_info i,cms_info_category c where i.cat_id=c.id and i.id="+infoId+" and i.info_status = 3";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -337,7 +337,7 @@ public class InfoDataUtil {
 		getInfoSearchCon(params,con_map);
 		int counts = 0;
 		int it = 0;
-		String sql = "select * from (select row_.*, rownum rownum_ from (select * from (select i.*,c.ch_name from cms_info i,cms_info_category c where i.cat_id=c.id and c.is_view = 1";
+		String sql = "select * from (select row_.*, rownum rownum_ from (select * from (select i.*,c.ch_name from cms_info i,cms_info_category c where i.cat_id=c.id";
 		sql = initSql(sql,con_map,"list");
 		sql += ") i order by i.is_top asc,i.weight desc,"+con_map.get("orderby")+") row_ where rownum <="+con_map.get("page_size")+"+"+con_map.get("start_num")+") where rownum_ >="+con_map.get("start_num")+" + 1";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
@@ -683,7 +683,7 @@ public class InfoDataUtil {
 		}
 		sql += " and i.info_status = 3";
 		if(type.equals("list")){
-			sql+=" union select i.*,c.ch_name from cms_info i,cms_info_category c where i.cat_id=c.id and c.is_view = 1 and i.id in ("+QueryInfoListUtils.getInfoCats(con_map.get("cat_id"))+")";
+			sql+=" union select i.*,c.ch_name from cms_info i,cms_info_category c where i.cat_id=c.id and i.id in ("+QueryInfoListUtils.getInfoCats(con_map.get("cat_id"))+")";
 			for(String key : keys){
 				if(key.equals("model_id") && con_map.containsKey(key) && !StringUtil.isBlank(con_map.get(key))){
 					sql += " and i.model_id = '"+con_map.get(key)+"'";
@@ -819,7 +819,7 @@ public class InfoDataUtil {
 	public static DataObject[] getInfoCategory(String catId) {
 		int counts = 0;
 		int it = 0;
-		String sql = "select c.id,c.ch_name,c.parent_id from cms_info_category c where c.parent_id = "+catId+" and c.is_view = 1 order by c.cat_sort asc";
+		String sql = "select c.id,c.ch_name,c.parent_id from cms_info_category c where c.parent_id = "+catId+" order by c.cat_sort asc";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		Statement stmt = null;
 		ResultSet rs = null;

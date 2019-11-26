@@ -33,6 +33,7 @@ import com.cms.view.data.CategoryUtil;
 import com.cms.view.data.InfoDataUtil;
 import com.eos.system.annotation.Bizlet;
 import com.cms.view.velocity.DateUtil;
+import commonj.sdo.DataObject;
 
 /**
  * @author chaoweima
@@ -336,19 +337,22 @@ public class SearchInfoManager {
 				String site_id = doc.get("siteId");
 				String model_id = doc.get("modelId");
 				String thumbUrl = doc.get("thumbUrl");
-				ResultBean resultBean = new ResultBean();
-				resultBean.setUrl(url);
-				resultBean.setTitle(title);
-				resultBean.setType(type);
-				resultBean.setTime(SearchUtil.formatTimeYYYYMMDDHHMMSS(time));
-				resultBean.setId(id);
-				resultBean.setCategory_id(categoryId);
-				resultBean.setCategory_name(CategoryUtil.getCategoryById(categoryId).getString("chName"));
-				resultBean.setSite_id(site_id);
-				resultBean.setContent(content);
-				resultBean.setModel_id(model_id);
-				resultBean.setThumb_url(thumbUrl);
-				listResult.add(resultBean);
+				DataObject categoryObj = CategoryUtil.getCategoryById(categoryId);
+				if(categoryObj != null && categoryObj.getString("isView").equals("1")){
+					ResultBean resultBean = new ResultBean();
+					resultBean.setUrl(url);
+					resultBean.setTitle(title);
+					resultBean.setType(type);
+					resultBean.setTime(SearchUtil.formatTimeYYYYMMDDHHMMSS(time));
+					resultBean.setId(id);
+					resultBean.setCategory_id(categoryId);
+					resultBean.setCategory_name(CategoryUtil.getCategoryById(categoryId).getString("chName"));
+					resultBean.setSite_id(site_id);
+					resultBean.setContent(content);
+					resultBean.setModel_id(model_id);
+					resultBean.setThumb_url(thumbUrl);
+					listResult.add(resultBean);
+				}
 			}
 			List<ResultBean> itemList = distinctByTitle(listResult);
 			//得到搜索所用时间

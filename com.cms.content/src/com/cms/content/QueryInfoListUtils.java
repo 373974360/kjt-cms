@@ -58,6 +58,7 @@ public class QueryInfoListUtils {
 			String s = getInfoCatIds(id,result,userId);
 			result = s;
 		}
+		System.out.println(result);
 		return result;
 	}
 	
