@@ -20,6 +20,32 @@ import com.eos.system.annotation.Bizlet;
 @Bizlet("工作流相关逻辑")
 public class WorkFlowUtils {
 	
+
+	@Bizlet("")
+	public static String getCurStep(String userId,String workId) {
+		int num = 0;
+		String sql = "SELECT work_id, step_sort FROM cms_workflow_step WHERE step_role IN ( SELECT role_id FROM cap_partyauth WHERE party_id = "+userId+" ) AND work_id = "+workId;
+		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				num = rs.getInt("step_sort");
+			}
+			num = num+1;
+			return num+"";
+		} catch (Throwable e) {
+			throw new RuntimeException(e);
+		} finally {
+			close(rs);
+			close(stmt);
+			close(conn);
+		}
+	}
+	
+	
 	@Bizlet("获取流程步骤总数")
 	public static int getWfStepNum(String wfId,String stepSort) {
 		int num = 0;
