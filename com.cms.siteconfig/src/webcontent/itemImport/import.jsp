@@ -81,7 +81,7 @@
 			cache : false,
 			contentType : 'text/json',
 			success : function(text) {
-				console.log(text);
+				alert("导入完成！");
 				nui.unmask(document.body);
 			}
 		});
