@@ -81,7 +81,7 @@
 </tr>  
 <tr>
     <th class="nui-form-label">来源<span style="color:red;"> *</span>：</th>
-    <td colspan = 3>    
+    <td colspan = 2>    
     	<%
 			if(group.equals("manager")){
 		%>
@@ -96,6 +96,9 @@
     </td>
     <td>
 		<a href="javascript:void(0)" onclick="removeSource()">[移除]</a>
+	</td>
+    <td>
+		<div name="info.isReprint" class="mini-checkbox" readOnly="false" text="转载"></div>
 	</td>
     <td>
     	<div id="infoSourceCombobox" class="nui-combobox" style="width:100px;" popupWidth="400" textField="sourceName" valueField="sourceName"

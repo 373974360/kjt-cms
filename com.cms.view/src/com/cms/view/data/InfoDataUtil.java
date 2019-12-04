@@ -121,6 +121,7 @@ public class InfoDataUtil {
 				dtr.setString("itemBegintime", rs.getString("item_begintime"));
 				dtr.setString("itemEndtime", rs.getString("item_endtime"));
 				dtr.setString("itemJhly", rs.getString("item_jhly"));
+				dtr.setString("isReprint", rs.getString("is_reprint"));
 				if(!rs.getString("model_id").equals("link") && !rs.getString("model_id").equals("download") && !rs.getString("model_id").equals("item")){
 					DataObject obj;
 					if(rs.getString("model_id").equals("expert") || rs.getString("model_id").equals("leader")){
@@ -204,6 +205,7 @@ public class InfoDataUtil {
 				dtr.setString("itemBegintime", rs.getString("item_begintime"));
 				dtr.setString("itemEndtime", rs.getString("item_endtime"));
 				dtr.setString("itemJhly", rs.getString("item_jhly"));
+				dtr.setString("isReprint", rs.getString("is_reprint"));
 				if(!rs.getString("model_id").equals("link") && !rs.getString("model_id").equals("download") && !rs.getString("model_id").equals("item")){
 					DataObject obj;
 					if(rs.getString("model_id").equals("expert") || rs.getString("model_id").equals("leader")){
@@ -401,6 +403,7 @@ public class InfoDataUtil {
 				dtr.setString("itemBegintime", rs.getString("item_begintime"));
 				dtr.setString("itemEndtime", rs.getString("item_endtime"));
 				dtr.setString("itemJhly", rs.getString("item_jhly"));
+				dtr.setString("isReprint", rs.getString("is_reprint"));
 				dobj[it] = dtr;
 				it++;
 			}
