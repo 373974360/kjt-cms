@@ -138,6 +138,12 @@
 					description = description.replaceAll(" ", "");
 					description = description.replaceAll("&nbsp;", "");
 				}
+				String thumbUrl = infoContent.getString("thumbUrl");
+				if(!StringUtil.isBlank(thumbUrl) && thumbUrl.length()>5){
+					if(!thumbUrl.substring(0,4).equals("http")){
+						thumbUrl = "http://kjt.shaanxi.gov.cn"+thumbUrl;
+					}
+				}
 				String source = infoContent.getString("source");
 				String author = infoContent.getString("author");
 				String releasedDtime = infoContent.getString("releasedDtime");
@@ -150,7 +156,7 @@
 						content = content.replace("/upload/", "http://kjt.shaanxi.gov.cn/upload/");
 						content = content.replace("/oldUpload/", "http://kjt.shaanxi.gov.cn/oldUpload/");
 					}
-					json = "{\"infoId\":\""+id+"\",\"modelId\":\""+modelId+"\",\"title\":\""+title+"\",\"contentUrl\":\""+contentUrl+"\",\"description\":\""+description+"\",\"source\":\""+source+"\",\"author\":\""+author+"\",\"releasedDtime\":\""+releasedDtime+"\",\"hits\":\""+hits+"\",\"content\":\""+replaceStr(content)+"\"}";
+					json = "{\"infoId\":\""+id+"\",\"modelId\":\""+modelId+"\",\"thumbUrl\":\""+thumbUrl+"\",\"title\":\""+title+"\",\"contentUrl\":\""+contentUrl+"\",\"description\":\""+description+"\",\"source\":\""+source+"\",\"author\":\""+author+"\",\"releasedDtime\":\""+releasedDtime+"\",\"hits\":\""+hits+"\",\"content\":\""+replaceStr(content)+"\"}";
 				}
 				if(modelId.equals("pic")){
 					String picContent = infoContent.getString("picContent");
@@ -165,7 +171,7 @@
 						content = content.replace("/upload/", "http://kjt.shaanxi.gov.cn/upload/");
 						content = content.replace("/oldUpload/", "http://kjt.shaanxi.gov.cn/oldUpload/");
 					}
-					json = "{\"infoId\":\""+id+"\",\"modelId\":\""+modelId+"\",\"title\":\""+title+"\",\"contentUrl\":\""+contentUrl+"\",\"description\":\""+description+"\",\"source\":\""+source+"\",\"author\":\""+author+"\",\"releasedDtime\":\""+releasedDtime+"\",\"hits\":\""+hits+"\",\"picContent\":"+picContent+",\"content\":\""+replaceStr(content)+"\"}";
+					json = "{\"infoId\":\""+id+"\",\"modelId\":\""+modelId+"\",\"thumbUrl\":\""+thumbUrl+"\",\"title\":\""+title+"\",\"contentUrl\":\""+contentUrl+"\",\"description\":\""+description+"\",\"source\":\""+source+"\",\"author\":\""+author+"\",\"releasedDtime\":\""+releasedDtime+"\",\"hits\":\""+hits+"\",\"picContent\":"+picContent+",\"content\":\""+replaceStr(content)+"\"}";
 				}
 				if(modelId.equals("video")){
 					String videoPath = infoContent.getString("videoPath");
@@ -180,7 +186,7 @@
 						content = content.replace("/upload/", "http://kjt.shaanxi.gov.cn/upload/");
 						content = content.replace("/oldUpload/", "http://kjt.shaanxi.gov.cn/oldUpload/");
 					}
-					json = "{\"infoId\":\""+id+"\",\"modelId\":\""+modelId+"\",\"title\":\""+title+"\",\"contentUrl\":\""+contentUrl+"\",\"description\":\""+description+"\",\"source\":\""+source+"\",\"author\":\""+author+"\",\"releasedDtime\":\""+releasedDtime+"\",\"hits\":\""+hits+"\",\"videoPath\":\""+videoPath+"\",\"content\":\""+replaceStr(content)+"\"}";
+					json = "{\"infoId\":\""+id+"\",\"modelId\":\""+modelId+"\",\"thumbUrl\":\""+thumbUrl+"\",\"title\":\""+title+"\",\"contentUrl\":\""+contentUrl+"\",\"description\":\""+description+"\",\"source\":\""+source+"\",\"author\":\""+author+"\",\"releasedDtime\":\""+releasedDtime+"\",\"hits\":\""+hits+"\",\"videoPath\":\""+videoPath+"\",\"content\":\""+replaceStr(content)+"\"}";
 				}
 				if(modelId.equals("expert")||modelId.equals("leader")){
 					String ldzw = infoContent.getString("ldzw");
@@ -201,7 +207,7 @@
 						zrfg = zrfg.replace("/upload/", "http://kjt.shaanxi.gov.cn/upload/");
 						zrfg = zrfg.replace("/oldUpload/", "http://kjt.shaanxi.gov.cn/oldUpload/");
 					}
-					json = "{\"infoId\":\""+id+"\",\"modelId\":\""+modelId+"\",\"title\":\""+title+"\",\"contentUrl\":\""+contentUrl+"\",\"description\":\""+description+"\",\"source\":\""+source+"\",\"author\":\""+author+"\",\"releasedDtime\":\""+releasedDtime+"\",\"hits\":\""+hits+"\",\"ldzw\":\""+replaceStr(ldzw)+"\",\"grjl\":\""+replaceStr(grjl)+"\",\"zrfg\":\""+replaceStr(zrfg)+"\"}";
+					json = "{\"infoId\":\""+id+"\",\"modelId\":\""+modelId+"\",\"thumbUrl\":\""+thumbUrl+"\",\"title\":\""+title+"\",\"contentUrl\":\""+contentUrl+"\",\"description\":\""+description+"\",\"source\":\""+source+"\",\"author\":\""+author+"\",\"releasedDtime\":\""+releasedDtime+"\",\"hits\":\""+hits+"\",\"ldzw\":\""+replaceStr(ldzw)+"\",\"grjl\":\""+replaceStr(grjl)+"\",\"zrfg\":\""+replaceStr(zrfg)+"\"}";
 				}
 				
 		}
