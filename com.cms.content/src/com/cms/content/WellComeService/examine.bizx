@@ -328,7 +328,7 @@
       <targetNode>invokePojo8</targetNode>
     </sourceConnections>
     <targetConnections>link16</targetConnections>
-    <location x="632" y="108"/>
+    <location x="552" y="108"/>
     <size height="28" width="28"/>
     <nodeLabel>assign4label</nodeLabel>
     <process:copy>
@@ -341,7 +341,7 @@
     </process:copy>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="assign4label" name="label" nodeType="label">
-    <location x="587" y="144"/>
+    <location x="507" y="144"/>
     <figSize height="17" width="118"/>
     <node>assign4</node>
   </nodes>
@@ -363,7 +363,7 @@
     </sourceConnections>
     <targetConnections>link18</targetConnections>
     <targetConnections>link25</targetConnections>
-    <location x="793" y="135"/>
+    <location x="762" y="135"/>
     <size height="28" width="22"/>
     <nodeLabel>invokePojo8label</nodeLabel>
     <process:pojo methodType="instance" synchronization="true" transactionType="join">
@@ -377,7 +377,7 @@
     <process:outputVariables/>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="invokePojo8label" name="label" nodeType="label">
-    <location x="772" y="171"/>
+    <location x="741" y="171"/>
     <figSize height="17" width="65"/>
     <node>invokePojo8</node>
   </nodes>
@@ -388,7 +388,7 @@
     </sourceConnections>
     <targetConnections>link27</targetConnections>
     <targetConnections>link29</targetConnections>
-    <location x="645" y="285"/>
+    <location x="615" y="233"/>
     <size height="28" width="28"/>
     <nodeLabel>assign5label</nodeLabel>
     <process:copy>
@@ -407,9 +407,13 @@
       <process:from type="query" pattern="reference">params/catId</process:from>
       <process:to type="query">info/catId</process:to>
     </process:copy>
+    <process:copy>
+      <process:from type="query" pattern="reference">currTime</process:from>
+      <process:to type="query">info/releasedDtime</process:to>
+    </process:copy>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="assign5label" name="label" nodeType="label">
-    <location x="600" y="321"/>
+    <location x="570" y="269"/>
     <figSize height="17" width="118"/>
     <node>assign5</node>
   </nodes>

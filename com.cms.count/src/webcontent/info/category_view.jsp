@@ -50,7 +50,6 @@
 	        grid.on("load", function () {
 	            grid.mergeColumns(["date"]);
 	        });
-	        
 	        function exportInfo() {        
 		       	var form = new nui.Form("form1");
 		        var data = form.getData(false,true);

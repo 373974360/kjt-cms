@@ -213,12 +213,29 @@
 				upload_ue.hide();
 				//侦听图片上传
 				upload_ue.addListener('beforeInsertImage', function (t, arg) {
-					var _html = "<table>";
+					var _html = "<table style='width:100%;'>";
+					var removeHtml = "";
 					if(arg.length>0){
 						for(var i=0;i<arg.length;i++){
-							_html+="<tr id='picArray_"+i+"'><td><img src='"+arg[i].src+"' width='200' height='120'/><input type='hidden' name='picUrl' value='"+arg[i].src+"'/></td>";
-							_html+="<td valign='top'><div>标题：<input type='text' name='picTitle' class='nui-textbox nui-form-input' value='"+arg[i].alt+"'/></div><div>描述：<textarea name='picRemark' style='height:60px;width:100%;font-size:14px;'></textarea></div></td>";
-							_html+="<td><a class='icon-remove' onclick='removePic("+i+")' style='padding-left:20px;cursor:pointer'>移除</a><br/><a class='icon-add' onclick=setThumbUrl('"+arg[i].src+"') style='padding-left:20px;cursor:pointer'>设为标题图</a></td></tr>";
+							if(i == 0){
+								removeHtml = "<a class='icon-download' onclick=\"movePic("+i+",'down')\" style='padding-left:20px;cursor:pointer'>下移</a>";
+							}
+							if(i > 0 && i < arg.length){
+								removeHtml = "<a class='icon-upload' onclick=\"movePic("+i+",'up')\" style='padding-left:20px;cursor:pointer'>上移</a><br/>"+
+								"<a class='icon-download' onclick=\"movePic("+i+",'down')\" style='padding-left:20px;cursor:pointer'>下移</a>";
+							}
+							if(i == arg.length-1){
+								removeHtml = "<a class='icon-upload' onclick=\"movePic("+i+",'up')\" style='padding-left:20px;cursor:pointer'>上移</a><br/>";
+							}
+							_html+="<tr id='picArray_"+i+"'>"+
+							"<td width='200' id='pic_"+i+"'>"+
+							"<img src='"+arg[i].src+"' width='200' height='120'/>"+
+							"<input type='hidden' name='picUrl' value='"+arg[i].src+"'/></td>"+
+							"<td valign='top' id='input_"+i+"'>"+
+							"<div>标题：<input type='text' name='picTitle' class='nui-textbox nui-form-input' value='"+arg[i].alt+"'/></div>"+
+							"<div>描述：<textarea name='picRemark' style='height:60px;width:100%;font-size:14px;'></textarea></div></td>"+
+							"<td><a class='icon-remove' onclick='removePic("+i+")' style='padding-left:20px;cursor:pointer'>移除</a><br/>"+
+							"<a class='icon-add' onclick=setThumbUrl('"+arg[i].src+"') style='padding-left:20px;cursor:pointer'>设为标题图</a><br/>"+removeHtml+"</td></tr>";
 						}
 					}
 					_html+="</table>";
@@ -228,6 +245,32 @@
 			function removePic(index){
 				$("#picArray_"+index).remove();
 			}
+	        function movePic(index,type){
+	        	var pic_html_1 = "";
+	        	var pic_html_2 = "";
+	        	var input_html_1 = "";
+	        	var input_html_2 = "";
+	        	if(type == "down"){
+	        		pic_html_1 = $("#pic_"+index).html();
+	        		pic_html_2 = $("#pic_"+(index+1)).html();
+	        		input_html_1 = $("#input_"+index).html();
+	        		input_html_2 = $("#input_"+(index+1)).html();
+	        		$("#pic_"+index).html(pic_html_2);
+	        		$("#pic_"+(index+1)).html(pic_html_1);
+	        		$("#input_"+index).html(input_html_2);
+	        		$("#input_"+(index+1)).html(input_html_1);
+	        	}
+	        	if(type == "up"){
+	        		pic_html_1 = $("#pic_"+index).html();
+	        		pic_html_2 = $("#pic_"+(index-1)).html();
+	        		input_html_1 = $("#input_"+index).html();
+	        		input_html_2 = $("#input_"+(index-1)).html();
+	        		$("#pic_"+index).html(pic_html_2);
+	        		$("#pic_"+(index-1)).html(pic_html_1);
+	        		$("#input_"+index).html(input_html_2);
+	        		$("#input_"+(index-1)).html(input_html_1);
+	        	}
+	        }
 			//弹出图片上传的对话框
 			function upImage() {
 				var myImage = upload_ue.getDialog("insertimage");

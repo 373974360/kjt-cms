@@ -215,7 +215,7 @@
       <process:to type="query">info/inputDtime</process:to>
     </process:copy>
     <process:copy>
-      <process:from type="query" pattern="reference">releasedDtime</process:from>
+      <process:from type="query" pattern="reference">currTime</process:from>
       <process:to type="query">info/releasedDtime</process:to>
     </process:copy>
     <process:copy>
@@ -493,7 +493,7 @@
       <targetNode>assign2</targetNode>
     </sourceConnections>
     <targetConnections>link17</targetConnections>
-    <location x="212" y="150"/>
+    <location x="212" y="165"/>
     <size height="28" width="22"/>
     <nodeLabel>invokePojo3label</nodeLabel>
     <process:pojo methodType="instance" synchronization="true" transactionType="join">
@@ -508,7 +508,7 @@
     </process:outputVariables>
   </nodes>
   <nodes xsi:type="model:NodeElementLabel" id="invokePojo3label" name="label" nodeType="label">
-    <location x="189" y="186"/>
+    <location x="189" y="201"/>
     <figSize height="17" width="68"/>
     <node>invokePojo3</node>
   </nodes>

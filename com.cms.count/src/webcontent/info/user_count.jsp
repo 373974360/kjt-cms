@@ -16,12 +16,14 @@
 	</head>
 	<body style="width: 98%; height: 95%;">
 		<div id="datagrid1" dataField="data" ajaxData="setRoleId" class="nui-datagrid" style="width: 100%; height: 100%;" showPager = "false"
-			url="com.cms.count.vo.InfoCountService.infoCountByUser.biz.ext" multiSelect="true" allowSortColumn="false" allowAlternating="true">
+			url="com.cms.count.vo.InfoCountService.infoCountByUser.biz.ext" multiSelect="true" allowSortColumn="false" allowAlternating="true"
+			showSummaryRow="true" ondrawsummarycell="onDrawSummaryCell" ondrawcell="onDrawCell">
 			<div property="columns">
 				<div field="userName" width="auto" headerAlign="center" allowSort="true">姓名</div>
 				<div field="count" width="100" headerAlign="center" allowSort="true">信息总数</div>
 				<div field="publisCount" width="100" headerAlign="center" allowSort="true">采用总数</div>
 				<div field="proportion" width="100" headerAlign="center" allowSort="true">采用率</div>
+				<div field="total" width="150" headerAlign="center" allowSort="true">总计</div>
 			</div>
 		</div>
 		<div id="main" style="width:100%;height:400px;"></div>
@@ -29,6 +31,38 @@
 	   		nui.parse();
 	   		var grid = nui.get("datagrid1");
 	   		grid.load();
+			
+			function onDrawCell(e) {
+	            var record = e.record;
+	            if (e.field == "total") {
+	                var count = record.count;
+	                var publisCount = record.publisCount;
+	                e.cellHtml = count + publisCount;
+	            }
+	        }
+        
+	        function onDrawSummaryCell(e) {
+	            var result = e.result;
+	            var grid = e.sender;
+	            var rows = e.data;
+	            if (e.field == "total") {
+	                var count = 0;
+	                var publisCount = 0;
+	                for (var i = 0, l = rows.length; i < l; i++) {
+	                    var row = rows[i];
+	                    var t = row.count;
+	                    if (isNaN(t)) continue;
+	                    count += t;
+	                }
+	                for (var i = 0, l = rows.length; i < l; i++) {
+	                    var row = rows[i];
+	                    var t = row.publisCount;
+	                    if (isNaN(t)) continue;
+	                    publisCount += t;
+	                }
+	                e.cellHtml = "总计: " + count+";已发布: "+publisCount;
+	            }
+        	}
 			
 			function openCountList(inputUser,infoStatus) {
 				var url = "<%=request.getContextPath()%>/count/info/countInfoList.jsp?catId=<%=catId %>&orgId=&infoStatus="+infoStatus+"&startTime=<%=startTime %>&endTime=<%=endTime %>&inputUser="+inputUser;

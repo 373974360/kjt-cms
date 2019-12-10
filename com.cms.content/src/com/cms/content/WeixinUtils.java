@@ -389,8 +389,8 @@ public class WeixinUtils {
     }
     
     public static void initParams() {
-    	appid = "wx22edd61c7e4a696f";
-        secret = "936c1fb5b5a7e92fca87004f546a6f9b";
+    	appid = "wxbb39e0ee7f35791f";
+        secret = "ad8078d008a3215e18a24c1218713b40";
         accessTockenUrl = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=";
         perUploadUrl = "https://api.weixin.qq.com/cgi-bin/material/add_material?access_token=##tocken##&type=image";
         uploadUrl = "https://api.weixin.qq.com/cgi-bin/material/add_news?access_token=##tocken##";
