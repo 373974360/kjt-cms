@@ -50,6 +50,9 @@ public class QueryInfoListUtils {
 	
 	@Bizlet("返回栏目子节点")
 	public static String getInfoCatIds(String catId,String result,String userId){
+		if(catId.equals("-1")){
+			return catId;
+		}
 		String id = "";
 		DataObject[] dtr = getInfoCategory(catId,userId);
 		for(DataObject d:dtr){

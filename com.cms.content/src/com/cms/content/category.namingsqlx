@@ -3,83 +3,93 @@
 <sqlMap>
 	<select id="queryInfoList" parameterClass="commonj.sdo.DataObject" resultClass="com.cms.content.category.CmsInfo">
     	select 
-    		id,
-    		info_title as infoTitle,
-    		editor,
-    		input_dtime as inputDtime,
-    		released_dtime as releasedDtime,
-    		is_top as isTop,
-    		is_tuijian as isTuijian,
-    		model_id as modelId,
-    		cat_id as catId,
-    		info_status as infoStatus,
-    		content_url as contentUrl,
-    		weight,
-    		org_name as orgName
+    		info.id,
+    		info.info_title as infoTitle,
+    		cate.ch_name as chName,
+    		info.editor,
+    		info.input_dtime as inputDtime,
+    		info.released_dtime as releasedDtime,
+    		info.is_top as isTop,
+    		info.is_tuijian as isTuijian,
+    		info.model_id as modelId,
+    		info.cat_id as catId,
+    		info.info_status as infoStatus,
+    		info.content_url as contentUrl,
+    		info.weight,
+    		info.org_name as orgName
     	from 
-    		cms_info
+    		cms_info info left join cms_info_category cate on info.cat_id=cate.id
     	where 1=1
     	<dynamic>
 			<isNotNull prepend="and" property="infoStatus">
-				info_status = $infoStatus$
+				info.info_status = $infoStatus$
 				<isEqual prepend="and" property="infoStatus" compareValue="6">
-			 		input_user = $userId$
+			 		info.input_user = $userId$
 			   	</isEqual>
 			</isNotNull>
     		<isNotNull prepend="and" property="infoType">
-    			info_type = $infoType$
+    			info.info_type = $infoType$
     		</isNotNull>
     		<isNotNull prepend="and" property="searchKey">
-    			info_title like '%$searchKey$%'
+    			info.info_title like '%$searchKey$%'
     		</isNotNull>
-    		<isNotNull prepend="and" property="catId">
-    			cat_id in ($catId$)
+    		<isNotNull property="catId">
+    			<isNotEqual prepend="and" property="catId" compareValue="-1">
+    				info.cat_id in ($catId$)
+    			</isNotEqual>
     		</isNotNull>
     		<isNotNull property="infoData">
     			<isEqual prepend="and" property="infoData" compareValue="1">
-			 		input_user = $userId$
+			 		info.input_user = $userId$
 			   	</isEqual>
     			<isEqual prepend="and" property="infoData" compareValue="2">
-			 		org_id = $orgId$
+			 		info.org_id = $orgId$
 			   	</isEqual>
     		</isNotNull>
     		<isNull prepend="and" property="infoData">
-    			org_id = 0
+    			info.org_id = 0
     		</isNull>
     		<isNotNull prepend="or" property="infoId">
-    			(id in ($infoId$)
+    			(info.id in ($infoId$)
 		    		<isNotNull prepend="and" property="searchKey">
-		    			info_title like '%$searchKey$%'
+		    			info.info_title like '%$searchKey$%'
 		    		</isNotNull>
 		    		<isNotNull property="infoStatus">
 		    			<isEqual prepend="and" property="infoStatus" compareValue="2">
-		    				info_status = $infoStatus$ and input_user = $userId$
+		    				info.info_status = $infoStatus$ and input_user = $userId$
 		    			</isEqual>
 		    			<isNotEqual prepend="and" property="infoStatus" compareValue="2">
-		    				info_status = $infoStatus$
+		    				info.info_status = $infoStatus$
 		    			</isNotEqual>
 						<isEqual prepend="and" property="infoStatus" compareValue="6">
-					 		input_user = $userId$
+					 		info.input_user = $userId$
 					   	</isEqual>
 		    		</isNotNull>
 		    		<isNotNull prepend="and" property="infoType">
-		    			info_type = $infoType$
+		    			info.info_type = $infoType$
 		    		</isNotNull>
 		    		<isNotNull property="infoData">
 		    			<isEqual prepend="and" property="infoData" compareValue="1">
-					 		input_user = $userId$
+					 		info.input_user = $userId$
 					   	</isEqual>
 		    			<isEqual prepend="and" property="infoData" compareValue="2">
-					 		org_id = $orgId$
+					 		info.org_id = $orgId$
 					   	</isEqual>
 		    		</isNotNull>
 		    		<isNull prepend="and" property="infoData">
-		    			org_id = 0
+		    			info.org_id = 0
 		    		</isNull>
     			)
     		</isNotNull>
     	</dynamic>
-    	order by is_top asc,weight desc,released_dtime desc
+    	<isNotNull property="catId">
+			<isNotEqual property="catId" compareValue="-1">
+				order by info.is_top asc,info.weight desc,info.released_dtime desc
+			</isNotEqual>
+			<isEqual property="catId" compareValue="-1">
+				order by info.released_dtime desc
+			</isEqual>
+		</isNotNull>
     </select>
     
     <delete id="deleteInfoContentById" parameterClass="commonj.sdo.DataObject">
