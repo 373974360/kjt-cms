@@ -243,7 +243,7 @@
       <process:to type="query">wflogs/wfId</process:to>
     </process:copy>
     <process:copy>
-      <process:from type="literal" pattern="reference">1</process:from>
+      <process:from type="literal" pattern="reference">6</process:from>
       <process:to type="query">wflogs/wfOptType</process:to>
     </process:copy>
     <process:copy>

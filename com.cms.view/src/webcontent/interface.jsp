@@ -158,6 +158,22 @@
 					}
 					json = "{\"infoId\":\""+id+"\",\"modelId\":\""+modelId+"\",\"thumbUrl\":\""+thumbUrl+"\",\"title\":\""+title+"\",\"contentUrl\":\""+contentUrl+"\",\"description\":\""+description+"\",\"source\":\""+source+"\",\"author\":\""+author+"\",\"releasedDtime\":\""+releasedDtime+"\",\"hits\":\""+hits+"\",\"content\":\""+replaceStr(content)+"\"}";
 				}
+				if(modelId.equals("doc")){
+					String content = infoContent.getString("infoContent");
+					String gkIndex = infoContent.getString("gkIndex");
+					String gkNo = infoContent.getString("gkNo");
+					String gkCwrq = infoContent.getString("gkCwrq");
+					String gkFwrq = infoContent.getString("gkFwrq");
+					String gkDept = infoContent.getString("gkDept");
+					String gkWjyxx = infoContent.getString("gkWjyxx");
+					String thumbRemark = infoContent.getString("thumbRemark");
+					if(!StringUtil.isBlank(content)){
+						content = content.replace("/default/upload/", "/upload/");
+						content = content.replace("/upload/", "http://kjt.shaanxi.gov.cn/upload/");
+						content = content.replace("/oldUpload/", "http://kjt.shaanxi.gov.cn/oldUpload/");
+					}
+					json = "{\"infoId\":\""+id+"\",\"modelId\":\""+modelId+"\",\"gkIndex\":\""+gkIndex+"\",\"thumbRemark\":\""+thumbRemark+"\",\"gkNo\":\""+gkNo+"\",\"gkCwrq\":\""+gkCwrq+"\",\"gkFwrq\":\""+gkFwrq+"\",\"gkDept\":\""+gkDept+"\",\"gkWjyxx\":\""+gkWjyxx+"\",\"thumbUrl\":\""+thumbUrl+"\",\"title\":\""+title+"\",\"contentUrl\":\""+contentUrl+"\",\"description\":\""+description+"\",\"source\":\""+source+"\",\"author\":\""+author+"\",\"releasedDtime\":\""+releasedDtime+"\",\"hits\":\""+hits+"\",\"content\":\""+replaceStr(content)+"\"}";
+				}
 				if(modelId.equals("pic")){
 					String picContent = infoContent.getString("picContent");
 					String content = infoContent.getString("infoContent");

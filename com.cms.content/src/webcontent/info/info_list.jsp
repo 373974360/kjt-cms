@@ -108,9 +108,7 @@
 					<div field="title" width="auto" headerAlign="left" allowSort="true">标题</div>
 					<div type="checkboxcolumn" field="isTop" width="50" trueValue="1" falseValue="2" headerAlign="center" align="center" allowSort="true">置顶</div>
 					<div type="checkboxcolumn" field="isTuijian" width="50" trueValue="1" falseValue="2" headerAlign="center" align="center" allowSort="true">推荐</div>
-					<div field="weight" width="50" headerAlign="center" align="center" allowSort="true">权重
-						<input property="editor" class="nui-spinner"  minValue="0" maxValue="99" style="width:80%;"/>
-					</div>
+					<div field="weight" width="50" headerAlign="center" align="center" allowSort="true">权重</div>
 					<div field="editor" width="100" headerAlign="center" align="center" allowSort="true">编辑</div>
 					<div field="releasedDtime" width="130" headerAlign="center" align="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm">发布时间</div>
 				</div>
@@ -121,24 +119,24 @@
 			var grid = nui.get("datagrid1");
          	var formData = new nui.Form("#queryform").getData(false, false);
  			grid.load(formData);
-         	grid.on("cellendedit", function (e) {
-			    var field = e.field,
-			        value = e.value,
-			        row = e.row;
-			    if (field == "weight") {
-		      		var json = '{"cmsInfo":{"id":"'+row.id+'","weight":"'+value+'"}}';
-		      		$.ajax({
-		                url: "com.cms.content.ContentService.updateInfoParams.biz.ext",
-		                type: 'POST',
-		                data: json,
-		                cache: false,
-		                contentType:'text/json',
-		                success: function (text) {
-		                   refresh();
-		                }
-		            });
-		      	}
-			});
+         	//grid.on("cellendedit", function (e) {
+			//    var field = e.field,
+			//        value = e.value,
+			//        row = e.row;
+			//    if (field == "weight") {
+		    //  		var json = '{"cmsInfo":{"id":"'+row.id+'","weight":"'+value+'"}}';
+		    //  		$.ajax({
+		    //            url: "com.cms.content.ContentService.updateInfoParams.biz.ext",
+		    //            type: 'POST',
+		    //            data: json,
+		    //            cache: false,
+		    //            contentType:'text/json',
+		    //            success: function (text) {
+		    //               refresh();
+		    //            }
+		    //        });
+		    //  	}
+			//});
          	
          	grid.on("drawcell", function (e) {
 			    var field = e.field,
