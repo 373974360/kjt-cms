@@ -36,13 +36,21 @@
 	   		nui.parse();
 	   		var grid = nui.get("datagrid1");
 	   		grid.load();
+	   		grid.on("drawcell", function (e) {
+			    var field = e.field,
+			        value = e.value,
+			        row = e.row;
+			    if (field == "publisCount") {
+		      		e.cellHtml = row.publisCount+"<a style='cursor:pointer;padding-left:10px;' href='javascript:openCountList("+row.orgId+",3)'>查看详情</a>";
+			    }
+			});
 			
 			function onDrawCell(e) {
 	            var record = e.record;
 	            if (e.field == "total") {
 	                var count = record.count;
 	                var publisCount = record.publisCount;
-	                e.cellHtml = count + publisCount;
+	                e.cellHtml = publisCount;
 	            }
 	        }
         
@@ -73,7 +81,6 @@
 				grid.load();
 				loadData();
 			}
-			
 			function openCountList(orgId,infoStatus) {
 				var url = "<%=request.getContextPath()%>/count/info/countInfoList.jsp?catId=<%=catId %>&inputUser=&infoStatus="+infoStatus+"&startTime=<%=startTime %>&endTime=<%=endTime %>&orgId="+orgId;
 				nui.open({
@@ -85,7 +92,6 @@
 					},
 				});
 			}
-	   		
 		    function setRoleId(){
 		    	var orgPid = nui.get("combobox3").getValue();
 				return {"orgPid":orgPid,"catId":"<%=catId %>","startTime":"<%=startTime %>","endTime":"<%=endTime %>"};

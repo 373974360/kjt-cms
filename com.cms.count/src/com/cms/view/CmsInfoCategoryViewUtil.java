@@ -34,7 +34,7 @@ public class CmsInfoCategoryViewUtil {
 		if(!StringUtil.isBlank(endTime)&&endTime.length()>=10){
 			endTime = endTime.substring(0,10)+" 23:59:59";
 		}
-		String sql = "select i.*,l.wf_opt_user from (select i.*,c.ch_name from (select i.id,i.info_title,u.empname,i.org_name,i.editor,i.source,i.released_dtime,i.info_status,i.cat_id from cms_info i left join org_employee u on i.input_user = u.empid where i.cat_id in ("+catId+") and i.released_dtime >= '"+startTime+"' and i.released_dtime<='"+endTime+"' order by substr(i.released_dtime,0,10) asc,i.input_user asc,i.org_id asc) i left join cms_info_category c on i.cat_id=c.id) i left join (select * from cms_workflow_logs where wf_opt_type=3) l on i.id=l.bus_id";
+		String sql = "select i.*,l.wf_opt_user from (select i.*,c.ch_name from (select i.id,i.info_title,u.empname,i.org_name,i.editor,i.source,i.released_dtime,i.info_status,i.cat_id from cms_info i left join org_employee u on i.input_user = u.empid where i.cat_id in ("+catId+") and i.released_dtime >= '"+startTime+"' and i.released_dtime<='"+endTime+"' order by substr(i.released_dtime,0,10) asc,i.input_user asc,i.org_id asc) i left join cms_info_category c on i.cat_id=c.id) i left join (select l.bus_id,l.wf_opt_user from cms_workflow_logs l,(SELECT bus_id, max(wf_opt_time) as wf_opt_time FROM cms_workflow_logs WHERE wf_opt_type = 3 GROUP BY bus_id) l1 where l.bus_id=l1.bus_id and l.wf_opt_time = l1.wf_opt_time) l on i.id=l.bus_id";
 		Connection conn = ConnectionHelper.getCurrentContributionConnection("default");
 		Statement stmt = null;
 		ResultSet rs = null;

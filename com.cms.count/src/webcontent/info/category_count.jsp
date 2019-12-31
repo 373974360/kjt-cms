@@ -31,13 +31,19 @@
 			nui.parse();
 	   		var grid = nui.get("datagrid1");
 	   		grid.load();
-	   		
+	   		grid.on("drawcell", function (e) {
+			    var field = e.field,
+			        value = e.value,
+			        row = e.row;
+			    if (field == "publisCount") {
+		      		e.cellHtml = row.publisCount+"<a style='cursor:pointer;padding-left:10px;' href='javascript:openCountList("+row.id+",3)'>查看详情</a>";
+			    }
+			});
 			function onDrawCell(e) {
 	            var record = e.record;
 	            if (e.field == "total") {
 	                var count = record.count;
-	                var publisCount = record.publisCount;
-	                e.cellHtml = count + publisCount;
+	                e.cellHtml = count;
 	            }
 	        }
         
@@ -74,7 +80,6 @@
 					},
 				});
 			}
-	   		
 		    function setRoleId(){
 				return {"catId":"<%=catId %>","startTime":"<%=startTime %>","endTime":"<%=endTime %>"};
 			}

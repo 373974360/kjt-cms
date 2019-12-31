@@ -152,6 +152,7 @@
 				if(modelId.equals("article")){
 					String content = infoContent.getString("infoContent");
 					if(!StringUtil.isBlank(content)){
+						content = content.replace("http://kjt.shaanxi.gov.cn/default/upload/", "/default/upload/");
 						content = content.replace("/default/upload/", "/upload/");
 						content = content.replace("/upload/", "http://kjt.shaanxi.gov.cn/upload/");
 						content = content.replace("/oldUpload/", "http://kjt.shaanxi.gov.cn/oldUpload/");
