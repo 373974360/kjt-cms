@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%>
 <%
 	String catId = request.getParameter("nodeId");
+	String searchType = request.getParameter("searchType");
 	String searchKey = request.getParameter("searchKey");
 	String infoStatus = request.getParameter("infoStatus");
 	String infoType = request.getParameter("infoType");
@@ -23,6 +24,7 @@
 			<input class="nui-hidden" name="params/infoStatus" value="<%=infoStatus %>"/>
 			<input class="nui-hidden" name="params/infoType" value="<%=infoType %>"/>
 			<input class="nui-hidden" name="params/searchKey" value="<%=searchKey %>"/>
+			<input class="nui-hidden" name="params/searchType" value="<%=searchType %>"/>
 			<input class="nui-hidden" name="params/userId" value="<%=userObject.getUserId() %>"/>
 			<input class="nui-hidden" name="params/orgId" value="<%=userObject.getUserOrgId() %>"/>
 		</div>

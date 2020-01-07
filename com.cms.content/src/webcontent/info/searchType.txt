@@ -1,0 +1,7 @@
+{data:
+    [
+        { id: "info.info_title", text: "标题" },
+        { id: "info.source", text: "来源" },
+        { id: "info.editor", text: "编辑" }
+    ]
+}

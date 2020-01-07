@@ -44,7 +44,12 @@
 							<input name="infoType" class="nui-combobox" style="width:150px;" textField="typeName" valueField="id"
 						    url="com.cms.basics.InfoTypeService.queryInfoTypeAll.biz.ext" dataField="data" showNullItem="true" />
 						</td>
-						<td class="form_label">标题:</td>
+						<td class="form_label">搜索分类:</td>
+						<td>
+							<input name="searchType" id="searchType" class="nui-combobox" style="width:150px;" textField="text" valueField="id"
+						    url="<%=request.getContextPath() %>/content/info/searchType.txt" dataField="data" value="info.info_title"/>
+						</td>
+						<td class="form_label">关键字:</td>
 						<td>
 							<input class="nui-textbox" name="searchKey" id="searchKey"/>
 						</td>
@@ -93,7 +98,7 @@
 		if(!url){
 			return url;
 		}
-		return url + "&nodeId=" + params.realId+"&isAdd="+params.isLeaf+"&searchKey="+$("input[name=searchKey]").val().replace(/^\s+|\s+$/g,'')+"&infoType="+$("input[name=infoType]").val();
+		return url + "&nodeId=" + params.realId+"&isAdd="+params.isLeaf+"&searchType="+nui.get("searchType").getValue()+"&searchKey="+$("input[name=searchKey]").val().replace(/^\s+|\s+$/g,'')+"&infoType="+$("input[name=infoType]").val();
 	}
 	
 	function refreshTab(node){

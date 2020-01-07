@@ -31,7 +31,7 @@
     			info.info_type = $infoType$
     		</isNotNull>
     		<isNotNull prepend="and" property="searchKey">
-    			info.info_title like '%$searchKey$%'
+    			$searchType$ like '%$searchKey$%'
     		</isNotNull>
     		<isNotNull property="catId">
     			<isNotEqual prepend="and" property="catId" compareValue="-1">
@@ -52,7 +52,7 @@
     		<isNotNull prepend="or" property="infoId">
     			(info.id in ($infoId$)
 		    		<isNotNull prepend="and" property="searchKey">
-		    			info.info_title like '%$searchKey$%'
+		    			$searchType$ like '%$searchKey$%'
 		    		</isNotNull>
 		    		<isNotNull property="infoStatus">
 		    			<isEqual prepend="and" property="infoStatus" compareValue="2">
