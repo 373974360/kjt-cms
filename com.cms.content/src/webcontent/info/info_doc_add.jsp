@@ -72,26 +72,26 @@
 		            <tr>
 		                <th class="nui-form-label">文号：</th>
 		                <td colspan="2">    
-		                   <input name="info.gkNo" class="nui-textbox nui-form-input"/>
+		                   <input name="info.gkNo" class="nui-textbox nui-form-input" required="true"/>
 		                </td>
 		                <th class="nui-form-label">发文单位：</th>
 		                <td colspan="2">
-		                   <input name="info.gkDept" class="nui-textbox nui-form-input"/>
+		                   <input name="info.gkDept" class="nui-textbox nui-form-input" required="true"/>
 		                </td>
 		            </tr>
 		            <tr>
 		                <th class="nui-form-label">文件有效性：</th>
 		                <td>    
 		                	<input name="info.gkWjyxx" class="nui-combobox" textField="text" valueField="text"
-						    url="<%=request.getContextPath() %>/content/info/wjyxx.txt" dataField="data" showNullItem="true" />
+						    url="<%=request.getContextPath() %>/content/info/wjyxx.txt" dataField="data" showNullItem="true" required="true"/>
 		                </td>
 		                <th class="nui-form-label">成文日期：</th>
 		                <td>
-		                   <input name="info.gkCwrq" class="nui-datepicker nui-form-input" format="yyyy-MM-dd" dateFormat="yyyy-MM-dd"/>
+		                   <input name="info.gkCwrq" class="nui-datepicker nui-form-input" format="yyyy-MM-dd" dateFormat="yyyy-MM-dd" required="true"/>
 		                </td>
 		                <th class="nui-form-label">发文日期：</th>
 		                <td>
-		                   <input name="info.gkFwrq" class="nui-datepicker nui-form-input" format="yyyy-MM-dd" dateFormat="yyyy-MM-dd"/>
+		                   <input name="info.gkFwrq" class="nui-datepicker nui-form-input" format="yyyy-MM-dd" dateFormat="yyyy-MM-dd" required="true"/>
 		                </td>
 		            </tr>
 		            <%

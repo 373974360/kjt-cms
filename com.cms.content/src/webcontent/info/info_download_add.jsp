@@ -103,7 +103,7 @@
 		            <tr>
 		                <th class="nui-form-label">附件：</th>
 		                <td colspan="4">    
-		                   <input id="contentUrl" name="info.contentUrl" class="nui-textbox nui-form-input"/>
+		                   <input id="contentUrl" name="info.contentUrl" class="nui-textbox nui-form-input" required="true"/>
 		                </td>
 		                <td>
 		                   <a id="update" class="nui-button" iconCls="icon-upload" onclick="upFiles();">上传附件 </a>
